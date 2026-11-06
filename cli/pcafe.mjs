@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // pcafe CLI. Plain Node ESM, no dependencies beyond what the project template installs.
 import { spawn, spawnSync } from 'node:child_process'
-import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync, copyFileSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync, copyFileSync, symlinkSync } from 'node:fs'
 import { basename, dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
@@ -240,6 +240,16 @@ const commands = {
     }
     // npm renames .gitignore on publish; restore it if needed.
     if (!existsSync(join(target, '.gitignore')) && existsSync(join(target, 'gitignore'))) renameSync(join(target, 'gitignore'), join(target, '.gitignore'))
+    // npm drops symlinks from the tarball, so recreate Claude Code's skill links.
+    const skillsDir = join(target, 'skills')
+    if (existsSync(skillsDir)) {
+      const links = join(target, '.claude', 'skills')
+      mkdirSync(links, { recursive: true })
+      for (const s of readdirSync(skillsDir)) {
+        const link = join(links, s)
+        if (!existsSync(link)) symlinkSync(join('..', '..', 'skills', s), link, 'junction')
+      }
+    }
     const pkgFile = join(target, 'package.json')
     const pkg = JSON.parse(readFileSync(pkgFile, 'utf8'))
     pkg.name = basename(target).toLowerCase().replace(/[^a-z0-9-]/g, '-')

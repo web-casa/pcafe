@@ -125,6 +125,8 @@ Checks come in two tiers. Run them yourself; don't wait for the user to ask:
 
 `hint  copy.…` lines before `PASS` flag stock phrases; they are not failures. Rewrite them, or keep them when accurate; "studies show" needs a named `source`.
 
+Before the full check, run Simplified Chinese copy (titles, leads, points) through `skills/qu-ai-wei/SKILL.md` as an embedded step: wording only, no new facts, numbers, quotes, commands and `source` untouched, still within each template's limits. For English copy, write plain sentences without stock phrases. When the user only asks to de-AI a piece of Chinese text, use that skill's normal mode.
+
 Add `--json` to any check to get only the issues (stable codes) and a `next` step; `npx pcafe status [format] <name> --json` gives the next step from the last check. See `docs/en/guide.md`, "Reports for scripts and agents".
 
 Skip checks only when the user explicitly asks for a quick draft, and say in your reply that it is unchecked. `npm run qa:kit` and `npm run check:engine` are the engine maintainers' self-tests; don't run them for a deck.

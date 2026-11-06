@@ -1,6 +1,6 @@
 # Third-party licences
 
-PCafe itself is released under the MIT License (see `LICENSE`). It bundles or
+PCafe itself is released under the Common Public Attribution License 1.0 (CPAL-1.0, see `LICENSE`). It bundles or
 depends on the third-party software and assets below. Built decks
 (`dist/*.html`) embed the fonts, icons and runtime libraries marked "bundled",
 so their licence terms travel with every exported deck.
@@ -19,6 +19,12 @@ so their licence terms travel with every exported deck.
 (`#/kit`) shows this credit. If you publish decks built with PCafe, keep a
 visible credit somewhere reasonable (for example in a closing slide note or the
 page where the deck is hosted).
+
+## Agent skills (shipped in `skills/`, not bundled into built decks)
+
+| Name | Licence | Source | Used for |
+| --- | --- | --- | --- |
+| qu-ai-wei 0.9.1 (`skills/qu-ai-wei/`) | MIT, Copyright (c) 2026 @LifelongLazyLearner, see `skills/qu-ai-wei/LICENSE` | https://github.com/LifelongLazyLearner/qu-ai-wei | Rewriting Simplified Chinese copy so it reads naturally |
 
 ## Fonts (bundled in `src/assets/fonts/`, embedded in built decks)
 

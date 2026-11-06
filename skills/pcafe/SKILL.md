@@ -134,6 +134,8 @@ export const deck: DeckDef = {
 
 `PASS` 前的 `hint  copy.…` 行是文案套话提示，不算失败：改掉，或在准确时保留；“有研究表明”这类说法要在 `source` 写出处。
 
+简体中文文案写完、跑完整检查之前，按 `skills/qu-ai-wei/SKILL.md`（去 AI 味）过一遍标题、导语和要点，作为内嵌步骤只改文字：不加事实，不动数字、引语、命令和 `source`，改完的字数仍要在模板上限内。用户只要求“去 AI 味”某段文字时，直接按那个技能的普通模式处理。
+
 检查时可以加 `--json`（任何格式都支持），只输出带固定代号的问题和下一步 `next`；`npx pcafe status [格式] <name> --json` 根据最近一次检查给出下一步。见 `docs/zh-CN/guide.md`“给脚本和 AI 用的报告”。
 
 只有用户明确说“先出个草稿看看”时，才可以不跑检查，并且在回复里写明“未检查”。`npm run qa:kit` 和 `npm run check:engine` 是引擎维护者的自检，做演示时不要跑。
