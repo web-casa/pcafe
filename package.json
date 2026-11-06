@@ -3,6 +3,9 @@
   "version": "0.2.0",
   "description": "Fixed-template HTML slide decks for humans and AI: React templates, single-file offline build, automated layout QA.",
   "license": "CPAL-1.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "types": "./src/engine/public.ts",
   "exports": {
