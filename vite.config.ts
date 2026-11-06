@@ -4,10 +4,11 @@ import { defineConfig, type Plugin } from 'vite'
 import { deckStyle, filterStyleFonts } from './src/engine/style-fonts'
 import { emoji } from './vite.emoji.mjs'
 import { proVirtual } from './vite.pro'
+import { designUnit } from './vite.unit.mjs'
 import { viteSingleFile } from 'vite-plugin-singlefile'
 
-// Third-party packages import the engine as 'pcafe'. Deep Pro imports resolve
-// inside the project so an installed @pcafe/pro works without an extra config.
+// Third-party packages import the engine as 'pcafe'. @pcafe/pro is a built
+// package and resolves through its own `exports` (no alias).
 const proRoot = resolve('node_modules/@pcafe/pro')
 // npm installs a `file:` dependency as a symlink, and Vite resolves the real
 // path, so the dev server must allow that path too or Pro fonts and styles 403.
@@ -15,25 +16,11 @@ const proRealRoot = existsSync(proRoot) ? realpathSync(proRoot) : proRoot
 export const engineResolve = {
   alias: [
     { find: /^pcafe$/, replacement: resolve(import.meta.dirname, 'src/engine/public.ts') },
-    { find: /^@pcafe\/pro$/, replacement: resolve(proRoot, 'src/index.ts') },
-    { find: /^@pcafe\/pro\/(.*)$/, replacement: `${proRoot}/$1` },
   ],
   dedupe: ['react', 'react-dom', 'motion'],
 }
 
-// `120u` in CSS becomes calc(120 * var(--u)). 1u is one pixel of the 1920×1080
-// design canvas; Stage sets --u from the viewport, so nothing is ever scaled
-// with a CSS transform (which would break shared-layout measurements).
-export const designUnit = {
-  postcssPlugin: 'design-unit',
-  Declaration(decl: { value: string }) {
-    if (!/\du\b/.test(decl.value)) return
-    decl.value = decl.value.replace(
-      /(^|[\s(,/*+])(-?\d*\.?\d+)u\b/g,
-      (_m, lead: string, n: string) => `${lead}calc(${n} * var(--u))`,
-    )
-  },
-}
+export { designUnit } from './vite.unit.mjs'
 
 // The deck must open from file:// with no network at all.
 export const forbidRemote = (): Plugin => ({

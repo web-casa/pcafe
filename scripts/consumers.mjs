@@ -4,7 +4,7 @@
 // reach stdout. See PHASE1-BATCH4-REPORT.md.
 import { spawn, spawnSync } from 'node:child_process'
 import { createServer } from 'node:net'
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync, openSync, closeSync, symlinkSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync, openSync, closeSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { launchChromium } from './playwright.mjs'
@@ -251,11 +251,6 @@ async function caseVite() {
   return 'plain Vite build and dynamic import PASS'
 }
 
-function awaitLink(target, source) {
-  mkdirSync(dirname(target), { recursive: true })
-  symlinkSync(source, target, 'dir')
-}
-
 function makeProProject(unpacked, dir, withPro) {
   initProject(unpacked, dir, withPro ? 'pro' : 'nopro')
   installProject(dir, withPro ? 'pro-base' : 'nopro')
@@ -263,21 +258,24 @@ function makeProProject(unpacked, dir, withPro) {
   const pkg = JSON.parse(readFileSync(pkgFile, 'utf8'))
   let proDir = ''
   if (withPro) {
-    proDir = join(CASES, 'pro-source')
-    rmSync(proDir, { recursive: true, force: true })
-    mkdirSync(proDir, { recursive: true })
-    sh('rsync', ['-a', '--exclude', 'node_modules', '--exclude', 'dist', '--exclude', 'qa', `${PRO_SOURCE}/`, `${proDir}/`], { cwd: B4, label: 'pro-copy' })
-    // TypeScript resolves the real path outside the project; give it the
-    // project's React types while Vite still sees a path outside the root.
-    const proModules = join(proDir, 'node_modules')
-    if (!existsSync(proModules)) awaitLink(proModules, join(dir, 'node_modules'))
+    // Install Pro the way a buyer gets it: the built package, packed into a
+    // tarball (no source, no symlink into the Pro checkout).
+    sh(npm, ['run', 'build'], { cwd: PRO_SOURCE, label: 'pro-package-build' })
+    const packDir = join(CASES, 'pro-pack')
+    rmSync(packDir, { recursive: true, force: true })
+    mkdirSync(packDir, { recursive: true })
+    sh(npm, ['pack', '--pack-destination', packDir], { cwd: PRO_SOURCE, label: 'pro-pack' })
+    const tgz = readdirSync(packDir).find((f) => f.endsWith('.tgz'))
+    if (!tgz) throw new Error('npm pack produced no Pro tarball')
+    proDir = join(packDir, tgz)
     pkg.dependencies = { ...(pkg.dependencies || {}), '@pcafe/pro': `file:${proDir}` }
     write(pkgFile, JSON.stringify(pkg, null, 2) + '\n')
   }
   installProject(dir, withPro ? 'pro' : 'nopro', withPro ? ['--legacy-peer-deps'] : [])
   if (withPro) {
     rmSync(join(dir, 'src', 'decks', 'pitch'), { recursive: true, force: true })
-    sh('cp', ['-a', join(proDir, 'decks', 'pitch'), join(dir, 'src', 'decks', 'pitch')], { cwd: dir, label: 'pro-deck-copy' })
+    // A user's own deck, written like the Pro sample: per-template imports.
+    sh('cp', ['-a', join(PRO_SOURCE, 'decks', 'pitch'), join(dir, 'src', 'decks', 'pitch')], { cwd: dir, label: 'pro-deck-copy' })
     setActive(dir, 'pitch')
   }
   sh(npm, ['run', 'build'], { cwd: dir, label: withPro ? 'pro-build' : 'nopro-build' })
@@ -291,6 +289,12 @@ async function casePro(unpacked) {
   patchAttribution(project, 'pitch')
   sh('npx', ['--no-install', 'pcafe', 'build', 'pitch'], { cwd: project, label: `${name}-build-deck` })
   await assertCredit(join(project, 'dist', 'pitch.html'), false)
+  // Only the Pro CSS the deck uses: the pitch deck must not carry the proposal
+  // pack (its classes start with .sp-), and no Pro source may leak in.
+  const html = readFileSync(join(project, 'dist', 'pitch.html'), 'utf8')
+  if (/\.sp-[a-z]/.test(html)) throw new Error('pitch.html contains proposal-pack CSS (.sp-*)')
+  if (!/calc\([^)]*var\(--u\)/.test(html)) throw new Error('pitch.html has no converted u units')
+  if (/\.tsx\b|sourceMappingURL/.test(html)) throw new Error('pitch.html references Pro source or sourcemaps')
   setActive(project, 'pitch')
   const server = await startVite(project, name)
   try {

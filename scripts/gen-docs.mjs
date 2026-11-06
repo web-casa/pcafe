@@ -9,29 +9,17 @@ import { freeCatalog } from '../src/kit/catalog.ts'
 import { catalogEn, groupNames, sharedPropNotes, hanExceptions } from '../src/kit/catalog.en.ts'
 import { existsSync, mkdirSync, readdirSync, rmSync } from 'node:fs'
 
-// Pro is optional. Detect it in Node with a dynamic import of its manifest, so
-// the engine repo (which has no @pcafe/pro) never touches Pro code. The catalog
-// is TypeScript under node_modules, where Node refuses to strip types, so read
-// it through Vite's SSR loader when the package is present.
+// Pro is optional. @pcafe/pro is a built package whose catalog is plain
+// JavaScript with no imports, so Node reads it directly. The engine repo (which
+// has no @pcafe/pro) never touches Pro code.
 const proRoot = resolve(import.meta.dirname, '..', 'node_modules', '@pcafe', 'pro')
 let proCatalog = []
 if (existsSync(resolve(proRoot, 'package.json'))) {
+  const file = resolve(proRoot, 'dist', 'catalog.js')
   try {
-    await import(pathToFileURL(resolve(proRoot, 'package.json')).href, { with: { type: 'json' } })
-    const { createServer } = await import('vite')
-    const server = await createServer({
-      root: resolve(import.meta.dirname, '..'),
-      configFile: false,
-      logLevel: 'silent',
-      appType: 'custom',
-      server: { middlewareMode: true, hmr: false },
-    })
-    try {
-      const mod = await server.ssrLoadModule('/node_modules/@pcafe/pro/src/catalog.ts')
-      proCatalog = Array.isArray(mod.proCatalog) ? mod.proCatalog : []
-    } finally {
-      await server.close()
-    }
+    if (!existsSync(file)) throw new Error('dist/catalog.js is missing (is the package built?)')
+    const mod = await import(pathToFileURL(file).href)
+    proCatalog = Array.isArray(mod.proCatalog) ? mod.proCatalog : []
   } catch (err) {
     console.warn(`docs: @pcafe/pro is installed but its catalog could not be read: ${err.message}`)
   }
@@ -169,12 +157,22 @@ const lines = [
   '| --- | --- | --- |',
   ...catalog.map((c) => `| [\`${c.component}\`](#${c.id}) ${c.name} | ${c.role} | ${cell(c.summary)} |`),
   '',
-  '所有模板都从 `src/kit` 导入：',
+  '免费模板都从 `src/kit` 导入：',
   '',
   '```tsx',
-  `import { ${catalog.map((c) => c.component).join(', ')} } from '../../kit'`,
+  `import { ${freeCatalog.map((c) => c.component).join(', ')} } from '../../kit'`,
   '```',
   '',
+  ...(proCatalog.length
+    ? [
+        'Pro 模板每个单独导入，导出的演示只带用到的模板和样式。风格的导入写法见参考页：',
+        '',
+        '```tsx',
+        ...proCatalog.map((c) => `import { ${c.component} } from '@pcafe/pro/${c.id}'`),
+        '```',
+        '',
+      ]
+    : []),
 ]
 
 for (const [i, c] of catalog.entries()) {
@@ -183,7 +181,7 @@ for (const [i, c] of catalog.entries()) {
     '',
     `## ${String(i + 1).padStart(2, '0')} · ${c.name} \`<${c.component} />\``,
     '',
-    `**位置**：${c.role}　**参考页**：\`${proIds.has(c.id) ? '@pcafe/pro/decks/' + c.deck : 'src/decks/' + (c.deck ?? 'release')}\` 中的 \`${c.demo}\``,
+    `**位置**：${c.role}　**参考页**：\`${proIds.has(c.id) ? '@pcafe/pro/decks/' + c.deck : 'src/decks/' + (c.deck ?? 'release')}\` 中的 \`${c.demo}\`${proIds.has(c.id) ? `　**导入**：\`import { ${c.component} } from '@pcafe/pro/${c.id}'\`` : ''}`,
     '',
     c.summary,
     '',
@@ -360,12 +358,22 @@ const enLines = [
   '| --- | --- | --- |',
   ...enCatalog.map((c) => `| [\`${c.component}\`](#${c.id}) ${c.en.name} | ${enCell(c.en.role)} | ${enCell(c.en.summary)} |`),
   '',
-  'All templates come from `src/kit`:',
+  'Free templates all come from `src/kit`:',
   '',
   '```tsx',
-  `import { ${catalog.map((c) => c.component).join(', ')} } from '../../kit'`,
+  `import { ${freeCatalog.map((c) => c.component).join(', ')} } from '../../kit'`,
   '```',
   '',
+  ...(proCatalog.length
+    ? [
+        'Import each Pro template on its own, so an exported deck carries only the templates and styles it uses. The reference deck shows how to import the style:',
+        '',
+        '```tsx',
+        ...proCatalog.map((c) => `import { ${c.component} } from '@pcafe/pro/${c.id}'`),
+        '```',
+        '',
+      ]
+    : []),
 ]
 for (const [i, c] of enCatalog.entries()) {
   const e = c.en
@@ -386,7 +394,7 @@ for (const [i, c] of enCatalog.entries()) {
     '',
     `## ${String(i + 1).padStart(2, '0')} · ${e.name} \`<${c.component} />\``,
     '',
-    `**Position**: ${e.role}; **Reference slide**: \`${proIds.has(c.id) ? '@pcafe/pro/decks/' + c.deck : 'src/decks/' + (c.deck ?? 'release')}\` — \`${c.demo}\``,
+    `**Position**: ${e.role}; **Reference slide**: \`${proIds.has(c.id) ? '@pcafe/pro/decks/' + c.deck : 'src/decks/' + (c.deck ?? 'release')}\` — \`${c.demo}\`${proIds.has(c.id) ? `; **Import**: \`import { ${c.component} } from '@pcafe/pro/${c.id}'\`` : ''}`,
     '',
     e.summary,
     '',

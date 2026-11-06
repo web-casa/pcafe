@@ -18,7 +18,7 @@ PCafe 的簡報只由 `src/kit` 裡的固定範本拼成。寫得好不好，取
 
 ## 安裝了 @pcafe/pro 時
 
-如果專案依賴裡裝了 `@pcafe/pro`，它的範本和風格隨包提供。在 `src/decks/active.ts` 裡從包裡匯出簡報，例如 `export { deck } from '@pcafe/pro/decks/<pack>'`；範本只從 `pcafe` 匯入引擎 API。裝了 Pro 後，`#/kit` 和 `npx pcafe docs` 會自動列出它的範本；沒裝時不會出現任何 Pro 內容。
+如果專案依賴裡裝了 `@pcafe/pro`，它的範本和風格隨包提供。在 `src/decks/active.ts` 裡從包裡匯出簡報，例如 `export { deck } from '@pcafe/pro/decks/<pack>'`；範本只從 `pcafe` 匯入引擎 API。自己寫的簡報裡，Pro 範本每個單獨匯入（`import { PitchCover } from '@pcafe/pro/pitch-cover'`，路徑見 components.md 每個範本的「匯入」），不要從 `@pcafe/pro` 整包匯入，否則匯出的簡報會帶上全部 Pro 樣式。裝了 Pro 後，`#/kit` 和 `npx pcafe docs` 會自動列出它的範本；沒裝時不會出現任何 Pro 內容。
 
 ## 流程
 

@@ -10,3 +10,6 @@ export interface EmojiOptions {
  * `jsxImportSource` at the deck's `/src/emoji` entry.
  */
 export function emoji(options?: EmojiOptions): Plugin[]
+
+/** PostCSS plugin: `120u` becomes `calc(120 * var(--u))`. Third-party CSS (Pro) must use it too. */
+export const designUnit: { postcssPlugin: string; Declaration(decl: { value: string }): void }

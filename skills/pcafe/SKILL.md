@@ -17,7 +17,7 @@ PCafe 的演示只由 `src/kit` 里的固定模板拼成。写得好不好，取
 
 ## 安装了 @pcafe/pro 时
 
-如果项目依赖里装了 `@pcafe/pro`，它的模板和风格随包提供。在 `src/decks/active.ts` 里从包里导出演示，例如 `export { deck } from '@pcafe/pro/decks/<pack>'`；模板只从 `pcafe` 导入引擎 API。装了 Pro 后，`#/kit` 和 `npx pcafe docs` 会自动列出它的模板；没装时不会出现任何 Pro 内容。
+如果项目依赖里装了 `@pcafe/pro`，它的模板和风格随包提供。在 `src/decks/active.ts` 里从包里导出演示，例如 `export { deck } from '@pcafe/pro/decks/<pack>'`；模板只从 `pcafe` 导入引擎 API。自己写的演示里，Pro 模板每个单独导入（`import { PitchCover } from '@pcafe/pro/pitch-cover'`，路径见 components.md 每个模板的“导入”），不要从 `@pcafe/pro` 整包导入，否则导出的演示会带上全部 Pro 样式。装了 Pro 后，`#/kit` 和 `npx pcafe docs` 会自动列出它的模板；没装时不会出现任何 Pro 内容。
 
 ## 流程
 

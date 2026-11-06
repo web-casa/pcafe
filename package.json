@@ -48,6 +48,7 @@
     "vite.pro.ts",
     "vite.emoji.mjs",
     "vite.emoji.d.ts",
+    "vite.unit.mjs",
     "tsconfig.json",
     "AGENTS.md",
     "CLAUDE.md",

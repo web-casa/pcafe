@@ -13,9 +13,7 @@
     "noEmit": true,
     "types": ["vite/client"],
     "paths": {
-      "pcafe": ["./src/engine/public.ts"],
-      "@pcafe/pro": ["./node_modules/@pcafe/pro/src/index.ts"],
-      "@pcafe/pro/*": ["./node_modules/@pcafe/pro/*"]
+      "pcafe": ["./src/engine/public.ts"]
     }
   },
   "include": ["src"]

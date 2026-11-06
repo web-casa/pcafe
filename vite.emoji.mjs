@@ -7,6 +7,8 @@ import { join, resolve } from 'node:path'
 import { gunzipSync } from 'node:zlib'
 import react from '@vitejs/plugin-react'
 
+export { designUnit } from './vite.unit.mjs'
+
 const VIRTUAL = 'virtual:emoji-table'
 const PLACEHOLDER = '__EMOJI_TABLE__'
 const STYLES = ['fluent', 'flat', 'noto']

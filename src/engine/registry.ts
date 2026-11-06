@@ -3,7 +3,7 @@
 
 import { freeCatalog, type CatalogEntry, type PropDoc } from '../kit/catalog'
 
-/** Shape of @pcafe/pro/src/catalog.ts. Typed here so the engine never imports Pro code. */
+/** Shape of `proCatalog` from @pcafe/pro/catalog. Typed here so the engine never imports Pro code. */
 export interface ProCatalogEntry {
   id: string
   component: string
