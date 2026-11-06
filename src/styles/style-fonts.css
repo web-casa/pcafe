@@ -1,0 +1,115 @@
+/* Display faces for the styles ported from beautiful-html-templates (MIT). All OFL-1.1.
+ * Each block is tagged with the styles that use it. A deck build keeps only the faces of the
+ * style its deck uses (styleFonts() in vite.config.ts); dev and the site embed keep all. */
+
+/* styles: block-frame neo-grid */
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('../assets/fonts/space-grotesk-latin-wght-normal.woff2') format('woff2');
+  font-weight: 300 700;
+  font-display: block;
+}
+
+/* styles: cobalt-grid */
+@font-face {
+  font-family: 'Newsreader';
+  src: url('../assets/fonts/newsreader-latin-wght-normal.woff2') format('woff2');
+  font-weight: 200 800;
+  font-display: block;
+}
+
+/* styles: forest */
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('../assets/fonts/source-serif-4-latin-wght-normal.woff2') format('woff2');
+  font-weight: 200 900;
+  font-display: block;
+}
+
+/* styles: emerald */
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('../assets/fonts/bodoni-moda-latin-wght-normal.woff2') format('woff2');
+  font-weight: 400 900;
+  font-display: block;
+}
+
+/* styles: pink-script emerald */
+@font-face {
+  font-family: 'DM Serif Display';
+  src: url('../assets/fonts/dm-serif-display-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+
+/* styles: platform */
+@font-face {
+  font-family: 'Alfa Slab One';
+  src: url('../assets/fonts/alfa-slab-one-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+
+/* styles: platform */
+@font-face {
+  font-family: 'Archivo Narrow';
+  src: url('../assets/fonts/archivo-narrow-latin-wght-normal.woff2') format('woff2');
+  font-weight: 400 700;
+  font-display: block;
+}
+
+/* styles: platform */
+@font-face {
+  font-family: 'Caveat Brush';
+  src: url('../assets/fonts/caveat-brush-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+
+/* styles: broadside */
+@font-face {
+  font-family: 'Barlow';
+  src: url('../assets/fonts/barlow-latin-800-normal.woff2') format('woff2');
+  font-weight: 800;
+  font-display: block;
+}
+
+/* styles: broadside */
+@font-face {
+  font-family: 'Barlow';
+  src: url('../assets/fonts/barlow-latin-900-normal.woff2') format('woff2');
+  font-weight: 900;
+  font-display: block;
+}
+
+/* styles: biennale */
+@font-face {
+  font-family: 'Archivo';
+  src: url('../assets/fonts/archivo-latin-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+
+/* styles: stencil */
+@font-face {
+  font-family: 'Bowlby One';
+  src: url('../assets/fonts/bowlby-one-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+
+/* styles: stencil */
+@font-face {
+  font-family: 'Stardos Stencil';
+  src: url('../assets/fonts/stardos-stencil-latin-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-display: block;
+}
+
+/* styles: stencil */
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('../assets/fonts/barlow-condensed-latin-800-normal.woff2') format('woff2');
+  font-weight: 800;
+  font-display: block;
+}

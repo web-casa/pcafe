@@ -1,0 +1,9 @@
+/* Style `neo-grid`: ported from beautiful-html-templates · neo-grid-bold (MIT, (c) zarazhangrui). Rules scoped to [data-style='neo-grid']. */
+
+[data-style='neo-grid'] { --f-display: 'Space Grotesk', 'Deck Heavy SC', sans-serif; --ink: #0a0a0a; }
+[data-style='neo-grid'] [data-tone='dark'], [data-style='neo-grid'][data-tone='dark'] { --canvas: #0a0a0a; --letterbox: #000; --card: #161616; --panel: #121212; }
+[data-style='neo-grid'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .statrow__value, .desk__ver, .detail__figure b, .numeral, .feature-num) { font-family: var(--f-display); font-weight: 700; letter-spacing: -0.035em; }
+[data-style='neo-grid'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title) { text-transform: uppercase; }
+[data-style='neo-grid'] .kicker { display: inline-flex; width: fit-content; padding: 8u 12u; background: #e6ff3d; font: 500 18u/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: #0a0a0a; }
+[data-style='neo-grid'] .kicker::before { width: 10u; height: 10u; background: #0a0a0a; }
+[data-style='neo-grid'] :is(.card, .kpi__tile, .price__card, .persona__card, .status__tile, .statrow__card, .igrid__card, .claim, .spark__card, .panel-card, .recap__item) { border-color: transparent; }

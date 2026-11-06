@@ -1,0 +1,9 @@
+/* Slides running in a website iframe. */
+html[data-embed='part'] :is(.slide-header, .progress, .controls) { display: none; }
+html[data-embed='part'] :is(.s-head, .s-foot) { visibility: hidden; }
+html[data-embed='part'] .stage { overflow: visible; }
+html[data-embed='part'] [data-embed-off] { visibility: hidden; }
+html[data-embed='page'] .controls { display: none; }
+html[data-bg='none'],
+html[data-bg='none'] body,
+html[data-bg='none'] :is(.stage, .slide-frame, .slide) { background: transparent !important; }

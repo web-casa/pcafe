@@ -1,0 +1,182 @@
+/* Phase 5 feature css: ink (laser, pen), zoom, and the shared status pill */
+
+.ink-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.ink-capture,
+.zoom-capture {
+  position: absolute;
+  inset: 0;
+  z-index: 41;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.zoom-capture {
+  cursor: zoom-in;
+}
+
+.stage.is-laser,
+.stage.is-laser * {
+  cursor: none !important;
+}
+
+.stage .slide-frame {
+  translate: 0 0;
+  scale: 1;
+  transition: translate 420ms var(--ease-out), scale 420ms var(--ease-out);
+}
+
+/* Origin is the frame centre; translate (C - p) keeps the clicked point p fixed and the stage covered. */
+.stage.is-zoomed .slide-frame {
+  translate: calc((960 - var(--zoom-x)) * var(--u)) calc((540 - var(--zoom-y)) * var(--u));
+  scale: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage .slide-frame {
+    transition: none;
+  }
+}
+
+.feat-pill {
+  position: absolute;
+  bottom: 28u;
+  z-index: 42;
+  display: inline-flex;
+  align-items: center;
+  gap: 10u;
+  padding: 8u 16u;
+  border-radius: 999u;
+  background: var(--ink);
+  color: var(--canvas);
+  font: 500 18u / 1.2 var(--f-sans);
+  pointer-events: none;
+  opacity: 0.88;
+}
+
+.feat-pill--a {
+  left: 28u;
+}
+
+.feat-pill--b {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.feat-pill__dot {
+  width: 8u;
+  height: 8u;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ── Audience screen: blank (B / W) and freeze (H) ─────────────────────── */
+
+.screen-blank {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--blank-dark);
+  cursor: none;
+}
+.screen-blank[data-blank='white'] {
+  background: var(--blank-light);
+}
+
+/* A static copy of the stage, appended to <html> outside <body>, so nothing the
+   live slide does underneath (tone, animation, navigation) reaches it. */
+.screen-frozen {
+  z-index: 90;
+  background: var(--letterbox);
+}
+
+/* ── Key list (?) ───────────────────────────────────────────────────────── */
+/* --k is one design unit: the stage unit in the deck, 1px in the presenter window. */
+
+.key-help {
+  --k: var(--u);
+  position: absolute;
+  inset: 0;
+  z-index: 110;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--ink) 38%, transparent);
+  font-family: var(--f-sans);
+}
+.pv .key-help {
+  --k: 0.8px;
+  position: fixed;
+  padding: 24px;
+}
+.key-help__box {
+  max-width: calc(1560 * var(--k));
+  padding: calc(36 * var(--k)) calc(44 * var(--k));
+  border-radius: calc(20 * var(--k));
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 0 0 1px var(--line), 0 calc(24 * var(--k)) calc(64 * var(--k)) rgb(0 0 0 / 0.18);
+}
+.key-help__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(24 * var(--k));
+  margin-bottom: calc(24 * var(--k));
+  font-size: calc(22 * var(--k));
+  color: var(--ink-2);
+}
+.key-help__head b {
+  font-size: calc(30 * var(--k));
+  font-weight: 500;
+  color: var(--ink);
+}
+.key-help__cols {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: calc(48 * var(--k));
+}
+.key-help h3 {
+  margin: 0 0 calc(12 * var(--k));
+  font-size: calc(18 * var(--k));
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+.key-help dl > div {
+  display: grid;
+  grid-template-columns: calc(250 * var(--k)) auto;
+  align-items: center;
+  gap: calc(16 * var(--k));
+  padding: calc(7 * var(--k)) 0;
+  border-top: 1px solid var(--line);
+}
+.key-help dt {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(6 * var(--k));
+}
+.key-help dd {
+  margin: 0;
+  font-size: calc(20 * var(--k));
+  color: var(--ink-2);
+}
+.key-help kbd {
+  height: auto;
+  margin: 0;
+  min-width: calc(30 * var(--k));
+  padding: calc(3 * var(--k)) calc(9 * var(--k));
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: calc(6 * var(--k));
+  background: var(--panel);
+  color: var(--ink);
+  font: 500 calc(18 * var(--k)) / 1.2 var(--f-mono);
+  text-align: center;
+}

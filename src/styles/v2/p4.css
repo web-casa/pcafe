@@ -1,0 +1,979 @@
+/* Components v2, phase 4: data and relations. RankingRace, BubbleCluster, NodeGraph,
+   Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics.
+   One accent per chart; everything else greys mixed from --ink and --canvas. */
+
+/* shared right-hand reading list (as LineChart) */
+.cluster__notes,
+.radar__notes {
+  display: flex;
+  flex-direction: column;
+  gap: 30u;
+  margin: 0;
+}
+.cluster__notes dt,
+.radar__notes dt {
+  font: 600 20u/1.3 var(--f-sans);
+  color: var(--accent-ink);
+}
+.cluster__notes dd,
+.radar__notes dd {
+  margin: 8u 0 0;
+  font-size: 21u;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* ── RankingRace ─────────────────────────────────────────────────────── */
+
+.race {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  margin-top: 36u;
+}
+.race__board {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+.race__row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: calc(100% / var(--n));
+  display: grid;
+  grid-template-columns: 56u 220u minmax(0, 1fr);
+  align-items: center;
+  translate: 0 calc(var(--r) * 100%);
+  transition: translate 800ms var(--ease-out), opacity 500ms var(--ease-out);
+}
+.race__row.is-out {
+  opacity: 0;
+  visibility: hidden;
+  transition: translate 800ms var(--ease-out), opacity 500ms var(--ease-out), visibility 0s 500ms;
+}
+.race__rank {
+  font: 500 20u/1 var(--f-mono);
+  color: var(--mute);
+}
+.race__name {
+  font-size: 24u;
+  color: var(--ink-2);
+}
+.race__track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 62%;
+  padding-right: 200u;
+}
+.race__track i {
+  display: block;
+  height: 100%;
+  /* The value label sits in the track's right padding: squeezing the bar for it would break the proportions. */
+  flex: none;
+  width: calc(var(--w) * 100%);
+  min-width: 4u;
+  border-radius: 0 calc(8u * var(--rs, 1)) calc(8u * var(--rs, 1)) 0;
+  background: color-mix(in srgb, var(--ink) 30%, var(--canvas));
+  transition: width 800ms var(--ease-out);
+}
+.race__track b {
+  margin-left: 16u;
+  font: 500 22u/1 var(--f-mono);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.race__row.is-focus .race__track i {
+  background: var(--accent);
+}
+.race__row.is-focus :is(.race__name, .race__track b) {
+  font-weight: 600;
+  color: var(--ink);
+}
+.race__periods li.race__year {
+  margin-left: auto;
+  padding: 0;
+  background: none;
+  font: 600 56u/0.8 var(--f-display, var(--f-sans));
+  letter-spacing: -0.03em;
+  color: var(--accent-ink);
+}
+.race__periods {
+  display: flex;
+  gap: 10u;
+  align-items: flex-end;
+  margin: 22u 0 0 276u;
+  padding: 0;
+  list-style: none;
+}
+.race__periods li {
+  padding: 8u 16u;
+  border-radius: 999px;
+  font: 500 18u/1 var(--f-mono);
+  color: var(--mute);
+  background: var(--panel);
+}
+.race__periods li.is-on {
+  background: var(--accent);
+  color: var(--paper-on-accent, #fff);
+}
+.race__note {
+  margin: 18u 0 0 276u;
+  font-size: 21u;
+  color: var(--ink-2);
+}
+
+/* ── BubbleCluster ───────────────────────────────────────────────────── */
+
+.cluster {
+  display: grid;
+  grid-template-columns: 1100u;
+  justify-content: center;
+  gap: 76u;
+  flex: 1;
+  min-height: 0;
+  margin-top: 30u;
+  align-items: center;
+}
+.cluster.has-notes {
+  grid-template-columns: 1100u minmax(0, 1fr);
+  justify-content: stretch;
+}
+.cluster__plot {
+  position: relative;
+  width: 1100u;
+  height: 600u;
+}
+.cluster__b {
+  position: absolute;
+  left: calc(var(--x) * 1u);
+  top: calc(var(--y) * 1u);
+  width: calc(var(--d) * 1u);
+  height: calc(var(--d) * 1u);
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 14%, var(--canvas));
+  color: var(--ink);
+  text-align: center;
+  animation: cluster-pop 700ms var(--ease-out) both;
+  animation-delay: calc(400ms + var(--k) * 60ms);
+}
+.cluster__b.is-focus {
+  background: var(--accent);
+  color: #fff;
+}
+.cluster__b span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6u;
+}
+.cluster__b em {
+  font-style: normal;
+  font-size: 21u;
+  line-height: 1.2;
+}
+.cluster__b b {
+  font: 600 26u/1 var(--f-mono);
+}
+.cluster__b b small {
+  margin-left: 4u;
+  font-size: 17u;
+  font-weight: 500;
+}
+.cluster__b.is-focus b {
+  font-size: 30u;
+}
+.cluster__tag {
+  font-size: 17u;
+  color: var(--ink-2);
+}
+@keyframes cluster-pop {
+  from {
+    scale: 0.3;
+    opacity: 0;
+  }
+}
+
+/* ── NodeGraph ───────────────────────────────────────────────────────── */
+
+.graph {
+  display: grid;
+  grid-template-columns: 1240u;
+  justify-content: center;
+  gap: 64u;
+  flex: 1;
+  min-height: 0;
+  margin-top: 30u;
+  align-items: center;
+}
+.graph.has-note {
+  grid-template-columns: 1240u minmax(0, 1fr);
+}
+.graph__plot {
+  position: relative;
+  width: 1240u;
+  height: 600u;
+}
+.graph__edge,
+.graph__edge svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.graph__edge line {
+  stroke: var(--line-strong);
+  stroke-width: 2.5px;
+}
+.graph__edge.is-strong line {
+  stroke: var(--accent);
+  stroke-width: 4px;
+}
+.graph__edge span {
+  position: absolute;
+  left: calc(var(--x) / 1240 * 100%);
+  top: calc(var(--y) / 600 * 100%);
+  translate: -50% -50%;
+  padding: 4u 12u;
+  border-radius: 999px;
+  background: var(--canvas);
+  font-size: 17u;
+  color: var(--mute);
+  white-space: nowrap;
+}
+.graph__edge.is-strong span {
+  color: var(--accent-ink);
+}
+.graph__node {
+  position: absolute;
+  left: calc(var(--x) / 1240 * 100%);
+  top: calc(var(--y) / 600 * 100%);
+  translate: -50% -50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4u;
+  min-width: 150u;
+  padding: 16u 22u;
+  border: 1.5px solid var(--line-strong);
+  border-radius: calc(16u * var(--rs, 1));
+  background: var(--card);
+  text-align: center;
+  white-space: nowrap;
+}
+.graph__node b {
+  font-size: 23u;
+  font-weight: 600;
+  color: var(--ink);
+}
+.graph__node small {
+  font-size: 17u;
+  color: var(--mute);
+}
+.graph__node.is-hub {
+  padding: 26u 34u;
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 12u rgb(var(--accent-rgb) / 0.14);
+}
+.graph__node.is-hub :is(b, small) {
+  color: #fff;
+}
+.graph__node.is-hub b {
+  font-size: 28u;
+}
+
+/* ── Sankey ──────────────────────────────────────────────────────────── */
+
+.sankey {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 36u 230u 10u 0;
+}
+.sankey__col,
+.sankey__col svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.sankey__col path {
+  fill: color-mix(in srgb, var(--ink) 13%, transparent);
+}
+.sankey.has-focus .sankey__col path.is-hot {
+  fill: rgb(var(--accent-rgb) / 0.42);
+}
+.sankey__node {
+  position: absolute;
+  left: calc(var(--x) * 100%);
+  top: calc(var(--y) * 100%);
+  width: calc(22 / 1600 * 100%);
+  height: max(3u, calc(var(--h) * 100%));
+  background: color-mix(in srgb, var(--ink) 55%, var(--canvas));
+  border-radius: 3u;
+}
+.sankey__node.is-focus {
+  background: var(--accent);
+}
+.sankey__node span {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  display: flex;
+  align-items: baseline;
+  gap: 10u;
+  white-space: nowrap;
+}
+.sankey__node.is-start span,
+.sankey__node.is-mid span {
+  left: calc(100% + 14u);
+}
+.sankey__node.is-end span {
+  left: calc(100% + 16u);
+}
+.sankey__node.is-start span {
+  left: auto;
+  right: calc(100% + 14u);
+  flex-direction: row-reverse;
+}
+.sankey__node em {
+  font-style: normal;
+  font-size: 20u;
+  color: var(--ink);
+}
+.sankey__node b {
+  font: 500 18u/1 var(--f-mono);
+  color: var(--mute);
+}
+.sankey__node.is-focus :is(em, b) {
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+.sankey:has(.sankey__node.is-start) {
+  margin-left: 230u;
+}
+
+/* ── Treemap ─────────────────────────────────────────────────────────── */
+
+.tmap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin-top: 36u;
+}
+.tmap__cell {
+  position: absolute;
+  left: calc(var(--x) * 100%);
+  top: calc(var(--y) * 100%);
+  width: calc(var(--w) * 100%);
+  height: calc(var(--h) * 100%);
+  border: 3u solid var(--canvas);
+  border-radius: calc(10u * var(--rs, 1));
+  background: var(--c);
+  overflow: hidden;
+  animation: tmap-in 700ms var(--ease-out) both;
+  animation-delay: calc(400ms + var(--k) * 60ms);
+}
+.tmap__cell.is-focus {
+  background: var(--accent);
+}
+.tmap__cell span {
+  position: absolute;
+  left: 20u;
+  top: 16u;
+  right: 12u;
+  display: flex;
+  flex-direction: column;
+  gap: 6u;
+  color: #fff;
+}
+.tmap__cell:nth-child(n + 4):not(.is-focus) span {
+  color: var(--ink);
+}
+.tmap__cell em {
+  font-style: normal;
+  font-size: 22u;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.tmap__cell b {
+  font: 500 19u/1.1 var(--f-mono);
+  white-space: nowrap;
+}
+.tmap__cell.is-big b {
+  font-size: 30u;
+}
+.tmap__cell small {
+  font: 500 18u/1 var(--f-mono);
+  opacity: 0.85;
+}
+.tmap__cell.is-mid em {
+  font-size: 18u;
+}
+.tmap__cell.is-mid b {
+  font-size: 17u;
+}
+@keyframes tmap-in {
+  from {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+/* ── Radar ───────────────────────────────────────────────────────────── */
+
+.radar {
+  display: grid;
+  grid-template-columns: 820u minmax(0, 1fr);
+  gap: 80u;
+  flex: 1;
+  min-height: 0;
+  margin-top: 20u;
+  align-items: center;
+}
+.radar__plot {
+  position: relative;
+  width: 520u;
+  height: 520u;
+  margin: 0 auto;
+}
+.radar__plot svg,
+.radar__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.radar__grid polygon,
+.radar__grid line {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1.5px;
+}
+.radar__layer.is-a polygon {
+  fill: rgb(var(--accent-rgb) / 0.2);
+  stroke: var(--accent);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.radar__layer.is-a circle {
+  fill: var(--accent);
+}
+.radar__layer.is-b polygon {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 3px;
+  stroke-dasharray: 10 8;
+}
+.radar__axis {
+  position: absolute;
+  left: calc(var(--x) * 100%);
+  top: calc(var(--y) * 100%);
+  translate: -50% -50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4u;
+  white-space: nowrap;
+}
+.radar__axis em {
+  font-style: normal;
+  font-size: 20u;
+  color: var(--ink-2);
+}
+.radar__axis b {
+  font: 600 19u/1 var(--f-mono);
+  color: var(--accent-ink);
+}
+.radar__axis i {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--mute);
+}
+.radar__side {
+  display: flex;
+  flex-direction: column;
+  gap: 40u;
+}
+.radar__legend {
+  display: flex;
+  gap: 30u;
+  font-size: 21u;
+  color: var(--ink-2);
+}
+.radar__legend span {
+  display: flex;
+  align-items: center;
+  gap: 12u;
+}
+.radar__legend span::before {
+  content: '';
+  width: 30u;
+  height: 0;
+  border-top: 4px solid var(--accent);
+}
+.radar__legend span.is-b::before {
+  border-top: 3px dashed var(--ink-2);
+}
+
+/* ── Scatter ─────────────────────────────────────────────────────────── */
+
+.scat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  margin-top: 30u;
+  padding-left: 80u;
+}
+.scat__ylabel {
+  font-size: 19u;
+  color: var(--mute);
+  margin: 0 0 14u -80u;
+}
+.scat__plot {
+  position: relative;
+  margin-top: 30u;
+  flex: 1;
+  min-height: 0;
+  border-left: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+}
+.scat__gy,
+.scat__gx {
+  position: absolute;
+}
+.scat__gy {
+  left: 0;
+  right: 0;
+  bottom: calc(var(--at) * 100%);
+  border-top: 1px solid var(--line);
+}
+.scat__gx {
+  top: 0;
+  bottom: 0;
+  left: calc(var(--at) * 100%);
+  border-left: 1px solid var(--line);
+}
+.scat__gy b,
+.scat__gx b {
+  position: absolute;
+  font: 400 17u/1 var(--f-mono);
+  color: var(--mute);
+}
+.scat__gy b {
+  right: calc(100% + 14u);
+  translate: 0 -50%;
+}
+.scat__gx b {
+  top: calc(100% + 12u);
+  translate: -50% 0;
+}
+.scat__split {
+  position: absolute;
+  background: var(--ink-2);
+}
+.scat__split.is-x {
+  top: 0;
+  bottom: 0;
+  left: calc(var(--at) * 100%);
+  width: 0;
+  border-left: 2px dashed var(--ink-2);
+  background: none;
+}
+.scat__split.is-y {
+  left: 0;
+  right: 0;
+  bottom: calc(var(--at) * 100%);
+  height: 0;
+  border-top: 2px dashed var(--ink-2);
+  background: none;
+}
+.scat__quad {
+  position: absolute;
+  padding: 6u 14u;
+  border-radius: 999px;
+  background: var(--panel);
+  font-size: 18u;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.scat__quad.q0 {
+  left: calc(var(--sx) * 100% - 12u);
+  translate: -100% 0;
+  top: -50u;
+}
+.scat__quad.q1 {
+  right: 0;
+  top: -50u;
+  background: var(--accent-wash);
+  color: var(--accent-ink);
+}
+.scat__quad.q2 {
+  left: calc(var(--sx) * 100% - 12u);
+  translate: -100% 0;
+  bottom: 14u;
+}
+.scat__quad.q3 {
+  right: 16u;
+  bottom: 14u;
+}
+.scat__pt {
+  position: absolute;
+  left: calc(var(--x) * 100%);
+  bottom: calc(var(--y) * 100%);
+  width: 16u;
+  height: 16u;
+  translate: -50% 50%;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 38%, var(--canvas));
+  animation: pop 500ms var(--ease-out) both;
+  animation-delay: calc(500ms + var(--k) * 30ms);
+}
+.scat__pt.is-focus {
+  width: 22u;
+  height: 22u;
+  background: var(--accent);
+  box-shadow: 0 0 0 6u rgb(var(--accent-rgb) / 0.2);
+  z-index: 1;
+}
+.scat__pt b {
+  position: absolute;
+  left: calc(100% + 10u);
+  top: 50%;
+  translate: 0 -50%;
+  font-size: 18u;
+  font-weight: 500;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.scat__pt.is-left b {
+  left: auto;
+  right: calc(100% + 10u);
+}
+.scat__pt.is-focus b {
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+.scat__xlabel {
+  align-self: flex-end;
+  margin-top: 40u;
+  font-size: 19u;
+  color: var(--mute);
+}
+
+/* ── StackedArea ─────────────────────────────────────────────────────── */
+
+.sarea {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  margin-top: 36u;
+  padding: 0 280u 0 70u;
+}
+.sarea__plot {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+.sarea__grid {
+  position: absolute;
+  left: -70u;
+  right: 0;
+  bottom: calc(var(--at) * 100%);
+  border-top: 1px solid var(--line);
+  z-index: 1;
+}
+.sarea__grid b {
+  position: absolute;
+  left: 0;
+  bottom: 6u;
+  font: 400 17u/1 var(--f-mono);
+  color: var(--mute);
+}
+.sarea__layer,
+.sarea__layer svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.sarea__layer svg {
+  overflow: visible;
+}
+.sarea__layer polygon {
+  fill: var(--c);
+  stroke: var(--canvas);
+  stroke-width: 1.5px;
+  vector-effect: non-scaling-stroke;
+}
+.sarea__name {
+  position: absolute;
+  left: calc(100% + 22u);
+  bottom: calc(var(--at) * 100%);
+  translate: 0 50%;
+  display: flex;
+  align-items: center;
+  gap: 10u;
+  font-size: 20u;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.sarea__name i {
+  width: 14u;
+  height: 14u;
+  border-radius: 3u;
+  background: var(--c);
+}
+.sarea__name b {
+  font: 500 18u/1 var(--f-mono);
+  color: var(--mute);
+}
+.sarea__layer.is-focus .sarea__name {
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+.sarea__layer.is-focus .sarea__name b {
+  color: var(--accent-ink);
+}
+.sarea__x {
+  position: relative;
+  height: 40u;
+}
+.sarea__x span {
+  position: absolute;
+  top: 14u;
+  left: calc(var(--at) * 100%);
+  translate: -50% 0;
+  font: 400 17u/1 var(--f-mono);
+  color: var(--mute);
+}
+.sarea__unit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 17u;
+  color: var(--mute);
+}
+
+/* ── DotMap ──────────────────────────────────────────────────────────── */
+
+.dmap {
+  display: grid;
+  grid-template-columns: 1280u minmax(0, 1fr);
+  gap: 64u;
+  flex: 1;
+  min-height: 0;
+  margin-top: 30u;
+  align-items: center;
+}
+.dmap__map {
+  position: relative;
+  width: 1280u;
+  aspect-ratio: 180 / 70;
+}
+.dmap__map svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.dmap__land {
+  fill: none;
+  stroke: color-mix(in srgb, var(--ink) 22%, var(--canvas));
+  stroke-width: 5.2;
+  stroke-linecap: round;
+}
+.dmap__mk {
+  position: absolute;
+  left: calc(var(--x) * 100%);
+  top: calc(var(--y) * 100%);
+  width: calc(30u + var(--s) * 70u);
+  height: calc(30u + var(--s) * 70u);
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+}
+.dmap__mk i {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgb(var(--accent-rgb) / 0.28);
+  border: 2px solid var(--accent);
+  animation: dmap-pulse 2400ms var(--ease-out) infinite;
+  animation-delay: calc(var(--k) * 300ms);
+}
+.dmap__mk b {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 30u;
+  height: 30u;
+  border-radius: 50%;
+  background: var(--accent);
+  font: 600 17u/1 var(--f-mono);
+  color: #fff;
+}
+@keyframes dmap-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(var(--accent-rgb) / 0.35);
+  }
+  60% {
+    box-shadow: 0 0 0 14u rgb(var(--accent-rgb) / 0);
+  }
+}
+.dmap__lt {
+  margin-bottom: 18u;
+  font-size: 19u;
+  color: var(--mute);
+}
+.dmap__list ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dmap__list li {
+  display: flex;
+  align-items: center;
+  gap: 16u;
+  padding: 13u 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 22u;
+  color: var(--ink);
+}
+.dmap__list li b {
+  display: grid;
+  place-items: center;
+  width: 30u;
+  height: 30u;
+  border-radius: 50%;
+  background: var(--accent);
+  font: 600 17u/1 var(--f-mono);
+  color: #fff;
+}
+.dmap__list li em {
+  margin-left: auto;
+  font: 500 20u/1 var(--f-mono);
+  font-style: normal;
+  color: var(--ink-2);
+}
+
+/* ── GlowMetrics ─────────────────────────────────────────────────────── */
+
+.glow {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: 28u;
+  flex: 1;
+  min-height: 0;
+  margin-top: 44u;
+}
+.glow__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 40u 38u;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+  border-radius: calc(24u * var(--rs, 1));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 8%, var(--card)), var(--card));
+  overflow: hidden;
+  isolation: isolate;
+}
+.glow__halo {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 38%;
+  width: 360u;
+  height: 360u;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(var(--accent-rgb) / 0.32), transparent 66%);
+  animation: glow-breathe 5s ease-in-out infinite;
+  animation-delay: calc(var(--k) * -1.2s);
+}
+.glow__card:not(.is-lead) .glow__halo {
+  opacity: 0.5;
+}
+@keyframes glow-breathe {
+  50% {
+    scale: 1.18;
+    opacity: 0.7;
+  }
+}
+.glow__label {
+  margin: 0;
+  font-size: 21u;
+  color: var(--ink-2);
+}
+.glow__value {
+  margin: 26u 0 0;
+  font: 600 104u/1 var(--f-display, var(--f-sans));
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  text-shadow: 0 0 28u rgb(var(--accent-rgb) / 0.55), 0 0 64u rgb(var(--accent-rgb) / 0.35);
+  white-space: nowrap;
+}
+.glow__card.is-lead .glow__value {
+  color: var(--accent-ink);
+}
+.glow__value small {
+  margin-left: 10u;
+  font-size: 32u;
+  letter-spacing: 0;
+  text-shadow: none;
+  color: var(--ink-2);
+}
+.glow__spark {
+  width: 100%;
+  height: 60u;
+  margin-top: 26u;
+}
+.glow__spark polyline {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3px;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 6px rgb(var(--accent-rgb) / 0.8));
+}
+.glow__delta {
+  margin: 22u 0 0;
+  font: 500 20u/1 var(--f-mono);
+  color: var(--accent-ink);
+}
+.glow__note {
+  margin: auto 0 0;
+  padding-top: 24u;
+  font-size: 20u;
+  line-height: 1.5;
+  color: var(--mute);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cluster__b,
+  .tmap__cell,
+  .scat__pt,
+  .dmap__mk i,
+  .glow__halo {
+    animation: none;
+  }
+  .race__row,
+  .race__track i {
+    transition: none;
+  }
+}
+.p5-static :is(.cluster__b, .tmap__cell, .scat__pt, .dmap__mk i, .glow__halo) {
+  animation: none;
+}

@@ -1,0 +1,189 @@
+/* Phase 4 style `keynote`: preset rules scoped to [data-style='keynote'] plus its templates. */
+/* Launch keynote: pure black (or pure white) canvas, Geist bold with very tight
+   tracking, gradient-filled hero words and kickers, nothing else on the stage. */
+
+[data-style='keynote'] {
+  --f-display: 'Geist', 'Deck Heavy SC', sans-serif;
+  --kn-grad: linear-gradient(100deg, var(--spot-3) 0%, color-mix(in srgb, var(--spot-3) 45%, var(--accent)) 30%, var(--accent) 62%, color-mix(in srgb, var(--accent) 55%, var(--spot-4)) 100%);
+}
+[data-style='keynote'] [data-tone='dark'],
+[data-style='keynote'][data-tone='dark'] {
+  --canvas: #000000;
+  --letterbox: #000000;
+  --card: #141416;
+  --card-hover: #1c1c1f;
+  --panel: #101012;
+  --line: #242427;
+  --line-strong: #36363a;
+  --ink-2: #a9a9b0;
+}
+[data-style='keynote']
+  :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt) {
+  font-family: var(--f-display);
+}
+[data-style='keynote'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+[data-style='keynote'] .kicker {
+  width: fit-content;
+  font: 600 22u/1.2 var(--f-sans);
+  letter-spacing: -0.01em;
+  background: var(--kn-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+[data-style='keynote'] .kicker::before {
+  display: none;
+}
+[data-style='keynote'] [data-tone='accent'] .kicker {
+  background: none;
+  color: var(--ink);
+}
+
+/* Shared gradient fill for hero words and numbers. */
+.kn-grad {
+  background: var(--kn-grad, linear-gradient(100deg, var(--spot-3), var(--accent)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ── KeyReveal ────────────────────────────────────────────────────────── */
+
+.kn-halo {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 1300u;
+  height: 520u;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(var(--accent-rgb) / 0.22), transparent);
+  filter: blur(40u);
+  pointer-events: none;
+}
+.s-kreveal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.kreveal__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.s-kreveal .kicker {
+  margin-inline: auto;
+}
+.kreveal__title {
+  margin-top: 30u;
+  font: 700 176u/1 var(--f-display);
+  letter-spacing: -0.055em;
+  color: var(--ink);
+}
+.kreveal__sub {
+  margin-top: 40u;
+  max-width: 1100u;
+  font: 500 32u/1.5 var(--f-sans);
+  letter-spacing: -0.01em;
+  color: var(--ink-2);
+}
+.kreveal__facts {
+  display: flex;
+  gap: 120u;
+  margin-bottom: 40u;
+}
+.kreveal__facts > div {
+  display: grid;
+  gap: 10u;
+  justify-items: center;
+}
+.kreveal__facts b {
+  font: 700 52u/1 var(--f-display);
+  letter-spacing: -0.04em;
+}
+.kreveal__facts span {
+  font-size: 20u;
+  color: var(--mute);
+}
+.s-kreveal .s-foot {
+  margin-top: 0;
+  align-self: stretch;
+  text-align: left;
+}
+
+/* ── KeySpec ──────────────────────────────────────────────────────────── */
+
+.s-kspec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.s-kspec .kicker {
+  margin-inline: auto;
+}
+.kspec__title {
+  margin-top: 22u;
+  font: 700 56u/1.15 var(--f-display);
+  letter-spacing: -0.04em;
+}
+.kspec__figure {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 18u;
+  margin-top: 6u;
+}
+.kspec__figure b {
+  font: 700 340u/1.02 var(--f-display);
+  letter-spacing: -0.06em;
+  font-variant-numeric: tabular-nums;
+  padding-right: 0.04em;
+}
+.kspec__figure span {
+  font: 700 84u/1 var(--f-display);
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.kspec__caption {
+  margin-top: 4u;
+  font: 500 28u/1.5 var(--f-sans);
+  color: var(--ink-2);
+}
+.kspec__specs {
+  display: grid;
+  grid-auto-columns: 360u;
+  grid-auto-flow: column;
+  margin-top: auto;
+  margin-bottom: 36u;
+  border-top: 1px solid var(--line-strong);
+}
+.kspec__specs > div {
+  display: grid;
+  gap: 10u;
+  padding: 28u 20u 0;
+}
+.kspec__specs > div + div {
+  box-shadow: inset 1px 0 0 var(--line);
+}
+.kspec__specs b {
+  font: 700 44u/1 var(--f-display);
+  letter-spacing: -0.03em;
+}
+.kspec__specs span {
+  font-size: 20u;
+  color: var(--mute);
+}
+.s-kspec .s-foot {
+  margin-top: 0;
+  align-self: stretch;
+  text-align: left;
+}

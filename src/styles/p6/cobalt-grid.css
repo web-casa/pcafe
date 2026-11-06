@@ -1,0 +1,32 @@
+/* Style `cobalt-grid`: ported from beautiful-html-templates · cobalt-grid (MIT, (c) zarazhangrui). Rules scoped to [data-style='cobalt-grid']. */
+/* Field-report index: warm paper, one ink colour (the theme accent) for type and
+   rules, light text-serif headings, small mono caps for labels. */
+
+[data-style='cobalt-grid'] {
+  --f-display: 'Newsreader', 'Deck Serif SC', serif;
+}
+[data-style='cobalt-grid']
+  :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .statrow__value, .desk__ver, .detail__figure b, .numeral, .feature-num) {
+  font-family: var(--f-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+[data-style='cobalt-grid'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title) {
+  color: var(--accent-ink);
+}
+[data-style='cobalt-grid'] [data-tone] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title) {
+  color: var(--ink);
+}
+[data-style='cobalt-grid'] .kicker {
+  font: 500 18u/1 var(--f-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+[data-style='cobalt-grid'] .kicker::before {
+  width: 18u;
+  height: 1px;
+}
+[data-style='cobalt-grid'] :is(.card, .kpi__tile, .price__card, .persona__card, .status__tile, .statrow__card, .igrid__card, .claim, .spark__card, .panel-card, .recap__item) {
+  border-color: transparent;
+  border-top: 1px solid rgb(var(--accent-rgb) / 0.55);
+}

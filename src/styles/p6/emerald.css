@@ -1,0 +1,11 @@
+/* Style `emerald`: ported from beautiful-html-templates · emerald-editorial (MIT, (c) zarazhangrui). Rules scoped to [data-style='emerald']. */
+
+[data-style='emerald'] { --f-display: 'Bodoni Moda', 'Deck Serif SC', serif; --ink: #0f1a5c; --ink-2: #2f3a78; }
+[data-style='emerald'] [data-tone='dark'], [data-style='emerald'][data-tone='dark'] {
+  --canvas: #111a5e; --letterbox: #0b1245; --card: #1b2670; --card-hover: #223080; --panel: #16206a;
+  --ink: #f1e9d6; --ink-2: #d4cdbb; --mute: #a7a9c4; --faint: #5d6497; --line: #27327a; --line-strong: #3a4690;
+}
+[data-style='emerald'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title, .quote__text, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .statrow__value, .desk__ver, .detail__figure b, .numeral, .feature-num) { font-family: var(--f-display); font-weight: 800; letter-spacing: -0.01em; }
+[data-style='emerald'] [data-tone='dark'] :is(.break__num, .close__num, .cover__title, .break__title) { color: #3cd896; }
+[data-style='emerald'] .kicker { font: 700 18u/1 var(--f-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
+[data-style='emerald'] .kicker::before { width: 26u; height: 2u; background: var(--accent); }

@@ -1,0 +1,223 @@
+/* Phase 4 style `desktop`: preset rules scoped to [data-style='desktop'] plus its templates. */
+
+[data-style='desktop'] {
+  --f-display: 'Plus Jakarta Sans', 'Deck Heavy SC', sans-serif;
+}
+[data-style='desktop'] .stage {
+  background:
+    linear-gradient(rgb(0 0 0 / 0.035) 1px, transparent 1px) 0 0 / 100% 6px,
+    var(--canvas);
+}
+[data-style='desktop'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-family: var(--f-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+[data-style='desktop'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7u 12u;
+  border: 2u solid var(--ink);
+  background: var(--accent);
+  box-shadow: 4u 4u 0 var(--ink);
+  font: 400 17u/1 'Silkscreen', 'Deck Sans SC', monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+[data-style='desktop'] .kicker::before {
+  display: none;
+}
+[data-style='desktop'] .slide-header {
+  font-family: 'Silkscreen', 'Deck Sans SC', monospace;
+}
+
+/* ── RetroWin ── */
+.rw {
+  display: flex;
+  flex-direction: column;
+  border: 3u solid var(--ink);
+  border-radius: calc(10u * var(--rs, 1));
+  background: var(--card);
+  box-shadow: 10u 10u 0 var(--ink);
+  overflow: hidden;
+}
+.rw__bar {
+  display: flex;
+  align-items: center;
+  gap: 14u;
+  height: 48u;
+  padding: 0 12u;
+  border-bottom: 3u solid var(--ink);
+  background:
+    repeating-linear-gradient(var(--ink) 0 2u, transparent 2u 6u) 0 50% / 100% 22u no-repeat,
+    var(--panel);
+}
+.rw__title {
+  margin: 0 auto;
+  padding: 0 16u;
+  background: var(--panel);
+  font: 400 18u/48u 'Silkscreen', 'Deck Sans SC', monospace;
+  color: var(--ink);
+}
+.rw__box {
+  flex: none;
+  width: 24u;
+  height: 24u;
+  border: 3u solid var(--ink);
+  background: var(--card);
+}
+.rw__box--max {
+  box-shadow: inset 0 -6u 0 var(--ink);
+}
+.rw__body {
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── RetroTabs ── */
+.rtabs__text {
+  display: flex;
+  flex-direction: column;
+}
+.s-rtabs .s-head {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.s-rtabs .s-head__aside .s-lead { margin-top: 34u; }
+.rtabs {
+  align-self: center;
+  margin-right: 12u;
+}
+.rtabs__tabs {
+  display: flex;
+  gap: 8u;
+  padding: 18u 22u 0;
+  border-bottom: 3u solid var(--ink);
+  background: var(--panel);
+}
+.rtabs__tabs button {
+  margin-bottom: -3u;
+  padding: 12u 24u;
+  border: 3u solid var(--ink);
+  border-radius: calc(8u * var(--rs, 1)) calc(8u * var(--rs, 1)) 0 0;
+  background: var(--line);
+  font: 700 21u/1 var(--f-display);
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.rtabs__tabs button.is-on {
+  border-bottom-color: var(--card);
+  background: var(--card);
+  color: var(--ink);
+}
+.rtabs__rows {
+  display: grid;
+  margin: 0;
+  padding: 10u 26u 18u;
+  list-style: none;
+}
+.rtabs__rows li {
+  display: grid;
+  grid-template-columns: 64u 1fr;
+  align-items: center;
+  gap: 22u;
+  padding: 26u 0;
+  border-bottom: 2u dashed var(--line);
+}
+.rtabs__rows li:last-child { border-bottom: 0; }
+.rtabs__icon {
+  display: grid;
+  place-items: center;
+  width: 64u;
+  height: 64u;
+  border: 3u solid var(--ink);
+  background: var(--accent-wash);
+  color: var(--ink);
+}
+.rtabs__rows b {
+  display: block;
+  font: 700 29u/1.3 var(--f-display);
+}
+.rtabs__rows span {
+  display: block;
+  margin-top: 4u;
+  font-size: 23u;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+/* ── RetroLog ── */
+.rlog {
+  display: flex;
+  flex-direction: column;
+}
+.rlog__body {
+  display: grid;
+  flex: 1;
+  grid-template-columns: minmax(0, 1fr) 440u;
+  gap: 56u;
+  margin-top: 44u;
+  min-height: 0;
+}
+.rlog__main .rw { height: 100%; }
+.rlog__main .rw__body { display: flex; }
+.rlog__list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0;
+  padding: 8u 32u;
+  list-style: none;
+}
+.rlog__row {
+  display: grid;
+  grid-template-columns: 170u 120u 1fr;
+  align-items: baseline;
+  gap: 20u;
+  padding: 24u 0;
+  border-bottom: 2u dashed var(--line);
+}
+.rlog__row:last-child { border-bottom: 0; }
+.rlog__row code {
+  font: 600 23u/1.3 var(--f-mono);
+  color: var(--ink);
+}
+.rlog__tag {
+  justify-self: start;
+  padding: 5u 10u;
+  border: 2u solid var(--ink);
+  background: var(--panel);
+  font: 600 19u/1.1 var(--f-sans);
+}
+.rlog__row.is-new .rlog__tag {
+  background: var(--accent);
+  color: #fff;
+}
+.rlog__row p {
+  margin: 0;
+  font-size: 25u;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.rlog__side {
+  align-self: center;
+}
+.rlog__tilt {
+  transform: rotate(2deg);
+}
+.rw--note {
+  background: var(--accent-wash);
+}
+.rw--note ul {
+  margin: 0;
+  padding: 26u 30u 30u 56u;
+}
+.rw--note li {
+  padding: 6u 0;
+  font: 600 24u/1.5 var(--f-display);
+  color: var(--ink);
+}
+.rw--note li::marker { color: var(--accent); }
+.rlog .s-foot { margin-top: 26u; }

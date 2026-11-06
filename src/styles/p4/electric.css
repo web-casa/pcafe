@@ -1,0 +1,347 @@
+/* Phase 4 style `electric`: preset rules scoped to [data-style='electric'] plus its templates. */
+/* Studio landing page: white pages with pale lavender-grey cards, accent pages
+   as a glowing saturated blue (lighter at the top centre, deeper below),
+   tight geometric sans headlines, pill buttons with a round arrow disc,
+   kickers as soft grey pills with a dot. */
+
+[data-style='electric'] {
+  --f-display: 'Geist', 'Deck Sans SC', sans-serif;
+}
+[data-style='electric'] [data-tone='accent'] .stage,
+[data-style='electric'] .stage[data-tone='accent'] {
+  background:
+    radial-gradient(46% 42% at 50% -4%, rgb(255 255 255 / 0.26), transparent 72%),
+    radial-gradient(70% 60% at 50% 110%, color-mix(in srgb, var(--accent-base) 70%, #0a0640), transparent 75%),
+    linear-gradient(180deg, color-mix(in srgb, var(--accent-base) 88%, #7d7bff), color-mix(in srgb, var(--accent-base) 84%, #0b0a5c));
+}
+[data-style='electric']
+  :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .statrow__value) {
+  font-family: var(--f-display);
+}
+[data-style='electric'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-weight: 600;
+  letter-spacing: -0.045em;
+}
+[data-style='electric'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 10u 20u;
+  border-radius: 999px;
+  background: var(--card);
+  font: 500 18u/1 var(--f-sans);
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+[data-style='electric'] .kicker::before {
+  width: 10u;
+  height: 10u;
+  border-radius: 50%;
+  background: var(--accent);
+}
+[data-style='electric'] [data-tone='accent'] .kicker {
+  background: rgb(255 255 255 / 0.14);
+}
+
+/* ── shared: pill button with a round arrow disc ── */
+
+.el-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 18u;
+  padding: 8u 8u 8u 30u;
+  border-radius: 999px;
+  border: 1.5px solid rgb(255 255 255 / 0.4);
+  font: 500 24u/1 var(--f-mono);
+  white-space: nowrap;
+  color: #ffffff;
+}
+.el-btn__arrow {
+  display: grid;
+  place-items: center;
+  width: 52u;
+  height: 52u;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--accent-base);
+}
+.el-btn__arrow svg {
+  width: 26u;
+  height: 26u;
+}
+.el-btn--solid {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--ink-on-white, #15142b);
+}
+.el-btn--solid .el-btn__arrow {
+  background: var(--accent-base);
+  color: #ffffff;
+}
+.el-btn--line {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+.el-btn--line .el-btn__arrow {
+  background: var(--ink);
+  color: var(--canvas);
+}
+
+/* ── FanCover ─────────────────────────────────────────────────────────── */
+
+.el-fan__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0;
+  text-align: center;
+}
+.el-fan__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 16u;
+  padding: 8u 26u 8u 8u;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.16);
+  font: 500 22u/1 var(--f-sans);
+  color: #ffffff;
+}
+.el-fan__dots {
+  display: flex;
+}
+.el-fan__dots span {
+  display: grid;
+  place-items: center;
+  width: 44u;
+  height: 44u;
+  margin-left: -10u;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 0 3u var(--accent-base);
+  color: var(--accent-base);
+}
+.el-fan__dots .icon {
+  color: inherit;
+}
+.el-fan__dots span:first-child {
+  margin-left: 0;
+}
+.el-fan__title {
+  margin-top: 28u;
+  font: 600 104u/1.06 var(--f-display);
+  letter-spacing: -0.05em;
+  color: #ffffff;
+}
+.el-fan__lead {
+  margin-top: 0;
+  max-width: 1160u;
+  font-size: 28u;
+  line-height: 1.6;
+  color: rgb(255 255 255 / 0.8);
+}
+.el-fan__actions {
+  display: flex;
+  gap: 20u;
+  margin-top: 30u;
+}
+.el-fan__cards {
+  position: absolute;
+  left: 50%;
+  bottom: -90u;
+  width: 0;
+  height: 0;
+}
+.el-fan__slot {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.el-fan__card {
+  position: absolute;
+  bottom: calc(var(--d) * var(--d) * -26u);
+  left: calc(var(--d) * 330u - 200u);
+  width: 400u;
+  height: 330u;
+  margin: 0;
+  padding: 10u;
+  border-radius: 26u;
+  background: #ffffff;
+  box-shadow: 0 40u 80u -30u rgb(5 4 60 / 0.6);
+  transform: rotate(calc(var(--d) * 7deg));
+  transform-origin: 50% 100%;
+}
+.el-fan__slot:nth-child(odd) .el-fan__card {
+  z-index: 1;
+}
+.el-fan__card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 18u;
+  object-fit: cover;
+  object-position: 0 0;
+}
+.el-fan > .s-foot {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+/* ── PillSentence ─────────────────────────────────────────────────────── */
+
+.el-ps {
+  display: flex;
+  flex-direction: column;
+}
+.el-ps__text {
+  margin-top: 64u;
+  max-width: 1560u;
+  font: 600 100u/1.3 var(--f-display);
+  letter-spacing: -0.045em;
+  color: var(--ink);
+}
+.el-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6u;
+  width: 170u;
+  height: 84u;
+  margin: 0 16u;
+  border-radius: 999px;
+  vertical-align: -12u;
+  background: var(--accent);
+  color: #ffffff;
+}
+.el-pill .icon {
+  color: inherit;
+}
+.el-pill--2 {
+  background: var(--accent-wash);
+  color: var(--accent);
+}
+.el-pill--3 {
+  background: var(--card);
+  color: var(--ink);
+}
+.el-ps__foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 760u;
+  gap: 80u;
+  align-items: start;
+  margin-top: auto;
+}
+.el-ps__note {
+  display: grid;
+  gap: 10u;
+  font-size: 22u;
+  line-height: 1.5;
+}
+.el-ps__note b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.el-ps__note span {
+  color: var(--mute);
+}
+.el-ps__aside {
+  font-size: 28u;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.el-ps > .s-foot {
+  padding-top: 28u;
+}
+
+/* ── OpenList ─────────────────────────────────────────────────────────── */
+
+.el-ol {
+  display: grid;
+  grid-template-columns: 560u minmax(0, 1fr);
+  gap: 120u;
+}
+.el-ol__side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 8u;
+}
+.el-ol__title {
+  margin-top: 28u;
+}
+.el-ol__lead {
+  margin-top: 26u;
+  font-size: 24u;
+  line-height: 1.6;
+  color: var(--mute);
+}
+.el-ol__action {
+  margin-top: 34u;
+}
+.el-ol__side .s-foot {
+  margin-top: 40u;
+}
+.el-ol__rows {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 1.5px solid var(--line);
+}
+.el-ol__row {
+  padding: 22u 0;
+  border-bottom: 1.5px solid var(--line);
+}
+.el-ol__q {
+  display: flex;
+  align-items: center;
+  gap: 20u;
+  font: 500 30u/1.3 var(--f-sans);
+  color: var(--ink);
+}
+.el-ol__q kbd {
+  min-width: 64u;
+  height: 40u;
+  margin: 0;
+  font-size: 19u;
+}
+.el-ol__q span {
+  flex: 1;
+}
+.el-ol__mark {
+  position: relative;
+  width: 22u;
+  height: 22u;
+  flex: none;
+}
+.el-ol__mark::before,
+.el-ol__mark::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 2.5u;
+  margin-top: -1.25u;
+  border-radius: 2u;
+  background: var(--ink);
+}
+.el-ol__mark::after {
+  transform: rotate(90deg);
+}
+.el-ol__row.is-open .el-ol__mark::after {
+  transform: rotate(0deg);
+}
+.el-ol__row.is-open .el-ol__q kbd {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+.el-ol__a {
+  margin-top: 14u;
+  padding-left: 84u;
+  max-width: 900u;
+  font-size: 23u;
+  line-height: 1.6;
+  color: var(--mute);
+}

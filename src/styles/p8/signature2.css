@@ -1,0 +1,92 @@
+/* Signature templates for seven more styles ported from beautiful-html-templates (MIT, (c) zarazhangrui):
+   FramedStats (block-frame), IndexList (cobalt-grid), AgendaMosaic (forest), MethodSteps (emerald),
+   PriorityColumns (platform), ChapterNumber (pink-script), StackBars (broadside).
+   Layouts re-drawn from the templates' screenshots, no markup copied. Colours come only from the theme
+   (accent, ink, paper), so every template follows the deck's theme in any style. */
+
+/* ── FramedStats ── */
+.s-fs { display: flex; flex-direction: column; }
+.fs__row { flex: 1; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 36u; align-items: center; padding: 110u 12u 46u 0; }
+.fs__box { position: relative; padding: 80u 44u 64u; background: var(--card); border: 4u solid var(--ink); border-radius: calc(14u * var(--rs, 1)); box-shadow: 10u 10u 0 var(--ink); }
+.fs__dot { position: absolute; top: 18u; right: 18u; width: 18u; height: 18u; border-radius: 50%; background: var(--accent); border: 3u solid var(--ink); }
+.fs__v { margin: 0; font: 800 150u/1 var(--f-display); letter-spacing: -0.03em; color: var(--ink); }
+.fs__l { margin: 24u 0 0; font: 600 24u/1.35 var(--f-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+
+/* ── IndexList ── */
+.s-il { display: flex; flex-direction: column; }
+.il__list { flex: 1; display: grid; grid-auto-flow: column; grid-template-columns: 1fr 1fr; column-gap: 80u; align-content: center; margin: 0; padding: 0 0 46u; list-style: none; }
+.il__list li { border-top: 1px solid var(--line-strong); }
+.il__list li[data-build-state] { filter: none; }
+.il__list li[data-build-state='pending'] { opacity: 0.18; }
+.il__in { display: grid; grid-template-columns: 70u minmax(0, 1fr); gap: 20u; padding: 26u 0 34u; }
+.il__n { font: 500 18u/1.6 var(--f-mono); color: var(--accent); }
+.il__in h3 { margin: 0; font: 400 34u/1.2 var(--f-display); color: var(--accent); }
+.il__in p { margin: 10u 0 0; font-size: 21u; line-height: 1.5; color: var(--ink-2); }
+
+/* ── AgendaMosaic ── */
+.s-am { display: flex; flex-direction: column; }
+.am__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 40u; }
+.am__aside { margin: 0; font: 500 18u/1.3 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+.am__grid { flex: 1; display: grid; grid-template-columns: 1.15fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 14u; margin: 40u 0 46u; }
+.am__tile { display: flex; flex-direction: column; padding: 30u 32u; border-radius: calc(8u * var(--rs, 1)); background: var(--accent-wash); color: var(--ink); }
+.am__tile.is-0 { grid-row: 1 / 3; background: var(--ink); color: var(--canvas); }
+.am__tile.is-1, .am__tile.is-4 { background: var(--accent); color: #ffffff; }
+.am__tile.is-2 { background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
+.am__n { font: 500 18u/1 var(--f-mono); opacity: 0.8; }
+.am__tile h3 { margin: 14u 0 0; font: 400 44u/1.12 var(--f-display); letter-spacing: -0.01em; }
+.am__tile.is-0 h3 { font-size: 64u; }
+.am__tag { margin-top: auto; padding-top: 20u; font: 500 18u/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.85; }
+
+/* ── MethodSteps ── */
+.s-ms { display: flex; flex-direction: column; }
+.ms__row { flex: 1; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 18u; align-items: stretch; margin: 44u 0 0; padding: 0 0 46u; list-style: none; }
+.ms__card { display: flex; transition: opacity 500ms; }
+.ms__card[data-build-state] { filter: none; }
+.ms__card[data-build-state='pending'] { opacity: 0.15; }
+.ms__in { flex: 1; display: flex; flex-direction: column; padding: 30u 30u 26u; border-radius: calc(8u * var(--rs, 1)); background: var(--card); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+.ms__card.is-dark .ms__in { background: var(--ink); color: var(--canvas); box-shadow: none; }
+.ms__n { font: 700 96u/1 var(--f-display); color: var(--accent); }
+.ms__in h3 { margin: 30u 0 0; font: 700 40u/1.2 var(--f-display); }
+.ms__in p { margin: 18u 0 0; font-size: 24u; line-height: 1.55; opacity: 0.88; }
+.ms__foot { display: flex; justify-content: space-between; gap: 12u; margin-top: auto; padding-top: 22u; border-top: 1px solid currentColor; font: 500 18u/1.2 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; }
+.ms__in p + .ms__foot { margin-top: auto; }
+
+/* ── PriorityColumns ── */
+.s-pc { display: flex; flex-direction: column; }
+.pc__head { display: grid; grid-template-columns: minmax(0, 1fr) 520u; gap: 60u; align-items: end; padding-bottom: 30u; border-bottom: 3u solid var(--ink); }
+.pc__title { margin: 18u 0 0; font: 400 96u/0.98 var(--f-display); color: var(--accent); }
+.pc__lead { margin: 0; font-size: 22u; line-height: 1.5; color: var(--ink-2); }
+.pc__cols { flex: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0 0 46u; padding: 0; list-style: none; }
+.pc__cols li { display: flex; border-right: 2u solid var(--ink); transition: opacity 500ms; }
+.pc__cols li:last-child { border-right: 0; }
+.pc__cols li[data-build-state] { filter: none; }
+.pc__cols li[data-build-state='pending'] { opacity: 0.15; }
+.pc__cols li.is-focus { background: var(--accent); color: #ffffff; }
+.pc__in { flex: 1; display: flex; flex-direction: column; padding: 34u 36u; }
+.pc__n { font: 400 120u/0.9 var(--f-display); color: var(--accent); }
+.is-focus .pc__n { color: #ffffff; }
+.pc__tag { margin-top: auto; padding-top: 22u; font: 600 18u/1 var(--f-sans); letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.8; }
+.pc__in h3 { margin: 14u 0 0; font: 400 36u/1.15 var(--f-display); }
+.pc__in p { margin: 14u 0 0; font-size: 21u; line-height: 1.55; opacity: 0.9; }
+
+/* ── ChapterNumber ── */
+.s-cn { display: grid; grid-template-columns: minmax(0, 1fr) 640u; align-items: center; gap: 60u; padding: 120u 120u 140u; }
+.cn__num { justify-self: center; }
+.cn__num span { display: block; font: 400 560u/0.8 var(--f-display); letter-spacing: -0.04em; color: var(--accent); text-shadow: 0 0 120u rgb(var(--accent-rgb) / 0.35); }
+.cn__title { margin: 24u 0 0; font: 400 72u/1.08 var(--f-display); color: var(--ink); }
+.cn__body { margin: 28u 0 0; font-size: 23u; line-height: 1.6; color: var(--ink-2); }
+.cn__foot { position: absolute; left: 120u; right: 120u; bottom: 72u; display: flex; justify-content: space-between; font: 500 18u/1 var(--f-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+
+/* ── StackBars ── */
+.s-sb { display: flex; flex-direction: column; }
+.sb__list { flex: 1; display: grid; align-content: center; gap: 10u; margin: 0; padding: 0 0 46u; list-style: none; }
+.sb__list li { padding-left: calc(var(--k) * 70u); transition: opacity 500ms; }
+.sb__list li[data-build-state] { filter: none; }
+.sb__list li[data-build-state='pending'] { opacity: 0.12; }
+.sb__bar { display: flex; align-items: center; justify-content: space-between; gap: 30u; width: 100%; padding: 24u 32u; background: color-mix(in oklab, var(--accent) calc(var(--o) * 100%), #141414); color: #ffffff; }
+.sb__bar b { font: 700 38u/1.1 var(--f-display); }
+.sb__bar span { font-size: 22u; opacity: 0.85; }
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.il__list li, .ms__card, .pc__cols li, .sb__list li) { transition-duration: 1ms !important; }
+}

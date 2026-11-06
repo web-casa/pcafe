@@ -1,0 +1,282 @@
+/* Phase 4 style `agency`: preset rules scoped to [data-style='agency'] plus its templates. */
+/* Growth-agency landing page: pure white, very large tight black headings,
+   "( 01 ) section." eyebrows, electric pill buttons, a lime badge, a dark
+   status pill with a live dot, colour icon tiles set inside headlines. */
+
+[data-style='agency'] {
+  --f-display: 'Geist', 'Deck Heavy SC', sans-serif;
+  --ag-lime: #d6f34a;
+  --ag-ink: #0d0d0f;
+}
+[data-style='agency']
+  :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title, .close__num, .bigstat__num, .metrics__value, .kpi__value) {
+  font-family: var(--f-display);
+}
+[data-style='agency'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+[data-style='agency'] .s-title {
+  font-size: 80u;
+  line-height: 1.08;
+}
+[data-style='agency'] .kicker {
+  display: block;
+  width: fit-content;
+  font: 500 19u/1.2 var(--f-sans);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--ink-2);
+}
+[data-style='agency'] .kicker::before {
+  content: '(\2009';
+  display: inline;
+  width: auto;
+  height: auto;
+  margin: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  position: static;
+}
+[data-style='agency'] .kicker::after {
+  content: '\2009).';
+}
+
+/* Shared bits */
+.ag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14u;
+  height: 72u;
+  padding: 0 34u;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  font: 500 24u/1 var(--f-sans);
+  color: var(--ink);
+  white-space: nowrap;
+}
+.ag-btn--fill {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+.ag-btn--fill .icon {
+  color: #fff;
+}
+.ag-pill-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 14u;
+  width: fit-content;
+  padding: 12u 24u 12u 14u;
+  border-radius: 999px;
+  background: var(--ag-ink, #0d0d0f);
+  font: 500 20u/1 var(--f-sans);
+  color: #fff;
+}
+.ag-pill-dark i {
+  width: 18u;
+  height: 18u;
+  border-radius: 50%;
+  background: var(--ag-lime, #d6f34a);
+  box-shadow: 0 0 0 4u rgb(214 243 74 / 0.25);
+  animation: ag-pulse 2.4s ease-in-out infinite;
+}
+@keyframes ag-pulse {
+  50% { box-shadow: 0 0 0 9u rgb(214 243 74 / 0.08); }
+}
+.ag-pill-soft {
+  display: inline-flex;
+  align-items: center;
+  gap: 12u;
+  width: fit-content;
+  padding: 10u 22u 10u 14u;
+  border-radius: 999px;
+  background: var(--panel);
+  font: 500 20u/1 var(--f-sans);
+  color: var(--ink);
+}
+/* Colour icon tile: a soft glossy square, three rotating hues. */
+.ag-tile {
+  display: inline-grid;
+  place-items: center;
+  width: 112u;
+  height: 112u;
+  border-radius: 30u;
+  vertical-align: middle;
+  color: #fff;
+  box-shadow: inset 0 -8u 18u rgb(0 0 0 / 0.12), inset 0 6u 12u rgb(255 255 255 / 0.45), 0 14u 30u -12u rgb(0 0 0 / 0.3);
+}
+.ag-tile .icon { color: #fff; }
+.ag-tile--0 { background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 60%, #fff), var(--accent)); }
+.ag-tile--1 { background: linear-gradient(145deg, #ffd27a, var(--spot-3)); }
+.ag-tile--2 { background: linear-gradient(145deg, #f7a6d0, var(--spot-4)); }
+.ag-tile--sm {
+  width: 68u;
+  height: 68u;
+  border-radius: 20u;
+}
+
+/* ── AgencyHero ───────────────────────────────────────────────────────── */
+
+.ag-hero {
+  top: 128u;
+  display: flex;
+  flex-direction: column;
+}
+.ag-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10u;
+  align-self: center;
+  padding: 12u 26u 12u 16u;
+  border-radius: 999px;
+  background: var(--ag-lime);
+  font: 500 20u/1 var(--f-sans);
+  color: var(--ag-ink);
+}
+.ag-bolt .icon { color: var(--spot-3); }
+.ag-hero__title {
+  margin-top: 26u;
+  font: 700 128u/1.04 var(--f-display);
+  letter-spacing: -0.05em;
+  color: var(--ag-ink);
+}
+.ag-hero__line {
+  display: flex;
+  align-items: center;
+  gap: 30u;
+  height: 140u;
+}
+.ag-hero__low {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 80u;
+  margin-top: 0;
+}
+.ag-hero__aside {
+  width: 640u;
+}
+.ag-hero__aside p {
+  font: 400 25u/1.6 var(--f-sans);
+  color: var(--ink-2);
+}
+.ag-hero__btns {
+  display: flex;
+  gap: 16u;
+  margin-top: 30u;
+}
+.ag-hero__names {
+  display: grid;
+  justify-items: center;
+  gap: 18u;
+  margin-top: auto;
+}
+.ag-hero__nlabel {
+  font-size: 18u;
+  color: var(--mute);
+}
+.ag-hero__names div {
+  display: flex;
+  gap: 72u;
+  font: 700 28u/1 var(--f-display);
+  letter-spacing: -0.02em;
+  color: color-mix(in srgb, var(--ink) 38%, transparent);
+}
+.ag-hero .s-foot {
+  margin-top: 14u;
+}
+
+/* ── AgencyRows ───────────────────────────────────────────────────────── */
+
+.ag-rows {
+  display: flex;
+  flex-direction: column;
+}
+.ag-rows__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40u;
+}
+.ag-rows__head .ag-btn {
+  height: 64u;
+  font-size: 21u;
+}
+.ag-rows__list {
+  margin: 44u 0 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--line);
+}
+.ag-rows__row {
+  display: grid;
+  grid-template-columns: 104u auto minmax(0, 1fr) 68u 64u;
+  align-items: center;
+  gap: 0 28u;
+  height: 108u;
+  border-top: 1px solid var(--line);
+}
+.ag-rows__num {
+  font: 600 26u/1 var(--f-display);
+  color: var(--mute);
+}
+.ag-rows__title {
+  font: 700 44u/1 var(--f-display);
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+.ag-rows__note {
+  font-size: 21u;
+  color: var(--mute);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 12u;
+}
+.ag-plus {
+  position: relative;
+  width: 60u;
+  height: 60u;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+}
+.ag-plus::before,
+.ag-plus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20u;
+  height: 1.5px;
+  background: var(--ink);
+  translate: -50% -50%;
+}
+.ag-plus::after { rotate: 90deg; }
+
+/* ── AgencyManifesto ──────────────────────────────────────────────────── */
+
+.ag-pov {
+  display: flex;
+  flex-direction: column;
+}
+.ag-pov__body {
+  display: grid;
+  gap: 44u;
+  align-content: center;
+  flex: 1;
+  padding-left: 110u;
+  padding-right: 60u;
+}
+.ag-pov__text {
+  font: 700 78u/1.18 var(--f-display);
+  letter-spacing: -0.04em;
+  color: var(--ag-ink, var(--ink));
+  text-wrap: pretty;
+}
+.ag-pov__text em {
+  font-style: normal;
+  color: var(--accent);
+}

@@ -1,0 +1,5 @@
+node_modules/
+dist/
+qa/
+.pcafe.lock
+src/assets/photos/*.webp

@@ -1,0 +1,7 @@
+/* Style `stencil`: ported from beautiful-html-templates · stencil-tablet (MIT, (c) zarazhangrui). Rules scoped to [data-style='stencil']. */
+
+[data-style='stencil'] { --f-display: 'Stardos Stencil', 'Deck Heavy SC', serif; --f-st-num: 'Bowlby One', 'Deck Heavy SC', sans-serif; --ink: #0a0a0a; }
+[data-style='stencil'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title) { font-family: var(--f-display); font-weight: 700; letter-spacing: 0; text-transform: uppercase; }
+[data-style='stencil'] :is(.break__num, .close__num, .metrics__value, .kpi__value, .price__amt, .statrow__value, .desk__ver, .detail__figure b) { font-family: var(--f-st-num); font-weight: 400; letter-spacing: 0; }
+[data-style='stencil'] .kicker { font: 800 18u/1 'Barlow Condensed', var(--f-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); }
+[data-style='stencil'] .kicker::before { display: none; }

@@ -1,0 +1,287 @@
+/* Mock interfaces (src/kit/mock). All sizes in --m: 1px in reports, scaled with the stage in slides. */
+
+.mk {
+  --m: 1px;
+  overflow: hidden;
+  border-radius: calc(12 * var(--m) * var(--rs, 1));
+  background: var(--card, #fff);
+  box-shadow: 0 0 0 1px var(--line-strong), 0 calc(14 * var(--m)) calc(30 * var(--m)) calc(-20 * var(--m)) rgb(0 0 0 / 0.28);
+  font-family: var(--f-sans);
+  color: var(--ink);
+  text-align: left;
+}
+.slide .mk,
+.slide .mk-steps {
+  --m: calc(var(--u) * 1.6);
+}
+.mk__bar {
+  display: flex;
+  align-items: center;
+  gap: calc(6 * var(--m));
+  padding: calc(9 * var(--m)) calc(12 * var(--m));
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+.mk__bar > i {
+  width: calc(8 * var(--m));
+  height: calc(8 * var(--m));
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.mk__bar > span {
+  margin-left: calc(6 * var(--m));
+  font-size: calc(12.5 * var(--m));
+  font-weight: 500;
+  color: var(--ink-2);
+}
+.mk__label {
+  margin-left: auto;
+  padding: calc(2 * var(--m)) calc(8 * var(--m));
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font-style: normal;
+  font-size: calc(11 * var(--m));
+  color: var(--mute);
+}
+
+/* chat */
+.mk-chat__body {
+  display: grid;
+  gap: calc(10 * var(--m));
+  padding: calc(14 * var(--m));
+}
+.mk-chat__msg {
+  max-width: 84%;
+  transition: opacity 500ms var(--ease-out), translate 500ms var(--ease-out);
+}
+.mk-chat__msg p {
+  margin: 0;
+  padding: calc(9 * var(--m)) calc(13 * var(--m));
+  border-radius: calc(14 * var(--m));
+  font-size: calc(13.5 * var(--m));
+  line-height: 1.6;
+}
+.mk-chat__msg.is-user {
+  justify-self: end;
+}
+.mk-chat__msg.is-user p {
+  border-bottom-right-radius: calc(4 * var(--m));
+  background: var(--accent-base, var(--accent));
+  color: #ffffff;
+}
+.mk-chat__msg.is-bot p {
+  border-bottom-left-radius: calc(4 * var(--m));
+  background: var(--panel);
+}
+.mk-chat__msg[data-build-state] {
+  filter: none;
+}
+.mk-chat__msg[data-build-state='pending'] {
+  opacity: 0;
+  translate: 0 calc(10 * var(--m));
+}
+.mk-chat__card {
+  margin-top: calc(8 * var(--m));
+  padding: calc(10 * var(--m)) calc(12 * var(--m));
+  border-radius: calc(10 * var(--m));
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  background: var(--card, #fff);
+}
+.mk-chat__card b {
+  font-size: calc(12.5 * var(--m));
+  font-weight: 600;
+}
+.mk-chat__card dl,
+.mk-app__fields {
+  display: grid;
+  gap: calc(5 * var(--m));
+  margin: calc(7 * var(--m)) 0 0;
+}
+.mk-chat__card dl > div,
+.mk-app__fields > div {
+  display: flex;
+  justify-content: space-between;
+  gap: calc(14 * var(--m));
+  font-size: calc(12.5 * var(--m));
+  line-height: 1.45;
+}
+.mk-chat__card dt,
+.mk-app__fields dt {
+  color: var(--mute);
+}
+.mk-chat__card dd,
+.mk-app__fields dd {
+  margin: 0;
+  text-align: right;
+  color: var(--ink);
+}
+
+/* app panel */
+.mk-app__body {
+  padding: calc(14 * var(--m)) calc(16 * var(--m)) calc(16 * var(--m));
+}
+.mk-app__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(10 * var(--m));
+}
+.mk-app__head b {
+  font-size: calc(15 * var(--m));
+  font-weight: 600;
+}
+.mk-app__status {
+  padding: calc(3 * var(--m)) calc(9 * var(--m));
+  border-radius: 999px;
+  font-size: calc(11.5 * var(--m));
+  white-space: nowrap;
+}
+.mk-app__status.is-ok {
+  background: rgb(22 163 74 / 0.14);
+  color: #15803d;
+}
+.mk-app__status.is-wait {
+  background: rgb(234 179 8 / 0.18);
+  color: #92400e;
+}
+.mk-app__status.is-stop {
+  background: rgb(220 38 38 / 0.12);
+  color: #b91c1c;
+}
+.mk-app__fields {
+  margin-top: calc(12 * var(--m));
+}
+.mk-app__fields > div {
+  padding-top: calc(6 * var(--m));
+  border-top: 1px solid var(--line);
+}
+.mk-app__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(6 * var(--m));
+  margin-top: calc(12 * var(--m));
+}
+.mk-app__tags span {
+  padding: calc(3 * var(--m)) calc(9 * var(--m));
+  border-radius: 999px;
+  background: var(--accent-wash);
+  font-size: calc(11.5 * var(--m));
+  color: var(--accent-ink);
+}
+
+/* step strip */
+.mk-steps {
+  --m: 1px;
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: calc(10 * var(--m));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mk-steps li {
+  position: relative;
+  padding-top: calc(36 * var(--m));
+  transition: opacity 500ms var(--ease-out);
+}
+.mk-steps li::before {
+  content: '';
+  position: absolute;
+  top: calc(13 * var(--m));
+  left: calc(30 * var(--m));
+  right: calc(-10 * var(--m));
+  height: 1.5px;
+  background: var(--line-strong);
+}
+.mk-steps li:last-child::before {
+  display: none;
+}
+.mk-steps__n {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: calc(26 * var(--m));
+  height: calc(26 * var(--m));
+  border-radius: 50%;
+  background: var(--accent);
+  font: 600 calc(12.5 * var(--m)) / 1 var(--f-mono);
+  color: #ffffff;
+}
+.mk-steps b {
+  display: block;
+  font-size: calc(14.5 * var(--m));
+  font-weight: 600;
+  line-height: 1.35;
+}
+.mk-steps p {
+  margin: calc(4 * var(--m)) 0 0;
+  font-size: calc(12.5 * var(--m));
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+@media (max-width: 640px) {
+  .doc-article .mk-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .doc-article .mk-steps li::before {
+    display: none;
+  }
+}
+
+/* ── ChatDemo ── */
+.s-chatdemo {
+  display: grid;
+  grid-template-columns: 600u minmax(0, 1fr);
+  gap: 90u;
+}
+.chatdemo__copy .s-title {
+  margin-top: 26u;
+}
+.chatdemo__copy .s-lead {
+  margin-top: 24u;
+}
+.chatdemo__notes ul {
+  display: grid;
+  gap: 14u;
+  margin: 40u 0 0;
+  padding: 0;
+  list-style: none;
+}
+.chatdemo__notes li {
+  padding-left: 22u;
+  border-left: 3u solid var(--accent);
+  font-size: 24u;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.chatdemo__win {
+  align-self: center;
+  max-width: 1040u;
+  padding-bottom: 46u;
+}
+.chatdemo__win .mk {
+  --m: calc(var(--u) * 1.95);
+}
+
+/* ── AppCards ── */
+.s-appcards {
+  display: flex;
+  flex-direction: column;
+}
+.appcards__row {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  align-items: center;
+  gap: 32u;
+  padding-bottom: 46u;
+}
+.appcards__row .mk {
+  --m: calc(var(--u) * 1.75);
+}
+/* 2–3 panels have room to grow */
+.appcards__row:not([data-n='4']) .mk {
+  --m: calc(var(--u) * 2.15);
+}

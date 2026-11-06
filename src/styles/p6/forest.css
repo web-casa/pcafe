@@ -1,0 +1,11 @@
+/* Style `forest`: ported from beautiful-html-templates · editorial-forest (MIT, (c) zarazhangrui). Rules scoped to [data-style='forest']. */
+
+[data-style='forest'] { --f-display: 'Source Serif 4', 'Deck Serif SC', serif; }
+[data-style='forest'] [data-tone='dark'], [data-style='forest'][data-tone='dark'] {
+  --canvas: #2e4a2a; --letterbox: #243a21; --card: #3a5a36; --card-hover: #426540; --panel: #34532f;
+  --ink: #f4ecdc; --ink-2: #ddd3bf; --mute: #b9b39e; --faint: #7f8a70; --line: #46663f; --line-strong: #5d7c55;
+}
+[data-style='forest'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title, .quote__text, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .statrow__value, .desk__ver, .detail__figure b, .numeral, .feature-num) { font-family: var(--f-display); font-weight: 500; letter-spacing: -0.02em; }
+[data-style='forest'] [data-tone='dark'] :is(.cover__title, .break__title, .close__statement, .break__num, .close__num) { color: #e89cb1; }
+[data-style='forest'] .kicker { font: 500 18u/1 var(--f-mono); letter-spacing: 0.16em; text-transform: uppercase; }
+[data-style='forest'] .kicker::before { display: none; }

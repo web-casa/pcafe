@@ -1,0 +1,99 @@
+/* Video engine: canvas, scene layers, captions. Portrait parts are in portrait.css. */
+
+html,
+body {
+  margin: 0;
+  background: #000;
+}
+
+.v-canvas {
+  position: relative;
+  overflow: hidden;
+  background: var(--canvas);
+}
+
+.v-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--canvas);
+}
+
+/* Video moves on frames, not on the wall clock. */
+.v-scene .stage {
+  transition: none;
+}
+
+.v-cap {
+  position: absolute;
+  z-index: 5;
+  text-align: center;
+  pointer-events: none;
+  color: var(--ink);
+  font-family: var(--f-sans);
+  font-weight: 500;
+  font-synthesis: none;
+}
+
+.v-wide .v-cap {
+  left: 96px;
+  right: 96px;
+  bottom: 22px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Inside PORTRAIT_SAFE: 1080 − 216 on the right, 1920 − 500 at the bottom. */
+.v-source {
+  position: absolute;
+  z-index: 5;
+  left: 72px;
+  width: 792px;
+  bottom: 500px;
+  margin: 0;
+  font-family: var(--f-sans);
+  font-size: 25px;
+  line-height: 1.3;
+  color: var(--mute);
+}
+
+.v-tall .v-cap {
+  left: 72px;
+  width: 792px;
+  bottom: 584px;
+  text-align: left;
+  font-size: 46px;
+  line-height: 1.32;
+}
+
+/* Preview page only. The renderer never mounts these. */
+.v-shell { position: fixed; inset: 0; display: grid; grid-template-rows: 1fr 64px; background: #101012; color: #e8e8ea; font: 14px/1.2 system-ui, sans-serif; }
+.v-shell__screen { position: relative; display: grid; place-items: center; overflow: hidden; }
+.v-shell__fit { position: absolute; left: 50%; top: 50%; translate: -50% -50%; transform-origin: center; }
+.v-safe { position: absolute; z-index: 20; outline: 3px dashed #ff4d4f; box-shadow: 0 0 0 9999px rgb(255 77 79 / 0.14); pointer-events: none; }
+.v-bar { display: flex; align-items: center; gap: 14px; padding: 0 18px; }
+.v-bar button { padding: 7px 12px; border: 1px solid #3a3a40; border-radius: 6px; background: #1c1c20; color: inherit; font: inherit; cursor: pointer; }
+.v-bar__track { position: relative; flex: 1; }
+.v-bar__track input { width: 100%; }
+.v-bar__ticks i { position: absolute; top: -3px; width: 2px; height: 6px; background: #6b6b73; }
+.v-bar__time, .v-bar__scene { font-variant-numeric: tabular-nums; color: #a9a9b0; white-space: nowrap; }
+.v-list { padding: 48px; color: #e8e8ea; font: 16px/1.5 system-ui, sans-serif; display: grid; gap: 8px; }
+.v-list a { color: #ffb648; }
+
+/* Attribution (LICENSE, Exhibit B): first and last scene, where the deck header would sit. */
+.v-credit {
+  position: absolute;
+  z-index: 5;
+  top: 46px;
+  right: 72px;
+  margin: 0;
+  font: 400 20px/44px var(--f-sans);
+  color: var(--mute);
+  white-space: nowrap;
+}
+.v-tall .v-credit { top: 278px; right: 220px; line-height: 1.2; font-size: 26px; }

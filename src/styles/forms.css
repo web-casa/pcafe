@@ -1,0 +1,1471 @@
+/* Phase 3: toy 3D objects and system chrome (parts in kit/shapes.tsx), the
+   toy3d and wallpaper templates, and the structure diagrams. Templates:
+   FloatCover, GlowStack, TileWall, ServiceIndex, DuoCards, Desktop,
+   WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone,
+   Swimlane, ArchLayers, Balance, DoubleFunnel. */
+
+/* ── Shape3D ──────────────────────────────────────────────────────────── */
+/* Light comes from the top left everywhere: highlight up-left, core shadow
+   down-right, a contact shadow on the floor below. */
+
+.shape {
+  position: absolute;
+  width: calc(var(--sz) * 1u);
+  height: calc(var(--sz) * 1u);
+  translate: -50% -50%;
+  pointer-events: none;
+}
+.shape__body {
+  position: absolute;
+  inset: 0;
+  animation: shape-float 6s var(--delay, 0s) ease-in-out infinite alternate;
+}
+.shape__shadow {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 108%;
+  height: 12%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(20 20 30 / 0.22), transparent);
+  animation: shape-shadow 6s var(--delay, 0s) ease-in-out infinite alternate;
+}
+@keyframes shape-float {
+  to {
+    translate: 0 -7%;
+  }
+}
+@keyframes shape-shadow {
+  to {
+    scale: 0.82;
+    opacity: 0.7;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shape__body,
+  .shape__shadow {
+    animation: none;
+  }
+}
+
+.shape--sphere .shape__body {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 26%, rgb(255 255 255 / 0.9) 0, rgb(255 255 255 / 0.25) 14%, transparent 34%),
+    radial-gradient(circle at 70% 78%, color-mix(in srgb, var(--c) 55%, #000) 0, transparent 55%),
+    radial-gradient(circle at 40% 38%, color-mix(in srgb, var(--c) 80%, #fff), var(--c) 55%, color-mix(in srgb, var(--c) 70%, #000));
+}
+
+.shape--capsule .shape__body {
+  inset: 30% -10%;
+  rotate: var(--rot);
+  border-radius: 999px;
+  background:
+    linear-gradient(to bottom, rgb(255 255 255 / 0.65), transparent 30%),
+    linear-gradient(to bottom, color-mix(in srgb, var(--c) 78%, #fff) 0, var(--c) 45%, color-mix(in srgb, var(--c) 62%, #000) 100%);
+  box-shadow: inset -8u -6u 18u rgb(0 0 0 / 0.12);
+}
+
+/* A ring seen from above at a slant: a radial band squashed in Y. */
+.shape--torus .shape__body {
+  inset: 18% 0;
+  rotate: var(--rot);
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    transparent 46%,
+    color-mix(in srgb, var(--c) 60%, #000) 48%,
+    var(--c) 60%,
+    color-mix(in srgb, var(--c) 70%, #fff) 74%,
+    var(--c) 86%,
+    color-mix(in srgb, var(--c) 72%, #000) 98%,
+    transparent 100%
+  );
+}
+.shape--torus .shape__body::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(70% 60% at 30% 20%, rgb(255 255 255 / 0.45), transparent 60%);
+  mask: radial-gradient(closest-side, transparent 47%, #000 49%, #000 99%, transparent 100%);
+}
+
+/* A real CSS 3D box. */
+.shape--cube .shape__body {
+  perspective: calc(var(--sz) * 6u);
+}
+.shape__box {
+  position: absolute;
+  inset: 18%;
+  transform-style: preserve-3d;
+  transform: rotateX(-26deg) rotateY(38deg);
+}
+.shape__box i {
+  position: absolute;
+  inset: 0;
+  border-radius: 3%;
+  background: var(--c);
+}
+/* Seen from the upper left: top face lightest, left face mid, front face darkest. */
+.shape__box i:nth-child(1) {
+  transform: translateZ(calc(var(--sz) * 0.32u));
+  background: color-mix(in srgb, var(--c) 80%, #000);
+}
+.shape__box i:nth-child(2) {
+  transform: rotateY(90deg) translateZ(calc(var(--sz) * 0.32u));
+  background: color-mix(in srgb, var(--c) 72%, #000);
+}
+.shape__box i:nth-child(3) {
+  transform: rotateY(180deg) translateZ(calc(var(--sz) * 0.32u));
+}
+.shape__box i:nth-child(4) {
+  transform: rotateY(-90deg) translateZ(calc(var(--sz) * 0.32u));
+  background: color-mix(in srgb, var(--c) 82%, #fff);
+}
+.shape__box i:nth-child(5) {
+  transform: rotateX(90deg) translateZ(calc(var(--sz) * 0.32u));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--c) 45%, #fff), color-mix(in srgb, var(--c) 75%, #fff));
+}
+.shape__box i:nth-child(6) {
+  transform: rotateX(-90deg) translateZ(calc(var(--sz) * 0.32u));
+}
+
+/* ── Marquee ──────────────────────────────────────────────────────────── */
+
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee__track > span {
+  display: flex;
+}
+.marquee b {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  padding-right: 0.25em;
+  font: 800 200u/1.1 var(--f-display);
+  letter-spacing: -0.05em;
+  color: var(--ink);
+}
+.marquee b i {
+  font-style: normal;
+  font-size: 0.45em;
+  color: var(--accent);
+}
+@keyframes marquee {
+  to {
+    translate: -50% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+  }
+}
+
+/* ── Window, Toggle, Dock, AppIcon ────────────────────────────────────── */
+
+.win {
+  overflow: hidden;
+  border-radius: calc(22u * var(--rs, 1));
+  background: var(--card);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 30u 70u -30u rgb(30 20 60 / 0.35);
+  backdrop-filter: blur(24px) saturate(1.3);
+}
+.win__bar {
+  display: flex;
+  align-items: center;
+  gap: 9u;
+  height: 50u;
+  padding: 0 20u;
+  border-bottom: 1px solid var(--line);
+}
+.win__bar i {
+  width: 14u;
+  height: 14u;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+.win__bar i:nth-child(2) {
+  background: #febc2e;
+}
+.win__bar i:nth-child(3) {
+  background: #28c840;
+}
+.win__bar span {
+  margin-left: 12u;
+  font: 400 18u/1 var(--f-mono);
+  color: var(--mute);
+}
+.win__body {
+  padding: 36u 40u 40u;
+}
+
+.toggle {
+  position: relative;
+  flex: none;
+  width: 84u;
+  height: 48u;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--line-strong);
+  cursor: pointer;
+  transition: background 0.3s var(--ease-out);
+}
+.toggle i {
+  position: absolute;
+  left: 4u;
+  top: 4u;
+  width: 40u;
+  height: 40u;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 3u 8u rgb(0 0 0 / 0.2);
+  transition: translate 0.35s var(--ease-out);
+}
+.toggle[aria-checked='true'] {
+  background: var(--spot-2);
+}
+.toggle[aria-checked='true'] i {
+  translate: 36u 0;
+}
+
+.dock {
+  display: flex;
+  gap: 16u;
+  margin: 0;
+  padding: 14u 18u;
+  list-style: none;
+  border-radius: calc(30u * var(--rs, 1));
+  background: rgb(255 255 255 / 0.4);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.6),
+    0 20u 50u -20u rgb(30 20 60 / 0.35);
+  backdrop-filter: blur(20px);
+}
+[data-tone='dark'] .dock {
+  background: rgb(255 255 255 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.15);
+}
+
+.appicon {
+  display: grid;
+  justify-items: center;
+  gap: 10u;
+  width: 140u;
+}
+.appicon span {
+  padding: 3u 10u;
+  border-radius: 6u;
+  font: 500 18u/1.3 var(--f-sans);
+  color: var(--ink);
+  text-align: center;
+}
+
+/* ── FloatCover ───────────────────────────────────────────────────────── */
+
+.float__band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 600u;
+  opacity: 0.08;
+}
+.float__shapes {
+  position: absolute;
+  inset: 0;
+}
+.s-float {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.s-float .kicker {
+  margin-inline: auto;
+}
+.float__title {
+  margin-top: 34u;
+  font: 800 128u/1.02 var(--f-display);
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+.float__lead {
+  margin-top: 26u;
+  max-width: 900u;
+  font-size: 28u;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.float__card {
+  position: relative;
+  display: grid;
+  gap: 12u;
+  width: 500u;
+  margin-top: 44u;
+  padding: 30u 40u 34u;
+  border-radius: calc(30u * var(--rs, 1));
+  background: var(--card);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 40u 80u -40u rgb(20 20 40 / 0.35);
+}
+.float__card span {
+  font: 400 18u/1 var(--f-mono);
+  color: var(--mute);
+}
+.float__card b {
+  font: 800 88u/1 var(--f-display);
+  letter-spacing: -0.04em;
+}
+.float__card p {
+  font-size: 22u;
+  color: var(--ink-2);
+}
+.s-float .s-foot {
+  align-self: stretch;
+  text-align: left;
+}
+
+/* ── GlowStack ────────────────────────────────────────────────────────── */
+
+.s-glow,
+.s-svcindex,
+.s-duo,
+.s-pyramid,
+.s-rings,
+.s-dtree,
+.s-fish,
+.s-swim,
+.s-arch,
+.s-balance,
+.s-dfunnel {
+  display: flex;
+  flex-direction: column;
+}
+.glow {
+  position: relative;
+  flex: 1;
+  margin-top: 40u;
+}
+.glow__light {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 900u;
+  height: 260u;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: var(--g);
+  filter: blur(70px);
+  opacity: 0.55;
+}
+.glow__back,
+.glow__front {
+  position: absolute;
+  left: 50%;
+  display: grid;
+  align-content: start;
+  gap: 14u;
+  border-radius: calc(30u * var(--rs, 1));
+  background: var(--card);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 40u 80u -40u rgb(20 20 40 / 0.3);
+}
+.glow__back {
+  top: 60u;
+  width: 680u;
+  height: 300u;
+  translate: calc(-50% + 160u) 0;
+  padding: 34u 44u;
+  filter: blur(2.5px);
+  opacity: 0.8;
+}
+.glow__front {
+  top: 150u;
+  width: 760u;
+  translate: calc(-50% - 60u) 0;
+  padding: 40u 48u 44u;
+}
+.glow__back span,
+.glow__front span {
+  font: 400 18u/1 var(--f-mono);
+  color: var(--mute);
+}
+.glow__back b,
+.glow__front b {
+  font: 700 44u/1.2 var(--f-display);
+  letter-spacing: -0.03em;
+}
+.glow__front ul {
+  display: grid;
+  gap: 16u;
+  margin: 14u 0 0;
+  padding: 0;
+  list-style: none;
+}
+.glow__front li {
+  display: flex;
+  align-items: center;
+  gap: 14u;
+  font-size: 25u;
+  color: var(--ink-2);
+}
+.glow__front li .icon {
+  color: var(--spot-2);
+}
+
+/* ── TileWall ─────────────────────────────────────────────────────────── */
+
+.tilewall__text {
+  display: flex;
+  flex-direction: column;
+}
+:is(.s-tilewall, .s-venn, .s-winstack, .s-toggles) .s-head {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+:is(.s-tilewall, .s-venn, .s-winstack, .s-toggles) .s-head__aside .s-lead {
+  margin-top: 34u;
+}
+.s-venn > div:first-child,
+.s-winstack > div:first-child,
+.s-toggles > div:first-child {
+  display: flex;
+  flex-direction: column;
+}
+.tilewall {
+  position: relative;
+  align-self: center;
+}
+.tilewall__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22u;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tilewall__tile {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 18u;
+  height: 216u;
+  border-radius: calc(30u * var(--rs, 1));
+  background: rgb(from var(--card) r g b / 0.82);
+  backdrop-filter: blur(14px);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 24u 50u -30u rgb(20 20 40 / 0.3);
+}
+.tilewall__tile span {
+  font: 600 24u/1.2 var(--f-sans);
+}
+
+/* ── ServiceIndex ─────────────────────────────────────────────────────── */
+
+.s-svcindex > .shape {
+  position: absolute;
+}
+.svcindex {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: 40u;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+.svcindex__item {
+  position: relative;
+  display: grid;
+  align-content: end;
+  gap: 18u;
+  min-height: 400u;
+  padding-top: 24u;
+  border-top: 2px solid var(--ink);
+}
+.svcindex__num {
+  position: absolute;
+  left: -8u;
+  top: 10u;
+  font: 800 260u/1 var(--f-display);
+  letter-spacing: -0.06em;
+  color: var(--ink);
+  opacity: 0.07;
+}
+.svcindex__item b {
+  position: relative;
+  font: 700 42u/1.2 var(--f-display);
+  letter-spacing: -0.03em;
+}
+.svcindex__item p {
+  position: relative;
+  font-size: 23u;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.s-svcindex .s-foot {
+  margin-top: 30u;
+}
+
+/* ── DuoCards ─────────────────────────────────────────────────────────── */
+
+.duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28u;
+  margin-top: 48u;
+}
+.duo__card {
+  display: grid;
+  align-content: start;
+  gap: 14u;
+  padding: 40u 48u 44u;
+  border-radius: calc(34u * var(--rs, 1));
+  background: var(--c);
+  color: #fff;
+  box-shadow: 0 40u 80u -46u var(--c);
+}
+.duo__name {
+  width: fit-content;
+  padding: 9u 18u;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.2);
+  font: 600 20u/1 var(--f-sans);
+}
+.duo__value {
+  display: flex;
+  align-items: baseline;
+  gap: 12u;
+  margin-top: 10u;
+}
+.duo__value b {
+  font: 800 104u/1 var(--f-display);
+  letter-spacing: -0.05em;
+}
+.duo__value span {
+  font-size: 28u;
+  font-weight: 600;
+}
+.duo__card p {
+  font-size: 23u;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+.duo__card ul {
+  display: grid;
+  gap: 14u;
+  margin: 18u 0 0;
+  padding: 24u 0 0;
+  border-top: 1px solid rgb(255 255 255 / 0.28);
+  list-style: none;
+}
+.duo__card li {
+  display: flex;
+  align-items: center;
+  gap: 14u;
+  font-size: 23u;
+}
+.duo__card li::before {
+  content: '';
+  flex: none;
+  width: 16u;
+  height: 16u;
+  border-radius: 50%;
+  background: var(--spot-5);
+  box-shadow: 0 0 0 4u rgb(255 255 255 / 0.25);
+}
+
+/* ── Desktop ──────────────────────────────────────────────────────────── */
+
+.s-desktop {
+  display: grid;
+  grid-template-columns: 300u minmax(0, 1fr) 300u;
+  grid-template-rows: minmax(0, 1fr) auto;
+  column-gap: 40u;
+}
+.desktop__apps {
+  display: grid;
+  grid-template-columns: repeat(2, 140u);
+  align-content: start;
+  gap: 26u 10u;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.desktop__main {
+  align-self: center;
+}
+.desktop__main .win__body {
+  padding: 44u 56u 52u;
+}
+.desktop__title {
+  margin-top: 28u;
+  font: 700 88u/1.08 var(--f-display);
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.desktop__lead {
+  margin-top: 24u;
+  font-size: 26u;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.desktop__clock {
+  display: grid;
+  align-self: start;
+  justify-items: end;
+  gap: 8u;
+  text-align: right;
+}
+.desktop__clock b {
+  font: 300 96u/1 var(--f-display);
+  letter-spacing: -0.04em;
+}
+.desktop__clock span {
+  font-size: 22u;
+  color: var(--ink-2);
+}
+.desktop__dock {
+  grid-column: 1 / -1;
+  justify-self: center;
+  margin-top: 24u;
+}
+.s-desktop .s-foot {
+  grid-column: 1 / -1;
+  margin-top: 16u;
+}
+
+/* ── WindowStack ──────────────────────────────────────────────────────── */
+
+.winstack {
+  position: relative;
+}
+.winstack__slot {
+  position: absolute;
+  width: 800u;
+}
+.winstack__slot--1 {
+  left: 0;
+  top: 0;
+}
+.winstack__slot--2 {
+  left: 140u;
+  top: 270u;
+}
+.winstack__slot--3 {
+  left: 280u;
+  top: 540u;
+}
+.winstack__heading {
+  display: block;
+  margin-bottom: 12u;
+  font: 700 36u/1.25 var(--f-display);
+  letter-spacing: -0.02em;
+}
+.winstack p {
+  font-size: 23u;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.winstack__slot[data-build-state='pending'] {
+  opacity: 0;
+}
+
+/* ── ToggleCard ───────────────────────────────────────────────────────── */
+
+.toggles {
+  align-self: center;
+}
+.toggles ul {
+  display: grid;
+  margin: -8u 0;
+  padding: 0;
+  list-style: none;
+}
+.toggles li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24u;
+  padding: 22u 0;
+  border-bottom: 1px solid var(--line);
+}
+.toggles li:last-child {
+  border-bottom: 0;
+}
+.toggles li div {
+  display: grid;
+  gap: 6u;
+}
+.toggles li b {
+  font: 600 27u/1.25 var(--f-sans);
+}
+.toggles li span {
+  font-size: 20u;
+  color: var(--mute);
+}
+
+/* ── Pyramid ──────────────────────────────────────────────────────────── */
+
+.pyramid {
+  display: grid;
+  grid-auto-rows: 1fr;
+  flex: 1;
+  margin: 40u 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pyramid__row {
+  display: grid;
+  grid-template-columns: 900u minmax(0, 1fr);
+  align-items: center;
+  gap: 56u;
+}
+/* Every band is a trapezoid cut from a full-width bar; a 4u gap separates levels. */
+.pyramid__band {
+  display: grid;
+  place-items: center;
+  height: calc(100% - 6u);
+  clip-path: polygon(var(--t) 0, calc(100% - var(--t)) 0, calc(100% - var(--b)) 100%, var(--b) 100%);
+  background: color-mix(in srgb, var(--accent) calc(100% - var(--k) * 72%), var(--canvas));
+  color: #fff;
+}
+.pyramid__band b {
+  font: 600 27u/1.2 var(--f-sans);
+}
+.pyramid__row:nth-last-child(-n + 2) .pyramid__band {
+  color: var(--accent-ink);
+}
+.pyramid__row:last-child .pyramid__band,
+.pyramid__row:only-child .pyramid__band {
+  color: var(--ink);
+}
+.pyramid__row p {
+  padding-left: 28u;
+  border-left: 2px solid var(--line-strong);
+  font-size: 24u;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* ── Venn ─────────────────────────────────────────────────────────────── */
+
+.venn {
+  position: relative;
+  width: 1000u;
+  height: 760u;
+  align-self: center;
+  justify-self: center;
+}
+.venn__set {
+  position: absolute;
+  width: 500u;
+  height: 500u;
+}
+.venn__set > i {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c) 18%, transparent);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--c) 70%, transparent);
+}
+.venn__label {
+  position: absolute;
+  display: grid;
+  gap: 6u;
+  width: 240u;
+  text-align: center;
+}
+.venn__label b {
+  font: 700 32u/1.2 var(--f-display);
+  color: color-mix(in srgb, var(--c) 80%, var(--ink));
+}
+.venn__label span {
+  font-size: 20u;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+/* two sets: side by side */
+.venn--2 .venn__set--1 {
+  left: 90u;
+  top: 130u;
+}
+.venn--2 .venn__set--2 {
+  left: 410u;
+  top: 130u;
+}
+.venn--2 .venn__set--1 .venn__label {
+  left: 40u;
+  top: 190u;
+}
+.venn--2 .venn__set--2 .venn__label {
+  right: 40u;
+  top: 190u;
+}
+/* three sets: a triangle */
+.venn--3 .venn__set--1 {
+  left: 120u;
+  top: 0;
+}
+.venn--3 .venn__set--2 {
+  left: 380u;
+  top: 0;
+}
+.venn--3 .venn__set--3 {
+  left: 250u;
+  top: 240u;
+}
+.venn--3 .venn__set--1 .venn__label {
+  left: 40u;
+  top: 120u;
+}
+.venn--3 .venn__set--2 .venn__label {
+  right: 40u;
+  top: 120u;
+}
+.venn--3 .venn__set--3 .venn__label {
+  left: 130u;
+  bottom: 50u;
+}
+.venn__mid {
+  position: absolute;
+  left: 500u;
+  top: 380u;
+  translate: -50% -50%;
+  padding: 12u 22u;
+  border-radius: 999px;
+  background: var(--ink);
+  font: 600 24u/1.2 var(--f-sans);
+  color: var(--canvas);
+  white-space: nowrap;
+}
+.venn__mid--3 {
+  top: 330u;
+}
+
+/* ── Concentric ───────────────────────────────────────────────────────── */
+
+.rings {
+  display: grid;
+  grid-template-columns: 640u minmax(0, 1fr);
+  align-items: center;
+  gap: 90u;
+  flex: 1;
+  margin-top: 24u;
+}
+.rings__art {
+  position: relative;
+  width: 600u;
+  height: 600u;
+}
+.rings__ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--s) * 600u);
+  height: calc(var(--s) * 600u);
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) calc(100% - var(--k) * 82%), var(--canvas));
+  box-shadow: 0 0 0 4u var(--canvas);
+}
+.rings__ring span {
+  position: absolute;
+  left: 50%;
+  top: 18u;
+  translate: -50% 0;
+  font: 600 22u/1.2 var(--f-sans);
+  color: var(--accent-ink);
+  white-space: nowrap;
+}
+.rings__ring:last-child span {
+  top: 50%;
+  translate: -50% -50%;
+  color: #fff;
+}
+.rings__list {
+  display: grid;
+  gap: 30u;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rings__list > div {
+  display: grid;
+  grid-template-columns: auto 160u minmax(0, 1fr);
+  align-items: baseline;
+  gap: 20u;
+  padding-bottom: 26u;
+  border-bottom: 1px solid var(--line);
+}
+.rings__list i {
+  width: 20u;
+  height: 20u;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) calc(100% - var(--k) * 82%), var(--canvas));
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+.rings__list b {
+  font: 600 27u/1.3 var(--f-sans);
+}
+.rings__list p {
+  font-size: 23u;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* ── DecisionTree ─────────────────────────────────────────────────────── */
+/* Classic CSS tree: each child draws its own elbow up to the parent bar. */
+
+.dtree {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  margin-top: 40u;
+}
+.dtree__branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dtree__q {
+  padding: 24u 36u;
+  border-radius: calc(16u * var(--rs, 1));
+  background: var(--ink);
+  font: 600 30u/1.3 var(--f-sans);
+  color: var(--canvas);
+  text-align: center;
+}
+.dtree__kids {
+  display: flex;
+  justify-content: center;
+}
+.dtree__kid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120u 28u 0;
+}
+/* vertical drop to the child */
+.dtree__kid::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 60u;
+  height: 60u;
+  border-left: 2px solid var(--line-strong);
+}
+/* horizontal bar from the parent's stem */
+.dtree__kid::after {
+  content: '';
+  position: absolute;
+  top: 60u;
+  width: 50%;
+  border-top: 2px solid var(--line-strong);
+}
+.dtree__kid:first-child::after {
+  left: 50%;
+}
+.dtree__kid:last-child::after {
+  right: 50%;
+}
+/* the parent's stem */
+.dtree__kids::before {
+  content: '';
+  position: absolute;
+}
+.dtree__branch > .dtree__kids {
+  position: relative;
+}
+.dtree__branch > .dtree__kids::before {
+  left: 50%;
+  top: 0;
+  height: 60u;
+  border-left: 2px solid var(--line-strong);
+}
+.dtree__edge {
+  position: absolute;
+  top: 74u;
+  z-index: 1;
+  padding: 4u 12u;
+  border-radius: 999px;
+  background: var(--canvas);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font: 500 20u/1 var(--f-mono);
+  color: var(--ink-2);
+}
+.dtree__kid .dtree__edge {
+  left: calc(50% + 14u);
+}
+.dtree__branch .dtree__branch .dtree__q {
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  color: var(--ink);
+}
+.dtree__leaf {
+  display: grid;
+  gap: 6u;
+  min-width: 330u;
+  padding: 26u 30u;
+  border-radius: calc(16u * var(--rs, 1));
+  background: var(--accent-wash);
+  box-shadow: inset 0 0 0 2px var(--accent);
+  text-align: center;
+}
+.dtree__leaf b {
+  font: 700 32u/1.2 var(--f-sans);
+  color: var(--accent-ink);
+}
+.dtree__leaf span {
+  font-size: 22u;
+  color: var(--ink-2);
+}
+
+/* ── Fishbone ─────────────────────────────────────────────────────────── */
+/* Head on the right. Ribs slant back towards the tail and meet the spine. */
+
+.fish {
+  position: relative;
+  flex: 1;
+  margin-top: 30u;
+  --head: 300u;
+}
+.fish__spine {
+  position: absolute;
+  left: 0;
+  right: var(--head);
+  top: 50%;
+  border-top: 4u solid var(--ink);
+}
+.fish__spine::before {
+  content: '';
+  position: absolute;
+  right: -2u;
+  top: -14u;
+  border: 12u solid transparent;
+  border-left: 22u solid var(--ink);
+  border-right: 0;
+}
+.fish__head {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: calc(var(--head) - 34u);
+  min-height: 130u;
+  translate: 0 -50%;
+  padding: 20u;
+  border-radius: calc(20u * var(--rs, 1)) 60% 60% calc(20u * var(--rs, 1)) / calc(20u * var(--rs, 1)) 50% 50% calc(20u * var(--rs, 1));
+  background: var(--accent);
+  font: 700 30u/1.3 var(--f-display);
+  color: #fff;
+  text-align: center;
+}
+.fish__bone {
+  position: absolute;
+  --cw: calc((100% - var(--head)) / var(--cols));
+  left: calc(var(--col) * var(--cw) + 40u);
+  width: calc(var(--cw) - 40u);
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 8u;
+}
+.fish__bone--up {
+  top: 0;
+  padding: 0 0 0 0;
+}
+.fish__bone--down {
+  bottom: 0;
+  flex-direction: column-reverse;
+}
+/* The rib starts under the category label and slants toward the head until
+   it meets the spine; causes branch off to its right, one per line. */
+.fish__rib {
+  position: absolute;
+  left: 30u;
+  width: 3u;
+  height: calc((100% - 44u) / 0.9135);
+  background: var(--line-strong);
+}
+.fish__bone--up .fish__rib {
+  top: 44u;
+  transform-origin: top;
+  rotate: -24deg;
+}
+.fish__bone--down .fish__rib {
+  bottom: 44u;
+  transform-origin: bottom;
+  rotate: 24deg;
+}
+.fish__bone b {
+  width: fit-content;
+  padding: 8u 16u;
+  border-radius: 999px;
+  background: var(--ink);
+  font: 600 22u/1.2 var(--f-sans);
+  color: var(--canvas);
+}
+.fish__bone ul {
+  display: grid;
+  gap: 8u;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.fish__bone--down ul {
+  padding-bottom: 6u;
+}
+.fish__bone li {
+  margin-left: calc(36u + var(--j) * 16u);
+  font-size: 20u;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.fish__bone li::before {
+  content: '— ';
+  color: var(--mute);
+}
+
+/* ── Swimlane ─────────────────────────────────────────────────────────── */
+
+.swim {
+  position: relative;
+  display: grid;
+  grid-template-columns: 220u minmax(0, 1fr);
+  grid-template-rows: repeat(var(--L), minmax(0, 1fr));
+  height: 560u;
+  margin-top: auto;
+}
+.swim__lane {
+  grid-column: 1 / -1;
+  grid-row: calc(var(--l) + 1);
+  display: flex;
+  align-items: center;
+  padding-left: 24u;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+}
+.swim__lane:nth-child(even) {
+  background: transparent;
+}
+.swim__lane:last-of-type {
+  border-bottom: 1px solid var(--line);
+}
+.swim__lane b {
+  font: 600 24u/1.2 var(--f-sans);
+}
+.swim__area {
+  position: absolute;
+  inset: 0 0 0 220u;
+}
+.swim__area svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.swim__area path {
+  fill: none;
+  stroke: var(--mute);
+  stroke-width: 2.5;
+}
+.swim__area marker path {
+  fill: var(--mute);
+  stroke: none;
+}
+.swim__step {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  gap: 4u;
+  width: calc(168 / 1556 * 100%);
+  height: 84u;
+  translate: -50% -50%;
+  border-radius: calc(14u * var(--rs, 1));
+  background: var(--card);
+  box-shadow:
+    inset 0 0 0 1.5px var(--line-strong),
+    0 10u 24u -14u rgb(20 20 40 / 0.25);
+  font: 600 20u/1.25 var(--f-sans);
+  text-align: center;
+}
+.swim__step span {
+  font: 400 16.5u/1 var(--f-mono);
+  color: var(--mute);
+}
+.swim__step--handoff {
+  box-shadow:
+    inset 0 0 0 2px var(--accent),
+    0 10u 24u -14u rgb(20 20 40 / 0.25);
+}
+.s-swim .s-foot {
+  margin-top: 24u;
+}
+
+/* ── ArchLayers ───────────────────────────────────────────────────────── */
+
+.arch {
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: 14u;
+  flex: 1;
+  margin: 40u 0 0;
+  padding: 0;
+  list-style: none;
+}
+.arch__layer {
+  display: grid;
+  grid-template-columns: 340u minmax(0, 1fr);
+  align-items: center;
+  gap: 30u;
+  padding: 0 30u;
+  border-radius: calc(20u * var(--rs, 1));
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.arch__layer--focus {
+  background: var(--accent-wash);
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+.arch__name {
+  display: grid;
+  gap: 8u;
+}
+.arch__name b {
+  font: 700 30u/1.2 var(--f-display);
+}
+.arch__name span {
+  font: 400 18u/1 var(--f-mono);
+  color: var(--mute);
+}
+.arch__layer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12u;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.arch__layer li {
+  padding: 12u 22u;
+  border-radius: calc(12u * var(--rs, 1));
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font: 500 21u/1.2 var(--f-mono);
+}
+.arch__layer--focus li {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+/* ── Balance ──────────────────────────────────────────────────────────── */
+/* The beam pivots on the post top. Each pan hangs from a beam end and is
+   counter-rotated so its strings stay vertical, as gravity would have it. */
+
+.balance {
+  position: relative;
+  flex: 1;
+  margin-top: 20u;
+}
+.balance__post {
+  position: absolute;
+  left: 50%;
+  top: 60u;
+  bottom: 0;
+  width: 14u;
+  translate: -50% 0;
+  border-radius: 7u 7u 0 0;
+  background: var(--ink);
+}
+.balance__post::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 260u;
+  height: 18u;
+  translate: -50% 0;
+  border-radius: 9u;
+  background: var(--ink);
+}
+.balance__post::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -14u;
+  width: 34u;
+  height: 34u;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.balance__beam {
+  position: absolute;
+  left: calc(50% - 600u);
+  top: 63u;
+  width: 1200u;
+  height: 10u;
+  border-radius: 5u;
+  background: var(--ink);
+  rotate: var(--tilt);
+  transition: rotate 1.2s var(--ease-out);
+}
+.balance__pan {
+  position: absolute;
+  top: 5u;
+  width: 460u;
+  translate: -50% 0;
+  rotate: calc(var(--tilt) * -1);
+  transform-origin: 50% 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.balance__pan--l {
+  left: 30u;
+}
+.balance__pan--r {
+  left: calc(100% - 30u);
+}
+.balance__strings {
+  position: relative;
+  width: 300u;
+  height: 110u;
+}
+.balance__strings::before,
+.balance__strings::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 171u;
+  background: var(--mute);
+  transform-origin: top;
+}
+.balance__strings::before {
+  rotate: 50deg;
+}
+.balance__strings::after {
+  rotate: -50deg;
+}
+.balance__dish {
+  display: grid;
+  gap: 14u;
+  width: 100%;
+  padding: 26u 32u 30u;
+  border-radius: calc(20u * var(--rs, 1)) calc(20u * var(--rs, 1)) calc(40u * var(--rs, 1)) calc(40u * var(--rs, 1));
+  background: var(--card);
+  box-shadow:
+    inset 0 0 0 1.5px var(--line-strong),
+    0 20u 40u -24u rgb(20 20 40 / 0.3);
+}
+.balance__dish b {
+  font: 700 32u/1.2 var(--f-display);
+  text-align: center;
+}
+.balance__dish ul {
+  display: grid;
+  gap: 8u;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.balance__dish li {
+  font-size: 22u;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.balance__dish li::before {
+  content: '· ';
+  color: var(--accent);
+  font-weight: 700;
+}
+.balance__pan--r .balance__dish {
+  background: var(--accent-wash);
+  box-shadow:
+    inset 0 0 0 1.5px var(--accent),
+    0 20u 40u -24u rgb(20 20 40 / 0.3);
+}
+
+/* ── DoubleFunnel ─────────────────────────────────────────────────────── */
+
+.dfunnel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260u minmax(0, 1fr);
+  align-content: center;
+  row-gap: 12u;
+  flex: 1;
+  margin-top: 30u;
+}
+.dfunnel__name {
+  padding-bottom: 10u;
+  font: 700 30u/1.2 var(--f-display);
+}
+.dfunnel__name--l {
+  text-align: right;
+}
+.dfunnel__unit {
+  align-self: end;
+  padding-bottom: 14u;
+  font: 400 18u/1 var(--f-mono);
+  color: var(--mute);
+  text-align: center;
+}
+.dfunnel__row {
+  display: contents;
+}
+.dfunnel__bar {
+  display: flex;
+  align-items: center;
+  gap: 14u;
+  width: calc(var(--w) * 100%);
+  min-width: 150u;
+  height: 92u;
+  padding: 0 22u;
+  background: var(--accent);
+  color: #fff;
+}
+.dfunnel__bar--l {
+  justify-self: end;
+  flex-direction: row-reverse;
+  border-radius: calc(14u * var(--rs, 1)) 0 0 calc(14u * var(--rs, 1));
+}
+.dfunnel__bar--r {
+  justify-self: start;
+  border-radius: 0 calc(14u * var(--rs, 1)) calc(14u * var(--rs, 1)) 0;
+  background: var(--ink);
+}
+.dfunnel__bar b {
+  font: 700 34u/1 var(--f-display);
+}
+.dfunnel__bar span {
+  font: 400 18u/1 var(--f-mono);
+  opacity: 0.8;
+}
+.dfunnel__stage {
+  display: grid;
+  place-items: center;
+  height: 92u;
+  background: var(--panel);
+  font: 600 22u/1.25 var(--f-sans);
+  text-align: center;
+  padding: 0 12u;
+}

@@ -1,0 +1,15 @@
+/* Sits on the text baseline at text size and never changes the line height. */
+img.em {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  max-width: none;
+  margin: 0 .08em;
+  vertical-align: -.125em;
+  transform: scale(1.14);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+}
+img.em--big { margin: 0; vertical-align: top; transform: none; }

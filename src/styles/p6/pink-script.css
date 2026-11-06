@@ -1,0 +1,13 @@
+/* Style `pink-script`: ported from beautiful-html-templates · pink-script (MIT, (c) zarazhangrui). Rules scoped to [data-style='pink-script']. */
+
+[data-style='pink-script'] { --f-display: 'DM Serif Display', 'Deck Serif SC', serif; }
+[data-style='pink-script'] [data-tone='dark'], [data-style='pink-script'][data-tone='dark'] {
+  --canvas: #0d0a0d; --letterbox: #060507; --card: #181217; --card-hover: #20181f; --panel: #141013; --line: #2a2028; --line-strong: #3d2f3a;
+}
+[data-style='pink-script'] [data-tone='dark'] .stage, [data-style='pink-script'] .stage[data-tone='dark'] {
+  background: radial-gradient(60% 60% at 30% 40%, rgb(var(--accent-rgb) / 0.12), transparent 70%), var(--canvas);
+}
+[data-style='pink-script'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title, .quote__text, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .statrow__value, .desk__ver, .detail__figure b, .numeral, .feature-num) { font-family: var(--f-display); font-weight: 400; letter-spacing: -0.01em; }
+[data-style='pink-script'] :is(.break__num, .close__num, .bigstat__num) { color: var(--accent-soft); text-shadow: 0 0 60u rgb(var(--accent-rgb) / 0.4); }
+[data-style='pink-script'] .kicker { font: 400 18u/1 var(--f-mono); letter-spacing: 0.2em; text-transform: uppercase; }
+[data-style='pink-script'] .kicker::before { display: none; }

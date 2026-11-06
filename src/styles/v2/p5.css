@@ -1,0 +1,275 @@
+/* Components v2 phase 5: filter and atmosphere templates. Backdrops live in styles/p5/visual.css. */
+
+/* ── Halftone ─────────────────────────────────────────────────────────── */
+.s-htone {
+  display: grid;
+  grid-template-columns: 1fr 900u;
+  gap: 72u;
+  align-items: center;
+}
+.htone__title { font-size: 80u; }
+.htone__facts {
+  display: flex;
+  gap: 40u;
+  margin-top: 48u;
+}
+.htone__fact {
+  display: flex;
+  flex-direction: column;
+  gap: 8u;
+  padding-top: 16u;
+  border-top: 1.5px solid var(--line-strong);
+}
+.htone__fact b {
+  font: 600 48u/1 var(--f-display, var(--f-sans));
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+.htone__fact span { font-size: 20u; color: var(--mute); }
+.htone__art {
+  position: relative;
+  height: 820u;
+  border-radius: 18u;
+  overflow: hidden;
+  color: var(--accent);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.htone__svg { display: block; width: 100%; height: 100%; }
+.htone__paper { fill: var(--card); }
+.htone__credit {
+  position: absolute;
+  right: 16u;
+  bottom: 14u;
+  padding: 4u 10u;
+  border-radius: 6u;
+  font-size: 17u;
+  color: var(--mute);
+  background: var(--card);
+}
+
+/* ── ProgressiveBlur ──────────────────────────────────────────────────── */
+.s-pblur { overflow: hidden; color: #fff; }
+.pblur__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pblur__blur {
+  position: absolute;
+  inset: 0;
+}
+/* Six stacked bands: each blurs more and is masked to start lower, so the blur ramps up toward the bottom. */
+.pblur__blur i {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(calc(var(--k) * var(--k) * 1.4u));
+  mask-image: linear-gradient(to bottom, transparent calc(30% + var(--k) * 7%), #000 calc(42% + var(--k) * 7%));
+}
+.pblur__blur::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 35%, rgb(0 0 0 / 0.62));
+}
+.pblur__frame {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 80u;
+}
+.s-pblur .kicker { color: rgb(255 255 255 / 0.86); }
+.pblur__copy { max-width: 1180u; }
+.pblur__title { color: #fff; font-size: 84u; }
+.pblur__lead {
+  margin-top: 26u;
+  max-width: 900u;
+  font-size: 28u;
+  line-height: 1.6;
+  color: rgb(255 255 255 / 0.86);
+}
+.pblur__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18u;
+  max-width: 460u;
+  text-align: right;
+}
+.pblur__tags { display: flex; gap: 10u; flex-wrap: wrap; justify-content: flex-end; }
+.pblur__tags span {
+  padding: 8u 18u;
+  border-radius: 99u;
+  font-size: 19u;
+  background: rgb(255 255 255 / 0.16);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.3);
+}
+.pblur__src { font-size: 17u; color: rgb(255 255 255 / 0.7); }
+
+/* ── MaskReveal ───────────────────────────────────────────────────────── */
+.s-mrev {
+  display: grid;
+  grid-template-columns: 1fr 1020u;
+  gap: 72u;
+  align-items: center;
+}
+.mrev__title { font-size: 72u; }
+.mrev__steps {
+  margin: 44u 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 26u;
+}
+.mrev__step {
+  display: grid;
+  grid-template-columns: 56u 1fr;
+  gap: 18u;
+  padding-top: 20u;
+  border-top: 1.5px solid var(--line);
+}
+.mrev__step b { font: 500 20u/1.6 var(--f-mono); color: var(--accent); }
+.mrev__step h3 { margin: 0; font-size: 28u; font-weight: 600; }
+.mrev__step p { margin: 6u 0 0; font-size: 21u; line-height: 1.55; color: var(--ink-2); }
+.mrev__art {
+  position: relative;
+  height: 820u;
+  border-radius: 20u;
+  overflow: hidden;
+  background: var(--panel);
+}
+.mrev__art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mrev__ghost {
+  filter: grayscale(1) contrast(0.7);
+  opacity: 0.22;
+}
+.mrev__layer { position: absolute; inset: 0; }
+.mrev__layer,
+.mrev__layer[data-build-state] {
+  filter: none;
+  transition: clip-path 900ms var(--ease-out);
+}
+.mrev__art--circle .mrev__layer { clip-path: circle(var(--r) at 50% 52%); }
+.mrev__art--circle .mrev__layer[data-build-state='pending'] { clip-path: circle(0% at 50% 52%); }
+/* Blinds: each step opens its own share of vertical slats. */
+.mrev__art--blinds .mrev__layer {
+  --w: 44u;
+  clip-path: inset(0 0 0 0);
+  mask-image: linear-gradient(90deg, transparent calc(var(--k) * var(--w)), #000 calc(var(--k) * var(--w)), #000 calc((var(--k) + 1) * var(--w)), transparent calc((var(--k) + 1) * var(--w)));
+  mask-size: calc(var(--n) * var(--w)) 100%;
+  mask-repeat: repeat-x;
+}
+.mrev__art--blinds .mrev__layer[data-build-state='pending'] { clip-path: inset(0 0 100% 0); }
+.mrev__credit {
+  position: absolute;
+  right: 16u;
+  bottom: 14u;
+  padding: 4u 10u;
+  border-radius: 6u;
+  font-size: 17u;
+  color: #fff;
+  background: rgb(0 0 0 / 0.45);
+}
+
+/* ── LogoWall ─────────────────────────────────────────────────────────── */
+.s-lwall { display: flex; flex-direction: column; }
+.lwall__grid {
+  flex: 1;
+  max-height: 560u;
+  display: grid;
+  grid-auto-rows: 1fr;
+  margin-top: 56u;
+  border-top: 1.5px solid var(--line);
+  border-left: 1.5px solid var(--line);
+}
+.lwall__cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22u;
+  padding: 34u 32u;
+  border-right: 1.5px solid var(--line);
+  border-bottom: 1.5px solid var(--line);
+}
+.lwall__mark {
+  flex: none;
+  width: 72u;
+  height: 72u;
+  fill: var(--ink);
+  stroke: var(--ink);
+}
+.lwall__cell:nth-child(3n + 2) .lwall__mark { fill: var(--accent); stroke: var(--accent); }
+.lwall__name { display: flex; flex-direction: column; gap: 4u; min-width: 0; }
+.lwall__name b { font-size: 26u; font-weight: 600; letter-spacing: -0.01em; }
+.lwall__name span { font-size: 18u; color: var(--mute); }
+.lwall__note { margin-top: 22u; }
+.lwall__note p { margin: 0; font-size: 19u; color: var(--mute); }
+
+/* ── PhotoClosing ─────────────────────────────────────────────────────── */
+.s-pclose { overflow: hidden; color: #fff; }
+.pclose__media { position: absolute; inset: 0; overflow: hidden; }
+.pclose__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: pclose-push 18s ease-out both;
+}
+@keyframes pclose-push {
+  from { transform: scale(1.1); }
+  to { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) { .pclose__media img { animation: none; } }
+.p5-static .pclose__media img { animation: none; }
+@media print { .pclose__media img { animation: none; } }
+.pclose__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(0 0 0 / 0.72), rgb(0 0 0 / 0.35) 55%, transparent 85%),
+    linear-gradient(to top, rgb(0 0 0 / 0.4), transparent 40%);
+}
+.pclose__frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.s-pclose .kicker { color: rgb(255 255 255 / 0.86); }
+.pclose__title {
+  margin: 30u 0 0;
+  max-width: 1100u;
+  color: #fff;
+  font: 600 108u/1.08 var(--f-display, var(--f-sans));
+  letter-spacing: -0.03em;
+}
+.pclose__lead {
+  margin-top: 30u;
+  max-width: 820u;
+  font-size: 28u;
+  line-height: 1.6;
+  color: rgb(255 255 255 / 0.86);
+}
+.pclose__actions {
+  margin: 48u 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14u;
+}
+.pclose__action {
+  display: flex;
+  align-items: baseline;
+  gap: 18u;
+  font-size: 26u;
+}
+.pclose__action i { font: normal 500 18u/1 var(--f-mono); color: rgb(255 255 255 / 0.7); }
+.pclose__src { position: absolute; left: 0; bottom: 0; }
+.pclose__src p { margin: 0; font-size: 17u; color: rgb(255 255 255 / 0.7); }

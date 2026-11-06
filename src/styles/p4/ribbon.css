@@ -1,0 +1,201 @@
+/* Phase 4 style `ribbon`: preset rules scoped to [data-style='ribbon'] plus its templates. */
+/* Warm white canvas, rounded heavy headings, kickers as slanted ribbon tags,
+   a three-colour ribbon edge along the top of every slide. */
+
+[data-style='ribbon'] {
+  --f-display: 'Plus Jakarta Sans', 'Deck Heavy SC', sans-serif;
+}
+[data-style='ribbon'] .stage {
+  background:
+    linear-gradient(90deg, var(--accent) 0 46%, var(--spot-5) 46% 72%, var(--spot-4) 72%) 0 0 / 100% 10u no-repeat,
+    var(--canvas);
+}
+[data-style='ribbon'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-family: var(--f-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+[data-style='ribbon'] :is(.break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .detail__figure b) {
+  font-family: var(--f-display);
+  font-weight: 800;
+}
+[data-style='ribbon'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 10u 26u 10u 20u;
+  background: var(--accent);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 14u) 50%, 100% 100%, 0 100%);
+  font: 700 18u/1 'Plus Jakarta Sans', 'Deck Sans SC', sans-serif;
+  letter-spacing: 0.02em;
+  color: rgb(255 255 255);
+}
+[data-style='ribbon'] .kicker::before {
+  display: none;
+}
+[data-style='ribbon'] [data-tone='accent'] .kicker,
+[data-style='ribbon'][data-tone='accent'] .kicker,
+[data-style='ribbon'] [data-tone='dark'] .kicker {
+  background: var(--spot-5);
+  color: var(--spot-6);
+}
+
+/* ── RibbonCover ──────────────────────────────────────────────────────── */
+
+.rbc__bands,
+.rbs__bands {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.rbc__wrap {
+  position: absolute;
+  inset: 0;
+}
+.rbc__band,
+.rbc__thin {
+  position: absolute;
+  left: 50%;
+  width: 3600u;
+  margin-left: -1800u;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 18u 40u -18u rgb(0 0 0 / 0.35);
+}
+.rbc__band span {
+  display: flex;
+  gap: 56u;
+  white-space: nowrap;
+}
+.rbc__band em {
+  font: 800 64u/1 var(--f-display);
+  font-style: normal;
+  letter-spacing: -0.02em;
+}
+.rbc__band em::after {
+  content: '✦';
+  margin-left: 56u;
+  font-size: 0.6em;
+  vertical-align: 0.2em;
+}
+.rbc__band--accent {
+  top: 800u;
+  height: 140u;
+  transform: translateX(420u) rotate(-21deg);
+  background: var(--accent);
+  color: rgb(255 255 255);
+}
+.rbc__band--ink {
+  top: 790u;
+  height: 100u;
+  transform: translateX(560u) rotate(-7deg);
+  background: var(--spot-6);
+  color: var(--spot-5);
+}
+.rbc__band--ink em {
+  font-size: 46u;
+}
+.rbc__thin {
+  top: 640u;
+  height: 36u;
+  transform: translateX(640u) rotate(-21deg);
+  background: var(--spot-5);
+}
+.rbc {
+  display: flex;
+  flex-direction: column;
+}
+.rbc__title {
+  margin-top: 40u;
+  font: 800 140u/1.04 var(--f-display);
+  letter-spacing: -0.04em;
+}
+.rbc__lead {
+  margin-top: 32u;
+  max-width: 760u;
+  font-size: 28u;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+/* ── RibbonSection ────────────────────────────────────────────────────── */
+
+.rbs__back {
+  position: absolute;
+  left: -200u;
+  right: -200u;
+  top: 330u;
+  height: 70u;
+  transform: rotate(4deg);
+  background: var(--spot-5);
+}
+.rbs__wrap {
+  position: absolute;
+  left: -200u;
+  right: -200u;
+  top: 330u;
+}
+.rbs__band {
+  display: flex;
+  align-items: center;
+  gap: 48u;
+  height: 250u;
+  padding-left: 272u;
+  transform: rotate(-5deg);
+  background: var(--accent);
+  color: rgb(255 255 255);
+  box-shadow: 0 24u 50u -24u rgb(0 0 0 / 0.4);
+}
+.rbs__num {
+  display: grid;
+  place-items: center;
+  width: 150u;
+  height: 150u;
+  border-radius: 50%;
+  background: var(--spot-6);
+  color: var(--spot-5);
+  font: 800 64u/1 var(--f-display);
+  letter-spacing: -0.03em;
+}
+.rbs__title {
+  font: 800 128u/1 var(--f-display);
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+}
+.rbs {
+  display: flex;
+  flex-direction: column;
+}
+.rbs__foot {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 720u;
+  align-items: end;
+  gap: 80u;
+}
+.rbs__lead {
+  max-width: 760u;
+  font-size: 30u;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.rbs__list {
+  display: grid;
+  gap: 14u;
+  list-style: none;
+}
+.rbs__list li {
+  display: flex;
+  align-items: center;
+  gap: 20u;
+  padding: 16u 24u;
+  border-radius: calc(var(--rs, 1) * 16u);
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font: 600 25u/1.2 var(--f-sans);
+}
+.rbs__list b {
+  font: 500 19u/1 var(--f-mono);
+  color: var(--accent);
+}

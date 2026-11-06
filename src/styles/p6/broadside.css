@@ -1,0 +1,10 @@
+/* Style `broadside`: ported from beautiful-html-templates · broadside (MIT, (c) zarazhangrui). Rules scoped to [data-style='broadside']. */
+
+[data-style='broadside'] { --f-display: 'Barlow', 'Deck Heavy SC', sans-serif; }
+[data-style='broadside'] [data-tone='dark'], [data-style='broadside'][data-tone='dark'] {
+  --canvas: #111111; --letterbox: #080808; --card: #1a1a18; --card-hover: #22221f; --panel: #161614; --ink: #f0ece5; --line: #282826; --line-strong: #3a3a36;
+}
+[data-style='broadside'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .statrow__value, .desk__ver, .detail__figure b, .numeral, .feature-num) { font-family: var(--f-display); font-weight: 900; letter-spacing: -0.045em; }
+[data-style='broadside'] .kicker { font: 400 18u/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; }
+[data-style='broadside'] .kicker::before { width: 22u; height: 2u; }
+[data-style='broadside'] .flow { margin-top: 88u; }

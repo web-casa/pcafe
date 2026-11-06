@@ -1,0 +1,376 @@
+/* Phase 4 style `halo`: preset rules scoped to [data-style='halo'] plus its templates. */
+/* Minimal creative-agency look: near-white stage, deep slate ink, thin
+   geometric display type with one phrase in italic serif, a soft blurred
+   multicolour glow behind the hero, hairline-ruled list rows, uppercase
+   letter-spaced kickers, grey tag chips. */
+
+[data-style='halo'] {
+  --f-display: 'Geist', 'Deck Sans SC', sans-serif;
+  --f-italic: 'Instrument Serif', 'Deck Serif SC', serif;
+  --ink: #1c272b;
+  --ink-2: #4c5659;
+  --halo-a: #ff9fc4;
+  --halo-b: #ffc978;
+  --halo-c: #8ff0cf;
+  --halo-d: #a9b8ff;
+}
+[data-style='halo']
+  :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .stat__value, .price__amt) {
+  font-family: var(--f-display);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+[data-style='halo'] .kicker {
+  font: 500 19u/1 var(--f-sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+[data-style='halo'] .kicker::before {
+  display: none;
+}
+[data-style='halo'] :is([data-tone='dark'], .stage[data-tone='dark']) .kicker {
+  color: rgb(255 255 255 / 0.82);
+}
+/* Dark pause: slate stage with a dim glow, like the reference's dark band. */
+[data-style='halo'] .stage[data-tone='dark'],
+[data-style='halo'] [data-tone='dark'] .stage {
+  background:
+    radial-gradient(28% 40% at 50% 48%, rgb(255 201 120 / 0.2), transparent 70%),
+    radial-gradient(40% 50% at 30% 70%, rgb(169 184 255 / 0.12), transparent 70%),
+    #1c272b;
+}
+[data-style='halo'] .statement__text .mark,
+[data-style='halo'] .statement__text mark,
+[data-style='halo'] .statement__text em {
+  font-family: var(--f-italic);
+  font-style: italic;
+}
+
+/* Stat cards turn into open columns split by hairlines, thin numerals. */
+[data-style='halo'] .statrow__card {
+  background: transparent;
+  border: 0;
+  border-top: 1.5px solid var(--ink);
+  border-radius: 0;
+  box-shadow: none;
+}
+[data-style='halo'] .statrow__value {
+  font-family: var(--f-display);
+  font-weight: 300;
+  letter-spacing: -0.05em;
+}
+[data-style='halo'] .statrow__card:first-child .statrow__value {
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ── HaloHero ─────────────────────────────────────────────────────────── */
+
+.s-halo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.halo__glow {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 1300u;
+  height: 820u;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.halo__glow i {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90u);
+  opacity: 0.75;
+  animation: halo-drift 14s ease-in-out infinite alternate;
+}
+.halo__glow i:nth-child(1) {
+  left: 4%;
+  top: 6%;
+  width: 46%;
+  height: 52%;
+  background: var(--halo-a, var(--spot-4));
+}
+.halo__glow i:nth-child(2) {
+  left: 26%;
+  top: 24%;
+  width: 34%;
+  height: 46%;
+  background: var(--halo-b, var(--spot-3));
+  animation-delay: -4s;
+}
+.halo__glow i:nth-child(3) {
+  left: 52%;
+  top: 4%;
+  width: 42%;
+  height: 50%;
+  background: var(--accent-soft);
+  animation-delay: -8s;
+}
+.halo__glow i:nth-child(4) {
+  left: 34%;
+  top: 50%;
+  width: 46%;
+  height: 46%;
+  background: var(--halo-c, var(--spot-2));
+  animation-delay: -2s;
+}
+@keyframes halo-drift {
+  to {
+    transform: translate(40u, -30u) scale(1.08);
+  }
+}
+.halo__title {
+  position: relative;
+  margin-top: 40u;
+  font: 400 136u/1.12 var(--f-display);
+  letter-spacing: -0.045em;
+  color: var(--ink);
+}
+.halo__line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32u;
+  white-space: nowrap;
+}
+.halo__line--fade {
+  color: rgb(28 39 43 / 0.16);
+}
+.halo__em {
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  padding: 0 0.06em;
+}
+.halo__pill {
+  display: inline-block;
+  flex: none;
+  width: 230u;
+  height: 118u;
+  border-radius: 999px;
+  background:
+    linear-gradient(118deg, transparent 38%, var(--halo-b, var(--spot-3)) 38% 50%, transparent 50%),
+    repeating-linear-gradient(118deg, rgb(255 255 255 / 0.22) 0 2px, transparent 2px 14u),
+    linear-gradient(118deg, var(--accent) 0 62%, var(--halo-c, var(--spot-2)) 62%);
+  box-shadow: inset 0 -10u 24u rgb(0 0 0 / 0.12);
+}
+.halo__lead {
+  position: relative;
+  margin-top: 40u;
+  max-width: 1000u;
+  font-size: 28u;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.halo__cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 28u;
+  margin-top: 44u;
+}
+.halo__cmd {
+  display: inline-flex;
+  gap: 16u;
+  padding: 22u 34u;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font: 400 28u/1 var(--f-mono);
+}
+.halo__cmd span {
+  opacity: 0.5;
+}
+.halo__link {
+  font: 400 24u/1 var(--f-mono);
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-underline-offset: 6u;
+}
+.s-halo > .s-foot {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+}
+
+/* ── HaloRows ─────────────────────────────────────────────────────────── */
+
+.s-hrows {
+  display: grid;
+  grid-template-columns: 640u minmax(0, 1fr);
+  gap: 120u;
+}
+.hrows__head {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.hrows__head .s-title {
+  font-size: 68u;
+  line-height: 1.16;
+}
+.hrows__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+.hrow {
+  display: grid;
+  grid-template-columns: 56u minmax(0, auto) minmax(0, 1fr) 28u;
+  align-items: center;
+  gap: 26u;
+  padding: 30u 0;
+  border-bottom: 1.5px solid var(--ink);
+}
+.hrows__list--n6 .hrow {
+  padding: 24u 0;
+}
+.hrow__icon {
+  display: grid;
+  place-items: center;
+  width: 56u;
+  height: 56u;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  color: var(--ink);
+}
+.hrow__icon .icon {
+  width: 32u;
+  height: 32u;
+  color: var(--ink);
+}
+.hrow__title {
+  font: 400 36u/1.25 var(--f-display);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.hrow__detail {
+  justify-self: end;
+  text-align: right;
+  font-size: 22u;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.hrow__plus {
+  position: relative;
+  width: 24u;
+  height: 24u;
+}
+.hrow__plus::before,
+.hrow__plus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24u;
+  height: 2px;
+  margin: -1px 0 0 -12u;
+  background: var(--ink);
+}
+.hrow__plus::after {
+  transform: rotate(90deg);
+}
+
+/* ── HaloMarquee ──────────────────────────────────────────────────────── */
+
+.s-hmarq {
+  display: flex;
+  flex-direction: column;
+}
+.hmarq__band {
+  margin: 18u -72u 0;
+}
+.hmarq__track {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.hmarq__run {
+  display: flex;
+  width: max-content;
+  animation: hmarq-run 36s linear infinite;
+}
+.hmarq__run span {
+  display: inline-flex;
+  align-items: center;
+  font: 400 136u/1.2 var(--f-display);
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.hmarq__run i {
+  margin: 0 56u;
+  font-style: normal;
+}
+@keyframes hmarq-run {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.hmarq__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48u;
+  margin-top: 30u;
+  min-height: 0;
+}
+.hwork {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.hwork__img {
+  height: 420u;
+  overflow: hidden;
+  border-radius: calc(16u * var(--rs, 1));
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.hwork__img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
+.hwork h3 {
+  margin-top: 24u;
+  font: 400 34u/1.25 var(--f-display);
+  letter-spacing: -0.02em;
+}
+.hwork__tags {
+  display: flex;
+  gap: 12u;
+  margin-top: 16u;
+}
+.hwork__tags span {
+  padding: 8u 14u;
+  border-radius: calc(6u * var(--rs, 1));
+  background: var(--panel);
+  font-size: 18u;
+  line-height: 1.2;
+  color: var(--ink-2);
+}
+.s-hmarq > .s-foot {
+  padding-top: 20u;
+}
+[data-style='halo'] .statrow__card {
+  padding-left: 0;
+  padding-right: 0;
+}
+[data-style='halo'] .statrow__top i {
+  display: none;
+}

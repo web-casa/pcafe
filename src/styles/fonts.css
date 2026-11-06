@@ -1,0 +1,76 @@
+/* All faces are embedded (OFL). Noto Sans SC is subset to GB2312 level-1 plus
+   every glyph used in src/, so in-browser edits keep the same typeface. */
+
+@font-face {
+  font-family: 'Geist';
+  src: url('../assets/fonts/geist-latin-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('../assets/fonts/geist-mono-latin-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('../assets/fonts/instrument-serif-latin-400-italic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 400;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Deck Sans SC';
+  src: url('../assets/fonts/noto-sans-sc-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Deck Sans SC';
+  src: url('../assets/fonts/noto-sans-sc-500.woff2') format('woff2');
+  font-weight: 500 900;
+  font-display: block;
+}
+
+/* Display faces for DeckDef.style (headings and big numbers only). Subset to the
+   characters used in src/, so `npm run fonts` must run after copy changes. */
+
+@font-face {
+  font-family: 'Deck Serif SC';
+  src: url('../assets/fonts/noto-serif-sc-600.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Anton';
+  src: url('../assets/fonts/anton-latin-400-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Deck Heavy SC';
+  src: url('../assets/fonts/noto-sans-sc-900.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('../assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2') format('woff2');
+  font-weight: 200 800;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Silkscreen';
+  src: url('../assets/fonts/silkscreen-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}

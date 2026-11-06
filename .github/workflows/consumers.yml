@@ -1,0 +1,23 @@
+name: consumers
+
+on:
+  push:
+
+jobs:
+  consumers:
+    runs-on: ubuntu-latest
+    env:
+      # The Pro sample is a local, private checkout; CI still covers the other
+      # three install paths. Run without this flag where Pro is available.
+      PCAFE_SKIP_PRO: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install chromium --with-deps
+      - run: npm run build
+      - run: npm run test:consumers
+      - run: npm run lint:package

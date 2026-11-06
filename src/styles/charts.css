@@ -1,0 +1,896 @@
+/* Chart templates (phase 2): BarChart, Donut, Bubble, SparkCards, SlopeRank,
+   Pictogram, Gauge, CountCompare. One accent per chart; everything else greys. */
+
+.s-chart {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 28u;
+  margin-top: 36u;
+  font-size: 19u;
+  color: var(--ink-2);
+}
+.chart-legend span {
+  display: flex;
+  align-items: center;
+  gap: 10u;
+}
+.chart-legend i {
+  width: 16u;
+  height: 16u;
+  border-radius: calc(4u * var(--rs, 1));
+  background: var(--c);
+}
+.chart-note {
+  margin: 0;
+  font-size: 22u;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.s-chart > .chart-note {
+  margin-top: 26u;
+  padding-left: 18u;
+  border-left: 3px solid var(--accent);
+}
+
+/* ── BarChart ─────────────────────────────────────────────────────────── */
+
+.bar {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin-top: 30u;
+  padding: 44u 0 0 64u;
+}
+.bar__grid {
+  position: absolute;
+  inset: 44u 0 54u 64u;
+}
+.bar__grid span {
+  position: absolute;
+  left: -64u;
+  right: 0;
+  bottom: calc(var(--y) * 100%);
+  height: 0;
+  border-top: 1px solid var(--line);
+  font: 400 17u/0 var(--f-mono);
+  color: var(--mute);
+}
+.bar__grid span:first-child {
+  border-top-color: var(--line-strong);
+}
+.bar__plot {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  height: 100%;
+}
+.bar__col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  transition: opacity 400ms var(--ease-out);
+}
+.bar.has-focus .bar__col:not(.is-focus) {
+  opacity: 0.42;
+}
+.bar__bars {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8u;
+}
+.bar__bar,
+.bar__stack {
+  position: relative;
+  width: min(96u, calc(70% / var(--m)));
+  height: calc(var(--h) * 100%);
+  transform-origin: bottom;
+  animation: bar-grow 900ms var(--ease-out) both;
+  animation-delay: calc(400ms + var(--k) * 70ms);
+}
+.bar__bar {
+  border-radius: calc(8u * var(--rs, 1)) calc(8u * var(--rs, 1)) 0 0;
+  background: var(--c);
+}
+.bar__stack {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 3u;
+}
+.bar__stack i {
+  flex: var(--f) 0 0;
+  background: var(--c);
+}
+.bar__stack i:last-of-type {
+  border-radius: calc(8u * var(--rs, 1)) calc(8u * var(--rs, 1)) 0 0;
+}
+@keyframes bar-grow {
+  from {
+    scale: 1 0;
+  }
+}
+.bar__val {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  translate: -50% -10u;
+  font: 500 20u/1 var(--f-mono);
+  white-space: nowrap;
+  color: var(--ink);
+}
+.bar__cat {
+  height: 54u;
+  padding-top: 16u;
+  font-size: 20u;
+  text-align: center;
+  color: var(--ink-2);
+}
+.bar__col.is-focus .bar__cat {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ── Donut ────────────────────────────────────────────────────────────── */
+
+.donut {
+  display: grid;
+  grid-template-columns: 560u minmax(0, 1fr);
+  align-items: center;
+  gap: 110u;
+  flex: 1;
+  min-height: 0;
+  padding: 20u 40u 0;
+}
+.donut__ring {
+  position: relative;
+  width: 560u;
+  height: 560u;
+}
+.donut__ring svg {
+  width: 100%;
+  height: 100%;
+  rotate: -90deg;
+  overflow: visible;
+}
+.donut__ring circle {
+  fill: none;
+  stroke: var(--c);
+  stroke-width: 30;
+  stroke-dasharray: var(--len) var(--C);
+  stroke-dashoffset: var(--off);
+  animation: donut-in 1100ms var(--ease-out) both;
+  animation-delay: calc(400ms + var(--k) * 120ms);
+}
+.donut__ring circle.is-focus {
+  stroke-width: 38;
+}
+.donut__ring .donut__track {
+  stroke: var(--panel);
+  stroke-dasharray: none;
+  animation: none;
+}
+@keyframes donut-in {
+  from {
+    stroke-dasharray: 0 var(--C);
+  }
+}
+.donut__center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10u;
+}
+.donut__center b {
+  font: 600 96u/1 var(--f-display);
+  letter-spacing: -0.04em;
+}
+.donut__center span {
+  font-size: 20u;
+  color: var(--mute);
+}
+.donut__legend {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.donut__row {
+  display: grid;
+  grid-template-columns: 22u minmax(0, 1fr) auto 84u;
+  align-items: center;
+  gap: 20u;
+  padding: 24u 0;
+  border-bottom: 1px solid var(--line);
+}
+.donut__row:last-child {
+  border-bottom: 0;
+}
+.donut__row > i {
+  width: 22u;
+  height: 22u;
+  border-radius: 50%;
+  background: var(--c);
+}
+.donut__row div {
+  display: flex;
+  flex-direction: column;
+  gap: 6u;
+}
+.donut__row span {
+  font-size: 24u;
+  color: var(--ink-2);
+}
+.donut__row em {
+  font-size: 18u;
+  font-style: normal;
+  color: var(--mute);
+}
+.donut__row b {
+  font: 500 26u/1 var(--f-mono);
+}
+.donut__row small {
+  font: 400 20u/1 var(--f-mono);
+  text-align: right;
+  color: var(--mute);
+}
+.donut__row.is-focus span,
+.donut__row.is-focus small {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ── Bubble ───────────────────────────────────────────────────────────── */
+
+.bubble {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360u;
+  gap: 56u;
+  flex: 1;
+  min-height: 0;
+  margin-top: 36u;
+}
+.bubble__plot {
+  position: relative;
+  margin: 10u 30u 60u 80u;
+  border-left: 1.5px solid var(--line-strong);
+  border-bottom: 1.5px solid var(--line-strong);
+  background:
+    linear-gradient(var(--line), var(--line)) 50% 0 / 1px 100% no-repeat,
+    linear-gradient(var(--line), var(--line)) 0 50% / 100% 1px no-repeat;
+}
+.bubble__axis {
+  position: absolute;
+  font-size: 18u;
+  color: var(--mute);
+  white-space: nowrap;
+}
+.bubble__axis--x {
+  right: 0;
+  bottom: -58u;
+}
+.bubble__axis--y {
+  left: -80u;
+  top: 40u;
+  writing-mode: vertical-rl;
+}
+.bubble__tick {
+  position: absolute;
+  font: 400 17u/1 var(--f-mono);
+  color: var(--mute);
+}
+.bubble__tick--x {
+  left: calc(var(--t) * 100%);
+  bottom: -30u;
+  translate: -50% 0;
+}
+.bubble__tick--x:last-of-type,
+.bubble__tick--x:nth-of-type(3) {
+  translate: -100% 0;
+}
+.bubble__tick--y {
+  left: -14u;
+  bottom: calc(var(--t) * 100%);
+  translate: -100% 50%;
+}
+.bubble__pt {
+  position: absolute;
+  left: calc(var(--x) * 100%);
+  bottom: calc(var(--y) * 100%);
+  translate: -50% 50%;
+  animation: pop 700ms var(--ease-out) both;
+  animation-delay: calc(500ms + var(--k) * 70ms);
+}
+.bubble__pt i {
+  display: block;
+  width: calc(var(--d) * 1u);
+  height: calc(var(--d) * 1u);
+  border-radius: 50%;
+  background: rgb(127 127 135 / 0.16);
+  box-shadow: inset 0 0 0 1.5px var(--line-strong);
+}
+.bubble__pt span {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  translate: -50% 8u;
+  font-size: 18u;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+.bubble__pt--above span {
+  top: auto;
+  bottom: 100%;
+  translate: -50% -8u;
+}
+.bubble__pt--right span {
+  left: 100%;
+  top: 50%;
+  translate: 12u -50%;
+}
+.bubble__pt--left span {
+  left: auto;
+  right: 100%;
+  top: 50%;
+  translate: -12u -50%;
+}
+.bubble__pt.is-focus {
+  z-index: 1;
+}
+.bubble__pt.is-focus i {
+  background: rgb(var(--accent-rgb) / 0.85);
+  box-shadow: 0 0 0 6u rgb(var(--accent-rgb) / 0.16);
+}
+.bubble__pt.is-focus span {
+  font-weight: 600;
+  color: var(--ink);
+}
+.bubble__aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 36u;
+  padding-bottom: 60u;
+}
+.bubble__key {
+  display: flex;
+  align-items: flex-end;
+  gap: 12u;
+  font-size: 18u;
+  color: var(--mute);
+}
+.bubble__key i {
+  width: 28u;
+  height: 28u;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px var(--line-strong);
+}
+.bubble__key i + i {
+  width: 56u;
+  height: 56u;
+}
+
+/* ── SparkCards ───────────────────────────────────────────────────────── */
+
+.spark {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: 22u;
+  flex: 1;
+  min-height: 0;
+  margin-top: 56u;
+}
+.spark__card {
+  display: flex;
+  flex-direction: column;
+  padding: 32u;
+  border-radius: calc(22u * var(--rs, 1));
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.spark__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12u;
+  font-size: 20u;
+  color: var(--ink-2);
+}
+.spark__head em {
+  padding: 6u 12u;
+  border-radius: 999px;
+  font: 500 18u/1 var(--f-mono);
+  font-style: normal;
+  color: var(--accent-ink);
+  background: var(--accent-wash);
+}
+.spark__head em.is-down {
+  color: var(--ink-2);
+  background: var(--panel);
+}
+.spark__value {
+  margin-top: 28u;
+  font: 600 76u/1 var(--f-display);
+  letter-spacing: -0.04em;
+}
+.spark__value small {
+  margin-left: 8u;
+  font: 400 24u/1 var(--f-sans);
+  letter-spacing: 0;
+  color: var(--mute);
+}
+.spark__plot {
+  position: relative;
+  flex: 1;
+  min-height: 120u;
+  margin-top: 32u;
+}
+.spark__plot svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.spark__area {
+  fill: rgb(var(--accent-rgb) / 0.1);
+}
+.spark__line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+/* Lines draw in left to right by unclipping (dash tricks break with non-scaling strokes). */
+.spark__plot svg,
+.slope__lines {
+  animation: wipe 1100ms var(--ease-out) both;
+  animation-delay: calc(500ms + var(--k, 0) * 120ms);
+}
+@keyframes wipe {
+  from {
+    clip-path: inset(-10% 100% -10% 0);
+  }
+  to {
+    clip-path: inset(-10% -2% -10% 0);
+  }
+}
+.spark__dot {
+  animation: pop 500ms var(--ease-out) both;
+  animation-delay: calc(1300ms + var(--k) * 120ms);
+  position: absolute;
+  left: calc(var(--x) * 100%);
+  top: calc(var(--y) * 100%);
+  width: 14u;
+  height: 14u;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5u rgb(var(--accent-rgb) / 0.2);
+}
+.spark__note {
+  margin-top: 18u;
+  font-size: 18u;
+  color: var(--mute);
+}
+
+/* ── SlopeRank ────────────────────────────────────────────────────────── */
+
+.slope {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380u;
+  gap: 72u;
+  flex: 1;
+  min-height: 0;
+  margin-top: 40u;
+}
+.slope__board {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.slope__head {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 14u;
+  border-bottom: 1px solid var(--line-strong);
+  font: 500 20u/1 var(--f-mono);
+  color: var(--mute);
+}
+.slope__head span:last-child {
+  padding-right: 130u;
+}
+.slope__body {
+  display: grid;
+  grid-template-columns: 300u minmax(0, 1fr) 380u;
+  flex: 1;
+  min-height: 0;
+  padding-top: 10u;
+}
+.slope__col {
+  display: grid;
+  grid-template-rows: repeat(var(--n), minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.slope__col li {
+  display: flex;
+  align-items: center;
+  gap: 16u;
+  font-size: 22u;
+  color: var(--ink-2);
+}
+.slope__col b {
+  font: 500 20u/1 var(--f-mono);
+  color: var(--mute);
+}
+.slope__col--from li {
+  justify-content: flex-end;
+  padding-right: 22u;
+}
+.slope__col--to li {
+  padding-left: 22u;
+}
+.slope__col em {
+  margin-left: auto;
+  font: 500 18u/1 var(--f-mono);
+  font-style: normal;
+  color: var(--mute);
+}
+.slope__col em.is-up {
+  color: var(--accent-ink);
+}
+.slope__col li.is-focus {
+  font-weight: 600;
+  color: var(--ink);
+}
+.slope__col li.is-focus b {
+  color: var(--accent-ink);
+}
+.slope__mid {
+  position: relative;
+}
+.slope__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.slope__lines line {
+  stroke: var(--line-strong);
+  stroke-width: 2px;
+  vector-effect: non-scaling-stroke;
+}
+.slope__lines line.is-up {
+  stroke: var(--mute);
+}
+.slope__lines line.is-focus {
+  stroke: var(--accent);
+  stroke-width: 5px;
+}
+.slope__note {
+  align-self: center;
+}
+
+/* ── Pictogram ────────────────────────────────────────────────────────── */
+
+.s-picto {
+  display: grid;
+  grid-template-columns: 640u minmax(0, 1fr);
+  gap: 96u;
+  align-items: center;
+}
+.picto__copy {
+  display: flex;
+  flex-direction: column;
+}
+.picto__title {
+  margin-top: 22u;
+}
+.picto__lead {
+  margin-top: 26u;
+}
+.picto__legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4u;
+  margin: 44u 0 0;
+  padding: 0;
+  list-style: none;
+}
+.picto__key {
+  display: grid;
+  grid-template-columns: 22u minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16u;
+  padding: 16u 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 22u;
+  color: var(--ink-2);
+}
+.picto__key i {
+  width: 22u;
+  height: 22u;
+  border-radius: calc(6u * var(--rs, 1));
+  background: var(--accent);
+}
+.picto__key--1 i {
+  background: var(--ink-2);
+}
+.picto__key--2 i {
+  background: var(--mute);
+}
+.picto__key--rest i {
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1.5px var(--line-strong);
+}
+.picto__key b {
+  font: 600 30u/1 var(--f-mono);
+  color: var(--ink);
+}
+.picto__key small {
+  font-size: 18u;
+  font-weight: 400;
+  color: var(--mute);
+}
+.picto__copy .s-foot {
+  margin-top: 40u;
+}
+.picto__grid {
+  display: grid;
+  justify-content: center;
+}
+.picto__grid--100 {
+  grid-template-columns: repeat(10, 64u);
+  gap: 14u;
+}
+.picto__grid--10 {
+  grid-template-columns: repeat(5, 150u);
+  gap: 28u;
+}
+.picto__cell {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: calc(12u * var(--rs, 1));
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1.5px var(--line);
+  color: var(--faint);
+  animation: pop 500ms var(--ease-out) both;
+  animation-delay: calc(400ms + var(--k) * 8ms);
+}
+.picto__grid--10 .picto__cell {
+  border-radius: calc(24u * var(--rs, 1));
+  animation-delay: calc(400ms + var(--k) * 60ms);
+}
+.picto__cell:has(.icon) {
+  background: none;
+  box-shadow: none;
+}
+.picto__cell.is-0 {
+  background: var(--accent);
+  box-shadow: none;
+  color: var(--accent);
+}
+.picto__cell.is-1 {
+  background: var(--ink-2);
+  box-shadow: none;
+  color: var(--ink-2);
+}
+.picto__cell.is-2 {
+  background: var(--mute);
+  box-shadow: none;
+  color: var(--mute);
+}
+.picto__cell:has(.icon):is(.is-0, .is-1, .is-2) {
+  background: none;
+}
+
+/* ── Gauge ────────────────────────────────────────────────────────────── */
+
+.gauge {
+  display: grid;
+  grid-template-columns: 720u minmax(0, 1fr);
+  align-items: center;
+  gap: 110u;
+  flex: 1;
+  min-height: 0;
+  padding: 0 40u;
+}
+.gauge--solo {
+  grid-template-columns: 720u;
+  justify-content: center;
+}
+.gauge__dial {
+  position: relative;
+  width: 720u;
+  height: 630u;
+}
+.gauge__dial svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.gauge__track,
+.gauge__fill {
+  fill: none;
+  stroke-width: 22;
+  stroke-linecap: round;
+}
+.gauge__track {
+  stroke: var(--panel);
+}
+.gauge__fill {
+  stroke: var(--accent);
+  stroke-dasharray: var(--d) var(--L);
+  animation: gauge-in 1400ms var(--ease-out) both 400ms;
+}
+@keyframes gauge-in {
+  from {
+    stroke-dasharray: 0 var(--L);
+  }
+}
+.gauge__target line {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.gauge__center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 210u;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14u;
+}
+.gauge__center b {
+  font: 600 150u/1 var(--f-display);
+  letter-spacing: -0.05em;
+}
+.gauge__center small {
+  margin-left: 6u;
+  font: 400 40u/1 var(--f-sans);
+  letter-spacing: 0;
+  color: var(--mute);
+}
+.gauge__center span {
+  font-size: 24u;
+  color: var(--ink-2);
+}
+.gauge__end {
+  position: absolute;
+  bottom: 30u;
+  font: 400 18u/1 var(--f-mono);
+  color: var(--mute);
+}
+.gauge__end--min {
+  left: 100u;
+}
+.gauge__end--max {
+  right: 100u;
+  translate: 50% 0;
+}
+.gauge__tlabel {
+  position: absolute;
+  left: 50%;
+  top: 315u;
+  width: 0;
+  height: 0;
+  rotate: var(--a);
+}
+.gauge__tlabel span {
+  position: absolute;
+  left: 0;
+  bottom: 350u;
+  translate: -50% 0;
+  rotate: calc(var(--a) * -1);
+  padding: 6u 12u;
+  border-radius: 999px;
+  background: var(--ink);
+  font-size: 18u;
+  white-space: nowrap;
+  color: var(--canvas);
+}
+.gauge__points {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.gauge__points > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20u;
+  padding: 28u 0;
+  border-bottom: 1px solid var(--line);
+}
+.gauge__points > div:last-child {
+  border-bottom: 0;
+}
+.gauge__points dt {
+  font-size: 22u;
+  color: var(--ink-2);
+}
+.gauge__points dd {
+  margin: 0;
+  font: 600 40u/1 var(--f-display);
+  letter-spacing: -0.03em;
+}
+
+/* ── CountCompare ─────────────────────────────────────────────────────── */
+
+.count {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 200u minmax(0, 1fr);
+  align-items: center;
+  flex: 1;
+  min-height: 0;
+}
+.count__side {
+  display: flex;
+  flex-direction: column;
+  gap: 22u;
+  padding: 56u;
+  border-radius: calc(26u * var(--rs, 1));
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.count__side.is-now {
+  background: var(--ink);
+  color: var(--canvas);
+  box-shadow: none;
+}
+.count__label {
+  font: 500 20u/1 var(--f-mono);
+  letter-spacing: 0.04em;
+  color: var(--mute);
+}
+.count__value {
+  font: 600 190u/0.9 var(--f-display);
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+.count__value small {
+  margin-left: 10u;
+  font: 400 44u/1 var(--f-sans);
+  letter-spacing: 0;
+  opacity: 0.6;
+}
+.count__side.is-now .count__value {
+  color: var(--accent-soft);
+}
+.count__note {
+  font-size: 20u;
+  color: var(--mute);
+}
+.count__change {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12u;
+}
+.count__change .arrow {
+  font-size: 56u;
+  color: var(--mute);
+}
+.count__change b {
+  padding: 8u 16u;
+  border-radius: 999px;
+  background: var(--accent-wash);
+  font: 600 26u/1 var(--f-mono);
+  color: var(--accent-ink);
+}

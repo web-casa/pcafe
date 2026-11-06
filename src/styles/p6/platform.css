@@ -1,0 +1,8 @@
+/* Style `platform`: ported from beautiful-html-templates · peoples-platform (MIT, (c) zarazhangrui). Rules scoped to [data-style='platform']. */
+
+[data-style='platform'] { --f-display: 'Alfa Slab One', 'Deck Heavy SC', serif; --f-sans: 'Archivo Narrow', 'Deck Sans SC', sans-serif; }
+[data-style='platform'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title, .break__num, .close__num, .metrics__value, .kpi__value, .price__amt, .statrow__value, .desk__ver, .detail__figure b) { font-family: var(--f-display); font-weight: 400; letter-spacing: 0; }
+[data-style='platform'] :is(.cover__title, .break__title, .break__num, .close__num) { text-shadow: 5u 5u 0 rgb(var(--accent-rgb) / 0.35); }
+[data-style='platform'] .kicker { font: 500 18u/1 var(--f-mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
+[data-style='platform'] .kicker::before { width: 14u; height: 2u; background: var(--ink); }
+[data-style='platform'] :is(.card, .kpi__tile, .price__card, .persona__card, .status__tile, .statrow__card, .igrid__card, .claim, .spark__card, .panel-card, .recap__item) { border: 2.5u solid var(--ink); }

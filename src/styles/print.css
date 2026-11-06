@@ -1,0 +1,159 @@
+/* Posters, roll-ups, tri-folds, long images. Sizes are real millimetres: 1mm on screen is 1mm in the PDF,
+   so nothing here scales the sheet. Colours come from the theme variables; only crop marks, which have
+   to read as registration black on white paper, name a colour of their own. */
+
+html[data-print],
+html[data-print] body {
+  height: auto;
+  min-height: 100%;
+  overflow: auto;
+  background: var(--letterbox);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+html[data-print] body { overflow: visible; }
+html[data-print] #root { width: auto; height: auto; }
+html[data-print][data-export='1'],
+html[data-print][data-export='1'] body { background: #fff; overflow: visible; }
+html[data-print][data-mode='print'] { --pr-reg: #000; }
+
+/* Paper does not move. Templates animate in with CSS keyframes, and a PDF would catch them part way, so every
+   animation jumps to its end state. `animation: none` would not do: some templates only reach their end state in one. */
+html[data-print] *, html[data-print] *::before, html[data-print] *::after { animation-duration: 0s !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition: none !important; }
+
+/* ---------- viewer ---------- */
+
+.pr-view { min-height: 100vh; padding: 0 16px 32px; font: 400 13px/1.4 var(--f-sans); color: var(--ink); }
+.pr-bar { position: sticky; top: 10px; z-index: 10; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; width: fit-content; max-width: 100%; margin: 10px auto 14px; padding: 6px 14px; border-radius: 999px; background: var(--card); box-shadow: 0 2px 10px rgb(30 30 40 / .14); }
+.pr-bar b { font-weight: 500; }
+.pr-bar span { color: var(--ink-2); }
+.pr-bar a { padding: 4px 10px; border-radius: 999px; color: var(--ink-2); text-decoration: none; }
+.pr-bar a[aria-current='true'], .pr-bar a[aria-pressed='true'] { background: var(--ink); color: var(--card); }
+.pr-fit { margin: 0 auto; }
+.pr-fit .pr-page { margin-bottom: 24px; box-shadow: 0 2px 14px rgb(20 20 30 / .22); }
+
+/* ---------- the sheet ---------- */
+
+.pr-page { position: relative; overflow: hidden; background: #fff; break-after: page; break-inside: avoid; }
+.pr-page:last-child { break-after: auto; }
+.pr-box { position: absolute; }
+.pr-long .pr-box { position: static; }
+.pr-trim { position: relative; width: 100%; height: 100%; isolation: isolate; color: var(--ink); font-family: var(--f-sans); font-synthesis: none; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; font-kerning: normal; }
+/* The bleed is drawn by every ground, and clipped by the page. */
+.pr-ground { position: absolute; inset: calc(var(--bleed) * -1); z-index: -3; background: var(--canvas); }
+.pr-live { position: relative; display: flex; flex-direction: column; width: 100%; height: 100%; min-height: 0; }
+/* Not positioned: a Bleed anywhere inside is placed against the trim. */
+.pr-live { position: static; }
+
+.pr-bleed { position: absolute; z-index: -1; overflow: hidden; }
+.pr-bleed[data-fill='accent'] { background: var(--accent-base); }
+.pr-bleed[data-fill='ink'] { background: var(--ink); }
+.pr-bleed[data-fill='wash'] { background: var(--accent-wash); }
+.pr-bleed[data-fill='panel'] { background: var(--panel); }
+.pr-bleed[data-fill='card'] { background: var(--card); }
+.pr-bleed[data-fill='canvas'] { background: var(--canvas); }
+
+.pr-stack { display: flex; flex-direction: column; min-width: 0; }
+.pr-row { display: grid; min-width: 0; }
+.pr-tone { display: flex; flex-direction: column; color: var(--ink); min-width: 0; }
+.pr-tone[data-grow], .pr-stack[data-grow], .pr-row[data-grow] { flex: 1 1 auto; min-height: 0; }
+.pr-spring { flex: 1 1 auto; }
+.pr-rule { width: 100%; height: 0; margin: 0; border: 0; border-top: .35mm solid var(--line-strong); }
+.pr-rule.is-strong { border-top: .8mm solid var(--ink); }
+
+/* ---------- text: sizes come from the tiers, set per viewing distance ---------- */
+
+.pr-title { margin: 0; font-family: var(--f-display); font-weight: 600; line-height: 1.04; letter-spacing: -0.015em; color: var(--ink); }
+.pr-title[data-face='sans'] { font-family: var(--f-sans); font-weight: 500; }
+html[data-style='poster'] .pr-title { font-weight: 400; letter-spacing: 0; }
+html[data-style='mono-studio'] .pr-title { font-weight: 800; letter-spacing: -0.02em; }
+.pr-title > span { display: block; width: fit-content; white-space: nowrap; }
+.pr-title[style*='text-align: center'] > span { margin-inline: auto; }
+.pr-title[style*='text-align: right'] > span { margin-left: auto; }
+.pr-title > .is-mark { color: var(--accent-ink); }
+.pr-heading { margin: 0; font-family: var(--f-display); font-weight: 600; line-height: 1.16; color: var(--ink); }
+html[data-style='poster'] .pr-heading { font-weight: 400; letter-spacing: .01em; }
+.pr-kicker { margin: 0; font: 500 var(--tier-read)/1.25 var(--f-mono); letter-spacing: .02em; color: var(--accent-ink); }
+.pr-kicker[data-tier='fine'] { font-size: var(--tier-fine); }
+.pr-text { margin: 0; line-height: 1.5; color: var(--ink-2); text-wrap: pretty; }
+.pr-kit p { text-wrap: pretty; }
+.pr-text.is-strong { font-weight: 500; color: var(--ink); }
+.pr-source { margin: 0; font-size: var(--tier-fine); line-height: 1.45; color: var(--mute); }
+html[data-print] [data-tone] .pr-source { color: color-mix(in srgb, var(--ink) 66%, var(--canvas)); }
+.pr-sample { align-self: flex-start; flex: none; margin: 0 0 .6em; padding: .3em .7em; background: var(--ink); color: var(--canvas); font-size: var(--tier-read); line-height: 1.25; }
+
+/* ---------- kit parts ---------- */
+
+.pr-kitbox { width: 100%; min-width: 0; }
+/* Not clipped: everything but the part is hidden, and a chart's end label may hang a little past its box. QA holds it to the safe zone. */
+.pr-kit { position: relative; flex: none; }
+.pr-kit .stage { position: relative; width: calc(var(--dw) * var(--u)); height: calc(var(--dh) * var(--u)); }
+.pr-kit .stage, .pr-kit .slide-frame, .pr-kit .slide { background: transparent !important; overflow: visible; }
+.pr-kit [data-part-off] { visibility: hidden !important; }
+/* Print reads closer and has no second chance at a build: quiet text gets the stronger of the kit's greys. */
+html[data-print] .pr-kit .slide { --mute: var(--ink-2); }
+html[data-print] .pr-kit .stage[data-tone='light'] { --accent: var(--accent-ink); }
+/* The struck-through claim stays readable on paper: the kit fades it, which suits a slide read for a few seconds. */
+html[data-print] .pr-kit .claim.is-false .claim__text span { color: var(--ink-2) !important; }
+/* background-clip paints only inside the element's box: at the slide's tight leading the bottoms of an O are cut off. */
+html[data-print] .pr-kit .x2-tm__word { line-height: 1.16; }
+
+/* A narrow canvas reflows what a slide lays out in columns, and what is switched off stops taking room. */
+.pr-kit[data-narrow] [data-part-off] { display: none !important; }
+.pr-kit[data-narrow] .frame--split { display: block; }
+.pr-kit[data-narrow] .glow { grid-template-columns: minmax(0, 1fr) !important; }
+.pr-kit[data-narrow] .claims { grid-template-columns: minmax(0, 1fr) !important; margin-top: 0; flex: none; }
+.pr-kit[data-narrow] .metrics__row { grid-template-columns: minmax(0, 1fr) auto; gap: 14u 16u; padding: 26u 0; }
+.pr-kit[data-narrow] .metrics__value { margin-right: 0; padding-right: 6u; grid-row: 1; grid-column: 2; }
+.pr-kit[data-narrow] .metrics__bar { grid-row: 2; grid-column: 1 / -1; margin-right: 0; }
+.pr-kit[data-narrow] .steps__list { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.pr-kit[data-narrow] .steps__item { position: relative; display: grid; grid-template-columns: 56u minmax(0, 1fr); column-gap: 28u; padding-bottom: 46u; }
+.pr-kit[data-narrow] .steps__list li:not(:last-child) .steps__item::before { content: ''; position: absolute; left: 28u; top: 56u; bottom: 0; width: 1px; background: var(--line-strong); }
+.pr-kit[data-narrow] .steps__list li:last-child .steps__item { padding-bottom: 0; }
+.pr-kit[data-narrow] .steps__node { grid-row: 1 / span 2; grid-column: 1; align-self: start; }
+.pr-kit[data-narrow] .steps__item h3 { grid-column: 2; margin: 10u 0 0; }
+.pr-kit[data-narrow] .steps__item p { grid-column: 2; margin: 10u 0 0; min-height: 0; }
+
+/* ---------- tri-fold ---------- */
+
+.pr-panel { position: absolute; top: 0; }
+.pr-panelground { position: absolute; z-index: -2; background: var(--canvas); }
+.pr-panelground[data-fill='wash'] { background: var(--accent-wash); }
+.pr-panelground[data-fill='panel'] { background: var(--panel); }
+.pr-panelground[data-fill='card'] { background: var(--card); }
+.pr-panelin { position: relative; display: flex; flex-direction: column; width: 100%; height: 100%; color: var(--ink); }
+.pr-panelin { position: static; }
+.pr-panel[data-tone] { color: var(--ink); }
+
+/* ---------- long image ---------- */
+
+.pr-long { break-after: auto; }
+.pr-sec { position: relative; isolation: isolate; color: var(--ink); background: var(--canvas); font-family: var(--f-sans); font-synthesis: none; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+.pr-secin { position: static; display: flex; flex-direction: column; padding: 16mm 14mm; gap: 8mm; }
+.pr-source--sec { margin-top: 2mm; }
+html[data-slicing='1'] .pr-long { display: flex; flex-direction: column; overflow: hidden; }
+html[data-slicing='1'] .pr-sec { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; }
+
+/* ---------- marks and guides ---------- */
+
+.pr-marks { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.pr-marks svg { position: absolute; left: 0; top: 0; display: block; }
+.pr-crop { stroke: var(--pr-reg, #000); stroke-width: .0882; }
+.pr-fold { stroke: var(--pr-reg, #000); stroke-width: .0882; stroke-dasharray: .6 .5; }
+.pr-job { position: absolute; margin: 0; font: 400 2mm/1.2 var(--f-sans); color: var(--pr-reg, #000); text-align: center; white-space: nowrap; overflow: hidden; }
+
+.pr-guides { position: absolute; inset: 0; z-index: 9; pointer-events: none; font: 500 4mm/1 var(--f-sans); }
+.pr-guides i { position: absolute; display: block; font-style: normal; }
+.pr-g-safe { outline: .5mm dashed #16b364; outline-offset: 0; }
+.pr-g-fold { top: calc(var(--bleed) * -1); bottom: calc(var(--bleed) * -1); width: 0; border-left: .5mm dashed #e00052; }
+.pr-g-hide { background: repeating-linear-gradient(45deg, rgb(224 0 82 / .35) 0 2mm, rgb(224 0 82 / .12) 2mm 4mm); }
+.pr-g-hide em { position: absolute; left: 3mm; top: 2mm; padding: 1mm 2mm; background: #e00052; color: #fff; font-style: normal; font-size: 8mm; }
+
+@media print {
+  html[data-print], html[data-print] body { background: #fff; }
+  .pr-bar { display: none !important; }
+  .pr-view { padding: 0; min-height: 0; }
+  .pr-fit { width: auto !important; height: auto !important; }
+  .pr-sheetset { transform: none !important; width: auto !important; }
+  .pr-fit .pr-page { margin: 0; box-shadow: none; }
+}

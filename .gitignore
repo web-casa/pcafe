@@ -1,0 +1,14 @@
+node_modules/
+dist/
+qa/
+.pcafe.lock
+src/assets/photos/*.webp
+.claude/settings.local.json
+site/node_modules/
+site/dist/
+site/.astro/
+site/public/demos/
+site/public/embed/
+site/public/shots/
+site/public/formats/
+site/public/emoji/

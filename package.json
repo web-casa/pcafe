@@ -1,0 +1,153 @@
+{
+  "name": "@pcafe/pcafe",
+  "version": "0.2.0",
+  "description": "Fixed-template HTML slide decks for humans and AI: React templates, single-file offline build, automated layout QA.",
+  "license": "CPAL-1.0",
+  "type": "module",
+  "types": "./src/engine/public.ts",
+  "exports": {
+    ".": {
+      "types": "./src/engine/public.ts",
+      "import": "./src/engine/public.ts"
+    },
+    "./vite": {
+      "types": "./vite.emoji.d.ts",
+      "import": "./vite.emoji.mjs"
+    },
+    "./*": "./*"
+  },
+  "bin": {
+    "pcafe": "cli/pcafe.mjs"
+  },
+  "files": [
+    "cli/",
+    "scripts/",
+    "!scripts/consumers.mjs",
+    "!scripts/lint-package.mjs",
+    "src/",
+    "docs/",
+    "skills/",
+    ".claude/",
+    "index.html",
+    "paper.html",
+    "cards.html",
+    "video.html",
+    "course.html",
+    "screen.html",
+    "print.html",
+    "presentation.html",
+    "studio.html",
+    "vite.config.ts",
+    "vite.paper.config.ts",
+    "vite.cards.config.ts",
+    "vite.video.config.ts",
+    "vite.course.config.ts",
+    "vite.screen.config.ts",
+    "vite.print.config.ts",
+    "vite.studio.config.ts",
+    "vite.pro.ts",
+    "vite.emoji.mjs",
+    "vite.emoji.d.ts",
+    "tsconfig.json",
+    "AGENTS.md",
+    "CLAUDE.md",
+    ".trae/",
+    ".junie/",
+    "QWEN.md",
+    ".github/copilot-instructions.md",
+    ".cursor/",
+    "GEMINI.md",
+    "README*.md",
+    "LICENSE",
+    "THIRD_PARTY_LICENSES.md",
+    "CONTRIBUTING.md",
+    "gitignore"
+  ],
+  "keywords": [
+    "slides",
+    "presentation",
+    "deck",
+    "html",
+    "react",
+    "vite",
+    "ppt",
+    "ai",
+    "claude",
+    "agents"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Web-Casa/pcafe.git"
+  },
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build": "vite build && vite build -c vite.studio.config.ts",
+    "build:deck": "vite build",
+    "fonts": "python3 scripts/subset-fonts.py && cp node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2 node_modules/@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2 node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2 node_modules/@fontsource/anton/files/anton-latin-400-normal.woff2 node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2 node_modules/@fontsource/silkscreen/files/silkscreen-latin-400-normal.woff2 node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2 node_modules/@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2 node_modules/@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2 node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-wght-normal.woff2 node_modules/@fontsource/dm-serif-display/files/dm-serif-display-latin-400-normal.woff2 node_modules/@fontsource/alfa-slab-one/files/alfa-slab-one-latin-400-normal.woff2 node_modules/@fontsource-variable/archivo-narrow/files/archivo-narrow-latin-wght-normal.woff2 node_modules/@fontsource/caveat-brush/files/caveat-brush-latin-400-normal.woff2 node_modules/@fontsource/barlow/files/barlow-latin-800-normal.woff2 node_modules/@fontsource/barlow/files/barlow-latin-900-normal.woff2 node_modules/@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2 node_modules/@fontsource/bowlby-one/files/bowlby-one-latin-400-normal.woff2 node_modules/@fontsource/stardos-stencil/files/stardos-stencil-latin-700-normal.woff2 node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-800-normal.woff2 src/assets/fonts/",
+    "qa": "node scripts/qa.mjs",
+    "qa:kit": "node scripts/qa.mjs --kit",
+    "docs": "node scripts/gen-docs.mjs && node scripts/zh-tw.mjs",
+    "docs:check": "node scripts/zh-tw.mjs --check",
+    "fonts:verify": "node scripts/font-coverage.mjs",
+    "check": "npm run typecheck && npm run build && node scripts/qa.mjs",
+    "check:engine": "npm run docs:check && npm run typecheck && npm run build && npm run qa && npm run qa:kit && npm run check:formats",
+    "check:formats": "npx pcafe paper check report-solar && npx pcafe cards check solar-linkedin && npx pcafe video check solar-data && npx pcafe course check object-storage && npx pcafe screen check apollo11 && npx pcafe print check starter",
+    "photos": "node scripts/fetch-photos.mjs",
+    "test:style-fonts": "node scripts/style-fonts-test.mjs",
+    "test:consumers": "node scripts/consumers.mjs",
+    "lint:package": "node scripts/lint-package.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
+    "@fontsource/anton": "^5.3.0",
+    "@fontsource/silkscreen": "^5.3.0",
+    "@solar-icons/react": "^2.3.3"
+  },
+  "peerDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "motion": "^14.7.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "vite": "^8.3.5"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource-variable/archivo-narrow": "^5.3.0",
+    "@fontsource-variable/bodoni-moda": "^5.3.0",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "@fontsource-variable/source-serif-4": "^5.3.1",
+    "@fontsource-variable/space-grotesk": "^5.3.0",
+    "@fontsource/alfa-slab-one": "^5.3.0",
+    "@fontsource/barlow": "^5.3.0",
+    "@fontsource/barlow-condensed": "^5.3.0",
+    "@fontsource/bowlby-one": "^5.3.0",
+    "@fontsource/caveat-brush": "^5.3.0",
+    "@fontsource/dm-serif-display": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@fontsource/stardos-stencil": "^5.3.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "jszip": "^3.10.1",
+    "motion": "^14.7.1",
+    "opencc-js": "^1.4.2",
+    "playwright": "^1.64.1",
+    "pptxgenjs": "^4.0.1",
+    "publint": "^0.3.25",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vite-plugin-singlefile": "^2.3.4"
+  },
+  "overrides": {
+    "image-size": "^2.0.3"
+  }
+}

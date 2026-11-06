@@ -1,0 +1,201 @@
+/* Phase 4 style `bento`: preset rules scoped to [data-style='bento'] plus its templates. */
+
+[data-style='bento'] {
+  --f-display: 'Geist', 'Deck Sans SC', sans-serif;
+}
+[data-style='bento'] .stage {
+  background: var(--canvas);
+}
+[data-style='bento'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-family: var(--f-display);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+}
+[data-style='bento'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7u 12u;
+  border-radius: calc(8u * var(--rs, 1));
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font: 500 17u/1 var(--f-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+[data-style='bento'] .kicker::before {
+  width: 8u;
+  height: 8u;
+  border-radius: 2u;
+  background: var(--accent);
+}
+
+/* ── shared tile ── */
+.bb__tile {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  padding: 34u 36u;
+  border-radius: calc(24u * var(--rs, 1));
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.bb__label {
+  font: 500 17u/1 var(--f-mono);
+  letter-spacing: 0.06em;
+  color: var(--mute);
+}
+.bb__note {
+  margin-top: 12u;
+  font-size: 21u;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+/* ── BentoBoard ── */
+.bb {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    'h h s0 t'
+    'h h s1 t'
+    'c c c s2';
+  gap: 20u;
+}
+.bb__head {
+  grid-area: h;
+  padding: 44u 48u 40u;
+}
+.bb__head .s-title {
+  font-size: 68u;
+}
+.bb__head .s-lead {
+  max-width: 640u;
+  font-size: 24u;
+}
+.bb__stat--0 { grid-area: s0; }
+.bb__stat--1 { grid-area: s1; }
+.bb__stat--2 { grid-area: s2; background: var(--accent); box-shadow: none; }
+.bb__stat--2 :is(.bb__label, .bb__note, .bb__value) { color: rgb(255 255 255 / 0.9); }
+.bb__stat--2 .bb__value { color: #fff; }
+.bb__value {
+  margin-top: auto;
+  font: 600 76u/1 var(--f-display);
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.bb__value small {
+  margin-left: 8u;
+  font: 500 26u/1 var(--f-mono);
+  letter-spacing: 0;
+  color: var(--mute);
+}
+.bb__stat--2 .bb__value small { color: rgb(255 255 255 / 0.8); }
+.bb__text {
+  grid-area: t;
+  background: var(--panel);
+}
+.bb__text p {
+  margin: auto 0 0;
+  font-size: 25u;
+  line-height: 1.6;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.bb__chips {
+  grid-area: c;
+}
+.bb__chips ul {
+  display: flex;
+  gap: 14u;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+.bb__chips li {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16u;
+  padding: 18u 20u;
+  border-radius: calc(16u * var(--rs, 1));
+  background: var(--panel);
+  font: 500 21u/1.2 var(--f-sans);
+  color: var(--ink);
+}
+.bb__chips li svg { color: var(--accent); }
+
+/* ── BentoFeature ── */
+.bf {
+  display: flex;
+  flex-direction: column;
+}
+.bf__grid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 1.1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    'h c0 c1'
+    'h r r';
+  gap: 20u;
+  margin-top: 44u;
+  min-height: 0;
+}
+.bf__hero { grid-area: h; background: var(--panel); }
+.bf__icon {
+  display: grid;
+  place-items: center;
+  width: 92u;
+  height: 92u;
+  margin-bottom: auto;
+  border-radius: calc(20u * var(--rs, 1));
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--accent);
+}
+.bf__hero h3 {
+  margin: 18u 0 0;
+  font: 600 40u/1.2 var(--f-display);
+  letter-spacing: -0.03em;
+}
+.bf__hero p {
+  margin: 14u 0 0;
+  font-size: 23u;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.bf__cell--0 { grid-area: c0; }
+.bf__cell--1 { grid-area: c1; }
+.bf__cell b {
+  margin-top: auto;
+  font: 600 64u/1 var(--f-display);
+  letter-spacing: -0.04em;
+}
+.bf__cell--0 b { color: var(--accent); }
+.bf__rows { grid-area: r; }
+.bf__rows dl {
+  display: grid;
+  margin: auto 0 0;
+}
+.bf__rows dl div {
+  display: grid;
+  grid-template-columns: 300u 1fr;
+  gap: 20u;
+  padding: 12u 0;
+  border-top: 1px solid var(--line);
+}
+.bf__rows dt {
+  font: 500 19u/1.4 var(--f-mono);
+  color: var(--ink);
+}
+.bf__rows dd {
+  margin: 0;
+  font-size: 20u;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.bf .s-foot { margin-top: 22u; }

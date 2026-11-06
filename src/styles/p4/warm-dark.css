@@ -1,0 +1,192 @@
+/* Phase 4 style `warm-dark`: preset rules scoped to [data-style='warm-dark'] plus its templates. */
+/* Warm near-black canvas, amber light pooling from the bottom, fine grain,
+   light Geist headings, serif-italic numerals, mono hairline-pill kickers. */
+
+[data-style='warm-dark'] {
+  --f-display: 'Geist', 'Deck Sans SC', sans-serif;
+  --f-wd-serif: 'Instrument Serif', 'Deck Serif SC', serif;
+}
+[data-style='warm-dark'] [data-tone='dark'],
+[data-style='warm-dark'][data-tone='dark'] {
+  --canvas: #0d0a08;
+  --letterbox: #060403;
+  --card: #17110d;
+  --card-hover: #1f1712;
+  --panel: #130e0b;
+  --ink: #f5ede4;
+  --ink-2: #c9bcae;
+  --mute: #8f8274;
+  --faint: #54493f;
+  --line: #2a211b;
+  --line-strong: #3d3128;
+}
+[data-style='warm-dark'] [data-tone='dark'].stage,
+[data-style='warm-dark'] [data-tone='dark'] .stage,
+[data-style='warm-dark'][data-tone='dark'] .stage {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .85 0 0 0 0 .7 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(70% 55% at 78% 118%, rgb(var(--accent-rgb) / 0.28), transparent 70%),
+    radial-gradient(40% 30% at 8% -6%, rgb(255 190 120 / 0.07), transparent 70%),
+    var(--canvas);
+}
+
+[data-style='warm-dark'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-family: var(--f-display);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+[data-style='warm-dark'] :is(.break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .detail__figure b) {
+  font-family: var(--f-wd-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+[data-style='warm-dark'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  gap: 12u;
+  padding: 9u 16u;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font: 400 18u/1 var(--f-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+[data-style='warm-dark'] .kicker::before {
+  width: 8u;
+  height: 8u;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10u 2u rgb(var(--accent-rgb) / 0.7);
+}
+
+/* ── GlowMetric ───────────────────────────────────────────────────────── */
+
+.wdg__pool {
+  position: absolute;
+  right: -120u;
+  top: 60u;
+  width: 1180u;
+  height: 760u;
+  background: radial-gradient(closest-side, rgb(var(--accent-rgb) / 0.42), rgb(var(--accent-rgb) / 0.12) 55%, transparent);
+  filter: blur(20u);
+  pointer-events: none;
+}
+.wdg {
+  display: grid;
+  grid-template-columns: 640u minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto auto;
+  column-gap: 60u;
+}
+.wdg__copy {
+  padding-top: 10u;
+}
+.wdg__title {
+  font-size: 76u;
+}
+.wdg__lead {
+  max-width: 560u;
+}
+.wdg__hero {
+  align-self: center;
+  justify-self: end;
+  text-align: right;
+}
+.wdg__fig {
+  font: italic 400 400u/0.86 var(--f-wd-serif, serif);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-shadow: 0 0 80u rgb(var(--accent-rgb) / 0.55);
+}
+.wdg__fig small {
+  margin-left: 18u;
+  font-size: 110u;
+  color: var(--accent-ink);
+}
+.wdg__cap {
+  margin-top: 18u;
+  font-size: 26u;
+  color: var(--ink-2);
+}
+.wdg__subs {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 30u;
+  border-top: 1px solid var(--line-strong);
+}
+.wdg__sub {
+  display: grid;
+  gap: 10u;
+  padding: 26u 32u 34u 0;
+}
+.wdg__sub + .wdg__sub {
+  padding-left: 32u;
+  border-left: 1px solid var(--line);
+}
+.wdg__sub b {
+  font: italic 400 58u/1 var(--f-wd-serif, serif);
+  color: var(--ink);
+}
+.wdg__sub span {
+  font-size: 21u;
+  color: var(--mute);
+}
+.wdg .s-foot {
+  grid-column: 1 / -1;
+}
+
+/* ── HairlineGrid ─────────────────────────────────────────────────────── */
+
+.wdh {
+  display: flex;
+  flex-direction: column;
+}
+.wdh__grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  margin-top: 56u;
+  border-top: 1px solid var(--line-strong);
+  border-left: 1px solid var(--line);
+}
+.wdh__cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14u;
+  padding: 34u 38u;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.wdh__cell.is-focus {
+  background: radial-gradient(90% 120% at 50% 120%, rgb(var(--accent-rgb) / 0.3), transparent 70%);
+  box-shadow: inset 0 1px 0 rgb(var(--accent-rgb) / 0.8);
+}
+.wdh__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: auto;
+  padding-bottom: 18u;
+}
+.wdh__top code {
+  font: 400 18u/1 var(--f-mono);
+  color: var(--mute);
+}
+.wdh__cell b {
+  font: 500 32u/1.2 var(--f-display);
+  letter-spacing: -0.02em;
+}
+.wdh__cell p {
+  font-size: 22u;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.wdh .s-foot {
+  margin-top: 24u;
+}
+

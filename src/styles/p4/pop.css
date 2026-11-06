@@ -1,0 +1,200 @@
+/* Phase 4 style `pop`: preset rules scoped to [data-style='pop'] plus its templates. */
+/* Bold flat pop: cream paper, saturated colour blocks, thick black outlines,
+   hard offset shadows, chunky condensed display caps. */
+
+[data-style='pop'] {
+  --f-display: 'Anton', 'Deck Heavy SC', sans-serif;
+  --pp-line: 4u;
+}
+[data-style='pop'] .stage {
+  background:
+    radial-gradient(circle, rgb(23 23 27 / 0.16) 2.2u, transparent 2.6u) 0 0 / 22u 22u,
+    var(--canvas);
+  background-blend-mode: normal;
+}
+[data-style='pop'] [data-tone='dark'] .stage,
+[data-style='pop'] .stage[data-tone='dark'] {
+  background:
+    radial-gradient(circle, rgb(255 255 255 / 0.08) 2.2u, transparent 2.6u) 0 0 / 22u 22u,
+    #17171b;
+}
+[data-style='pop'] [data-tone='dark'] {
+  --canvas: #17171b;
+  --line-strong: #f1f0f3;
+}
+[data-style='pop']
+  :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .numeral, .feature-num, .hard__num) {
+  font-family: var(--f-display);
+}
+[data-style='pop'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title) {
+  font-weight: 900;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+[data-style='pop'] :is(.break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .numeral, .feature-num, .hard__num) {
+  font-weight: 400;
+}
+[data-style='pop'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 9u 16u;
+  border: 3u solid var(--ink);
+  background: var(--ink);
+  box-shadow: 6u 6u 0 var(--accent);
+  font: 700 18u/1 var(--f-sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--canvas);
+}
+[data-style='pop'] .kicker::before {
+  width: 10u;
+  height: 10u;
+  background: var(--spot-5);
+}
+[data-style='pop'] [data-tone='accent'] .kicker {
+  box-shadow: 6u 6u 0 rgb(255 255 255);
+}
+
+/* ── BlockStats ───────────────────────────────────────────────────────── */
+
+.s-pblocks {
+  display: flex;
+  flex-direction: column;
+}
+.pblocks__row {
+  display: grid;
+  gap: 40u;
+  margin-top: 64u;
+  padding-right: 12u;
+}
+.pblock {
+  display: flex;
+  flex-direction: column;
+  min-height: 400u;
+  padding: 30u 32u 34u;
+  border: var(--pp-line, 4u) solid var(--ink);
+  border-radius: calc(14u * var(--rs, 1));
+  background: var(--pb, var(--accent));
+  box-shadow: 12u 12u 0 var(--ink);
+  color: var(--ink);
+}
+.pblock--1 {
+  --pb: var(--accent);
+}
+.pblock--2 {
+  --pb: var(--spot-5);
+}
+.pblock--3 {
+  --pb: var(--spot-4);
+}
+.pblock--4 {
+  --pb: var(--spot-2);
+}
+.pblock__label {
+  width: fit-content;
+  padding: 8u 14u;
+  border: 3u solid var(--ink);
+  background: var(--card);
+  font: 700 20u/1 var(--f-sans);
+}
+.pblock__value {
+  margin-top: auto;
+  font: 400 168u/0.95 var(--f-display);
+  letter-spacing: 0.01em;
+}
+.pblock__value small {
+  margin-left: 8u;
+  font-size: 56u;
+}
+.pblock__note {
+  margin-top: 18u;
+  font: 600 21u/1.5 var(--f-sans);
+}
+.s-pblocks > .s-foot {
+  padding-top: 28u;
+}
+
+/* ── PopPoster ────────────────────────────────────────────────────────── */
+
+.pposter__dots {
+  position: absolute;
+  right: -60u;
+  bottom: -60u;
+  width: 720u;
+  height: 520u;
+  background: radial-gradient(circle, var(--accent) 5u, transparent 5.6u) 0 0 / 30u 30u;
+  mask-image: radial-gradient(circle at 100% 100%, black 20%, transparent 70%);
+  opacity: 0.55;
+}
+.s-pposter {
+  display: flex;
+  flex-direction: column;
+}
+.pposter__title {
+  margin-top: 44u;
+  font: 400 184u/1.08 var(--f-display);
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.pposter__mark {
+  display: inline-block;
+  margin: 0 0.06em;
+  padding: 0 0.12em;
+  border: 6u solid var(--ink);
+  background: var(--accent);
+  box-shadow: 14u 14u 0 var(--ink);
+  rotate: -2.5deg;
+  line-height: 1.1;
+  color: var(--canvas);
+}
+.pposter__badgewrap {
+  position: absolute;
+  top: 10u;
+  right: 40u;
+}
+.pposter__badge {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  width: 280u;
+  height: 280u;
+  border: 5u solid var(--ink);
+  border-radius: 50%;
+  background: var(--spot-5);
+  box-shadow: 10u 10u 0 var(--ink);
+  rotate: 10deg;
+  color: var(--ink);
+}
+.pposter__badge b {
+  font: 400 110u/1 var(--f-display);
+}
+.pposter__badge span {
+  margin-top: 6u;
+  font: 800 24u/1 var(--f-sans);
+}
+.pposter__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22u;
+  margin-top: auto;
+  margin-bottom: 32u;
+}
+.pposter__tag {
+  display: inline-block;
+  padding: 14u 22u;
+  border: 3u solid var(--ink);
+  background: var(--card);
+  box-shadow: 6u 6u 0 var(--ink);
+  font: 600 22u/1 var(--f-mono);
+  color: var(--ink);
+}
+.s-pposter > .s-foot {
+  margin-top: 0;
+}
+[data-style='pop'] .hard__num {
+  font-style: normal;
+  font-size: 260u;
+  -webkit-text-stroke: 4u var(--ink);
+  color: var(--accent);
+}

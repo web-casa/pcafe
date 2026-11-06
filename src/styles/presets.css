@@ -1,0 +1,304 @@
+/* ── Style presets (DeckDef.style) ─────────────────────────────────────── */
+/* A preset changes only the display layer: headings and big numbers. Body copy,
+   labels and spacing stay the same, so every template keeps its content limits.
+   The attribute sits on <html> (deck) or on a preview wrapper (gallery). */
+
+:root {
+  --f-display: var(--f-sans);
+}
+
+[data-style='editorial'] {
+  --f-display: 'Deck Serif SC', serif;
+}
+
+[data-style='poster'] {
+  --f-display: 'Anton', 'Deck Heavy SC', sans-serif;
+}
+
+[data-style='studio-dark'] {
+  --f-display: 'Plus Jakarta Sans', 'Deck Sans SC', sans-serif;
+}
+
+[data-style='mono-studio'] {
+  --f-display: 'Geist', 'Deck Heavy SC', sans-serif;
+}
+
+[data-style='sticker'] {
+  --f-display: 'Silkscreen', 'Deck Heavy SC', sans-serif;
+}
+
+[data-style='toy3d'] {
+  --f-display: 'Plus Jakarta Sans', 'Deck Heavy SC', sans-serif;
+}
+
+[data-style='wallpaper'] {
+  --f-display: 'Plus Jakarta Sans', 'Deck Sans SC', sans-serif;
+}
+
+:is([data-style='editorial'], [data-style='poster'], [data-style='studio-dark'], [data-style='mono-studio'], [data-style='sticker'], [data-style='toy3d'], [data-style='wallpaper'])
+  :is(
+    .s-title,
+    .cover__title,
+    .break__title,
+    .close__statement,
+    .quote__text,
+    .feature__title,
+    .detail__title,
+    .statement__text,
+    .break__num,
+    .close__num,
+    .bigstat__num,
+    .metrics__value,
+    .kpi__value,
+    .price__amt,
+    .desk__ver,
+    .detail__figure b
+  ) {
+  font-family: var(--f-display);
+}
+
+/* Giant decorative numerals (cover mark, Bento) only take the poster face: a serif at 500u runs into the lead. */
+[data-style='poster'] :is(.numeral, .feature-num) {
+  font-family: var(--f-display);
+}
+
+/* Serif: lighter weight reads as print; looser tracking than the sans. */
+[data-style='editorial']
+  :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .feature__title, .detail__title, .statement__text) {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Poster: heavy condensed caps for Latin, black weight for CJK. */
+[data-style='poster']
+  :is(.s-title, .cover__title, .break__title, .close__statement, .feature__title, .detail__title, .statement__text) {
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+[data-style='poster'] :is(.numeral, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .desk__ver, .feature-num) {
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* The serif sets wider than the sans: shrink the cover title so it clears the cover mark. */
+[data-style='editorial'] .cover__title {
+  font-size: 124u;
+}
+
+/* ── calm ─────────────────────────────────────────────────────────────── */
+/* White canvas, pale cards, tight semibold headings, kickers as small pills
+   led by an accent square (the numbered-eyebrow look). */
+
+[data-style='calm'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+[data-style='calm'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  gap: 12u;
+  padding: 8u 16u 8u 8u;
+  border-radius: 999px;
+  background: var(--panel);
+  font: 500 18u/1 var(--f-sans);
+  letter-spacing: 0;
+  color: var(--ink-2);
+}
+[data-style='calm'] .kicker::before {
+  width: 26u;
+  height: 22u;
+  border-radius: 6u;
+  background: var(--accent);
+  box-shadow: inset 0 0 0 6u var(--accent), inset 0 0 0 9u rgb(255 255 255 / 0.85);
+}
+[data-style='calm'][data-tone='dark'] .kicker,
+[data-tone='dark'] [data-style='calm'] .kicker,
+[data-style='calm'] [data-tone='dark'] .kicker {
+  background: rgb(255 255 255 / 0.08);
+}
+
+/* ── studio-dark ──────────────────────────────────────────────────────── */
+/* Geometric sans headings, pill kickers with a hairline, very round cards. */
+
+[data-style='studio-dark'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+[data-style='studio-dark'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 9u 18u;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font: 600 17u/1 var(--f-sans);
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+[data-style='studio-dark'] .kicker::before {
+  display: none;
+}
+
+/* ── mono-studio ──────────────────────────────────────────────────────── */
+/* Near-black canvas, heavy tight headings, mono kickers on a red bar, and
+   thin L-shaped corner marks framing the whole stage (drawn as backgrounds). */
+
+[data-style='mono-studio'] [data-tone='dark'],
+[data-style='mono-studio'][data-tone='dark'] {
+  --canvas: #0b0b0c;
+  --letterbox: #000;
+  --card: #161618;
+  --card-hover: #1d1d20;
+  --panel: #121214;
+  --line: #262629;
+  --line-strong: #38383d;
+}
+[data-style='mono-studio'] .stage {
+  --cm: 34u;
+  --cl: 1.5px;
+  --cc: var(--line-strong);
+  background:
+    linear-gradient(var(--cc), var(--cc)) 40u 40u / var(--cm) var(--cl),
+    linear-gradient(var(--cc), var(--cc)) 40u 40u / var(--cl) var(--cm),
+    linear-gradient(var(--cc), var(--cc)) calc(100% - 40u) 40u / var(--cm) var(--cl),
+    linear-gradient(var(--cc), var(--cc)) calc(100% - 40u) 40u / var(--cl) var(--cm),
+    linear-gradient(var(--cc), var(--cc)) 40u calc(100% - 40u) / var(--cm) var(--cl),
+    linear-gradient(var(--cc), var(--cc)) 40u calc(100% - 40u) / var(--cl) var(--cm),
+    linear-gradient(var(--cc), var(--cc)) calc(100% - 40u) calc(100% - 40u) / var(--cm) var(--cl),
+    linear-gradient(var(--cc), var(--cc)) calc(100% - 40u) calc(100% - 40u) / var(--cl) var(--cm),
+    var(--canvas);
+  background-repeat: no-repeat;
+}
+[data-style='mono-studio'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+[data-style='mono-studio'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7u 12u;
+  background: linear-gradient(var(--accent), var(--accent)) 0 100% / 100% 42% no-repeat;
+  font: 500 18u/1 var(--f-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+[data-style='mono-studio'] .kicker::before {
+  display: none;
+}
+
+/* ── sticker ──────────────────────────────────────────────────────────── */
+/* Grid paper with a ruler along the top, pixel Latin display face, and
+   kickers as a slightly tilted sticker with a hard shadow. */
+
+[data-style='sticker'] .stage {
+  background:
+    repeating-linear-gradient(90deg, var(--line-strong) 0 1px, transparent 1px 12u) 0 0 / 100% 10u no-repeat,
+    repeating-linear-gradient(90deg, var(--line-strong) 0 1.5px, transparent 1.5px 60u) 0 0 / 100% 18u no-repeat,
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 60u 60u,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 60u 60u,
+    var(--canvas);
+}
+[data-style='sticker'][data-tone='dark'] .stage,
+[data-style='sticker'] [data-tone='dark'].stage {
+  background: var(--canvas);
+}
+[data-style='sticker'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title) {
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+[data-style='sticker'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 9u 16u;
+  border-radius: 8u;
+  background: var(--spot-5);
+  box-shadow: 0 0 0 2px var(--ink), 4u 4u 0 0 var(--ink);
+  rotate: -2deg;
+  font: 700 18u/1 var(--f-sans);
+  letter-spacing: 0.02em;
+  color: #17171b;
+}
+[data-style='sticker'] .kicker::before {
+  display: none;
+}
+
+/* ── toy3d ────────────────────────────────────────────────────────────── */
+/* Off-white canvas, very heavy tight headings, black pill kickers. The 3D
+   objects come from the Shape3D part, placed by the templates. */
+
+[data-style='toy3d'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+[data-style='toy3d'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 9u 18u;
+  border-radius: 999px;
+  background: var(--ink);
+  font: 600 17u/1 var(--f-sans);
+  letter-spacing: 0.02em;
+  color: var(--canvas);
+}
+[data-style='toy3d'] .kicker::before {
+  width: 10u;
+  height: 10u;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ── wallpaper ────────────────────────────────────────────────────────── */
+/* A soft gradient wallpaper fills the stage; the header becomes a menu bar;
+   cards turn into frosted glass. */
+
+[data-style='wallpaper'] .stage {
+  background:
+    radial-gradient(60% 70% at 12% 18%, rgb(255 196 222 / 0.9), transparent 70%),
+    radial-gradient(55% 65% at 88% 12%, rgb(186 214 255 / 0.95), transparent 70%),
+    radial-gradient(70% 70% at 78% 92%, rgb(206 190 255 / 0.95), transparent 70%),
+    radial-gradient(60% 60% at 18% 95%, rgb(255 226 190 / 0.9), transparent 70%),
+    var(--canvas);
+}
+[data-style='wallpaper'] [data-tone='dark'] .stage,
+[data-style='wallpaper'] .stage[data-tone='dark'] {
+  background:
+    radial-gradient(60% 70% at 12% 18%, rgb(120 60 140 / 0.55), transparent 70%),
+    radial-gradient(55% 65% at 88% 12%, rgb(40 80 160 / 0.6), transparent 70%),
+    var(--canvas);
+}
+[data-style='wallpaper'] .slide-header {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52u;
+  padding: 0 36u;
+  background: rgb(255 255 255 / 0.42);
+  backdrop-filter: blur(20px) saturate(1.4);
+  box-shadow: 0 1px 0 rgb(30 20 60 / 0.06);
+  font-size: 18u;
+}
+[data-style='wallpaper'] [data-tone='dark'] .slide-header {
+  background: rgb(0 0 0 / 0.3);
+}
+[data-style='wallpaper'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+[data-style='wallpaper'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 8u 16u;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.6);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.8), 0 4u 14u -6u rgb(30 20 60 / 0.25);
+  font: 500 17u/1 var(--f-sans);
+  letter-spacing: 0;
+  color: var(--ink);
+}
+[data-style='wallpaper'] .kicker::before {
+  width: 10u;
+  height: 10u;
+  border-radius: 50%;
+  background: var(--accent);
+}

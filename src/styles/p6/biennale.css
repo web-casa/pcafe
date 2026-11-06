@@ -1,0 +1,9 @@
+/* Style `biennale`: ported from beautiful-html-templates · biennale-yellow (MIT, (c) zarazhangrui). Rules scoped to [data-style='biennale']. */
+
+[data-style='biennale'] { --f-display: 'Instrument Serif', 'Deck Serif SC', serif; --f-sans: 'Archivo', 'Deck Sans SC', sans-serif; --ink: #1b2566; --ink-2: #333c78; }
+[data-style='biennale'] .stage:not([data-tone]) , [data-style='biennale'] body:not([data-tone]) .stage {
+  background: radial-gradient(38% 46% at 82% 8%, rgb(241 238 46 / 0.55), transparent 70%), radial-gradient(30% 40% at 6% 96%, rgb(248 243 155 / 0.6), transparent 70%), var(--canvas);
+}
+[data-style='biennale'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title, .quote__text, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .statrow__value, .desk__ver, .detail__figure b, .numeral, .feature-num) { font-family: var(--f-display); font-weight: 400; letter-spacing: -0.02em; }
+[data-style='biennale'] .kicker { font: 600 18u/1 var(--f-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
+[data-style='biennale'] .kicker::before { display: none; }

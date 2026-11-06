@@ -1,0 +1,57 @@
+/* Style `block-frame`: ported from beautiful-html-templates · block-frame (MIT, (c) zarazhangrui). Rules scoped to [data-style='block-frame']. */
+/* Neo-brutalist: warm pastel page, off-white cards with a thick black outline
+   and a hard offset shadow, bold grotesk caps, kickers as small boxed tags. */
+
+[data-style='block-frame'] {
+  --f-display: 'Space Grotesk', 'Deck Heavy SC', sans-serif;
+  --bf-edge: 3u;
+  --bf-drop: 8u;
+}
+[data-style='block-frame'] [data-tone='dark'],
+[data-style='block-frame'][data-tone='dark'] {
+  --canvas: #141414;
+  --letterbox: #0a0a0a;
+  --card: #222222;
+  --card-hover: #2a2a2a;
+  --panel: #1c1c1c;
+}
+
+[data-style='block-frame']
+  :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title, .break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .statrow__value, .desk__ver, .detail__figure b, .numeral, .feature-num) {
+  font-family: var(--f-display);
+}
+[data-style='block-frame'] :is(.s-title, .cover__title, .break__title, .close__statement, .statement__text, .feature__title, .detail__title) {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+[data-style='block-frame'] :is(.break__num, .close__num, .bigstat__num, .metrics__value, .kpi__value, .price__amt, .statrow__value, .numeral, .feature-num) {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* Kicker: a small boxed tag with a hard shadow. */
+[data-style='block-frame'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 8u 14u;
+  background: #c0f7fe;
+  box-shadow: inset 0 0 0 2u #000000, 4u 4u 0 #000000;
+  font: 700 18u/1 var(--f-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #000000;
+}
+[data-style='block-frame'] .kicker::before {
+  display: none;
+}
+
+/* Cards: thick outline and a hard drop, drawn with shadows so no box changes size. */
+[data-style='block-frame']
+  :is(.card, .kpi__tile, .price__card, .persona__card, .status__tile, .statrow__card, .igrid__card, .claim, .spark__card, .panel-card, .recap__item, .quotearc__card, .diff__pane, .count__side, .float__card, .swim__step, .laurels__item) {
+  border-color: transparent;
+  box-shadow: inset 0 0 0 var(--bf-edge) var(--ink), var(--bf-drop) var(--bf-drop) 0 var(--ink);
+}
+[data-style='block-frame'] .card:hover {
+  box-shadow: inset 0 0 0 var(--bf-edge) var(--ink), calc(var(--bf-drop) + 4u) calc(var(--bf-drop) + 4u) 0 var(--ink);
+}

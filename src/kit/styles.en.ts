@@ -1,0 +1,47 @@
+// English names for the style presets and themes. The Chinese labels and notes
+// in theme.ts and src/kit/styles/*.ts stay the source; `npm run docs` fails when
+// a style or theme has no English entry here.
+
+export const STYLE_EN: Record<string, { label: string; note: string }> = {
+  standard: { label: 'Business', note: 'Geist with Source Han Sans, clean and neutral. The default; fits most reports.' },
+  editorial: { label: 'Editorial', note: 'Source Han Serif headings, like a magazine or a report. For analysis, opinion and essay-style talks.' },
+  poster: { label: 'Poster', note: 'Anton condensed caps with Source Han Sans Black. For launches, marketing and slogan slides.' },
+  calm: { label: 'Calm', note: 'Pure white page, light grey round cards, numbered pill labels, small colour icons inside sentences. For product, finance and SaaS introductions.' },
+  'studio-dark': { label: 'Studio', note: 'White pages alternate with large black round cards, geometric sans headings, software screenshots. For tool, platform and design-system launches.' },
+  'mono-studio': { label: 'Mono', note: 'Black throughout, bold headings with small monospace text, corner viewfinder marks, red bar labels. For creative, brand and portfolio pitches.' },
+  sticker: { label: 'Sticker', note: 'Grid-paper background, pixel Latin type, sticker labels, colour word blocks and instant photos. For introductions, team sharing and relaxed internal meetings.' },
+  toy3d: { label: 'Geometric', note: 'Huge black type on white, colourful 3D shapes floating around the content, marquee lettering. For brands, creative agencies and launch openers.' },
+  wallpaper: { label: 'Wallpaper', note: 'Each slide is a soft gradient wallpaper, the header becomes a menu bar, content sits in translucent system windows. For product demos, portfolios and relaxed talks.' },
+  agency: { label: 'Growth', note: 'Pure white, huge tight black headings with small colour icons, “( 01 ) Section.” bracket labels, blue pill buttons and neon green badges. For product sites, marketing plans and growth pitches.' },
+  bento: { label: 'Bento', note: 'White tiles of different sizes on light grey, small monospace labels, crisp corners. For product overviews, feature lists and one-slide summaries.' },
+  biennale: { label: 'Biennale', note: 'Lemon light spots on warm grey paper, deep indigo condensed serif headings, hairline columns. For exhibitions, cultural projects and annual reviews.' },
+  'block-frame': { label: 'Block frame', note: 'Warm yellow with off-white cards, heavy black outlines and hard shadows, bold sans caps, labels like stuck-on squares. For products, events and young brands.' },
+  broadside: { label: 'Broadside', note: 'Near-black with orange, Barlow extra-bold lowercase headings set tight enough to read as shapes, slashed lists. Dark by default. For manifestos, opinion and team rallies.' },
+  'cobalt-grid': { label: 'Index', note: 'Warm paper, hairline columns, thin serif headings in one ink only (the theme colour; cobalt is closest to the original). For annual reports, research briefs and journal-style reports.' },
+  desktop: { label: 'Retro', note: 'Beige background, old system windows with heavy black borders, striped title bars and hard shadows, pixel labels, dense information. For developer tools, changelogs and relaxed tech talks.' },
+  electric: { label: 'Electric', note: 'White pages with light grey round cards; accent slides are a glowing saturated blue; tight sans headings, pill buttons with round arrows. For product-site style introductions, studio pitches and launch openers.' },
+  emerald: { label: 'Emerald', note: 'Beige paper with deep navy ink, high-contrast Bodoni headings; dark slides are emerald on navy. For annual reports, strategy reviews and formal launches.' },
+  'float-ui': { label: 'Float UI', note: 'A quiet large heading surrounded by slightly tilted floating cards, tags and sound waves, with light shadows. For AI, voice and tool products.' },
+  forest: { label: 'Forest', note: 'Cream paper alternating with deep forest green, pink serif headings, small monospace labels. For quarterly reviews, brands and lifestyle reports; crimson is closest to the original.' },
+  gradient: { label: 'Gradient', note: 'Bright diffuse gradient blobs on white, translucent frosted round cards, rounded bold headings. For creative studios, brand introductions and feature launches.' },
+  halo: { label: 'Halo', note: 'Near-white page, thin dark slate headings with a word or two in italic serif, a soft multicolour glow behind; lists are rows split by hairlines. For product home pages, agencies and brand introductions.' },
+  keynote: { label: 'Keynote', note: 'A pure black canvas, one huge tightly tracked heading per slide, key words filled with a gradient, lots of empty space. For product launches, keynotes and annual conferences.' },
+  'neo-grid': { label: 'Neo grid', note: 'A square grid on off-white, large neon yellow and black panels, bold sans caps with small monospace text. For financial data, launches and growth reviews.' },
+  nuance: { label: 'Artboard', note: 'Warm white paper, condensed serif headings with one word inside a tilted orange tag; iridescent round panels, dot-grid boards, red-dot pills and dark arched cards. For product home pages, portfolios and design tools.' },
+  'pink-script': { label: 'Night pink', note: 'Near-black with a dark pink glow, DM Serif headings and large pink numbers, small monospace header. Dark by default. For fashion, brands and launch events.' },
+  platform: { label: 'Platform', note: 'Thick slab serif headings with an offset shadow on beige paper, condensed body text, handwritten notes. For rallies, roadmaps and manifesto openers.' },
+  playful: { label: 'Candy', note: 'Cream background, candy-colour soft blobs, very round bold headings, tilted sticky notes and chat bubbles. For consumer products, community events and relaxed talks.' },
+  pop: { label: 'Pop', note: 'Cream with saturated colour blocks, heavy black outlines and hard shadows, Anton condensed and extra-bold headings. For campaigns, campus and community talks, and slogan-style rules.' },
+  ribbon: { label: 'Ribbon', note: 'Warm white, rounded bold headings, bias-cut ribbon labels; thick ribbons cross the cover and section slides. For training, events and friendly customer introductions.' },
+  'soft-saas': { label: 'Soft SaaS', note: 'White with a pale blue glow, round cards with soft shadows, small interface pieces such as calendars and time slots. For SaaS products, process explanations, booking and collaboration.' },
+  stencil: { label: 'Stencil', note: 'Bone paper, stencil serif caps, condensed bold labels, cards in saturated ochre, magenta, orange and teal blocks. For studio pitches, principles and comparisons.' },
+  'warm-dark': { label: 'Warm dark', note: 'Warm near-black, amber glow, hairline grid and italic serif numbers. Dark by default. For finance, data products and premium launches.' },
+}
+
+export const THEME_EN: Record<string, string> = {
+  crimson: 'Crimson',
+  amber: 'Amber',
+  cobalt: 'Cobalt',
+  emerald: 'Emerald',
+  violet: 'Violet',
+}

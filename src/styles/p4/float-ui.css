@@ -1,0 +1,233 @@
+/* Phase 4 style `float-ui`: preset rules scoped to [data-style='float-ui'] plus its templates. */
+
+[data-style='float-ui'] {
+  --f-display: 'Geist', 'Deck Sans SC', sans-serif;
+}
+[data-style='float-ui'] .stage {
+  background:
+    radial-gradient(42% 52% at 50% 46%, rgb(var(--accent-rgb) / 0.08), transparent 72%),
+    radial-gradient(circle at center, rgb(0 0 0 / 0.045) 1.2px, transparent 1.6px) 0 0 / 28px 28px,
+    var(--canvas);
+}
+[data-style='float-ui'] :is(.s-title, .cover__title, .break__title, .close__statement, .quote__text, .statement__text, .feature__title, .detail__title) {
+  font-family: var(--f-display);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+[data-style='float-ui'] .kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 9u 16u;
+  border-radius: 999px;
+  background: var(--card);
+  box-shadow: 0 0 0 1px var(--line), 0 10u 24u -14u rgb(20 20 30 / 0.22);
+  font: 500 17u/1 var(--f-mono);
+  letter-spacing: 0.02em;
+  color: var(--ink-2);
+}
+[data-style='float-ui'] .kicker::before {
+  width: 8u;
+  height: 8u;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5u rgb(var(--accent-rgb) / 0.18);
+}
+
+/* ── shared parts ── */
+.fu-wave {
+  display: flex;
+  align-items: center;
+  gap: 4u;
+  height: 100%;
+}
+.fu-wave i {
+  flex: 1;
+  min-width: 3u;
+  height: calc(var(--h) * 100%);
+  border-radius: 99px;
+  background: var(--line-strong);
+}
+.fu-wave i.is-on {
+  background: var(--accent);
+}
+.fu-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 12u;
+  padding: 12u 26u 12u 12u;
+  border-radius: 999px;
+  background: var(--card);
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 18u 36u -18u rgb(20 20 30 / 0.28);
+  font: 500 24u/1 var(--f-sans);
+  white-space: nowrap;
+  color: var(--ink);
+  transform: rotate(var(--rot, 0deg));
+}
+.fu-chip__icon {
+  display: grid;
+  place-items: center;
+  width: 50u;
+  height: 50u;
+  border-radius: 50%;
+  background: var(--accent-wash);
+  color: var(--accent);
+}
+.fh__play {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 54u;
+  height: 54u;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ── FloatHero ── */
+.fh__center {
+  position: absolute;
+  inset: 0 330u;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.fh__center .kicker { margin: 0 auto; }
+.fh__title {
+  font-size: 112u;
+  line-height: 1.1;
+}
+.fh__lead {
+  max-width: 820u;
+  margin-inline: auto;
+}
+.fh__card {
+  display: flex;
+  align-items: center;
+  gap: 20u;
+  width: 640u;
+  margin-top: 44u;
+  padding: 16u 26u 16u 16u;
+  border-radius: calc(26u * var(--rs, 1));
+  background: var(--card);
+  box-shadow: 0 0 0 1px var(--line), 0 30u 60u -30u rgb(20 20 30 / 0.3);
+  text-align: left;
+}
+.fh__card > div {
+  display: grid;
+  flex: none;
+  gap: 6u;
+}
+.fh__cardlabel {
+  font: 500 17u/1 var(--f-mono);
+  color: var(--mute);
+}
+.fh__card b {
+  font: 600 21u/1.2 var(--f-sans);
+}
+.fh__card .fu-wave {
+  flex: 1;
+  height: 44u;
+}
+.fh__chip {
+  position: absolute;
+}
+.fh__chip--0 { left: 40u; top: 30u; --rot: -6deg; }
+.fh__chip--1 { right: 30u; top: 0; --rot: 5deg; }
+.fh__chip--2 { right: 0; top: 380u; --rot: -4deg; }
+.fh__chip--3 { right: 70u; bottom: 70u; --rot: 6deg; }
+.fh__chip--4 { left: 60u; bottom: 90u; --rot: -5deg; }
+.fh__chip--5 { left: 0; top: 400u; --rot: 4deg; }
+.fh__chip .fu-chip { --rot: inherit; }
+.fh .s-foot {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+/* ── TranscriptCard ── */
+.trans__text {
+  display: flex;
+  flex-direction: column;
+}
+.s-trans .s-head {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.s-trans .s-head__aside .s-lead { margin-top: 34u; }
+.trans {
+  position: relative;
+  align-self: center;
+  padding: 40u 50u;
+}
+.trans__card {
+  border-radius: calc(26u * var(--rs, 1));
+  background: var(--card);
+  box-shadow: 0 0 0 1px var(--line), 0 40u 80u -40u rgb(20 20 30 / 0.32);
+  overflow: hidden;
+}
+.trans__card header {
+  display: flex;
+  align-items: center;
+  gap: 18u;
+  padding: 22u 30u 22u 22u;
+}
+.trans__card header b {
+  font: 600 25u/1.2 var(--f-sans);
+}
+.trans__meta {
+  margin-left: auto;
+  font: 500 18u/1 var(--f-mono);
+  color: var(--mute);
+}
+.trans__wave {
+  height: 64u;
+  padding: 0 30u 18u;
+  border-bottom: 1px solid var(--line);
+}
+.trans__card ol {
+  margin: 0;
+  padding: 12u 18u 18u;
+  list-style: none;
+}
+.trans__line {
+  display: grid;
+  grid-template-columns: 130u 1fr;
+  gap: 18u;
+  padding: 22u 16u;
+  border-radius: calc(16u * var(--rs, 1));
+}
+.trans__line.is-on {
+  background: var(--accent-wash);
+}
+.trans__who {
+  display: grid;
+  align-content: start;
+  gap: 6u;
+}
+.trans__who b {
+  font: 600 20u/1.2 var(--f-sans);
+}
+.trans__who time {
+  font: 500 17u/1 var(--f-mono);
+  color: var(--mute);
+}
+.trans__line p {
+  margin: 0;
+  font-size: 25u;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.trans__line.is-on p { color: var(--ink); }
+.trans__line.is-on .trans__who b { color: var(--accent-ink); }
+.trans__tag {
+  position: absolute;
+  z-index: 1;
+}
+.trans__tag--0 { right: 0; top: 0; --rot: 5deg; }
+.trans__tag--1 { left: 0; bottom: 30u; --rot: -5deg; }
+.trans__tag--2 { right: 20u; bottom: 0; --rot: -3deg; }
+.trans__tag .fu-chip { --rot: inherit; }
