@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 20 个模板。返回索引：[../templates.md](../templates.md)。
+共 24 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `Cover` 封面（开场 · 第 1 页）
 - 适合：整份演示的第一页；主题能浓缩成一个数字或短代号：版本号、年份、季度、排名
@@ -123,3 +123,27 @@
 - 不适合：议题不是五个：用 Agenda 或 PillAgenda；议题需要说明：用 Agenda
 - 上限：items 正好 5 个；title ≤ 12 字；tag ≤ 6 字；页标题 ≤ 16 字；aside ≤ 16 个字符
 - 参考：src/decks/sig-forest 的 `agenda` 页；docs/zh-CN/components.md#agenda-mosaic
+
+### `AtelierHero` 设计室开场（开场 · 工作室首页）
+- 适合：设计工作室、自由职业者、作品集的第一页；想一上来就让人看到作品
+- 不适合：没有 4 张以上作品图：用 Cover 或 PhotoCover；需要一句话讲清楚产品：用 Statement
+- 上限：badge ≤ 16 字；title ≤ 2 行 × 11 字；lead ≤ 40 字；ctas 每个 ≤ 8 字；clients 3–6 个，每个 ≤ 10 个字符；strip 4–6 张横图
+- 参考：src/decks/sig-atelier 的 `hero` 页；docs/zh-CN/components.md#atelier-hero；交互：作品图带持续横向漂移，悬停放大
+
+### `MonographHero` 机构自我介绍（开场 · 机构介绍）
+- 适合：机构、工作室开场，用一句话说清楚你是谁；想要杂志感的第一页
+- 不适合：标题超过 3 行：拆页或用 Statement；没有合适的配图：用 Cover
+- 上限：title ≤ 3 行 × 12 字；rating.score ≤ 7 个字符，note ≤ 12 字；aside.title ≤ 10 字，body ≤ 30 字；story.text ≤ 70 字，index ≤ 4 个字符
+- 参考：src/decks/sig-monograph 的 `hero` 页；docs/zh-CN/components.md#monograph-hero
+
+### `NocturneHero` 夜光开场（开场 · App 首页）
+- 适合：消费类 App、AI 工具的第一页；想让人一眼看到产品出来的效果
+- 不适合：产品是桌面软件：用 HeroPanel 或 DeviceFrame；没有能放进手机的图：用 Cover
+- 上限：title ≤ 2 行 × 8 字；lead ≤ 36 字；ctas 每个 ≤ 8 字；note ≤ 16 字；stats 2–3 个：value ≤ 7 个字符，label ≤ 6 字；phone.thumbs ≤ 4 张，label ≤ 4 字，cta ≤ 8 字，toast ≤ 12 字
+- 参考：src/decks/sig-nocturne 的 `hero` 页；docs/zh-CN/components.md#nocturne-hero；交互：手机持续缓慢浮动
+
+### `SunriseHero` 晨光开场（开场 · SaaS 首页）
+- 适合：SaaS、模板、协作工具的第一页；想一开场就让人看到产品界面
+- 不适合：没有产品界面可展示：用 Cover；要放真实截图：用 HeroPanel 或 DeviceFrame
+- 上限：brand ≤ 10 个字符；links ≤ 4 个 × ≤ 4 字；navCta ≤ 6 字；title ≤ 2 行 × 12 字；lead ≤ 30 字；ctas 每个 ≤ 6 字；cursors 2 个名字 × ≤ 4 字；dash.gauge.value 0–100；trend.values 6–12 个；team.faces ≤ 5 张，tasks 2 条（title ≤ 8 字，status ≤ 3 字）
+- 参考：src/decks/sig-sunrise 的 `hero` 页；docs/zh-CN/components.md#sunrise-hero；交互：光标在页边持续漂动；悬停柱子和头像有反馈

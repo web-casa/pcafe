@@ -12,3 +12,14 @@ site/public/embed/
 site/public/shots/
 site/public/formats/
 site/public/emoji/
+
+# local env and junk
+.env
+.env.*
+*.db
+.DS_Store
+*.log
+.output/
+.nitro/
+src/paraglide/
+src/routeTree.gen.ts

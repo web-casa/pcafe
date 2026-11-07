@@ -261,11 +261,35 @@
 | [`StackBars`](#stack-bars) 階梯層級 | 結構 · 一層層錯開的橫條 | 3–6 條橫條從上到下逐層向右錯開，顏色從主題色逐漸變深，每條左邊名稱、右邊一句說明。為號外風格設計，其他風格也能用。配 build: 'reveal' 逐層出現。 |
 | [`ChatDemo`](#chat-demo) 對話簡報 | 擬真介面 · 用一段對話展示怎麼用 | 左邊標題、導語和 0–3 條小注，右邊一個手搓的聊天視窗，最後一條回覆可以帶結果卡片。視窗上始終標著「示意介面」。配 build: 'reveal' 時每按一次 → 出現一條訊息。 |
 | [`AppCards`](#app-cards) 後台卡片 | 擬真介面 · 2–4 個填好內容的應用面板 | 標題下一排手搓的應用面板：視窗名、標題、狀態膠囊、2–5 個欄位和標籤，都已經填好。每張卡標著「示意介面」。配 build: 'reveal' 時逐張出現。 |
+| [`AtelierHero`](#atelier-hero) 設計室開場 | 開場 · 工作室首頁 | 居中的狀態膠囊（綠色可接單圓點）、超大黑體標題、導語和兩枚按鈕，下面一行客戶名，頁尾一排作品圖緩慢橫向漂移。為設計室風格設計，其他風格也能用。 |
+| [`ProjectPair`](#project-pair) 雙作品展示 | 證據 · 兩個代表作 | 居中的膠囊小標籤和標題，下面兩張大橫圖並排，每張下面寫客戶和專案型別。圖片由下而上揭開，懸停微放大。 |
+| [`ProcessQuote`](#process-quote) 流程配客戶評價 | 方法 · 合作步驟加一句評價 | 左邊標題和 3–5 行編號步驟（右側寫時長），右邊一張豎幅人像，上面浮著評分膠囊和一張客戶評價卡。 |
+| [`ServiceTrio`](#service-trio) 三項服務卡 | 產品 · 三項服務 | 居中標題下三張淺灰圓角卡，每張上面一張圖，下面編號、服務名、一句話和幾個小標籤。懸停時卡片浮起、圖片放大。 |
+| [`TeamBanner`](#team-banner) 團隊大合影 | 背景 · 團隊和數字 | 一張貼滿版面的團隊合影，左上角膠囊標籤，底部一張深色句子卡和 2–3 張數字卡，數字逐位升起。 |
+| [`BookingClose`](#booking-close) 預約收尾 | 收尾 · 預約一次溝通 | 左邊狀態膠囊、大標題、導語、按鈕和聯絡方式；右邊一張預約卡：主持人頭像、月曆和三個時段，日期和時段都可以當場點選。 |
+| [`MonographHero`](#monograph-hero) 機構自我介紹 | 開場 · 機構介紹 | 左上三行大字自我介紹，右上評分和一段小字；下面一張雜誌式故事卡（圖片、編號、襯線段落、播放按鈕）和一張深色物件圖。 |
+| [`ProjectIndex`](#project-index) 專案索引 | 證據 · 專案列表 | 一列專案行，目前行是黑底；右邊一張大圖對應目前專案。點選或懸停某一行，右邊的圖就換過去。 |
+| [`WhyStats`](#why-stats) 為什麼選我們 | 實證 · 三個數字 | 左邊短標題、幾條加號理由和一句評價；右邊大號的一段話，下面三張數字卡，數字逐位升起，背後拖著一個淡淡的描邊重影，可加一條進度條。 |
+| [`TeamPortraits`](#team-portraits) 黑白人像團隊 | 背景 · 團隊成員 | 三張黑白豎幅人像加一張深色招聘卡，懸停時人像變回彩色；下面寫名字、職位和編號。 |
+| [`ServiceLedger`](#service-ledger) 服務清單 | 產品 · 服務列表 | 左邊標題和一張橫線分隔的清單：主題色編號、服務名、一句說明；右邊一張豎幅圖帶膠囊圖注。清單逐行出現。 |
+| [`MonographClose`](#monograph-close) 三行收尾 | 收尾 · 聯絡方式 | 三行超大字，中間一行用主題色；下面一條橫線分隔聯絡方式；右邊一張大圖上放一枚深色膠囊按鈕。 |
+| [`NocturneHero`](#nocturne-hero) 夜光開場 | 開場 · App 首頁 | 深色舞台中央暈開主題色的光：左邊頭像組、大標題、導語、按鈕和三個逐位升起的數字；右邊一部緩緩浮動的手機，螢幕裡是成片、縮圖和按鈕。 |
+| [`FeatureBento`](#feature-bento) 發光便當格 | 產品 · 功能總覽 | 居中標題下五格便當：一張主題色大卡，三張人像扇形展開；一張深色大卡，排滿帶標籤的風格縮圖；底部三張小卡左圖右文。 |
+| [`GlowPricing`](#glow-pricing) 發光價格表 | 定價 · 三檔套餐 | 三檔套餐卡，最推薦的一檔用主題色漸變發光；上方一個按月 / 按年開關，點一下所有價格一起切換。 |
+| [`StepTrio`](#step-trio) 三步簡報卡 | 操作 · 三步上手 | 三張步驟卡，每張上半部分簡報這一步：照片像相紙一樣一張張發下來；風格選擇器可以當場點選；最後是成片。下面寫步驟號、標題和一句話。 |
+| [`RevealCompare`](#reveal-compare) 拖動前後對比 | 對比 · 處理前後 | 左邊標題、導語和 2–4 行引數；右邊一張豎幅對比圖，中間的把手可以拖動（也能用方向鍵），看處理前後的差別。 |
+| [`WallClose`](#wall-close) 照片牆收尾 | 收尾 · 行動號召 | 滿屏傾斜的照片牆，一列向上、一列向下緩緩滾動；中央壓暗，放標題、一句話、按鈕和小字。 |
+| [`SunriseHero`](#sunrise-hero) 晨光開場 | 開場 · SaaS 首頁 | 頁面頂部一團暖黃晨光：上面一條模擬導航，中間居中的大標題、導語和兩個按鈕，兩位協作者的游標在左右頁邊漂動，底邊升起一塊儀表盤（完成度圓弧、柱狀趨勢、團隊頭像和任務）。 |
+| [`KitBento`](#kit-bento) 數字便當格 | 產品 · 內容清單 | 三格便當：上面兩張大數字卡，右半邊分別畫著疊起的頁面和區塊拼版；下面一張通欄卡，左邊說明，右邊是一塊深色設計畫布，排著幾個頁面畫板。 |
+| [`HomeTrio`](#home-trio) 三套首頁 | 產品 · 方案並列 | 居中標題下三張卡，每張裡是一幅首頁草圖（圖表、日曆、深色頁尾三種），下面寫名稱和一句說明。懸停時草影像網頁一樣往下滾，點選選中一張。 |
+| [`KanbanDemo`](#kanban-demo) 可玩的看板 | 產品 · 互動簡報 | 左邊小標籤、標題、導語和幾條打勾要點；右邊一塊任務看板：頂部檢視切換和成員頭像，協作者游標在檢視標籤上滑動；三列任務卡，點一下卡片就移到下一列，計數跟著變；每列底部是虛線「新增任務」位。 |
+| [`ProofMosaic`](#proof-mosaic) 口碑拼圖 | 客戶 · 評價與口碑 | 居中標題下的拼圖：左邊一張深色大引言卡，右半是人像；右側上方一塊晨光黃的大數字，下面兩張短評卡，每張帶星級、一個量化結果小標籤和頭像署名。 |
+| [`BuyoutPricing`](#buyout-pricing) 買斷價格 | 定價 · 兩檔加收尾 | 兩張套餐卡加一張晨光黃收尾卡：套餐卡里有價格、一句話、勾選清單和兩格關鍵數字，點一下切換選中；收尾卡寫一句號召、說明、一排頭像和使用人數，底部黑色按鈕。 |
 
 免費範本都從 `src/kit` 匯入：
 
 ```tsx
-import { Cover, Bento, MetricBars, Timeline, SpotlightList, CompareTable, NumberedColumns, VerdictColumns, Checklist, StepTrack, Teaser, Closing, Terminal, CodeDiff, StatusGrid, SpecSheet, Cycle, Faq, Lanes, LineChart, Agenda, SectionBreak, QuoteHero, FlowDiagram, ClaimCards, LayerStack, Matrix, IconGrid, BigStat, DeltaBars, Dumbbell, RangeBars, Gantt, Milestones, QuoteWall, BeforeAfter, Screenshot, Funnel, Quadrant, PersonaCards, PricingTiers, KpiBoard, ShareBar, Waterfall, Team, IssueTree, Heatmap, Roadmap, Statement, HangingCover, PanelCards, AskAnswer, ProofSplit, IndexStack, ContactPanel, Orbit, NumberOpener, ChapterProgress, Question, Contrast, Recap, HeroPanel, TabbedShot, BrandKit, Laurels, FullBleed, Thanks, SplitWord, PillAgenda, StatRow, CountCompare, Donut, BarChart, Bubble, Gauge, ServiceList, QuoteArc, WorkCards, RepeatClosing, StickerCover, WordBlocks, FolderCards, SparkCards, Pictogram, SlopeRank, PixelClosing, FloatCover, TileWall, ServiceIndex, GlowStack, DuoCards, Desktop, WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone, Swimlane, ArchLayers, Balance, DoubleFunnel, KeyReveal, KeySpec, OrbCover, GradientCards, BlockStats, PopPoster, BentoBoard, BentoSpotlight, SlotPicker, UiSteps, FloatHero, TranscriptCard, RetroTabs, RetroLog, GlowMetric, HairlineGrid, RibbonCover, RibbonSection, ChatThread, NoteCards, RevealStatement, SketchCover, ArcCards, CaseCard, AgencyHero, AgencyRows, AgencyManifesto, HaloHero, HaloRows, HaloMarquee, FanCover, PillSentence, OpenList, PhotoCover, PhotoSplit, PhotoMosaic, PolaroidWall, FilmStrip, MagazineSpread, CaseStudy, DeviceFrame, CompareSlider, PhotoStack, FlipCards, CardStack, FanCarousel, DepthCarousel, Envelope, FlipBook, Lanyard, ProgressCards, ProcessAccordion, NotebookCover, Halftone, ProgressiveBlur, MaskReveal, LogoWall, PhotoClosing, RankingRace, BubbleCluster, NodeGraph, Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics, Typewriter, RotatingWord, MorphHeadline, TextArc, Odometer, MarkerSweep, TextMask, SplitFlap, NewsTicker, KaraokeLines, ParadigmCards, AnatomyCard, ExplorerFlip, VerbCards, NinesDial, TierLadder, LifecycleRail, MeterCards, ShelfGallery, TabSpec, TokenStream, MoeRouter, ContextWindow, ScoreMatrix, ModelSpecCard, TokenPriceGrid, AttentionMask, EffortDial, PeakClock, AliasRoute, GlobeCover, ArcGlobe, PopGrid, RequestJourney, ShieldLayers, SpikeChart, OutageBoard, ReachRings, ServerRack, TraceTimeline, QueryPlan, SchemaEr, ResultGrid, CodeCallouts, RequestResponse, BeamFlow, TupleVersions, BTreeIndex, JsonTree, SessionSequence, BadgeHero, TabPanels, EditionPicker, ReleaseTrain, MegaMenu, PathCrumbs, FilterChips, CtaBlock, FooterClosing, FaqAccordion, MediaExpand, ScatterOrder, TiltShot, ConvergeShots, StepVideo, ExhibitCover, YearBars, NumberTiles, ScoreTable, MetricMosaic, StepGrid, FramedStats, IndexList, AgendaMosaic, MethodSteps, PriorityColumns, ChapterNumber, StackBars, ChatDemo, AppCards } from '../../kit'
+import { Cover, Bento, MetricBars, Timeline, SpotlightList, CompareTable, NumberedColumns, VerdictColumns, Checklist, StepTrack, Teaser, Closing, Terminal, CodeDiff, StatusGrid, SpecSheet, Cycle, Faq, Lanes, LineChart, Agenda, SectionBreak, QuoteHero, FlowDiagram, ClaimCards, LayerStack, Matrix, IconGrid, BigStat, DeltaBars, Dumbbell, RangeBars, Gantt, Milestones, QuoteWall, BeforeAfter, Screenshot, Funnel, Quadrant, PersonaCards, PricingTiers, KpiBoard, ShareBar, Waterfall, Team, IssueTree, Heatmap, Roadmap, Statement, HangingCover, PanelCards, AskAnswer, ProofSplit, IndexStack, ContactPanel, Orbit, NumberOpener, ChapterProgress, Question, Contrast, Recap, HeroPanel, TabbedShot, BrandKit, Laurels, FullBleed, Thanks, SplitWord, PillAgenda, StatRow, CountCompare, Donut, BarChart, Bubble, Gauge, ServiceList, QuoteArc, WorkCards, RepeatClosing, StickerCover, WordBlocks, FolderCards, SparkCards, Pictogram, SlopeRank, PixelClosing, FloatCover, TileWall, ServiceIndex, GlowStack, DuoCards, Desktop, WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone, Swimlane, ArchLayers, Balance, DoubleFunnel, KeyReveal, KeySpec, OrbCover, GradientCards, BlockStats, PopPoster, BentoBoard, BentoSpotlight, SlotPicker, UiSteps, FloatHero, TranscriptCard, RetroTabs, RetroLog, GlowMetric, HairlineGrid, RibbonCover, RibbonSection, ChatThread, NoteCards, RevealStatement, SketchCover, ArcCards, CaseCard, AgencyHero, AgencyRows, AgencyManifesto, HaloHero, HaloRows, HaloMarquee, FanCover, PillSentence, OpenList, PhotoCover, PhotoSplit, PhotoMosaic, PolaroidWall, FilmStrip, MagazineSpread, CaseStudy, DeviceFrame, CompareSlider, PhotoStack, FlipCards, CardStack, FanCarousel, DepthCarousel, Envelope, FlipBook, Lanyard, ProgressCards, ProcessAccordion, NotebookCover, Halftone, ProgressiveBlur, MaskReveal, LogoWall, PhotoClosing, RankingRace, BubbleCluster, NodeGraph, Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics, Typewriter, RotatingWord, MorphHeadline, TextArc, Odometer, MarkerSweep, TextMask, SplitFlap, NewsTicker, KaraokeLines, ParadigmCards, AnatomyCard, ExplorerFlip, VerbCards, NinesDial, TierLadder, LifecycleRail, MeterCards, ShelfGallery, TabSpec, TokenStream, MoeRouter, ContextWindow, ScoreMatrix, ModelSpecCard, TokenPriceGrid, AttentionMask, EffortDial, PeakClock, AliasRoute, GlobeCover, ArcGlobe, PopGrid, RequestJourney, ShieldLayers, SpikeChart, OutageBoard, ReachRings, ServerRack, TraceTimeline, QueryPlan, SchemaEr, ResultGrid, CodeCallouts, RequestResponse, BeamFlow, TupleVersions, BTreeIndex, JsonTree, SessionSequence, BadgeHero, TabPanels, EditionPicker, ReleaseTrain, MegaMenu, PathCrumbs, FilterChips, CtaBlock, FooterClosing, FaqAccordion, MediaExpand, ScatterOrder, TiltShot, ConvergeShots, StepVideo, ExhibitCover, YearBars, NumberTiles, ScoreTable, MetricMosaic, StepGrid, FramedStats, IndexList, AgendaMosaic, MethodSteps, PriorityColumns, ChapterNumber, StackBars, ChatDemo, AppCards, AtelierHero, ProjectPair, ProcessQuote, ServiceTrio, TeamBanner, BookingClose, MonographHero, ProjectIndex, WhyStats, TeamPortraits, ServiceLedger, MonographClose, NocturneHero, FeatureBento, GlowPricing, StepTrio, RevealCompare, WallClose, SunriseHero, KitBento, HomeTrio, KanbanDemo, ProofMosaic, BuyoutPricing } from '../../kit'
 ```
 
 <a id="cover"></a>
@@ -12049,6 +12073,1082 @@ EXPLAIN 風格的計畫樹，自上而下畫節點和連線；可選在上方放
   cards={[{ app: '匯出', title: 'PDF', fields: [{ label: '指令', value: 'build 後列印' }], status: { text: '可用' } }]}
   source="示意介面"
 />
+```
+
+<a id="atelier-hero"></a>
+
+## 252 · 設計室開場 `<AtelierHero />`
+
+**位置**：開場 · 工作室首頁　**參考頁**：`src/decks/sig-atelier` 中的 `hero`
+
+居中的狀態膠囊（綠色可接單圓點）、超大黑體標題、導語和兩枚按鈕，下面一行客戶名，頁尾一排作品圖緩慢橫向漂移。為設計室風格設計，其他風格也能用。
+
+**適合**
+
+- 設計工作室、自由職業者、作品集的第一頁
+- 想一上來就讓人看到作品
+
+**避免**
+
+- 沒有 4 張以上作品圖：用 Cover 或 PhotoCover
+- 需要一句話講清楚產品：用 Statement
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- badge ≤ 16 字
+- title ≤ 2 行 × 11 字
+- lead ≤ 40 字
+- ctas 每個 ≤ 8 字
+- clients 3–6 個，每個 ≤ 10 個字元
+- strip 4–6 張橫圖
+
+**互動**：作品圖帶持續橫向漂移，懸停放大
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `badge` | `string` | 是 | 帶綠點的狀態膠囊 |
+| `title` | `string \| string[]` | 是 | 大標題 |
+| `lead` | `string` |  | 導語 |
+| `ctas` | `[string, string?]` |  | 黑色主按鈕和普通按鈕 |
+| `clients` | `string[]` |  | 客戶名 |
+| `strip` | `{ src, alt, credit?, focus? }[]` | 是 | 頁尾漂移的作品圖 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<AtelierHero badge="本月可接 2 個專案" title={['讓人信任、', '也願意買單的設計']} ctas={['預約溝通', '看作品']} strip={[{ src: t1, alt: '…' }, …]} />
+```
+
+<a id="project-pair"></a>
+
+## 253 · 雙作品展示 `<ProjectPair />`
+
+**位置**：證據 · 兩個代表作　**參考頁**：`src/decks/sig-atelier` 中的 `work`
+
+居中的膠囊小標籤和標題，下面兩張大橫圖並排，每張下面寫客戶和專案型別。圖片由下而上揭開，懸停微放大。
+
+**適合**
+
+- 挑兩個最能代表你的專案
+- 作品要配客戶名一起看
+
+**避免**
+
+- 作品超過 2 個：用 PhotoMosaic 或 WorkCards
+- 要講一個專案的前後變化：用 CaseStudy
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- kicker ≤ 6 字
+- title ≤ 2 行 × 9 字
+- projects 正好 2 個：name ≤ 16 字，tag ≤ 8 字
+- 圖片用橫圖
+
+**互動**：build：兩個專案逐個出現
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 膠囊小標籤 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `projects` | `{ image, name, tag }[]` | 是 | 兩個專案 |
+| `source` | `string` |  | 出處或示意說明 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<ProjectPair kicker="精選專案" title={['從策略出發，', '用手藝收尾。']} projects={[{ image: { src: p1, alt: '…' }, name: '遠拓 · AI 服務機構', tag: '網站設計' }, …]} />
+```
+
+<a id="process-quote"></a>
+
+## 254 · 流程配客戶評價 `<ProcessQuote />`
+
+**位置**：方法 · 合作步驟加一句評價　**參考頁**：`src/decks/sig-atelier` 中的 `process`
+
+左邊標題和 3–5 行編號步驟（右側寫時長），右邊一張豎幅人像，上面浮著評分膠囊和一張客戶評價卡。
+
+**適合**
+
+- 講合作流程，同時給一句客戶背書
+- 服務型生意的「怎麼合作」頁
+
+**避免**
+
+- 步驟要配圖：用 StepGrid
+- 只有評價沒有流程：用 QuoteHero
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title ≤ 2 行 × 8 字
+- steps 3–5 行：title ≤ 8 字，body ≤ 26 字，time ≤ 6 字
+- rating ≤ 14 個字元
+- quote.text ≤ 48 字，by ≤ 6 字，role ≤ 14 字
+
+**互動**：build：步驟逐行出現
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 帶綠點的小標籤 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `steps` | `{ title, body, time? }[]` | 是 | 編號步驟，每行一個 build 步驟 |
+| `portrait` | `{ src, alt, credit?, focus? }` | 是 | 右側豎幅人像 |
+| `rating` | `string` |  | 評分膠囊 |
+| `quote` | `{ text, by, role? }` | 是 | 評價卡 |
+| `source` | `string` |  | 出處或示意說明 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<ProcessQuote kicker="合作方式" title={['四步，', '從想法到上線。']} steps={[{ title: '定位訪談', body: '…', time: '第 1 周' }, …]} portrait={{ src: face, alt: '…' }} quote={{ text: '…', by: '周嵐' }} />
+```
+
+<a id="service-trio"></a>
+
+## 255 · 三項服務卡 `<ServiceTrio />`
+
+**位置**：產品 · 三項服務　**參考頁**：`src/decks/sig-atelier` 中的 `services`
+
+居中標題下三張淺灰圓角卡，每張上面一張圖，下面編號、服務名、一句話和幾個小標籤。懸停時卡片浮起、圖片放大。
+
+**適合**
+
+- 介紹 3 項服務或產品線
+- 每項服務有一張代表圖
+
+**避免**
+
+- 服務超過 3 項：用 ServiceList 或 Bento
+- 沒有配圖：用 NumberedColumns
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title 1 行 ≤ 14 字
+- services 正好 3 個：title ≤ 6 字，body ≤ 30 字，tags 2–3 個 × ≤ 6 字
+
+**互動**：build：卡片逐張出現
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 膠囊小標籤 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `services` | `{ image, title, body, tags? }[]` | 是 | 三項服務，每張一個 build 步驟 |
+| `source` | `string` |  | 出處 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<ServiceTrio kicker="服務" title="三件事，我們做得最好" services={[{ image: { src: s1, alt: '…' }, title: '品牌識別', body: '…', tags: ['標誌', '包裝'] }, …]} />
+```
+
+<a id="team-banner"></a>
+
+## 256 · 團隊大合影 `<TeamBanner />`
+
+**位置**：背景 · 團隊和數字　**參考頁**：`src/decks/sig-atelier` 中的 `team`
+
+一張貼滿版面的團隊合影，左上角膠囊標籤，底部一張深色句子卡和 2–3 張數字卡，數字逐位升起。
+
+**適合**
+
+- 「關於我們」，人比文字更有說服力
+- 團隊介紹配幾個硬數字
+
+**避免**
+
+- 要介紹每個人的分工：用 Team
+- 沒有合影：用 BigStat 或 StatRow
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- statement ≤ 2 行 × 12 字
+- note ≤ 16 字
+- stats 2–3 個：value ≤ 5 個字元，label ≤ 10 字
+- 合影的人物放在上三分之二
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 照片上的膠囊標籤 |
+| `image` | `{ src, alt, credit?, focus? }` | 是 | 團隊合影 |
+| `statement` | `string \| string[]` | 是 | 深色卡片上的一句話 |
+| `note` | `string` |  | 句子下面的小字 |
+| `stats` | `{ value, label }[]` | 是 | 數字卡 |
+| `source` | `string` |  | 出處或示意說明 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<TeamBanner kicker="關於我們" image={{ src: team, alt: '…' }} statement={['五個人，一間工作室，', '只接想做好的專案。']} stats={[{ value: '120+', label: '完成的專案' }, …]} />
+```
+
+<a id="booking-close"></a>
+
+## 257 · 預約收尾 `<BookingClose />`
+
+**位置**：收尾 · 預約一次溝通　**參考頁**：`src/decks/sig-atelier` 中的 `book`
+
+左邊狀態膠囊、大標題、導語、按鈕和聯絡方式；右邊一張預約卡：主持人頭像、月曆和三個時段，日期和時段都可以當場點選。
+
+**適合**
+
+- 最後一頁，邀請對方約一次溝通
+- 想讓收尾頁有一個能動手的小互動
+
+**避免**
+
+- 只留聯絡方式：用 ContactPanel 或 Closing
+- 需要二維碼：用 Thanks
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- badge ≤ 14 字
+- title ≤ 2 行 × 6 字
+- lead ≤ 36 字
+- contacts 2 個：value ≤ 20 個字元，label ≤ 6 字
+- card.days 14–21 天，slots 3 個 × ≤ 5 個字元
+
+**互動**：點選：日期和時段可以選中
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `badge` | `string` | 是 | 狀態膠囊 |
+| `title` | `string \| string[]` | 是 | 大標題 |
+| `lead` | `string` |  | 導語 |
+| `ctas` | `[string, string?]` |  | 按鈕 |
+| `contacts` | `{ value, label }[]` |  | 聯絡方式 |
+| `card` | `{ avatar?, name, note?, status?, month, offset?, from, days, open, slots }` | 是 | 預約卡；open 是可選的日期 |
+| `hint` | `string` |  | 頁首提示，例如「點日期和時間試試」 |
+
+**範例**
+
+```tsx
+<BookingClose badge="本月還能接 2 個專案" title={['聊聊你的', '下一個專案']} card={{ name: '周嵐', month: '2026 年 11 月', from: 2, days: 21, open: [5, 6, 7], slots: ['10:00', '14:30', '16:00'] }} />
+```
+
+<a id="monograph-hero"></a>
+
+## 258 · 機構自我介紹 `<MonographHero />`
+
+**位置**：開場 · 機構介紹　**參考頁**：`src/decks/sig-monograph` 中的 `hero`
+
+左上三行大字自我介紹，右上評分和一段小字；下面一張雜誌式故事卡（圖片、編號、襯線段落、播放按鈕）和一張深色物件圖。
+
+**適合**
+
+- 機構、工作室開場，用一句話說清楚你是誰
+- 想要雜誌感的第一頁
+
+**避免**
+
+- 標題超過 3 行：拆頁或用 Statement
+- 沒有合適的配圖：用 Cover
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title ≤ 3 行 × 12 字
+- rating.score ≤ 7 個字元，note ≤ 12 字
+- aside.title ≤ 10 字，body ≤ 30 字
+- story.text ≤ 70 字，index ≤ 4 個字元
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 帶圓點的編號小節名 |
+| `title` | `string \| string[]` | 是 | 三行以內的大字 |
+| `rating` | `{ score, note, faces? }` |  | 右上評分 |
+| `aside` | `{ title, body }` |  | 右側小字 |
+| `story` | `{ image, index?, text }` | 是 | 故事卡 |
+| `image` | `{ src, alt, credit?, focus? }` | 是 | 右側深色物件圖 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<MonographHero kicker="01 關於我們" title={['阿盧拉是一家數字機構，', '做大膽的品牌和', '有影響力的體驗。']} story={{ image: { src: chair, alt: '…' }, text: '…' }} image={{ src: blob, alt: '…' }} />
+```
+
+<a id="project-index"></a>
+
+## 259 · 專案索引 `<ProjectIndex />`
+
+**位置**：證據 · 專案列表　**參考頁**：`src/decks/sig-monograph` 中的 `index`
+
+一列專案行，目前行是黑底；右邊一張大圖對應目前專案。點選或懸停某一行，右邊的圖就換過去。
+
+**適合**
+
+- 一次列出 3–6 個專案，又想讓每個都有畫面
+- 現場講到哪個專案就點哪個
+
+**避免**
+
+- 每個專案都要講細節：一頁一個，用 CaseStudy
+- 要同時看到所有圖：用 PhotoMosaic
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title 1 行 ≤ 12 字
+- cta ≤ 8 字
+- projects 3–6 個：name ≤ 14 字，year ≤ 6 個字元
+- 圖片用豎圖
+
+**互動**：點選或懸停：切換目前專案和右側大圖
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 編號小節名 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `cta` | `string` |  | 右上膠囊按鈕 |
+| `projects` | `{ name, year, image }[]` | 是 | 專案行 |
+| `source` | `string` |  | 出處 |
+| `hint` | `string` |  | 頁首提示，例如「點一行換圖」 |
+
+**範例**
+
+```tsx
+<ProjectIndex kicker="02 專案" title="看看我們最好的作品" projects={[{ name: '遠山咖啡 · 品牌升級', year: '2026', image: { src: prev, alt: '…' } }, …]} />
+```
+
+<a id="why-stats"></a>
+
+## 260 · 為什麼選我們 `<WhyStats />`
+
+**位置**：實證 · 三個數字　**參考頁**：`src/decks/sig-monograph` 中的 `why`
+
+左邊短標題、幾條加號理由和一句評價；右邊大號的一段話，下面三張數字卡，數字逐位升起，背後拖著一個淡淡的描邊重影，可加一條進度條。
+
+**適合**
+
+- 「為什麼選我們」，用三個數字撐腰
+- 一段話加數字的成果頁
+
+**避免**
+
+- 數字超過 3 個：用 StatRow 或 KpiBoard
+- 要比較前後變化：用 CountCompare
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title ≤ 2 行 × 5 字
+- reasons 3–5 條 × ≤ 6 字
+- lead ≤ 60 字
+- quote.text ≤ 34 字，by ≤ 16 字
+- stats 正好 3 個：value ≤ 5 個字元，label ≤ 14 字，meter 0–100
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 編號小節名 |
+| `title` | `string \| string[]` | 是 | 短標題 |
+| `reasons` | `string[]` |  | 加號理由 |
+| `lead` | `string` | 是 | 右上的一段話 |
+| `quote` | `{ text, by }` |  | 左下評價 |
+| `stats` | `{ value, label, meter? }[]` | 是 | 三個數字 |
+| `source` | `string` |  | 出處或示意說明 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<WhyStats kicker="03 成果" title={['為什麼', '選我們']} lead="…" stats={[{ value: '105+', label: '完成的專案' }, { value: '92%', label: '客戶留存率', meter: 92 }, …]} />
+```
+
+<a id="team-portraits"></a>
+
+## 261 · 黑白人像團隊 `<TeamPortraits />`
+
+**位置**：背景 · 團隊成員　**參考頁**：`src/decks/sig-monograph` 中的 `team`
+
+三張黑白豎幅人像加一張深色招聘卡，懸停時人像變回彩色；下面寫名字、職位和編號。
+
+**適合**
+
+- 介紹 3 位核心成員
+- 團隊頁順便招人
+
+**避免**
+
+- 成員超過 3 位或沒有照片：用 Team
+- 要寫每個人的分工細節：用 PersonaCards
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title 1 行 ≤ 8 字
+- people 正好 3 位：name ≤ 6 字，role ≤ 8 字
+- join.title 2 行 × ≤ 5 字，body ≤ 34 字，contact ≤ 22 個字元
+
+**互動**：懸停：人像從黑白變回彩色
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 編號小節名 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `cta` | `string` |  | 右上膠囊 |
+| `people` | `{ photo, name, role }[]` | 是 | 三位成員 |
+| `join` | `{ title, accent?, body, contact }` |  | 深色招聘卡；accent 是用主題色強調的詞 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<TeamPortraits kicker="04 團隊" title="做事的人" people={[{ photo: { src: t1, alt: '…' }, name: '馬丁', role: '創意總監' }, …]} join={{ title: ['我們在', '招設計師。'], accent: '設計師', body: '…', contact: 'jobs@…' }} />
+```
+
+<a id="service-ledger"></a>
+
+## 262 · 服務清單 `<ServiceLedger />`
+
+**位置**：產品 · 服務列表　**參考頁**：`src/decks/sig-monograph` 中的 `services`
+
+左邊標題和一張橫線分隔的清單：主題色編號、服務名、一句說明；右邊一張豎幅圖帶膠囊圖注。清單逐行出現。
+
+**適合**
+
+- 列出 3–5 項服務，每項一句話
+- 想要報紙目錄一樣的剋制感
+
+**避免**
+
+- 每項服務要配圖：用 ServiceTrio
+- 服務需要展開詳情：用 ProcessAccordion
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title 1 行 ≤ 8 字
+- rows 3–5 行：title ≤ 6 字，body ≤ 26 字
+- caption ≤ 10 字
+
+**互動**：build：清單逐行出現
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 編號小節名 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `rows` | `{ title, body }[]` | 是 | 清單行，每行一個 build 步驟 |
+| `image` | `{ src, alt, credit?, focus? }` | 是 | 右側豎圖 |
+| `caption` | `string` |  | 圖注膠囊 |
+| `source` | `string` |  | 出處 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<ServiceLedger kicker="05 服務" title="我們做什麼" rows={[{ title: '品牌策略', body: '…' }, …]} image={{ src: svc, alt: '…' }} />
+```
+
+<a id="monograph-close"></a>
+
+## 263 · 三行收尾 `<MonographClose />`
+
+**位置**：收尾 · 聯絡方式　**參考頁**：`src/decks/sig-monograph` 中的 `close`
+
+三行超大字，中間一行用主題色；下面一條橫線分隔聯絡方式；右邊一張大圖上放一枚深色膠囊按鈕。
+
+**適合**
+
+- 最後一頁，一句話邀請合作
+- 想用大字收尾
+
+**避免**
+
+- 需要多個聯絡人或二維碼：用 ContactPanel 或 Thanks
+- 沒有合適的圖：用 Closing
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title 正好 3 行 × ≤ 5 字
+- contacts 2–3 個：value ≤ 20 個字元，label ≤ 8 字
+- cta ≤ 10 字
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 編號小節名 |
+| `title` | `[string, string, string]` | 是 | 三行大字，中間一行強調 |
+| `contacts` | `{ value, label }[]` | 是 | 聯絡方式 |
+| `image` | `{ src, alt, credit?, focus? }` | 是 | 右側大圖 |
+| `cta` | `string` |  | 圖上的按鈕 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<MonographClose kicker="06 聯絡" title={['一起做點', '大膽的', '東西吧。']} contacts={[{ value: 'hello@…', label: '新專案' }, …]} image={{ src: end, alt: '…' }} />
+```
+
+<a id="nocturne-hero"></a>
+
+## 264 · 夜光開場 `<NocturneHero />`
+
+**位置**：開場 · App 首頁　**參考頁**：`src/decks/sig-nocturne` 中的 `hero`
+
+深色舞台中央暈開主題色的光：左邊頭像組、大標題、導語、按鈕和三個逐位升起的數字；右邊一部緩緩浮動的手機，螢幕裡是成片、縮圖和按鈕。
+
+**適合**
+
+- 消費類 App、AI 工具的第一頁
+- 想讓人一眼看到產品出來的效果
+
+**避免**
+
+- 產品是桌面軟體：用 HeroPanel 或 DeviceFrame
+- 沒有能放進手機的圖：用 Cover
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title ≤ 2 行 × 8 字
+- lead ≤ 36 字
+- ctas 每個 ≤ 8 字；note ≤ 16 字
+- stats 2–3 個：value ≤ 7 個字元，label ≤ 6 字
+- phone.thumbs ≤ 4 張，label ≤ 4 字，cta ≤ 8 字，toast ≤ 12 字
+
+**互動**：手機持續緩慢浮動
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `faces` | `{ src, alt, credit?, focus? }[]` |  | 標題上方的小頭像 |
+| `title` | `string \| string[]` | 是 | 大標題 |
+| `lead` | `string` |  | 導語 |
+| `ctas` | `[string, string?]` |  | 主題色按鈕和普通按鈕 |
+| `note` | `string` |  | 按鈕下的小字 |
+| `stats` | `{ value, label }[]` |  | 底部數字 |
+| `phone` | `{ image, thumbs?, label?, cta?, toast? }` | 是 | 手機螢幕內容；有 2 張以上縮圖時其中兩張浮在手機旁，toast 是旁邊的通知卡 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<NocturneHero title={['把你的照片', '變成一組大片']} ctas={['產生我的照片', '看看功能']} stats={[{ value: '20+', label: '種風格' }]} phone={{ image: { src: glow, alt: '…' }, cta: '免費試用' }} />
+```
+
+<a id="feature-bento"></a>
+
+## 265 · 發光便當格 `<FeatureBento />`
+
+**位置**：產品 · 功能總覽　**參考頁**：`src/decks/sig-nocturne` 中的 `features`
+
+居中標題下五格便當：一張主題色大卡，三張人像扇形展開；一張深色大卡，排滿帶標籤的風格縮圖；底部三張小卡左圖右文。
+
+**適合**
+
+- 一頁講清楚產品的五個賣點
+- 賣點本身就是「效果圖」
+
+**避免**
+
+- 賣點沒有圖：用 Bento 或 IconGrid
+- 只有 3 個賣點：用 ServiceTrio
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- kicker ≤ 16 個字元
+- title ≤ 2 行 × 8 字
+- hero、grid：title ≤ 8 字，body ≤ 26 字
+- hero.images 3 張；grid.items 6–8 個，label ≤ 4 字
+- small 正好 3 張：tag ≤ 6 個字元，title ≤ 8 字，body ≤ 20 字
+
+**互動**：懸停：扇形照片展得更開，縮圖放大
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 膠囊小標籤 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `hero` | `{ title, body, images }` | 是 | 主題色大卡 |
+| `grid` | `{ title, body, items }` | 是 | 風格縮圖大卡 |
+| `small` | `{ tag, title, body, image }[]` | 是 | 三張小卡 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<FeatureBento kicker="已產生 56 萬張" title={['AI 驅動的', '頭像創作']} hero={{ title: '高畫質', body: '…', images: [a, b, c] }} grid={{ title: '20+ 種風格', body: '…', items: [{ image: x, label: '賽博' }, …] }} small={[…]} />
+```
+
+<a id="glow-pricing"></a>
+
+## 266 · 發光價格表 `<GlowPricing />`
+
+**位置**：定價 · 三檔套餐　**參考頁**：`src/decks/sig-nocturne` 中的 `pricing`
+
+三檔套餐卡，最推薦的一檔用主題色漸變發光；上方一個按月 / 按年開關，點一下所有價格一起切換。
+
+**適合**
+
+- 訂閱制產品的價格頁
+- 想現場簡報年付更省
+
+**避免**
+
+- 套餐超過 3 檔或要逐項對比：用 PricingTiers 或 CompareTable
+- 只有一個價格：用 BigStat
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title 1 行 ≤ 12 字
+- periods 2 個 × ≤ 4 字，save ≤ 6 字
+- plans 正好 3 個：name ≤ 4 字，price 每個 ≤ 6 個字元，body ≤ 24 字，items 3–5 條 × ≤ 10 字，cta ≤ 6 字
+- quota 可選：label ≤ 6 字，value ≤ 10 個字元，pct 0–100
+
+**互動**：點選：切換計費週期，價格一起變
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 膠囊小標籤 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `periods` | `[string, string]` | 是 | 兩個計費週期 |
+| `save` | `string` |  | 第二個週期旁的優惠說明 |
+| `units` | `[string, string]` |  | 價格後面的單位 |
+| `plans` | `{ name, price, body, items, quota?, cta, hot?, badge? }[]` | 是 | 三檔套餐；price 對應兩個週期，quota 是按鈕上方的額度條 |
+| `source` | `string` |  | 出處 |
+| `hint` | `string` |  | 頁首提示，例如「點按月 / 按年切換」 |
+
+**範例**
+
+```tsx
+<GlowPricing kicker="價格" title="按需選擇，隨時升級" periods={['按月', '按年']} save="省 20%" plans={[{ name: '入門', price: ['¥99', '¥79'], body: '…', items: ['…'], cta: '選擇入門' }, …]} />
+```
+
+<a id="step-trio"></a>
+
+## 267 · 三步簡報卡 `<StepTrio />`
+
+**位置**：操作 · 三步上手　**參考頁**：`src/decks/sig-nocturne` 中的 `steps`
+
+三張步驟卡，每張上半部分簡報這一步：照片像相紙一樣一張張發下來；風格選擇器可以當場點選；最後是成片。下面寫步驟號、標題和一句話。
+
+**適合**
+
+- 產品上手只需要三步
+- 想讓觀眾看到每一步長什麼樣
+
+**避免**
+
+- 步驟超過 3 個：用 StepTrack 或 UiSteps
+- 步驟沒有畫面：用 NumberedColumns
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title 1 行 ≤ 12 字；lead ≤ 30 字
+- steps 正好 3 個：label ≤ 8 個字元，title ≤ 9 字，body ≤ 24 字
+- inputs.images 3 張，counter ≤ 12 字
+- options 4–6 個，label ≤ 4 字
+- result.chip ≤ 8 個字元
+- picked ≤ 10 字，{n} 換成已選數量
+
+**互動**：點選：第二張卡里的選項可以選中或取消
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 膠囊小標籤 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `lead` | `string` |  | 導語 |
+| `steps` | `{ label, title, body }[]` | 是 | 三個步驟 |
+| `inputs` | `{ images, counter? }` | 是 | 第一步的照片 |
+| `options` | `{ image, label, on? }[]` | 是 | 第二步的選項，可點選 |
+| `result` | `{ image, chip? }` | 是 | 第三步的成片 |
+| `picked` | `string` |  | 選擇卡上的即時計數，例如「已選 {n} 種」 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<StepTrio kicker="三步完成" title="上傳、選風格、拿成片" steps={[…]} inputs={{ images: [a, b, c] }} options={[{ image: x, label: '光影', on: true }, …]} result={{ image: y, chip: '4K' }} />
+```
+
+<a id="reveal-compare"></a>
+
+## 268 · 拖動前後對比 `<RevealCompare />`
+
+**位置**：對比 · 處理前後　**參考頁**：`src/decks/sig-nocturne` 中的 `compare`
+
+左邊標題、導語和 2–4 行引數；右邊一張豎幅對比圖，中間的把手可以拖動（也能用方向鍵），看處理前後的差別。
+
+**適合**
+
+- 同一畫面處理前後的對比
+- 要觀眾親手拖一下才有說服力
+
+**避免**
+
+- 兩張圖不是同一構圖：用 BeforeAfter
+- 橫圖對比：用 CompareSlider
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title ≤ 2 行 × 8 字
+- lead ≤ 40 字
+- specs 2–4 行：label ≤ 8 字，value ≤ 12 個字元
+- labels 每個 ≤ 8 個字元
+- 兩張圖構圖一致，用豎圖
+
+**互動**：拖動或方向鍵：移動分隔線
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 膠囊小標籤 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `lead` | `string` |  | 導語 |
+| `specs` | `{ label, value }[]` |  | 引數行 |
+| `before` | `{ src, alt, credit?, focus? }` | 是 | 處理前 |
+| `after` | `{ src, alt, credit?, focus? }` | 是 | 處理後 |
+| `labels` | `[string, string]` |  | 左右角標 |
+| `source` | `string` |  | 出處或示意說明 |
+| `hint` | `string` |  | 頁首提示，例如「拖動把手對比」 |
+
+**範例**
+
+```tsx
+<RevealCompare kicker="前後對比" title={['還是你，', '只是更好看。']} before={{ src: a, alt: '…' }} after={{ src: b, alt: '…' }} labels={['原圖', '處理後']} />
+```
+
+<a id="wall-close"></a>
+
+## 269 · 照片牆收尾 `<WallClose />`
+
+**位置**：收尾 · 行動號召　**參考頁**：`src/decks/sig-nocturne` 中的 `close`
+
+滿屏傾斜的照片牆，一列向上、一列向下緩緩滾動；中央壓暗，放標題、一句話、按鈕和小字。
+
+**適合**
+
+- 最後一頁，用大量成果給人「已經很多人在用」的感覺
+- 作品、頭像、海報這類適合成牆的圖
+
+**避免**
+
+- 圖片少於 6 張：用 PhotoClosing
+- 要留聯絡方式：用 ContactPanel
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title ≤ 2 行 × 10 字
+- lead ≤ 30 字
+- ctas 每個 ≤ 8 字；note ≤ 20 字
+- images 6–10 張豎圖
+
+**互動**：照片牆持續上下滾動
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `lead` | `string` |  | 一句話 |
+| `ctas` | `[string, string?]` |  | 按鈕 |
+| `note` | `string` |  | 按鈕下的小字 |
+| `images` | `{ src, alt, credit?, focus? }[]` | 是 | 照片牆用的豎圖 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<WallClose title={['下一張頭像，', '交給夜拍。']} ctas={['產生我的照片', '看價格']} images={[a, b, c, d, e, f]} />
+```
+
+<a id="sunrise-hero"></a>
+
+## 270 · 晨光開場 `<SunriseHero />`
+
+**位置**：開場 · SaaS 首頁　**參考頁**：`src/decks/sig-sunrise` 中的 `hero`
+
+頁面頂部一團暖黃晨光：上面一條模擬導航，中間居中的大標題、導語和兩個按鈕，兩位協作者的游標在左右頁邊漂動，底邊升起一塊儀表盤（完成度圓弧、柱狀趨勢、團隊頭像和任務）。
+
+**適合**
+
+- SaaS、範本、協作工具的第一頁
+- 想一開場就讓人看到產品介面
+
+**避免**
+
+- 沒有產品介面可展示：用 Cover
+- 要放真實截圖：用 HeroPanel 或 DeviceFrame
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- brand ≤ 10 個字元；links ≤ 4 個 × ≤ 4 字；navCta ≤ 6 字
+- title ≤ 2 行 × 12 字
+- lead ≤ 30 字；ctas 每個 ≤ 6 字
+- cursors 2 個名字 × ≤ 4 字
+- dash.gauge.value 0–100；trend.values 6–12 個；team.faces ≤ 5 張，tasks 2 條（title ≤ 8 字，status ≤ 3 字）
+
+**互動**：游標在頁邊持續漂動；懸停柱子和頭像有反饋
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `brand` | `string` | 是 | 模擬導航裡的產品名 |
+| `links` | `string[]` |  | 導航連結 |
+| `navCta` | `string` |  | 導航按鈕 |
+| `title` | `string \| string[]` | 是 | 大標題 |
+| `lead` | `string` |  | 導語 |
+| `ctas` | `[string, string?]` |  | 主按鈕和次按鈕 |
+| `cursors` | `[string, string]` |  | 左右兩個協作者游標的名字 |
+| `dash` | `{ gauge, trend, team }` | 是 | 底部儀表盤的三張卡 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<SunriseHero brand="拾頁" title={['幾天，而不是幾週，', '上線你的 SaaS 官網']} ctas={['獲取範本', '看全部範例']} cursors={['小周', '你']} dash={{ gauge: { label: '本週完成度', value: 68 }, trend: { label: '任務完成趨勢', values: [40, 62, 48, 80] }, team: { label: '團隊', faces: [a, b], tasks: [{ title: '首頁動效', status: '待評審' }] } }} />
+```
+
+<a id="kit-bento"></a>
+
+## 271 · 數字便當格 `<KitBento />`
+
+**位置**：產品 · 內容清單　**參考頁**：`src/decks/sig-sunrise` 中的 `kit`
+
+三格便當：上面兩張大數字卡，右半邊分別畫著疊起的頁面和區塊拼版；下面一張通欄卡，左邊說明，右邊是一塊深色設計畫布，排著幾個頁面畫板。
+
+**適合**
+
+- 講清一套產品「裡面有什麼」
+- 範本、元件庫、設計系統的內容總覽
+
+**避免**
+
+- 數字超過 2 個：用 NumberTiles 或 StatRow
+- 要放真實截圖：用 Bento
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title 可選，1 行 ≤ 14 字
+- stats 正好 2 個：value ≤ 4 個字元，label ≤ 6 字，body ≤ 22 字
+- wide.title ≤ 10 字，body ≤ 30 字，frames 4–6 個 × ≤ 4 字
+
+**互動**：懸停：頁面草圖散開，畫板上浮
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `title` | `string \| string[]` |  | 網格上方的標題 |
+| `stats` | `{ value, label, body }[]` | 是 | 兩張大數字卡 |
+| `wide` | `{ title, body, frames? }` | 是 | 通欄卡和畫布上的畫板名 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<KitBento stats={[{ value: '19', label: '獨立頁面', body: '…' }, { value: '62+', label: '區塊與元件', body: '…' }]} wide={{ title: '附帶設計原始檔', body: '…', frames: ['首頁', '定價', '部落格', '關於'] }} />
+```
+
+<a id="home-trio"></a>
+
+## 272 · 三套首頁 `<HomeTrio />`
+
+**位置**：產品 · 方案並列　**參考頁**：`src/decks/sig-sunrise` 中的 `homes`
+
+居中標題下三張卡，每張裡是一幅首頁草圖（圖表、日曆、深色頁尾三種），下面寫名稱和一句說明。懸停時草影像網頁一樣往下滾，點選選中一張。
+
+**適合**
+
+- 同一產品的三種版本或三套方案
+- 範本、主題、套餐的外觀對比
+
+**避免**
+
+- 要放真實截圖：用 Screenshot 或 ShelfGallery
+- 超過 3 個方案：用 IconGrid
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- kicker ≤ 10 字；title 1 行 ≤ 10 字
+- items 正好 3 個：name ≤ 10 字，note ≤ 18 字，variant 為 chart / calendar / dark
+- pickedLabel ≤ 4 字
+
+**互動**：懸停：草圖滾動；點選：選中這一張
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` |  | 膠囊小標籤 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `items` | `{ name, note?, variant }[]` | 是 | 三套首頁 |
+| `picked` | `number` |  | 一開始選中第幾張，預設 0 |
+| `pickedLabel` | `string` |  | 選中卡片右上角的小標籤 |
+| `hint` | `string` |  | 頁首提示，例如「懸停看整頁，點選選中」 |
+
+**範例**
+
+```tsx
+<HomeTrio title="3 套首頁" items={[{ name: '首頁 1 · 任務管理', variant: 'chart' }, { name: '首頁 2 · 團隊協作', variant: 'calendar' }, { name: '首頁 3 · 遠端團隊', variant: 'dark' }]} pickedLabel="已選" />
+```
+
+<a id="kanban-demo"></a>
+
+## 273 · 可玩的看板 `<KanbanDemo />`
+
+**位置**：產品 · 互動簡報　**參考頁**：`src/decks/sig-sunrise` 中的 `board`
+
+左邊小標籤、標題、導語和幾條打勾要點；右邊一塊任務看板：頂部檢視切換和成員頭像，協作者游標在檢視標籤上滑動；三列任務卡，點一下卡片就移到下一列，計數跟著變；每列底部是虛線「新增任務」位。
+
+**適合**
+
+- 簡報任務、工單、流程類產品的核心操作
+- 想讓觀眾現場點一點
+
+**避免**
+
+- 流程是線性的步驟：用 StepTrack
+- 要放真實截圖：用 DeviceFrame
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title ≤ 2 行 × 7 字；lead ≤ 36 字
+- points 2–4 條 × ≤ 16 字
+- columns 正好 3 列：name ≤ 4 字，每列 1–3 張卡
+- 卡片：tag ≤ 4 字，title ≤ 12 字，due ≤ 8 個字元，progress 0–100
+- views ≤ 3 個 × ≤ 4 字；cursor ≤ 4 字
+
+**互動**：點選：任務卡移到下一列，計數更新；檢視標籤可切換
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` |  | 膠囊小標籤 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `lead` | `string` |  | 導語 |
+| `points` | `string[]` |  | 打勾要點 |
+| `columns` | `{ name, count?, cards }[]` | 是 | 三列任務；count 是初始顯示的數量，最後一列是「完成」 |
+| `views` | `string[]` |  | 看板頂部的檢視標籤 |
+| `cursor` | `string` |  | 在檢視標籤上滑動的協作者游標 |
+| `doneLabel` | `string` |  | 完成卡片上的字，預設「✓ 已完成」 |
+| `addLabel` | `string` |  | 每列底部空位的字，預設「+ 新增任務」 |
+| `faces` | `{ src, alt, credit?, focus? }[]` |  | 看板右上角的成員頭像 |
+| `hint` | `string` |  | 頁首提示，例如「點任務卡，它會移到下一列」 |
+
+**範例**
+
+```tsx
+<KanbanDemo title={['拖一下，', '進度就更新了']} points={['…']} views={['看板', '列表', '日曆']} cursor="小周" columns={[{ name: '待辦', cards: [{ tag: '設計', title: '定價頁改版', due: '11 月 12 日' }] }, { name: '進行中', cards: [{ tag: '開發', title: '接入支付回撥', progress: 40 }] }, { name: '完成', count: 12, cards: [] }]} />
+```
+
+<a id="proof-mosaic"></a>
+
+## 274 · 口碑拼圖 `<ProofMosaic />`
+
+**位置**：客戶 · 評價與口碑　**參考頁**：`src/decks/sig-sunrise` 中的 `proof`
+
+居中標題下的拼圖：左邊一張深色大引言卡，右半是人像；右側上方一塊晨光黃的大數字，下面兩張短評卡，每張帶星級、一個量化結果小標籤和頭像署名。
+
+**適合**
+
+- 客戶評價、使用者口碑頁
+- 既有一句重磅引言、又有一個總量數字
+
+**避免**
+
+- 只有一條引言：用 QuoteHero 或 QuoteArc
+- 評價超過 3 條：用 QuoteWall
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title 1 行 ≤ 10 字
+- quote.text ≤ 48 字，name ≤ 6 字，role ≤ 16 個字元，人像豎圖
+- stat.value ≤ 7 個字元，label ≤ 2 行 × 6 字
+- items 正好 2 條：text ≤ 30 字，name ≤ 4 字，role ≤ 16 個字元；result 可選（value ≤ 6 個字元，label ≤ 8 字）
+
+**互動**：懸停：人像微放大，短評卡上浮
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` |  | 膠囊小標籤 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `quote` | `{ text, name, role, image }` | 是 | 深色大引言卡 |
+| `stat` | `{ value, label }` | 是 | 晨光黃大數字 |
+| `items` | `{ text, name, role, face?, result? }[]` | 是 | 兩張短評卡 |
+| `stars` | `number` |  | 短評卡上的星級，1–5，預設 5 |
+| `source` | `string` |  | 出處 |
+| `hint` | `string` |  | 頁首提示 |
+
+**範例**
+
+```tsx
+<ProofMosaic title="用過的團隊都說好" quote={{ text: '…', name: '許寧', role: '聯合創始人', image: p }} stat={{ value: '2,400+', label: ['團隊用它', '上線了官網'] }} items={[{ text: '…', name: '韓東', role: '前端負責人', result: { value: '-60%', label: '對稿時間' } }, …]} />
+```
+
+<a id="buyout-pricing"></a>
+
+## 275 · 買斷價格 `<BuyoutPricing />`
+
+**位置**：定價 · 兩檔加收尾　**參考頁**：`src/decks/sig-sunrise` 中的 `pricing`
+
+兩張套餐卡加一張晨光黃收尾卡：套餐卡里有價格、一句話、勾選清單和兩格關鍵數字，點一下切換選中；收尾卡寫一句號召、說明、一排頭像和使用人數，底部黑色按鈕。
+
+**適合**
+
+- 一次性買斷、兩檔套餐的價格頁
+- 想把價格和最後的號召放在同一頁
+
+**避免**
+
+- 訂閱制、要切換月付年付：用 GlowPricing 或 PricingTiers
+- 超過 2 檔：用 PricingTiers
+
+**內容上限**（超出會破版，`npm run qa` 會報出來）
+
+- title 1 行 ≤ 10 字
+- plans 正好 2 個：name ≤ 4 字，price ≤ 6 個字元，unit ≤ 4 字，body ≤ 20 字，items 3–4 條 × ≤ 10 字，facts 2 格（label ≤ 4 字，value ≤ 6 字），cta ≤ 6 字，badge ≤ 3 字
+- close.title ≤ 2 行 × 6 字，body ≤ 36 字，points 2–3 條 × ≤ 12 字，count.value ≤ 7 個字元，count.label ≤ 6 字，cta ≤ 6 字
+
+**互動**：點選：切換選中的套餐，按鈕變成主題色
+
+**Props**
+
+| 名稱 | 型別 | 必填 | 說明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` |  | 膠囊小標籤 |
+| `title` | `string \| string[]` | 是 | 標題 |
+| `plans` | `{ name, price, unit?, body?, items, facts?, cta, badge? }[]` | 是 | 兩檔套餐；有 badge 的一檔初始選中 |
+| `close` | `{ title, body?, points?, faces?, count?, cta }` | 是 | 晨光黃收尾卡 |
+| `source` | `string` |  | 出處 |
+| `hint` | `string` |  | 頁首提示，例如「點套餐卡切換選中」 |
+
+**範例**
+
+```tsx
+<BuyoutPricing title="一次買斷，永久使用" plans={[{ name: '個人版', price: '¥299', unit: '一次性', items: ['…'], cta: '購買個人版' }, { name: '團隊版', price: '¥899', badge: '推薦', items: ['…'], cta: '購買團隊版' }]} close={{ title: ['今天開始，', '週末上線。'], cta: '免費預覽' }} />
 ```
 
 <a id="icons"></a>

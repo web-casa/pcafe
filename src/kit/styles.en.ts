@@ -35,6 +35,10 @@ export const STYLE_EN: Record<string, { label: string; note: string }> = {
   ribbon: { label: 'Ribbon', note: 'Warm white, rounded bold headings, bias-cut ribbon labels; thick ribbons cross the cover and section slides. For training, events and friendly customer introductions.' },
   'soft-saas': { label: 'Soft SaaS', note: 'White with a pale blue glow, round cards with soft shadows, small interface pieces such as calendars and time slots. For SaaS products, process explanations, booking and collaboration.' },
   stencil: { label: 'Stencil', note: 'Bone paper, stencil serif caps, condensed bold labels, cards in saturated ochre, magenta, orange and teal blocks. For studio pitches, principles and comparisons.' },
+  atelier: { label: 'Atelier', note: 'Pure white, soft grey rounded cards, heavy black titles, pill labels with a green "available" dot, and work images drifting in a row. For design studios, freelancers, portfolios and service pitches.' },
+  monograph: { label: 'Monograph', note: 'Light grey paper with faint four-column rules and medium-weight big titles; the theme colour only marks dots, numbers and one emphasis. Large work images, black-and-white portraits. For brand and digital agencies, portfolios and team intros.' },
+  sunrise: { label: 'Sunrise', note: 'White canvas with a warm yellow sunrise glow at the top, hairline cards with big figures, teammates\' cursors drifting in the margins and lime ticks as accents. Buttons and charts follow the theme colour. For SaaS products, template and tool launches, and team collaboration pitches.' },
+  nocturne: { label: 'Nocturne', note: 'Deep violet-black canvas with the theme colour glowing in the middle, light-weight titles with serif italic numerals, translucent glowing cards. Dark throughout; closest to the original with the violet theme. For consumer apps, AI tools and creative product launches.' },
   'warm-dark': { label: 'Warm dark', note: 'Warm near-black, amber glow, hairline grid and italic serif numbers. Dark by default. For finance, data products and premium launches.' },
 }
 

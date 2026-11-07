@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 6 个模板。返回索引：[../templates.md](../templates.md)。
+共 7 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `CompareTable` 前后对比表（对比 · 旧 → 新）
 - 适合：版本升级、政策调整、改版前后；每行都是同一维度的旧值与新值
@@ -39,3 +39,9 @@
 - 不适合：格子里要写一句话：用 CompareTable；只比较两项：用 Contrast
 - 上限：columns 2–4 个，每个 ≤ 10 字；rows 3–5 行，label ≤ 8 字；每格 text ≤ 8 个字符；页标题 ≤ 22 字
 - 参考：src/decks/sig-stencil 的 `score` 页；docs/zh-CN/components.md#score-table；交互：按 → 逐行出现
+
+### `RevealCompare` 拖动前后对比（对比 · 处理前后）
+- 适合：同一画面处理前后的对比；要观众亲手拖一下才有说服力
+- 不适合：两张图不是同一构图：用 BeforeAfter；横图对比：用 CompareSlider
+- 上限：title ≤ 2 行 × 8 字；lead ≤ 40 字；specs 2–4 行：label ≤ 8 字，value ≤ 12 个字符；labels 每个 ≤ 8 个字符；两张图构图一致，用竖图
+- 参考：src/decks/sig-nocturne 的 `compare` 页；docs/zh-CN/components.md#reveal-compare；交互：拖动或方向键：移动分隔线

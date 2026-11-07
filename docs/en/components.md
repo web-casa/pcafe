@@ -260,11 +260,35 @@
 | [`StackBars`](#stack-bars) Stepped layers | Structure · horizontal bars offset layer by layer | 3–6 horizontal bars offset to the right layer by layer from top to bottom, the colour deepening from the theme colour, each with a name on the left and one line of description on the right. Designed for the broadside style; other styles work too. With build: 'reveal' the layers appear one by one. |
 | [`ChatDemo`](#chat-demo) Chat demo | Realistic UI · show how it works through a short conversation | Title, lead and 0–3 notes on the left; a hand-built chat window on the right, where the last reply can carry a result card. The window always carries the label 'illustrative interface'. With build: 'reveal', each press reveals one message. |
 | [`AppCards`](#app-cards) Dashboard cards | Realistic UI · 2–4 filled-in app panels | A row of hand-built app panels below the title: window name, title, status pill, 2–5 fields and tags, all filled in. Each card is marked as an illustrative UI. With build: 'reveal' the cards appear one by one. |
+| [`AtelierHero`](#atelier-hero) Atelier hero | Opening · studio home page | A centred status pill with a green "available" dot, a huge heavy title, a lead and two buttons, a row of client names, and a strip of work images drifting slowly sideways along the foot. Made for the atelier style; other styles work too. |
+| [`ProjectPair`](#project-pair) Project pair | Evidence · two flagship projects | A centred pill label and title over two large landscape images side by side, each captioned with the client and the kind of work. The images wipe up and zoom slightly on hover. |
+| [`ProcessQuote`](#process-quote) Process with quote | Method · how we work plus one quote | A title and 3–5 numbered steps with durations on the left; a tall portrait on the right carrying a rating pill and a client quote card. |
+| [`ServiceTrio`](#service-trio) Service trio | Product · three services | Three soft grey rounded cards under a centred title, each with an image on top, then a number, the service name, one line and a few small tags. Cards lift and images zoom on hover. |
+| [`TeamBanner`](#team-banner) Team banner | Background · team and figures | A team photo filling the slide, a pill label at the top left, and along the bottom a dark statement card plus 2–3 figure cards whose digits roll up. |
+| [`BookingClose`](#booking-close) Booking close | Closing · book a call | A status pill, big title, lead, buttons and contacts on the left; on the right a booking card with the host's avatar, a month calendar and three time slots, all clickable on the slide. |
+| [`MonographHero`](#monograph-hero) Monograph hero | Opening · agency introduction | A three-line introduction at the top left, a rating and a short note at the top right; below, a magazine-style story card (image, index, serif paragraph, play button) and a dark object picture. |
+| [`ProjectIndex`](#project-index) Project index | Evidence · project list | A column of project rows with the current one inked black, and a large picture of that project at the right. Click or hover a row to switch the picture. |
+| [`WhyStats`](#why-stats) Why stats | Proof · three figures | A short title, a few plus-sign reasons and a quote on the left; a large paragraph on the right above three figure cards whose digits roll in over a faint outline echo, with an optional progress bar. |
+| [`TeamPortraits`](#team-portraits) Team portraits | Background · team members | Three black-and-white portrait photos plus a dark hiring card; portraits turn colour on hover. Name, role and number underneath. |
+| [`ServiceLedger`](#service-ledger) Service ledger | Product · service list | A title and a ruled list on the left: accent numbers, a service name and one line each; a tall picture with a caption pill on the right. Rows appear one by one. |
+| [`MonographClose`](#monograph-close) Monograph close | Closing · contact details | Three huge lines with the middle one in the theme colour, contacts ruled underneath, and a large picture at the right carrying a dark pill button. |
+| [`NocturneHero`](#nocturne-hero) Nocturne hero | Opening · app home page | The theme colour glows in the middle of a dark stage: faces, a big title, a lead, buttons and three figures whose digits roll in on the left; a slowly floating phone on the right shows the result, thumbnails and a button. |
+| [`FeatureBento`](#feature-bento) Feature bento | Product · feature overview | A five-cell bento under a centred title: a large accent card with three portraits fanned out, a large dark card full of labelled style thumbnails, and three small picture-and-text cards along the bottom. |
+| [`GlowPricing`](#glow-pricing) Glow pricing | Pricing · three plans | Three plan cards with the recommended one glowing in an accent gradient; a monthly / yearly switch above flips every price at once. |
+| [`StepTrio`](#step-trio) Step trio | Procedure · three steps to start | Three step cards whose top half acts out the step: photos dealt like prints, a style picker you can tap on the slide, and the finished picture. Step number, title and one line underneath. |
+| [`RevealCompare`](#reveal-compare) Reveal compare | Comparison · before and after | A title, a lead and 2–4 spec rows on the left; a portrait comparison on the right whose middle handle can be dragged (or moved with the arrow keys) to see before and after. |
+| [`WallClose`](#wall-close) Wall close | Closing · call to action | A tilted wall of photos filling the slide, columns drifting slowly up and down; the centre is darkened for the title, one line, buttons and a small note. |
+| [`SunriseHero`](#sunrise-hero) Sunrise hero | Opening · SaaS home page | A warm yellow sunrise glow across the top: a mock nav bar, a centred title, lead and two buttons, two teammates' cursors drifting in the side margins, and a dashboard rising from the bottom edge (completion arc, bar trend, team faces and tasks). |
+| [`KitBento`](#kit-bento) Kit bento | Product · what is inside | A three-cell bento: two big-figure cards on top whose right halves sketch stacked pages and a block layout, and a full-width card below with copy at the left and a dark design canvas of page frames at the right. |
+| [`HomeTrio`](#home-trio) Home trio | Product · options side by side | Three cards under a centred title, each holding a homepage sketch (chart, calendar or dark footer) with a name and one line underneath. Hover and the sketch scrolls like a web page; click to pick one. |
+| [`KanbanDemo`](#kanban-demo) Kanban demo | Product · interactive demo | A pill, title, lead and ticked points on the left; a task board on the right with view tabs and member faces on top, a teammate cursor gliding over the tabs, and three columns of cards. Click a card and it moves to the next column while the counts update; each column ends in a dashed "add task" slot. |
+| [`ProofMosaic`](#proof-mosaic) Proof mosaic | Customer · quotes and reviews | A mosaic under a centred title: a large dark quote card with a portrait in its right half; on the right, a sun-yellow headline figure above two short quote cards, each with a star rating, a measured result chip and a signed face. |
+| [`BuyoutPricing`](#buyout-pricing) Buyout pricing | Pricing · two plans and a close | Two plan cards and a sun-yellow closing card: each plan has a price, one line, a ticked list and two key facts in boxes, and clicking switches the picked plan; the closing card carries a call to action, a note, a row of faces with a user count and a black button. |
 
 Free templates all come from `src/kit`:
 
 ```tsx
-import { Cover, Bento, MetricBars, Timeline, SpotlightList, CompareTable, NumberedColumns, VerdictColumns, Checklist, StepTrack, Teaser, Closing, Terminal, CodeDiff, StatusGrid, SpecSheet, Cycle, Faq, Lanes, LineChart, Agenda, SectionBreak, QuoteHero, FlowDiagram, ClaimCards, LayerStack, Matrix, IconGrid, BigStat, DeltaBars, Dumbbell, RangeBars, Gantt, Milestones, QuoteWall, BeforeAfter, Screenshot, Funnel, Quadrant, PersonaCards, PricingTiers, KpiBoard, ShareBar, Waterfall, Team, IssueTree, Heatmap, Roadmap, Statement, HangingCover, PanelCards, AskAnswer, ProofSplit, IndexStack, ContactPanel, Orbit, NumberOpener, ChapterProgress, Question, Contrast, Recap, HeroPanel, TabbedShot, BrandKit, Laurels, FullBleed, Thanks, SplitWord, PillAgenda, StatRow, CountCompare, Donut, BarChart, Bubble, Gauge, ServiceList, QuoteArc, WorkCards, RepeatClosing, StickerCover, WordBlocks, FolderCards, SparkCards, Pictogram, SlopeRank, PixelClosing, FloatCover, TileWall, ServiceIndex, GlowStack, DuoCards, Desktop, WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone, Swimlane, ArchLayers, Balance, DoubleFunnel, KeyReveal, KeySpec, OrbCover, GradientCards, BlockStats, PopPoster, BentoBoard, BentoSpotlight, SlotPicker, UiSteps, FloatHero, TranscriptCard, RetroTabs, RetroLog, GlowMetric, HairlineGrid, RibbonCover, RibbonSection, ChatThread, NoteCards, RevealStatement, SketchCover, ArcCards, CaseCard, AgencyHero, AgencyRows, AgencyManifesto, HaloHero, HaloRows, HaloMarquee, FanCover, PillSentence, OpenList, PhotoCover, PhotoSplit, PhotoMosaic, PolaroidWall, FilmStrip, MagazineSpread, CaseStudy, DeviceFrame, CompareSlider, PhotoStack, FlipCards, CardStack, FanCarousel, DepthCarousel, Envelope, FlipBook, Lanyard, ProgressCards, ProcessAccordion, NotebookCover, Halftone, ProgressiveBlur, MaskReveal, LogoWall, PhotoClosing, RankingRace, BubbleCluster, NodeGraph, Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics, Typewriter, RotatingWord, MorphHeadline, TextArc, Odometer, MarkerSweep, TextMask, SplitFlap, NewsTicker, KaraokeLines, ParadigmCards, AnatomyCard, ExplorerFlip, VerbCards, NinesDial, TierLadder, LifecycleRail, MeterCards, ShelfGallery, TabSpec, TokenStream, MoeRouter, ContextWindow, ScoreMatrix, ModelSpecCard, TokenPriceGrid, AttentionMask, EffortDial, PeakClock, AliasRoute, GlobeCover, ArcGlobe, PopGrid, RequestJourney, ShieldLayers, SpikeChart, OutageBoard, ReachRings, ServerRack, TraceTimeline, QueryPlan, SchemaEr, ResultGrid, CodeCallouts, RequestResponse, BeamFlow, TupleVersions, BTreeIndex, JsonTree, SessionSequence, BadgeHero, TabPanels, EditionPicker, ReleaseTrain, MegaMenu, PathCrumbs, FilterChips, CtaBlock, FooterClosing, FaqAccordion, MediaExpand, ScatterOrder, TiltShot, ConvergeShots, StepVideo, ExhibitCover, YearBars, NumberTiles, ScoreTable, MetricMosaic, StepGrid, FramedStats, IndexList, AgendaMosaic, MethodSteps, PriorityColumns, ChapterNumber, StackBars, ChatDemo, AppCards } from '../../kit'
+import { Cover, Bento, MetricBars, Timeline, SpotlightList, CompareTable, NumberedColumns, VerdictColumns, Checklist, StepTrack, Teaser, Closing, Terminal, CodeDiff, StatusGrid, SpecSheet, Cycle, Faq, Lanes, LineChart, Agenda, SectionBreak, QuoteHero, FlowDiagram, ClaimCards, LayerStack, Matrix, IconGrid, BigStat, DeltaBars, Dumbbell, RangeBars, Gantt, Milestones, QuoteWall, BeforeAfter, Screenshot, Funnel, Quadrant, PersonaCards, PricingTiers, KpiBoard, ShareBar, Waterfall, Team, IssueTree, Heatmap, Roadmap, Statement, HangingCover, PanelCards, AskAnswer, ProofSplit, IndexStack, ContactPanel, Orbit, NumberOpener, ChapterProgress, Question, Contrast, Recap, HeroPanel, TabbedShot, BrandKit, Laurels, FullBleed, Thanks, SplitWord, PillAgenda, StatRow, CountCompare, Donut, BarChart, Bubble, Gauge, ServiceList, QuoteArc, WorkCards, RepeatClosing, StickerCover, WordBlocks, FolderCards, SparkCards, Pictogram, SlopeRank, PixelClosing, FloatCover, TileWall, ServiceIndex, GlowStack, DuoCards, Desktop, WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone, Swimlane, ArchLayers, Balance, DoubleFunnel, KeyReveal, KeySpec, OrbCover, GradientCards, BlockStats, PopPoster, BentoBoard, BentoSpotlight, SlotPicker, UiSteps, FloatHero, TranscriptCard, RetroTabs, RetroLog, GlowMetric, HairlineGrid, RibbonCover, RibbonSection, ChatThread, NoteCards, RevealStatement, SketchCover, ArcCards, CaseCard, AgencyHero, AgencyRows, AgencyManifesto, HaloHero, HaloRows, HaloMarquee, FanCover, PillSentence, OpenList, PhotoCover, PhotoSplit, PhotoMosaic, PolaroidWall, FilmStrip, MagazineSpread, CaseStudy, DeviceFrame, CompareSlider, PhotoStack, FlipCards, CardStack, FanCarousel, DepthCarousel, Envelope, FlipBook, Lanyard, ProgressCards, ProcessAccordion, NotebookCover, Halftone, ProgressiveBlur, MaskReveal, LogoWall, PhotoClosing, RankingRace, BubbleCluster, NodeGraph, Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics, Typewriter, RotatingWord, MorphHeadline, TextArc, Odometer, MarkerSweep, TextMask, SplitFlap, NewsTicker, KaraokeLines, ParadigmCards, AnatomyCard, ExplorerFlip, VerbCards, NinesDial, TierLadder, LifecycleRail, MeterCards, ShelfGallery, TabSpec, TokenStream, MoeRouter, ContextWindow, ScoreMatrix, ModelSpecCard, TokenPriceGrid, AttentionMask, EffortDial, PeakClock, AliasRoute, GlobeCover, ArcGlobe, PopGrid, RequestJourney, ShieldLayers, SpikeChart, OutageBoard, ReachRings, ServerRack, TraceTimeline, QueryPlan, SchemaEr, ResultGrid, CodeCallouts, RequestResponse, BeamFlow, TupleVersions, BTreeIndex, JsonTree, SessionSequence, BadgeHero, TabPanels, EditionPicker, ReleaseTrain, MegaMenu, PathCrumbs, FilterChips, CtaBlock, FooterClosing, FaqAccordion, MediaExpand, ScatterOrder, TiltShot, ConvergeShots, StepVideo, ExhibitCover, YearBars, NumberTiles, ScoreTable, MetricMosaic, StepGrid, FramedStats, IndexList, AgendaMosaic, MethodSteps, PriorityColumns, ChapterNumber, StackBars, ChatDemo, AppCards, AtelierHero, ProjectPair, ProcessQuote, ServiceTrio, TeamBanner, BookingClose, MonographHero, ProjectIndex, WhyStats, TeamPortraits, ServiceLedger, MonographClose, NocturneHero, FeatureBento, GlowPricing, StepTrio, RevealCompare, WallClose, SunriseHero, KitBento, HomeTrio, KanbanDemo, ProofMosaic, BuyoutPricing } from '../../kit'
 ```
 
 <a id="cover"></a>
@@ -12047,6 +12071,1082 @@ A row of hand-built app panels below the title: window name, title, status pill,
   cards={[{ app: '导出', title: 'PDF', fields: [{ label: '命令', value: 'build 后打印' }], status: { text: '可用' } }]}
   source="示意界面"
 />
+```
+
+<a id="atelier-hero"></a>
+
+## 252 · Atelier hero `<AtelierHero />`
+
+**Position**: Opening · studio home page; **Reference slide**: `src/decks/sig-atelier` — `hero`
+
+A centred status pill with a green "available" dot, a huge heavy title, a lead and two buttons, a row of client names, and a strip of work images drifting slowly sideways along the foot. Made for the atelier style; other styles work too.
+
+**Use when**
+
+- First slide for a design studio, freelancer or portfolio
+- You want the work visible from the start
+
+**Avoid**
+
+- Fewer than 4 work images: use Cover or PhotoCover
+- One sentence explains the product: use Statement
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- badge ≤ 16 chars
+- title ≤ 2 lines × 11 chars
+- lead ≤ 40 chars
+- ctas ≤ 8 chars each
+- clients 3–6, each ≤ 10 characters
+- strip 4–6 landscape images
+
+**Interaction**: The work strip drifts sideways continuously; images zoom on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `badge` | `string` | yes | Status pill with a green dot |
+| `title` | `string \| string[]` | yes | Big title |
+| `lead` | `string` |  | Lead |
+| `ctas` | `[string, string?]` |  | Black main button and a plain button |
+| `clients` | `string[]` |  | Client names |
+| `strip` | `{ src, alt, credit?, focus? }[]` | yes | Work images drifting along the foot |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<AtelierHero badge="本月可接 2 个项目" title={['让人信任、', '也愿意买单的设计']} ctas={['预约沟通', '看作品']} strip={[{ src: t1, alt: '…' }, …]} />
+```
+
+<a id="project-pair"></a>
+
+## 253 · Project pair `<ProjectPair />`
+
+**Position**: Evidence · two flagship projects; **Reference slide**: `src/decks/sig-atelier` — `work`
+
+A centred pill label and title over two large landscape images side by side, each captioned with the client and the kind of work. The images wipe up and zoom slightly on hover.
+
+**Use when**
+
+- Pick the two projects that best represent you
+- The work should be seen with the client name
+
+**Avoid**
+
+- More than 2 projects: use PhotoMosaic or WorkCards
+- One project before and after: use CaseStudy
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 6 chars
+- title ≤ 2 lines × 9 chars
+- projects exactly 2: name ≤ 16 chars, tag ≤ 8 chars
+- Use landscape images
+
+**Interaction**: build: the projects appear one at a time
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Pill label |
+| `title` | `string \| string[]` | yes | Title |
+| `projects` | `{ image, name, tag }[]` | yes | Two projects |
+| `source` | `string` |  | Source or illustration note |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<ProjectPair kicker="精选项目" title={['从策略出发，', '用手艺收尾。']} projects={[{ image: { src: p1, alt: '…' }, name: '远拓 · AI 服务机构', tag: '网站设计' }, …]} />
+```
+
+<a id="process-quote"></a>
+
+## 254 · Process with quote `<ProcessQuote />`
+
+**Position**: Method · how we work plus one quote; **Reference slide**: `src/decks/sig-atelier` — `process`
+
+A title and 3–5 numbered steps with durations on the left; a tall portrait on the right carrying a rating pill and a client quote card.
+
+**Use when**
+
+- Explain how working together goes, backed by a client quote
+- The "how we work" page of a service business
+
+**Avoid**
+
+- Steps need pictures: use StepGrid
+- Only a quote, no process: use QuoteHero
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 2 lines × 8 chars
+- steps 3–5: title ≤ 8 chars, body ≤ 26 chars, time ≤ 6 chars
+- rating ≤ 14 characters
+- quote.text ≤ 48 chars, by ≤ 6 chars, role ≤ 14 chars
+
+**Interaction**: build: the steps appear row by row
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Label with a green dot |
+| `title` | `string \| string[]` | yes | Title |
+| `steps` | `{ title, body, time? }[]` | yes | Numbered steps, one build step each |
+| `portrait` | `{ src, alt, credit?, focus? }` | yes | Tall portrait at the right |
+| `rating` | `string` |  | Rating pill |
+| `quote` | `{ text, by, role? }` | yes | Quote card |
+| `source` | `string` |  | Source or illustration note |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<ProcessQuote kicker="合作方式" title={['四步，', '从想法到上线。']} steps={[{ title: '定位访谈', body: '…', time: '第 1 周' }, …]} portrait={{ src: face, alt: '…' }} quote={{ text: '…', by: '周岚' }} />
+```
+
+<a id="service-trio"></a>
+
+## 255 · Service trio `<ServiceTrio />`
+
+**Position**: Product · three services; **Reference slide**: `src/decks/sig-atelier` — `services`
+
+Three soft grey rounded cards under a centred title, each with an image on top, then a number, the service name, one line and a few small tags. Cards lift and images zoom on hover.
+
+**Use when**
+
+- Present 3 services or product lines
+- Each service has one picture
+
+**Avoid**
+
+- More than 3 services: use ServiceList or Bento
+- No pictures: use NumberedColumns
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 1 line ≤ 14 chars
+- services exactly 3: title ≤ 6 chars, body ≤ 30 chars, tags 2–3 × ≤ 6 chars
+
+**Interaction**: build: the cards appear one at a time
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Pill label |
+| `title` | `string \| string[]` | yes | Title |
+| `services` | `{ image, title, body, tags? }[]` | yes | Three services, one build step each |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<ServiceTrio kicker="服务" title="三件事，我们做得最好" services={[{ image: { src: s1, alt: '…' }, title: '品牌识别', body: '…', tags: ['标志', '包装'] }, …]} />
+```
+
+<a id="team-banner"></a>
+
+## 256 · Team banner `<TeamBanner />`
+
+**Position**: Background · team and figures; **Reference slide**: `src/decks/sig-atelier` — `team`
+
+A team photo filling the slide, a pill label at the top left, and along the bottom a dark statement card plus 2–3 figure cards whose digits roll up.
+
+**Use when**
+
+- "About us", where the people say more than words
+- A team intro with a few hard numbers
+
+**Avoid**
+
+- You need each person's role: use Team
+- No group photo: use BigStat or StatRow
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- statement ≤ 2 lines × 12 chars
+- note ≤ 16 chars
+- stats 2–3: value ≤ 5 characters, label ≤ 10 chars
+- Keep the people in the upper two thirds of the photo
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Pill label on the photo |
+| `image` | `{ src, alt, credit?, focus? }` | yes | Team photo |
+| `statement` | `string \| string[]` | yes | One sentence on the dark card |
+| `note` | `string` |  | Small line under it |
+| `stats` | `{ value, label }[]` | yes | Figure cards |
+| `source` | `string` |  | Source or illustration note |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<TeamBanner kicker="关于我们" image={{ src: team, alt: '…' }} statement={['五个人，一间工作室，', '只接想做好的项目。']} stats={[{ value: '120+', label: '完成的项目' }, …]} />
+```
+
+<a id="booking-close"></a>
+
+## 257 · Booking close `<BookingClose />`
+
+**Position**: Closing · book a call; **Reference slide**: `src/decks/sig-atelier` — `book`
+
+A status pill, big title, lead, buttons and contacts on the left; on the right a booking card with the host's avatar, a month calendar and three time slots, all clickable on the slide.
+
+**Use when**
+
+- Last slide, inviting the audience to book a call
+- You want a small hands-on moment at the close
+
+**Avoid**
+
+- Only contact details: use ContactPanel or Closing
+- You need a QR code: use Thanks
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- badge ≤ 14 chars
+- title ≤ 2 lines × 6 chars
+- lead ≤ 36 chars
+- contacts 2: value ≤ 20 characters, label ≤ 6 chars
+- card.days 14–21, slots 3 × ≤ 5 characters
+
+**Interaction**: Click: days and time slots can be selected
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `badge` | `string` | yes | Status pill |
+| `title` | `string \| string[]` | yes | Big title |
+| `lead` | `string` |  | Lead |
+| `ctas` | `[string, string?]` |  | Buttons |
+| `contacts` | `{ value, label }[]` |  | Contacts |
+| `card` | `{ avatar?, name, note?, status?, month, offset?, from, days, open, slots }` | yes | Booking card; open lists the days that can be picked |
+| `hint` | `string` |  | Header hint, e.g. "Try picking a day and time" |
+
+**Example**
+
+```tsx
+<BookingClose badge="本月还能接 2 个项目" title={['聊聊你的', '下一个项目']} card={{ name: '周岚', month: '2026 年 11 月', from: 2, days: 21, open: [5, 6, 7], slots: ['10:00', '14:30', '16:00'] }} />
+```
+
+<a id="monograph-hero"></a>
+
+## 258 · Monograph hero `<MonographHero />`
+
+**Position**: Opening · agency introduction; **Reference slide**: `src/decks/sig-monograph` — `hero`
+
+A three-line introduction at the top left, a rating and a short note at the top right; below, a magazine-style story card (image, index, serif paragraph, play button) and a dark object picture.
+
+**Use when**
+
+- An agency or studio opening that says who you are in one sentence
+- A first slide with a magazine feel
+
+**Avoid**
+
+- The title runs past 3 lines: split it or use Statement
+- No suitable pictures: use Cover
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 3 lines × 12 chars
+- rating.score ≤ 7 characters, note ≤ 12 chars
+- aside.title ≤ 10 chars, body ≤ 30 chars
+- story.text ≤ 70 chars, index ≤ 4 characters
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Numbered section label with a dot |
+| `title` | `string \| string[]` | yes | Big text, up to three lines |
+| `rating` | `{ score, note, faces? }` |  | Rating at the top right |
+| `aside` | `{ title, body }` |  | Small note at the right |
+| `story` | `{ image, index?, text }` | yes | Story card |
+| `image` | `{ src, alt, credit?, focus? }` | yes | Dark object picture at the right |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<MonographHero kicker="01 关于我们" title={['阿卢拉是一家数字机构，', '做大胆的品牌和', '有影响力的体验。']} story={{ image: { src: chair, alt: '…' }, text: '…' }} image={{ src: blob, alt: '…' }} />
+```
+
+<a id="project-index"></a>
+
+## 259 · Project index `<ProjectIndex />`
+
+**Position**: Evidence · project list; **Reference slide**: `src/decks/sig-monograph` — `index`
+
+A column of project rows with the current one inked black, and a large picture of that project at the right. Click or hover a row to switch the picture.
+
+**Use when**
+
+- List 3–6 projects at once while giving each a picture
+- Click whichever project you are talking about
+
+**Avoid**
+
+- Each project needs detail: one per slide with CaseStudy
+- All pictures should be visible at once: use PhotoMosaic
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 1 line ≤ 12 chars
+- cta ≤ 8 chars
+- projects 3–6: name ≤ 14 chars, year ≤ 6 characters
+- Use portrait images
+
+**Interaction**: Click or hover: switches the current project and its picture
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Numbered section label |
+| `title` | `string \| string[]` | yes | Title |
+| `cta` | `string` |  | Pill button at the top right |
+| `projects` | `{ name, year, image }[]` | yes | Project rows |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint, e.g. "Click a row to switch" |
+
+**Example**
+
+```tsx
+<ProjectIndex kicker="02 项目" title="看看我们最好的作品" projects={[{ name: '远山咖啡 · 品牌升级', year: '2026', image: { src: prev, alt: '…' } }, …]} />
+```
+
+<a id="why-stats"></a>
+
+## 260 · Why stats `<WhyStats />`
+
+**Position**: Proof · three figures; **Reference slide**: `src/decks/sig-monograph` — `why`
+
+A short title, a few plus-sign reasons and a quote on the left; a large paragraph on the right above three figure cards whose digits roll in over a faint outline echo, with an optional progress bar.
+
+**Use when**
+
+- "Why us", backed by three numbers
+- A results slide with one paragraph and figures
+
+**Avoid**
+
+- More than 3 figures: use StatRow or KpiBoard
+- Comparing before and after: use CountCompare
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 2 lines × 5 chars
+- reasons 3–5 × ≤ 6 chars
+- lead ≤ 60 chars
+- quote.text ≤ 34 chars, by ≤ 16 chars
+- stats exactly 3: value ≤ 5 characters, label ≤ 14 chars, meter 0–100
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Numbered section label |
+| `title` | `string \| string[]` | yes | Short title |
+| `reasons` | `string[]` |  | Plus-sign reasons |
+| `lead` | `string` | yes | Paragraph at the top right |
+| `quote` | `{ text, by }` |  | Quote at the bottom left |
+| `stats` | `{ value, label, meter? }[]` | yes | Three figures |
+| `source` | `string` |  | Source or illustration note |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<WhyStats kicker="03 成果" title={['为什么', '选我们']} lead="…" stats={[{ value: '105+', label: '完成的项目' }, { value: '92%', label: '客户留存率', meter: 92 }, …]} />
+```
+
+<a id="team-portraits"></a>
+
+## 261 · Team portraits `<TeamPortraits />`
+
+**Position**: Background · team members; **Reference slide**: `src/decks/sig-monograph` — `team`
+
+Three black-and-white portrait photos plus a dark hiring card; portraits turn colour on hover. Name, role and number underneath.
+
+**Use when**
+
+- Introduce 3 core members
+- A team slide that also hires
+
+**Avoid**
+
+- More than 3 people or no photos: use Team
+- Each person's responsibilities in detail: use PersonaCards
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 1 line ≤ 8 chars
+- people exactly 3: name ≤ 6 chars, role ≤ 8 chars
+- join.title 2 lines × ≤ 5 chars, body ≤ 34 chars, contact ≤ 22 characters
+
+**Interaction**: Hover: a portrait turns from black and white to colour
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Numbered section label |
+| `title` | `string \| string[]` | yes | Title |
+| `cta` | `string` |  | Pill at the top right |
+| `people` | `{ photo, name, role }[]` | yes | Three people |
+| `join` | `{ title, accent?, body, contact }` |  | Dark hiring card; accent is the word set in the theme colour |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<TeamPortraits kicker="04 团队" title="做事的人" people={[{ photo: { src: t1, alt: '…' }, name: '马丁', role: '创意总监' }, …]} join={{ title: ['我们在', '招设计师。'], accent: '设计师', body: '…', contact: 'jobs@…' }} />
+```
+
+<a id="service-ledger"></a>
+
+## 262 · Service ledger `<ServiceLedger />`
+
+**Position**: Product · service list; **Reference slide**: `src/decks/sig-monograph` — `services`
+
+A title and a ruled list on the left: accent numbers, a service name and one line each; a tall picture with a caption pill on the right. Rows appear one by one.
+
+**Use when**
+
+- List 3–5 services with one line each
+- You want the restraint of a newspaper contents page
+
+**Avoid**
+
+- Each service needs a picture: use ServiceTrio
+- Services need expanding details: use ProcessAccordion
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 1 line ≤ 8 chars
+- rows 3–5: title ≤ 6 chars, body ≤ 26 chars
+- caption ≤ 10 chars
+
+**Interaction**: build: the rows appear one by one
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Numbered section label |
+| `title` | `string \| string[]` | yes | Title |
+| `rows` | `{ title, body }[]` | yes | List rows, one build step each |
+| `image` | `{ src, alt, credit?, focus? }` | yes | Tall picture at the right |
+| `caption` | `string` |  | Caption pill |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<ServiceLedger kicker="05 服务" title="我们做什么" rows={[{ title: '品牌策略', body: '…' }, …]} image={{ src: svc, alt: '…' }} />
+```
+
+<a id="monograph-close"></a>
+
+## 263 · Monograph close `<MonographClose />`
+
+**Position**: Closing · contact details; **Reference slide**: `src/decks/sig-monograph` — `close`
+
+Three huge lines with the middle one in the theme colour, contacts ruled underneath, and a large picture at the right carrying a dark pill button.
+
+**Use when**
+
+- Last slide, one sentence inviting work together
+- You want to close on big type
+
+**Avoid**
+
+- Several contacts or a QR code: use ContactPanel or Thanks
+- No suitable picture: use Closing
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title exactly 3 lines × ≤ 5 chars
+- contacts 2–3: value ≤ 20 characters, label ≤ 8 chars
+- cta ≤ 10 chars
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Numbered section label |
+| `title` | `[string, string, string]` | yes | Three big lines, the middle one emphasised |
+| `contacts` | `{ value, label }[]` | yes | Contacts |
+| `image` | `{ src, alt, credit?, focus? }` | yes | Large picture at the right |
+| `cta` | `string` |  | Button on the picture |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<MonographClose kicker="06 联系" title={['一起做点', '大胆的', '东西吧。']} contacts={[{ value: 'hello@…', label: '新项目' }, …]} image={{ src: end, alt: '…' }} />
+```
+
+<a id="nocturne-hero"></a>
+
+## 264 · Nocturne hero `<NocturneHero />`
+
+**Position**: Opening · app home page; **Reference slide**: `src/decks/sig-nocturne` — `hero`
+
+The theme colour glows in the middle of a dark stage: faces, a big title, a lead, buttons and three figures whose digits roll in on the left; a slowly floating phone on the right shows the result, thumbnails and a button.
+
+**Use when**
+
+- First slide for a consumer app or AI tool
+- You want the output visible at first glance
+
+**Avoid**
+
+- The product is desktop software: use HeroPanel or DeviceFrame
+- Nothing fits a phone screen: use Cover
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 2 lines × 8 chars
+- lead ≤ 36 chars
+- ctas ≤ 8 chars each; note ≤ 16 chars
+- stats 2–3: value ≤ 7 characters, label ≤ 6 chars
+- phone.thumbs ≤ 4, label ≤ 4 chars, cta ≤ 8 chars, toast ≤ 12 chars
+
+**Interaction**: The phone keeps floating slowly
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `faces` | `{ src, alt, credit?, focus? }[]` |  | Small faces above the title |
+| `title` | `string \| string[]` | yes | Big title |
+| `lead` | `string` |  | Lead |
+| `ctas` | `[string, string?]` |  | Accent button and a plain button |
+| `note` | `string` |  | Small line under the buttons |
+| `stats` | `{ value, label }[]` |  | Figures along the bottom |
+| `phone` | `{ image, thumbs?, label?, cta?, toast? }` | yes | What the phone screen shows; with 2+ thumbnails two also float beside the phone, toast is a notification card next to it |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<NocturneHero title={['把你的照片', '变成一组大片']} ctas={['生成我的照片', '看看功能']} stats={[{ value: '20+', label: '种风格' }]} phone={{ image: { src: glow, alt: '…' }, cta: '免费试用' }} />
+```
+
+<a id="feature-bento"></a>
+
+## 265 · Feature bento `<FeatureBento />`
+
+**Position**: Product · feature overview; **Reference slide**: `src/decks/sig-nocturne` — `features`
+
+A five-cell bento under a centred title: a large accent card with three portraits fanned out, a large dark card full of labelled style thumbnails, and three small picture-and-text cards along the bottom.
+
+**Use when**
+
+- Five selling points on one slide
+- The selling points are themselves results to look at
+
+**Avoid**
+
+- No pictures for the points: use Bento or IconGrid
+- Only 3 points: use ServiceTrio
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 16 characters
+- title ≤ 2 lines × 8 chars
+- hero, grid: title ≤ 8 chars, body ≤ 26 chars
+- hero.images 3; grid.items 6–8, label ≤ 4 chars
+- small exactly 3: tag ≤ 6 characters, title ≤ 8 chars, body ≤ 20 chars
+
+**Interaction**: Hover: the fan opens wider, thumbnails zoom
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Pill label |
+| `title` | `string \| string[]` | yes | Title |
+| `hero` | `{ title, body, images }` | yes | Large accent card |
+| `grid` | `{ title, body, items }` | yes | Large card of style thumbnails |
+| `small` | `{ tag, title, body, image }[]` | yes | Three small cards |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<FeatureBento kicker="已生成 56 万张" title={['AI 驱动的', '头像创作']} hero={{ title: '高画质', body: '…', images: [a, b, c] }} grid={{ title: '20+ 种风格', body: '…', items: [{ image: x, label: '赛博' }, …] }} small={[…]} />
+```
+
+<a id="glow-pricing"></a>
+
+## 266 · Glow pricing `<GlowPricing />`
+
+**Position**: Pricing · three plans; **Reference slide**: `src/decks/sig-nocturne` — `pricing`
+
+Three plan cards with the recommended one glowing in an accent gradient; a monthly / yearly switch above flips every price at once.
+
+**Use when**
+
+- Pricing for a subscription product
+- You want to show live that yearly saves money
+
+**Avoid**
+
+- More than 3 plans or a line-by-line comparison: use PricingTiers or CompareTable
+- Only one price: use BigStat
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 1 line ≤ 12 chars
+- periods 2 × ≤ 4 chars, save ≤ 6 chars
+- plans exactly 3: name ≤ 4 chars, each price ≤ 6 characters, body ≤ 24 chars, items 3–5 × ≤ 10 chars, cta ≤ 6 chars
+- quota optional: label ≤ 6 chars, value ≤ 10 characters, pct 0–100
+
+**Interaction**: Click: switches the billing period and every price
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Pill label |
+| `title` | `string \| string[]` | yes | Title |
+| `periods` | `[string, string]` | yes | The two billing periods |
+| `save` | `string` |  | Saving note next to the second period |
+| `units` | `[string, string]` |  | Unit after the price |
+| `plans` | `{ name, price, body, items, quota?, cta, hot?, badge? }[]` | yes | Three plans; price holds one value per period, quota is an allowance bar above the button |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint, e.g. "Click monthly / yearly to switch" |
+
+**Example**
+
+```tsx
+<GlowPricing kicker="价格" title="按需选择，随时升级" periods={['按月', '按年']} save="省 20%" plans={[{ name: '入门', price: ['¥99', '¥79'], body: '…', items: ['…'], cta: '选择入门' }, …]} />
+```
+
+<a id="step-trio"></a>
+
+## 267 · Step trio `<StepTrio />`
+
+**Position**: Procedure · three steps to start; **Reference slide**: `src/decks/sig-nocturne` — `steps`
+
+Three step cards whose top half acts out the step: photos dealt like prints, a style picker you can tap on the slide, and the finished picture. Step number, title and one line underneath.
+
+**Use when**
+
+- Getting started takes three steps
+- The audience should see what each step looks like
+
+**Avoid**
+
+- More than 3 steps: use StepTrack or UiSteps
+- Steps have no visuals: use NumberedColumns
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 1 line ≤ 12 chars; lead ≤ 30 chars
+- steps exactly 3: label ≤ 8 characters, title ≤ 9 chars, body ≤ 24 chars
+- inputs.images 3, counter ≤ 12 chars
+- options 4–6, label ≤ 4 chars
+- result.chip ≤ 8 characters
+- picked ≤ 10 chars, {n} becomes the number picked
+
+**Interaction**: Click: options in the second card toggle on and off
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Pill label |
+| `title` | `string \| string[]` | yes | Title |
+| `lead` | `string` |  | Lead |
+| `steps` | `{ label, title, body }[]` | yes | Three steps |
+| `inputs` | `{ images, counter? }` | yes | Photos for step one |
+| `options` | `{ image, label, on? }[]` | yes | Options for step two, tappable |
+| `result` | `{ image, chip? }` | yes | Finished picture for step three |
+| `picked` | `string` |  | Live count on the picker, e.g. "{n} picked" |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<StepTrio kicker="三步完成" title="上传、选风格、拿成片" steps={[…]} inputs={{ images: [a, b, c] }} options={[{ image: x, label: '光影', on: true }, …]} result={{ image: y, chip: '4K' }} />
+```
+
+<a id="reveal-compare"></a>
+
+## 268 · Reveal compare `<RevealCompare />`
+
+**Position**: Comparison · before and after; **Reference slide**: `src/decks/sig-nocturne` — `compare`
+
+A title, a lead and 2–4 spec rows on the left; a portrait comparison on the right whose middle handle can be dragged (or moved with the arrow keys) to see before and after.
+
+**Use when**
+
+- Before and after of the same frame
+- It convinces best when someone drags it themselves
+
+**Avoid**
+
+- The two images are framed differently: use BeforeAfter
+- Landscape comparison: use CompareSlider
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 2 lines × 8 chars
+- lead ≤ 40 chars
+- specs 2–4: label ≤ 8 chars, value ≤ 12 characters
+- labels ≤ 8 characters each
+- Both images framed the same, portrait
+
+**Interaction**: Drag or arrow keys: moves the divider
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Pill label |
+| `title` | `string \| string[]` | yes | Title |
+| `lead` | `string` |  | Lead |
+| `specs` | `{ label, value }[]` |  | Spec rows |
+| `before` | `{ src, alt, credit?, focus? }` | yes | Before |
+| `after` | `{ src, alt, credit?, focus? }` | yes | After |
+| `labels` | `[string, string]` |  | Corner labels |
+| `source` | `string` |  | Source or illustration note |
+| `hint` | `string` |  | Header hint, e.g. "Drag the handle" |
+
+**Example**
+
+```tsx
+<RevealCompare kicker="前后对比" title={['还是你，', '只是更好看。']} before={{ src: a, alt: '…' }} after={{ src: b, alt: '…' }} labels={['原图', '处理后']} />
+```
+
+<a id="wall-close"></a>
+
+## 269 · Wall close `<WallClose />`
+
+**Position**: Closing · call to action; **Reference slide**: `src/decks/sig-nocturne` — `close`
+
+A tilted wall of photos filling the slide, columns drifting slowly up and down; the centre is darkened for the title, one line, buttons and a small note.
+
+**Use when**
+
+- Last slide, showing lots of results to suggest many people already use it
+- Work, portraits or posters that make a good wall
+
+**Avoid**
+
+- Fewer than 6 images: use PhotoClosing
+- You need contact details: use ContactPanel
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 2 lines × 10 chars
+- lead ≤ 30 chars
+- ctas ≤ 8 chars each; note ≤ 20 chars
+- images 6–10 portrait images
+
+**Interaction**: The wall keeps drifting up and down
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `title` | `string \| string[]` | yes | Title |
+| `lead` | `string` |  | One line |
+| `ctas` | `[string, string?]` |  | Buttons |
+| `note` | `string` |  | Small line under the buttons |
+| `images` | `{ src, alt, credit?, focus? }[]` | yes | Portrait images for the wall |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<WallClose title={['下一张头像，', '交给夜拍。']} ctas={['生成我的照片', '看价格']} images={[a, b, c, d, e, f]} />
+```
+
+<a id="sunrise-hero"></a>
+
+## 270 · Sunrise hero `<SunriseHero />`
+
+**Position**: Opening · SaaS home page; **Reference slide**: `src/decks/sig-sunrise` — `hero`
+
+A warm yellow sunrise glow across the top: a mock nav bar, a centred title, lead and two buttons, two teammates' cursors drifting in the side margins, and a dashboard rising from the bottom edge (completion arc, bar trend, team faces and tasks).
+
+**Use when**
+
+- First slide for a SaaS product, template kit or collaboration tool
+- You want the product UI visible from the start
+
+**Avoid**
+
+- No product UI to show: use Cover
+- You have real screenshots: use HeroPanel or DeviceFrame
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- brand ≤ 10 characters; links ≤ 4 × ≤ 4 chars; navCta ≤ 6 chars
+- title ≤ 2 lines × 12 chars
+- lead ≤ 30 chars; ctas ≤ 6 chars each
+- cursors 2 names × ≤ 4 chars
+- dash.gauge.value 0–100; trend.values 6–12; team.faces ≤ 5, tasks 2 (title ≤ 8 chars, status ≤ 3 chars)
+
+**Interaction**: Cursors keep drifting in the margins; bars and faces react on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `brand` | `string` | yes | Product name in the mock nav |
+| `links` | `string[]` |  | Nav links |
+| `navCta` | `string` |  | Nav button |
+| `title` | `string \| string[]` | yes | Big title |
+| `lead` | `string` |  | Lead |
+| `ctas` | `[string, string?]` |  | Primary and secondary buttons |
+| `cursors` | `[string, string]` |  | Names on the two teammate cursors |
+| `dash` | `{ gauge, trend, team }` | yes | The three dashboard cards along the bottom |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<SunriseHero brand="拾页" title={['几天，而不是几周，', '上线你的 SaaS 官网']} ctas={['获取模板', '看全部示例']} cursors={['小周', '你']} dash={{ gauge: { label: '本周完成度', value: 68 }, trend: { label: '任务完成趋势', values: [40, 62, 48, 80] }, team: { label: '团队', faces: [a, b], tasks: [{ title: '首页动效', status: '待评审' }] } }} />
+```
+
+<a id="kit-bento"></a>
+
+## 271 · Kit bento `<KitBento />`
+
+**Position**: Product · what is inside; **Reference slide**: `src/decks/sig-sunrise` — `kit`
+
+A three-cell bento: two big-figure cards on top whose right halves sketch stacked pages and a block layout, and a full-width card below with copy at the left and a dark design canvas of page frames at the right.
+
+**Use when**
+
+- Showing what a product contains
+- Content overview for a template kit, component library or design system
+
+**Avoid**
+
+- More than 2 figures: use NumberTiles or StatRow
+- You have real screenshots: use Bento
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title optional, 1 line ≤ 14 chars
+- stats exactly 2: value ≤ 4 characters, label ≤ 6 chars, body ≤ 22 chars
+- wide.title ≤ 10 chars, body ≤ 30 chars, frames 4–6 × ≤ 4 chars
+
+**Interaction**: Hover: page sketches spread out, frames lift
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `title` | `string \| string[]` |  | Title above the grid |
+| `stats` | `{ value, label, body }[]` | yes | Two big-figure cards |
+| `wide` | `{ title, body, frames? }` | yes | Full-width card and the frame names on its canvas |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<KitBento stats={[{ value: '19', label: '独立页面', body: '…' }, { value: '62+', label: '区块与组件', body: '…' }]} wide={{ title: '附带设计源文件', body: '…', frames: ['首页', '定价', '博客', '关于'] }} />
+```
+
+<a id="home-trio"></a>
+
+## 272 · Home trio `<HomeTrio />`
+
+**Position**: Product · options side by side; **Reference slide**: `src/decks/sig-sunrise` — `homes`
+
+Three cards under a centred title, each holding a homepage sketch (chart, calendar or dark footer) with a name and one line underneath. Hover and the sketch scrolls like a web page; click to pick one.
+
+**Use when**
+
+- Three versions or plans of one product
+- Comparing the look of templates, themes or packages
+
+**Avoid**
+
+- You have real screenshots: use Screenshot or ShelfGallery
+- More than 3 options: use IconGrid
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 10 chars; title 1 line ≤ 10 chars
+- items exactly 3: name ≤ 10 chars, note ≤ 18 chars, variant chart / calendar / dark
+- pickedLabel ≤ 4 chars
+
+**Interaction**: Hover: the sketch scrolls; click: picks that card
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` |  | Pill label |
+| `title` | `string \| string[]` | yes | Title |
+| `items` | `{ name, note?, variant }[]` | yes | The three homepages |
+| `picked` | `number` |  | Which card starts picked, default 0 |
+| `pickedLabel` | `string` |  | Small label on the picked card |
+| `hint` | `string` |  | Header hint, e.g. "Hover to scroll, click to pick" |
+
+**Example**
+
+```tsx
+<HomeTrio title="3 套首页" items={[{ name: '首页 1 · 任务管理', variant: 'chart' }, { name: '首页 2 · 团队协作', variant: 'calendar' }, { name: '首页 3 · 远程团队', variant: 'dark' }]} pickedLabel="已选" />
+```
+
+<a id="kanban-demo"></a>
+
+## 273 · Kanban demo `<KanbanDemo />`
+
+**Position**: Product · interactive demo; **Reference slide**: `src/decks/sig-sunrise` — `board`
+
+A pill, title, lead and ticked points on the left; a task board on the right with view tabs and member faces on top, a teammate cursor gliding over the tabs, and three columns of cards. Click a card and it moves to the next column while the counts update; each column ends in a dashed "add task" slot.
+
+**Use when**
+
+- Showing the core action of a task, ticket or workflow product
+- The audience should be able to click it live
+
+**Avoid**
+
+- The process is linear steps: use StepTrack
+- You have real screenshots: use DeviceFrame
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 2 lines × 7 chars; lead ≤ 36 chars
+- points 2–4 × ≤ 16 chars
+- columns exactly 3: name ≤ 4 chars, 1–3 cards each
+- cards: tag ≤ 4 chars, title ≤ 12 chars, due ≤ 8 characters, progress 0–100
+- views ≤ 3 × ≤ 4 chars; cursor ≤ 4 chars
+
+**Interaction**: Click: a card moves to the next column and counts update; view tabs switch
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` |  | Pill label |
+| `title` | `string \| string[]` | yes | Title |
+| `lead` | `string` |  | Lead |
+| `points` | `string[]` |  | Ticked points |
+| `columns` | `{ name, count?, cards }[]` | yes | Three columns; count is the starting number shown, the last column is "done" |
+| `views` | `string[]` |  | View tabs on the board |
+| `cursor` | `string` |  | Teammate cursor gliding over the tabs |
+| `doneLabel` | `string` |  | Text on finished cards; the default is a Chinese "done" label |
+| `addLabel` | `string` |  | Text in each column's empty slot; the default is a Chinese "add task" label |
+| `faces` | `{ src, alt, credit?, focus? }[]` |  | Member faces at the top right of the board |
+| `hint` | `string` |  | Header hint, e.g. "Click a card to move it" |
+
+**Example**
+
+```tsx
+<KanbanDemo title={['拖一下，', '进度就更新了']} points={['…']} views={['看板', '列表', '日历']} cursor="小周" columns={[{ name: '待办', cards: [{ tag: '设计', title: '定价页改版', due: '11 月 12 日' }] }, { name: '进行中', cards: [{ tag: '开发', title: '接入支付回调', progress: 40 }] }, { name: '完成', count: 12, cards: [] }]} />
+```
+
+<a id="proof-mosaic"></a>
+
+## 274 · Proof mosaic `<ProofMosaic />`
+
+**Position**: Customer · quotes and reviews; **Reference slide**: `src/decks/sig-sunrise` — `proof`
+
+A mosaic under a centred title: a large dark quote card with a portrait in its right half; on the right, a sun-yellow headline figure above two short quote cards, each with a star rating, a measured result chip and a signed face.
+
+**Use when**
+
+- Customer quotes and reviews
+- You have one strong quote and one headline total
+
+**Avoid**
+
+- Only one quote: use QuoteHero or QuoteArc
+- More than 3 quotes: use QuoteWall
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 1 line ≤ 10 chars
+- quote.text ≤ 48 chars, name ≤ 6 chars, role ≤ 16 characters, portrait image
+- stat.value ≤ 7 characters, label ≤ 2 lines × 6 chars
+- items exactly 2: text ≤ 30 chars, name ≤ 4 chars, role ≤ 16 characters; result optional (value ≤ 6 characters, label ≤ 8 chars)
+
+**Interaction**: Hover: the portrait zooms a little, short cards lift
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` |  | Pill label |
+| `title` | `string \| string[]` | yes | Title |
+| `quote` | `{ text, name, role, image }` | yes | Large dark quote card |
+| `stat` | `{ value, label }` | yes | Sun-yellow headline figure |
+| `items` | `{ text, name, role, face?, result? }[]` | yes | Two short quote cards |
+| `stars` | `number` |  | Star rating on the short cards, 1–5, default 5 |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<ProofMosaic title="用过的团队都说好" quote={{ text: '…', name: '许宁', role: '联合创始人', image: p }} stat={{ value: '2,400+', label: ['团队用它', '上线了官网'] }} items={[{ text: '…', name: '韩东', role: '前端负责人', result: { value: '-60%', label: '对稿时间' } }, …]} />
+```
+
+<a id="buyout-pricing"></a>
+
+## 275 · Buyout pricing `<BuyoutPricing />`
+
+**Position**: Pricing · two plans and a close; **Reference slide**: `src/decks/sig-sunrise` — `pricing`
+
+Two plan cards and a sun-yellow closing card: each plan has a price, one line, a ticked list and two key facts in boxes, and clicking switches the picked plan; the closing card carries a call to action, a note, a row of faces with a user count and a black button.
+
+**Use when**
+
+- One-time purchase with two plans
+- Price and final call to action on the same slide
+
+**Avoid**
+
+- Subscription with monthly / yearly: use GlowPricing or PricingTiers
+- More than 2 plans: use PricingTiers
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 1 line ≤ 10 chars
+- plans exactly 2: name ≤ 4 chars, price ≤ 6 characters, unit ≤ 4 chars, body ≤ 20 chars, items 3–4 × ≤ 10 chars, facts 2 (label ≤ 4 chars, value ≤ 6 chars), cta ≤ 6 chars, badge ≤ 3 chars
+- close.title ≤ 2 lines × 6 chars, body ≤ 36 chars, points 2–3 × ≤ 12 chars, count.value ≤ 7 characters, count.label ≤ 6 chars, cta ≤ 6 chars
+
+**Interaction**: Click: switches the picked plan, its button turns the theme colour
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` |  | Pill label |
+| `title` | `string \| string[]` | yes | Title |
+| `plans` | `{ name, price, unit?, body?, items, facts?, cta, badge? }[]` | yes | Two plans; the one with a badge starts picked |
+| `close` | `{ title, body?, points?, faces?, count?, cta }` | yes | Sun-yellow closing card |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint, e.g. "Click a plan to pick it" |
+
+**Example**
+
+```tsx
+<BuyoutPricing title="一次买断，永久使用" plans={[{ name: '个人版', price: '¥299', unit: '一次性', items: ['…'], cta: '购买个人版' }, { name: '团队版', price: '¥899', badge: '推荐', items: ['…'], cta: '购买团队版' }]} close={{ title: ['今天开始，', '周末上线。'], cta: '免费预览' }} />
 ```
 
 <a id="icons"></a>

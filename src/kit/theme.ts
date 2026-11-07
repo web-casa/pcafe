@@ -26,6 +26,10 @@ import { preset as pink_script } from './styles/pink-script'
 import { preset as broadside } from './styles/broadside'
 import { preset as biennale } from './styles/biennale'
 import { preset as stencil } from './styles/stencil'
+import { preset as atelier } from './styles/atelier'
+import { preset as monograph } from './styles/monograph'
+import { preset as nocturne } from './styles/nocturne'
+import { preset as sunrise } from './styles/sunrise'
 import type { CSSProperties } from 'react'
 
 export interface Theme {
@@ -223,6 +227,10 @@ const BASE_STYLES = {
   'broadside': broadside,
   'biennale': biennale,
   'stencil': stencil,
+  'atelier': atelier,
+  'monograph': monograph,
+  'nocturne': nocturne,
+  'sunrise': sunrise,
 } satisfies Record<string, StylePreset>
 
 /** Built-in presets plus any added later by `registerStyle`. */

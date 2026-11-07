@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 8 个模板。返回索引：[../templates.md](../templates.md)。
+共 10 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `BigStat` 单个大数字（证据 · 一个数字撑起一页）
 - 适合：一个数字本身就是论点：97%、9.34%、1/100；需要在一串文字页之间放一个视觉重音
@@ -51,3 +51,15 @@
 - 不适合：跨天或跨月：用 Gantt；只有一条时间线：用 Timeline
 - 上限：rows 2–6 个：name ≤ 10 字，note ≤ 20 字；ticks 3–8 个，时间写 HH:MM，同一天；events 0–3 个，label ≤ 10 字，相邻两个至少隔开窗口的 15%；legend 每项 ≤ 6 字
 - 参考：src/decks/v3-p3 的 `outage` 页；docs/zh-CN/components.md#outage-board；交互：每按一次 → 出现一个服务的轨道
+
+### `ProjectPair` 双作品展示（证据 · 两个代表作）
+- 适合：挑两个最能代表你的项目；作品要配客户名一起看
+- 不适合：作品超过 2 个：用 PhotoMosaic 或 WorkCards；要讲一个项目的前后变化：用 CaseStudy
+- 上限：kicker ≤ 6 字；title ≤ 2 行 × 9 字；projects 正好 2 个：name ≤ 16 字，tag ≤ 8 字；图片用横图
+- 参考：src/decks/sig-atelier 的 `work` 页；docs/zh-CN/components.md#project-pair；交互：build：两个项目逐个出现
+
+### `ProjectIndex` 项目索引（证据 · 项目列表）
+- 适合：一次列出 3–6 个项目，又想让每个都有画面；现场讲到哪个项目就点哪个
+- 不适合：每个项目都要讲细节：一页一个，用 CaseStudy；要同时看到所有图：用 PhotoMosaic
+- 上限：title 1 行 ≤ 12 字；cta ≤ 8 字；projects 3–6 个：name ≤ 14 字，year ≤ 6 个字符；图片用竖图
+- 参考：src/decks/sig-monograph 的 `index` 页；docs/zh-CN/components.md#project-index；交互：点击或悬停：切换当前项目和右侧大图

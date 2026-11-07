@@ -16,6 +16,7 @@
 | `toy3d` | Geometric | Huge black type on white, colourful 3D shapes floating around the content, marquee lettering. For brands, creative agencies and launch openers. |  | src/decks/toy3d |
 | `wallpaper` | Wallpaper | Each slide is a soft gradient wallpaper, the header becomes a menu bar, content sits in translucent system windows. For product demos, portfolios and relaxed talks. |  | src/decks/wallpaper |
 | `agency` | Growth | Pure white, huge tight black headings with small colour icons, “( 01 ) Section.” bracket labels, blue pill buttons and neon green badges. For product sites, marketing plans and growth pitches. |  | — |
+| `atelier` | Atelier | Pure white, soft grey rounded cards, heavy black titles, pill labels with a green "available" dot, and work images drifting in a row. For design studios, freelancers, portfolios and service pitches. |  | — |
 | `bento` | Bento | White tiles of different sizes on light grey, small monospace labels, crisp corners. For product overviews, feature lists and one-slide summaries. |  | src/decks/bento |
 | `biennale` | Biennale | Lemon light spots on warm grey paper, deep indigo condensed serif headings, hairline columns. For exhibitions, cultural projects and annual reviews. |  | — |
 | `block-frame` | Block frame | Warm yellow with off-white cards, heavy black outlines and hard shadows, bold sans caps, labels like stuck-on squares. For products, events and young brands. |  | — |
@@ -29,7 +30,9 @@
 | `gradient` | Gradient | Bright diffuse gradient blobs on white, translucent frosted round cards, rounded bold headings. For creative studios, brand introductions and feature launches. |  | src/decks/gradient |
 | `halo` | Halo | Near-white page, thin dark slate headings with a word or two in italic serif, a soft multicolour glow behind; lists are rows split by hairlines. For product home pages, agencies and brand introductions. |  | — |
 | `keynote` | Keynote | A pure black canvas, one huge tightly tracked heading per slide, key words filled with a gradient, lots of empty space. For product launches, keynotes and annual conferences. | yes | src/decks/keynote |
+| `monograph` | Monograph | Light grey paper with faint four-column rules and medium-weight big titles; the theme colour only marks dots, numbers and one emphasis. Large work images, black-and-white portraits. For brand and digital agencies, portfolios and team intros. |  | — |
 | `neo-grid` | Neo grid | A square grid on off-white, large neon yellow and black panels, bold sans caps with small monospace text. For financial data, launches and growth reviews. |  | — |
+| `nocturne` | Nocturne | Deep violet-black canvas with the theme colour glowing in the middle, light-weight titles with serif italic numerals, translucent glowing cards. Dark throughout; closest to the original with the violet theme. For consumer apps, AI tools and creative product launches. | yes | — |
 | `nuance` | Artboard | Warm white paper, condensed serif headings with one word inside a tilted orange tag; iridescent round panels, dot-grid boards, red-dot pills and dark arched cards. For product home pages, portfolios and design tools. |  | — |
 | `pink-script` | Night pink | Near-black with a dark pink glow, DM Serif headings and large pink numbers, small monospace header. Dark by default. For fashion, brands and launch events. | yes | — |
 | `platform` | Platform | Thick slab serif headings with an offset shadow on beige paper, condensed body text, handwritten notes. For rallies, roadmaps and manifesto openers. |  | — |
@@ -38,6 +41,7 @@
 | `ribbon` | Ribbon | Warm white, rounded bold headings, bias-cut ribbon labels; thick ribbons cross the cover and section slides. For training, events and friendly customer introductions. |  | src/decks/ribbon |
 | `soft-saas` | Soft SaaS | White with a pale blue glow, round cards with soft shadows, small interface pieces such as calendars and time slots. For SaaS products, process explanations, booking and collaboration. |  | src/decks/soft-saas |
 | `stencil` | Stencil | Bone paper, stencil serif caps, condensed bold labels, cards in saturated ochre, magenta, orange and teal blocks. For studio pitches, principles and comparisons. |  | — |
+| `sunrise` | Sunrise | White canvas with a warm yellow sunrise glow at the top, hairline cards with big figures, teammates' cursors drifting in the margins and lime ticks as accents. Buttons and charts follow the theme colour. For SaaS products, template and tool launches, and team collaboration pitches. |  | — |
 | `warm-dark` | Warm dark | Warm near-black, amber glow, hairline grid and italic serif numbers. Dark by default. For finance, data products and premium launches. | yes | src/decks/warm-dark |
 
 | theme | label |

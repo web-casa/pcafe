@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 6 个模板。返回索引：[../templates.md](../templates.md)。
+共 7 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `Checklist` 可勾选清单（操作 · 准备工作）
 - 适合：上线前检查、升级前准备、验收标准；每项都能给出一条具体命令或动作
@@ -39,3 +39,9 @@
 - 不适合：步骤带命令且超过 3 步：用 StepTrack；步骤没有先后：用 NumberedColumns
 - 上限：steps 正好 3 步：title ≤ 8 字，text ≤ 36 字；ui: field（label ≤ 10 字，value ≤ 24 字符）/ options（2–4 个，各 ≤ 8 字符）/ done（≤ 14 字）
 - 参考：src/decks/soft-saas 的 `steps` 页；docs/zh-CN/components.md#ui-steps
+
+### `StepTrio` 三步演示卡（操作 · 三步上手）
+- 适合：产品上手只需要三步；想让观众看到每一步长什么样
+- 不适合：步骤超过 3 个：用 StepTrack 或 UiSteps；步骤没有画面：用 NumberedColumns
+- 上限：title 1 行 ≤ 12 字；lead ≤ 30 字；steps 正好 3 个：label ≤ 8 个字符，title ≤ 9 字，body ≤ 24 字；inputs.images 3 张，counter ≤ 12 字；options 4–6 个，label ≤ 4 字；result.chip ≤ 8 个字符；picked ≤ 10 字，{n} 换成已选数量
+- 参考：src/decks/sig-nocturne 的 `steps` 页；docs/zh-CN/components.md#step-trio；交互：点击：第二张卡里的选项可以选中或取消

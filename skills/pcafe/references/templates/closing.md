@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 7 个模板。返回索引：[../templates.md](../templates.md)。
+共 10 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `Closing` 结论（收尾 · 最后一页）
 - 适合：整份演示的最后一页
@@ -45,3 +45,21 @@
 - 不适合：步骤超过 3 个：用 Roadmap；只是总结要点：用 Closing
 - 上限：steps 正好 3 个；when ≤ 8 字，title ≤ 10 字，body ≤ 40 字，meta ≤ 16 字符；title ≤ 2 行 × 8 字
 - 参考：src/decks/sig-neo 的 `steps` 页；docs/zh-CN/components.md#step-grid；交互：按 → 逐块亮起
+
+### `BookingClose` 预约收尾（收尾 · 预约一次沟通）
+- 适合：最后一页，邀请对方约一次沟通；想让收尾页有一个能动手的小互动
+- 不适合：只留联系方式：用 ContactPanel 或 Closing；需要二维码：用 Thanks
+- 上限：badge ≤ 14 字；title ≤ 2 行 × 6 字；lead ≤ 36 字；contacts 2 个：value ≤ 20 个字符，label ≤ 6 字；card.days 14–21 天，slots 3 个 × ≤ 5 个字符
+- 参考：src/decks/sig-atelier 的 `book` 页；docs/zh-CN/components.md#booking-close；交互：点击：日期和时段可以选中
+
+### `MonographClose` 三行收尾（收尾 · 联系方式）
+- 适合：最后一页，一句话邀请合作；想用大字收尾
+- 不适合：需要多个联系人或二维码：用 ContactPanel 或 Thanks；没有合适的图：用 Closing
+- 上限：title 正好 3 行 × ≤ 5 字；contacts 2–3 个：value ≤ 20 个字符，label ≤ 8 字；cta ≤ 10 字
+- 参考：src/decks/sig-monograph 的 `close` 页；docs/zh-CN/components.md#monograph-close
+
+### `WallClose` 照片墙收尾（收尾 · 行动号召）
+- 适合：最后一页，用大量成果给人“已经很多人在用”的感觉；作品、头像、海报这类适合成墙的图
+- 不适合：图片少于 6 张：用 PhotoClosing；要留联系方式：用 ContactPanel
+- 上限：title ≤ 2 行 × 10 字；lead ≤ 30 字；ctas 每个 ≤ 8 字；note ≤ 20 字；images 6–10 张竖图
+- 参考：src/decks/sig-nocturne 的 `close` 页；docs/zh-CN/components.md#wall-close；交互：照片墙持续上下滚动
