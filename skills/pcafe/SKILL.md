@@ -1,6 +1,6 @@
 ---
-name: PCafe
-description: Turn a topic, notes or a document into a finished HTML slide deck with PCafe's fixed templates and style presets. Also covers reports and résumés, social cards and carousels (小红书/B站封面), animated MP4 video, interactive courseware, display screens and print pieces (海报/易拉宝/三折页/信息长图). Use when the user asks to make, write, restyle or fix a deck / 演示 / PPT / 幻灯片 or any of those in a PCafe project, or asks which template or style fits some content. Covers storyline, matching each point to a template, fitting text to each template's limits, picking a style and theme, sourcing facts, and the check-and-review loop.
+name: pcafe
+description: Turn a topic, notes or a document into a finished HTML slide deck with PCafe's fixed templates and style presets. Also covers reports and résumés, social cards and carousels (小红书/B站封面), animated MP4 video, interactive courseware, display screens and print pieces (海报/易拉宝/三折页/信息长图). Use when the user asks to make, write, restyle or fix a deck / 演示 / PPT / 幻灯片 or any of those (inside a PCafe project, or in a new one it creates with npx), or asks which template or style fits some content. Covers storyline, matching each point to a template, fitting text to each template's limits, picking a style and theme, sourcing facts, and the check-and-review loop.
 ---
 
 # PCafe：把文字写进模板
@@ -14,6 +14,17 @@ PCafe 的演示只由 `src/kit` 里的固定模板拼成。写得好不好，取
 - `references/templates.md`：模板索引，每组一行（组名、内容形状、模板名）。先读它选组。
 - `references/templates/<组>.md`：每组模板的“适合 / 不适合 / 上限 / 参考页”。只读用得到的组，不要一次读完所有组文件。
 - `references/styles.md`：全部风格（`DeckDef.style`）和配色（`DeckDef.theme`）。
+
+## 还没有 PCafe 项目时
+
+这份 skill 也可能被装进 Agent 的全局技能目录（`~/.claude/skills`、`~/.agents/skills` 等），在一个空文件夹或别的项目里被触发。先看当前目录：根目录同时有 `AGENTS.md` 和 `src/decks/`，才是 PCafe 项目。不是的话，先新建一个再开始（需要 Node.js 20.11 以上）：
+
+```bash
+npx @pcafe/pcafe init <name>
+cd <name> && npm install
+```
+
+之后在 `<name>` 里工作，先读它的 `AGENTS.md`，再按下面的流程做。不能运行命令行时，只交付故事线和逐页大纲（每页写明用哪个模板），并告诉用户需要能运行 Node.js 的环境才能生成 HTML。
 
 ## 安装了 @pcafe/pro 时
 

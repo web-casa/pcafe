@@ -12,6 +12,17 @@ Referenzdateien (erzeugt mit `npx pcafe docs`, nicht von Hand bearbeiten; Beschr
 - `references/templates/<gruppe>.md`: „geeignet für / vermeiden / Grenzen / Referenzfolie“ der Vorlagen einer Gruppe. Nur die benötigten Gruppen lesen, nie alle auf einmal.
 - `references/styles.md`: alle Stile (`DeckDef.style`) und Farbthemen (`DeckDef.theme`).
 
+## Wenn es noch kein PCafe-Projekt gibt
+
+Dieser Skill kann auch im globalen Skill-Ordner eines Agenten liegen (`~/.claude/skills`, `~/.agents/skills` usw.) und in einem leeren Ordner oder einem anderen Projekt ausgelöst werden. Prüfe zuerst den aktuellen Ordner: Ein PCafe-Projekt hat im Wurzelverzeichnis sowohl `AGENTS.md` als auch `src/decks/`. Wenn nicht, lege zuerst eines an (benötigt Node.js 20.11 oder neuer):
+
+```bash
+npx @pcafe/pcafe init <name>
+cd <name> && npm install
+```
+
+Arbeite danach in `<name>`: Lies zuerst dessen `AGENTS.md` und folge dem Ablauf unten. Wenn du keine Befehle ausführen kannst, liefere nur die Storyline und eine Gliederung Folie für Folie (mit der Vorlage für jede Folie) und sag dem Nutzer, dass für das HTML eine Umgebung mit Node.js nötig ist.
+
 ## Wenn @pcafe/pro installiert ist
 
 Wenn `@pcafe/pro` in den Projektabhängigkeiten steht, kommen seine Vorlagen und Stile mit dem Paket. Exportieren Sie den Foliensatz in `src/decks/active.ts` aus dem Paket, zum Beispiel `export { deck } from '@pcafe/pro/decks/<pack>'`; Vorlagen importieren die Engine-API nur aus `pcafe`. Mit installiertem Pro listen `#/kit` und `npx pcafe docs` seine Vorlagen automatisch; ohne Pro erscheint kein Pro-Inhalt.

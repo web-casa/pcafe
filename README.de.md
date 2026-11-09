@@ -40,6 +40,15 @@ Das Projekt ist darauf ausgelegt, von Coding-Assistenten bedient zu werden. Werk
 
 Ein typischer Auftrag: *„Erstelle aus notes.md einen Foliensatz mit 10 Folien zu unseren Q3-Ergebnissen und halte dich an AGENTS.md. Fertig ist er, wenn `npx pcafe check` PASS ausgibt und du dir jeden Screenshot in qa/ angesehen hast.“*
 
+### Den Skill im eigenen Agenten installieren
+
+Der Skill funktioniert auch außerhalb eines PCafe-Projekts: In einem leeren Ordner legt er zuerst mit `npx @pcafe/pcafe init` eines an.
+
+- **Claude Code** (Plugin): `/plugin marketplace add Web-Casa/pcafe`, danach `/plugin install pcafe@pcafe`
+- **Agenten mit Skills** (Codex, OpenClaw, Cursor u. a.): `npx skills add Web-Casa/pcafe`, oder [`skills/pcafe/`](skills/pcafe/) in den Skill-Ordner des Agenten kopieren (`~/.claude/skills/`, `~/.agents/skills/`, `~/.openclaw/skills/`)
+
+Anleitungen für jedes Werkzeug: [p.cafe/en/skills](https://p.cafe/en/skills/).
+
 ## Bilder
 
 Bilder werden in den Foliensatz importiert und beim Build eingebettet. Erlaubt sind nur drei Arten:

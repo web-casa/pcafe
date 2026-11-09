@@ -46,6 +46,16 @@ npx pcafe build q3-review   # 產出 dist/q3-review.html
 
 把資料交給 AI 助手，說「用 PCafe 做一份 10 頁的季度簡報」，它會建立 deck、填內容、反覆執行 `npx pcafe check` 直到 `PASS`。
 
+### 把 skill 裝進你的 Agent
+
+這個 skill 在 PCafe 專案外也能用：在空資料夾裡被觸發時，它會先用 `npx @pcafe/pcafe init` 新建專案。
+
+- **Claude Code**（外掛）：`/plugin marketplace add Web-Casa/pcafe`，再 `/plugin install pcafe@pcafe`
+- **支援 skills 的 Agent**（Codex、OpenClaw、Cursor 等）：`npx skills add Web-Casa/pcafe`，或把 [`skills/pcafe/`](skills/pcafe/) 複製到它的技能目錄（`~/.claude/skills/`、`~/.agents/skills/`、`~/.openclaw/skills/`）
+- **辦公 Agent**（WorkBuddy、千問辦公、豆包工作、Kimi Work）：在技能管理裡上傳 [pcafe-skill.zip](https://p.cafe/downloads/pcafe-skill.zip)
+
+每個工具的詳細步驟見 [p.cafe/zh-tw/skills](https://p.cafe/zh-tw/skills/)。
+
 ## 圖片規則
 
 圖片只有三類，都用 `import` 引入：

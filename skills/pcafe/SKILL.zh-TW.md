@@ -1,6 +1,6 @@
 ---
-name: PCafe
-description: Turn a topic, notes or a document into a finished HTML slide deck with PCafe's fixed templates and style presets. Also covers reports and résumés, social cards and carousels (小紅書/B站封面), animated MP4 video, interactive courseware, display screens and print pieces (海報/易拉寶/三折頁/資訊長圖). Use when the user asks to make, write, restyle or fix a deck / 簡報 / PPT / 投影片 or any of those in a PCafe project, or asks which template or style fits some content. Covers storyline, matching each point to a template, fitting text to each template's limits, picking a style and theme, sourcing facts, and the check-and-review loop.
+name: pcafe
+description: Turn a topic, notes or a document into a finished HTML slide deck with PCafe's fixed templates and style presets. Also covers reports and résumés, social cards and carousels (小紅書/B站封面), animated MP4 video, interactive courseware, display screens and print pieces (海報/易拉寶/三折頁/資訊長圖). Use when the user asks to make, write, restyle or fix a deck / 簡報 / PPT / 投影片 or any of those (inside a PCafe project, or in a new one it creates with npx), or asks which template or style fits some content. Covers storyline, matching each point to a template, fitting text to each template's limits, picking a style and theme, sourcing facts, and the check-and-review loop.
 ---
 <!-- 本檔案由 scripts/zh-tw.mjs 從簡體中文自動轉換產生，請改簡體原文後執行 npm run docs。 -->
 
@@ -15,6 +15,17 @@ PCafe 的簡報只由 `src/kit` 裡的固定範本拼成。寫得好不好，取
 - `references/templates.md`：範本索引，每組一行（組名、內容形狀、範本名）。先讀它選組。
 - `references/templates/<組>.md`：每組範本的「適合 / 不適合 / 上限 / 參考頁」。只讀用得到的組，不要一次讀完所有組檔案。
 - `references/styles.md`：全部風格（`DeckDef.style`）和配色（`DeckDef.theme`）。
+
+## 還沒有 PCafe 專案時
+
+這份 skill 也可能被裝進 Agent 的全域技能目錄（`~/.claude/skills`、`~/.agents/skills` 等），在一個空資料夾或別的專案裡被觸發。先看目前目錄：根目錄同時有 `AGENTS.md` 和 `src/decks/`，才是 PCafe 專案。不是的話，先新建一個再開始（需要 Node.js 20.11 以上）：
+
+```bash
+npx @pcafe/pcafe init <name>
+cd <name> && npm install
+```
+
+之後在 `<name>` 裡工作，先讀它的 `AGENTS.md`，再按下面的流程做。不能執行命令列時，只交付故事線和逐頁大綱（每頁寫明用哪個模板），並告訴使用者需要能執行 Node.js 的環境才能產生 HTML。
 
 ## 安裝了 @pcafe/pro 時
 

@@ -1,0 +1,15 @@
+{
+  "name": "pcafe",
+  "version": "0.2.0",
+  "description": "Turn notes or a document into a finished HTML slide deck with PCafe's templates and styles, checked until PASS",
+  "author": {
+    "name": "PCafe",
+    "url": "https://p.cafe"
+  },
+  "homepage": "https://p.cafe/skills/",
+  "repository": "https://github.com/Web-Casa/pcafe",
+  "license": "CPAL-1.0",
+  "skills": [
+    "./skills/pcafe"
+  ]
+}

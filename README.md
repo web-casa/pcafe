@@ -38,6 +38,16 @@ The project is written to be driven by coding assistants. Tools that read `AGENT
 
 A typical prompt: *"Make a 10-slide deck about our Q3 results from notes.md, following AGENTS.md. Finish when `npx pcafe check` prints PASS and you have looked at every screenshot in qa/."*
 
+### Install the skill in your agent
+
+The skill also works outside a PCafe project: when it is triggered in an empty folder it creates one with `npx @pcafe/pcafe init`.
+
+- **Claude Code** (plugin): `/plugin marketplace add Web-Casa/pcafe`, then `/plugin install pcafe@pcafe`
+- **Any agent with skills** (Codex, OpenClaw, Cursor and others): `npx skills add Web-Casa/pcafe`, or copy [`skills/pcafe/`](skills/pcafe/) into the agent's skills folder (`~/.claude/skills/`, `~/.agents/skills/`, `~/.openclaw/skills/`)
+- **Office agents** (WorkBuddy, Qwen Work, Doubao, Kimi Work): upload [pcafe-skill.zip](https://p.cafe/downloads/pcafe-skill.zip) in their skills manager
+
+Step-by-step instructions for each tool: [p.cafe/en/skills](https://p.cafe/en/skills/).
+
 ## Images
 
 Images are imported into the deck and inlined at build time. Only three kinds are allowed:

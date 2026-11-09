@@ -1,0 +1,12 @@
+{
+  "name": "pcafe",
+  "description": "PCafe: HTML slide decks from fixed templates, written by your AI assistant",
+  "owner": { "name": "PCafe", "email": "support@p.cafe" },
+  "plugins": [
+    {
+      "name": "pcafe",
+      "source": "./",
+      "description": "Turn notes or a document into a finished HTML slide deck with PCafe's templates and styles, checked until PASS"
+    }
+  ]
+}
