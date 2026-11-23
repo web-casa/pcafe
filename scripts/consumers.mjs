@@ -25,6 +25,9 @@ const ENV = {
   npm_config_fund: 'false',
   CI: '1',
 }
+// Parent `npm run` inherits user/global allow-scripts flags that npm 11 rejects in nested project installs.
+delete ENV.npm_config_allow_scripts
+delete ENV.NPM_CONFIG_ALLOW_SCRIPTS
 const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm'
 let failures = 0
 
@@ -273,10 +276,10 @@ function makeProProject(unpacked, dir, withPro) {
   }
   installProject(dir, withPro ? 'pro' : 'nopro', withPro ? ['--legacy-peer-deps'] : [])
   if (withPro) {
-    rmSync(join(dir, 'src', 'decks', 'pitch'), { recursive: true, force: true })
+    rmSync(join(dir, 'src', 'decks', 'proposal'), { recursive: true, force: true })
     // A user's own deck, written like the Pro sample: per-template imports.
-    sh('cp', ['-a', join(PRO_SOURCE, 'decks', 'pitch'), join(dir, 'src', 'decks', 'pitch')], { cwd: dir, label: 'pro-deck-copy' })
-    setActive(dir, 'pitch')
+    sh('cp', ['-a', join(PRO_SOURCE, 'decks', 'proposal'), join(dir, 'src', 'decks', 'proposal')], { cwd: dir, label: 'pro-deck-copy' })
+    setActive(dir, 'proposal')
   }
   sh(npm, ['run', 'build'], { cwd: dir, label: withPro ? 'pro-build' : 'nopro-build' })
   return pkg
@@ -286,26 +289,29 @@ async function casePro(unpacked) {
   const name = 'pro'
   const project = join(CASES, 'pro')
   makeProProject(unpacked, project, true)
-  patchAttribution(project, 'pitch')
-  sh('npx', ['--no-install', 'pcafe', 'build', 'pitch'], { cwd: project, label: `${name}-build-deck` })
-  await assertCredit(join(project, 'dist', 'pitch.html'), false)
-  // Only the Pro CSS the deck uses: the pitch deck must not carry the proposal
-  // pack (its classes start with .sp-), and no Pro source may leak in.
-  const html = readFileSync(join(project, 'dist', 'pitch.html'), 'utf8')
-  if (/\.sp-[a-z]/.test(html)) throw new Error('pitch.html contains proposal-pack CSS (.sp-*)')
-  if (!/calc\([^)]*var\(--u\)/.test(html)) throw new Error('pitch.html has no converted u units')
-  if (/\.tsx\b|sourceMappingURL/.test(html)) throw new Error('pitch.html references Pro source or sourcemaps')
-  setActive(project, 'pitch')
+  patchAttribution(project, 'proposal')
+  sh('npx', ['--no-install', 'pcafe', 'build', 'proposal'], { cwd: project, label: `${name}-build-deck` })
+  // Installing Pro is not enough: attribution: false needs a PCafe-signed licence file,
+  // and this project has none, so the credit stays. The signed path is unit-tested in
+  // scripts/licence-test.mjs.
+  await assertCredit(join(project, 'dist', 'proposal.html'), true)
+  // Only the Pro CSS the deck uses: the proposal deck must not carry another Pro
+  // pack's style (e.g. pulse), and no Pro source may leak in.
+  const html = readFileSync(join(project, 'dist', 'proposal.html'), 'utf8')
+  if (/data-style=['"]?pulse\b/.test(html)) throw new Error('proposal.html contains unused Pro pulse style CSS')
+  if (!/calc\([^)]*var\(--u\)/.test(html)) throw new Error('proposal.html has no converted u units')
+  if (/\.tsx\b|sourceMappingURL/.test(html)) throw new Error('proposal.html references Pro source or sourcemaps')
+  setActive(project, 'proposal')
   const server = await startVite(project, name)
   try {
     const outside = join(B4, 'outside', 'secret.txt')
     write(outside, 'outside the allow list\n')
     let fontUrl = ''
     let fontStatus = 0
-    await browserPage(`${server.origin}/?deck=pitch`, async (page, fonts) => {
+    await browserPage(`${server.origin}/?deck=proposal`, async (page, fonts) => {
       await page.waitForSelector('.slide-frame', { timeout: 20_000 })
       await page.waitForTimeout(1200)
-      const found = fonts.find((f) => f.status === 200 && /source-serif|vendor\/pro|@pcafe\/pro/.test(f.url))
+      const found = fonts.find((f) => f.status === 200 && /archivo|source-serif|vendor\/pro|@pcafe\/pro/.test(f.url))
       if (!found) throw new Error(`page did not request a Pro font successfully: ${fonts.map((f) => `${f.status} ${f.url}`).join(', ')}`)
       fontUrl = found.url
       fontStatus = found.status
@@ -315,7 +321,7 @@ async function casePro(unpacked) {
     if (fontRes.status !== 200) throw new Error(`font fetch ${fontRes.status}`)
     const blocked = await fetch(`${server.origin}/@fs${outside}`)
     if (blocked.status !== 403) throw new Error(`outside file expected 403, got ${blocked.status}`)
-    sh('npx', ['--no-install', 'pcafe', 'check', 'pitch'], { cwd: project, label: `${name}-check` })
+    sh('npx', ['--no-install', 'pcafe', 'check', 'proposal'], { cwd: project, label: `${name}-check` })
     return `font 200, outside 403, build/check PASS (${fontUrl.replace(server.origin, '')})`
   } finally {
     await server.stop()

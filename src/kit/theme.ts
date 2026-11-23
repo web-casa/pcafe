@@ -30,6 +30,13 @@ import { preset as atelier } from './styles/atelier'
 import { preset as monograph } from './styles/monograph'
 import { preset as nocturne } from './styles/nocturne'
 import { preset as sunrise } from './styles/sunrise'
+import { preset as duskP } from './styles/dusk'
+import { preset as emberP } from './styles/ember'
+import { preset as slateP } from './styles/slate'
+import { preset as albumP } from './styles/album'
+import { preset as markerP } from './styles/marker'
+import { preset as diptychP } from './styles/diptych'
+import { preset as folioP } from './styles/folio'
 import type { CSSProperties } from 'react'
 
 export interface Theme {
@@ -231,6 +238,13 @@ const BASE_STYLES = {
   'monograph': monograph,
   'nocturne': nocturne,
   'sunrise': sunrise,
+  'dusk': duskP,
+  'ember': emberP,
+  'slate': slateP,
+  'album': albumP,
+  'marker': markerP,
+  'diptych': diptychP,
+  'folio': folioP,
 } satisfies Record<string, StylePreset>
 
 /** Built-in presets plus any added later by `registerStyle`. */

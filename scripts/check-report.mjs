@@ -121,13 +121,23 @@ export function parseOutput(format, output, root, name, since) {
   return issues
 }
 
-export function screenshots(root, format, name) {
-  return FORMATS[format].shots(name).flatMap(([dir, re]) => {
+const numericSort = (a, b) => a.localeCompare(b, undefined, { numeric: true })
+
+export function screenshots(root, format, name, opts = {}) {
+  const list = FORMATS[format].shots(name).flatMap(([dir, re]) => {
     const abs = join(root, dir)
     if (!existsSync(abs)) return []
-    const walk = (d) => readdirSync(join(root, d)).sort().flatMap((f) => (statSync(join(root, d, f)).isDirectory() ? walk(join(d, f)) : re.test(f) ? [join(d, f)] : []))
+    const walk = (d) => readdirSync(join(root, d)).sort(numericSort).flatMap((f) => (statSync(join(root, d, f)).isDirectory() ? walk(join(d, f)) : re.test(f) ? [join(d, f)] : []))
     return walk(dir)
   })
+  if (format === 'deck' && Array.isArray(opts.checked)) {
+    const want = new Set(opts.checked.map(Number))
+    return list.filter((p) => {
+      const m = p.match(/slide-(\d+)-1920x1080\.png$/)
+      return m ? want.has(Number(m[1])) : true
+    })
+  }
+  return list
 }
 
 /** Newest modification time of the item's sources. */
@@ -147,9 +157,9 @@ export function command(format, name) {
 
 /**
  * One next step for whoever runs the project (a person or an agent):
- *   run_check     sources are newer than the last check, or there is none
+ *   run_check     sources are newer than the last check, last run was partial, or there is none
  *   fix           the check failed; issues are grouped by code, fix them and run `rerun`
- *   review        the check passed; look at every screenshot, then confirm with the user
+ *   review        the check passed; look at the screenshots/grids, then confirm with the user
  */
 export function nextStep(root, format, name, report) {
   const rerun = command(format, name)
@@ -162,11 +172,22 @@ export function nextStep(root, format, name, report) {
     for (const i of fails) (byCode[i.code] ??= []).push(i.message)
     return { action: 'fix', path: `src/${FORMATS[format].dir}/${name}/`, issues: byCode, rerun, docs: 'docs/<lang>/guide.md, section "Fixing QA errors"' }
   }
+  if (report.partial) {
+    return {
+      action: 'run_check',
+      command: rerun,
+      reason: 'partial check; run a full check before delivery',
+      checkedScreenshots: report.screenshots,
+    }
+  }
   return {
     action: 'review',
     screenshots: report.screenshots,
+    ...(report.grids?.length ? { grids: report.grids } : {}),
     hints: report.issues.filter((i) => i.level !== 'fail'),
-    then: 'Look at every screenshot at full size. Fix what reads badly, then show the result to the user; the user decides when it is done.',
+    then: report.grids?.length
+      ? 'Look at qa/contact-sheet.png and every qa/grid-NN.png (2x2 high-res review grid); open full-size qa/slide-NN-1920x1080.png for any slide with WARN, complex graphics, or edits.'
+      : 'Look at every screenshot at full size. Fix what reads badly, then show the result to the user; the user decides when it is done.',
   }
 }
 

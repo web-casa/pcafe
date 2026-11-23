@@ -11,5 +11,8 @@ export interface EmojiOptions {
  */
 export function emoji(options?: EmojiOptions): Plugin[]
 
+/** Fast RGI emoji scan for bundled chunks that skips binary base64 data URIs. */
+export function scanChunkEmoji(code: string): string[]
+
 /** PostCSS plugin: `120u` becomes `calc(120 * var(--u))`. Third-party CSS (Pro) must use it too. */
 export const designUnit: { postcssPlugin: string; Declaration(decl: { value: string }): void }

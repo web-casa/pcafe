@@ -1,0 +1,152 @@
+/* v4 · album signature templates (AlbumHero, AlbumLayout, AlbumWeek, AlbumStories,
+   AlbumPlus, AlbumClose). Classes start with `al-`. White page under a warm sunrise glow,
+   photos shown as prints with a wide bottom border and a handwritten-feel serif caption,
+   one warm orange → rose → violet gradient word per title. The glow and gradient are the
+   style's fixed signature; buttons follow the ink, picks and badges follow the theme. */
+
+@keyframes al-deal { from { rotate: 0deg; translate: 0 320u; opacity: 0; } }
+@keyframes al-pop { from { opacity: 0; scale: 0.6; } }
+@keyframes al-bob { 50% { translate: 0 -10u; } }
+@keyframes al-swing { 0% { rotate: 0deg; } 35% { rotate: calc(var(--r) * -1.6); } 70% { rotate: calc(var(--r) * 1.3); } 100% { rotate: var(--r); } }
+@keyframes al-write { from { opacity: 0; transform: translateY(14u); filter: blur(5u); } }
+@keyframes al-roll { from { opacity: 0; transform: translateY(40%); } }
+@keyframes al-glow { 50% { opacity: 0.82; scale: 1.04; } }
+
+.al { --al-warm: #fff1d6; --al-grad: linear-gradient(90deg, #f08a24, #ef4f7d 52%, #7c5cff); --al-body: color-mix(in srgb, var(--ink) 66%, var(--canvas)); --al-grey: color-mix(in srgb, var(--ink) 46%, var(--canvas)); --al-spring: cubic-bezier(0.34, 1.56, 0.64, 1); --al-ease: cubic-bezier(0.65, 0, 0.2, 1); --al-shadow: 0 24u 50u -16u rgb(20 33 61 / 0.35), 0 0 0 1px rgb(20 33 61 / 0.05); }
+
+/* ── Shared ── */
+.al-glow { position: absolute; inset: 0 0 auto; height: 780u; background: radial-gradient(60% 90% at 50% 0%, var(--al-warm) 0%, color-mix(in srgb, var(--al-warm) 45%, transparent) 45%, transparent 100%); pointer-events: none; animation: al-glow 9s ease-in-out infinite; transform-origin: 50% 0; }
+.al-glow.is-right { height: 100%; background: radial-gradient(50% 70% at 75% 50%, var(--al-warm) 0%, transparent 100%); transform-origin: 75% 50%; }
+.al-glow.is-center { height: 100%; background: radial-gradient(60% 60% at 50% 32%, #f4ecff 0%, color-mix(in srgb, var(--al-warm) 70%, transparent) 40%, transparent 75%); transform-origin: 50% 30%; }
+.al-print { position: relative; display: block; margin: 0; box-sizing: border-box; padding: 12u 12u 48u; border-radius: 10u; background: #fff; box-shadow: var(--al-shadow); }
+.al-print img { display: block; width: 100%; height: var(--h, 250u); object-fit: cover; border-radius: 4u; }
+.al-print figcaption { position: absolute; left: 0; right: 0; bottom: 11u; text-align: center; font: italic 400 22u/1.2 var(--f-serif), 'Deck Serif SC', serif; color: #6b6b6b; white-space: nowrap; }
+.al-badge { display: inline-flex; align-items: center; gap: 8u; padding: 8u 16u; border-radius: 999px; background: color-mix(in srgb, #ff8a3d 22%, var(--canvas)); font: 600 17u/1 var(--f-sans); color: #a8461a; }
+.al-badge i { width: 8u; height: 8u; border-radius: 50%; background: currentColor; }
+.al-hand { display: block; margin-top: 18u; font: italic 400 26u/1.3 var(--f-serif), 'Deck Serif SC', serif; color: color-mix(in srgb, #7a6a58 85%, var(--ink)); }
+.al-hand.is-left { margin-top: 0; }
+.al-h1 { margin: 12u 0 0; font: 800 104u/1.08 'Deck Heavy SC', var(--f-sans); letter-spacing: -0.04em; color: var(--ink); }
+.al-h1 > span, .al-h2 > span { display: block; }
+.al-h1.is-left { margin-top: 14u; }
+.al-grad { padding: 0 0.08em; font: italic 400 1.18em/1 var(--f-serif), 'Deck Serif SC', serif; letter-spacing: -0.01em; background: var(--al-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.al-h2 { margin: 0; font: 800 76u/1.12 'Deck Heavy SC', var(--f-sans); letter-spacing: -0.035em; color: var(--ink); }
+.al-h2.is-one { font-size: 68u; }
+.al-em { font: italic 400 1.12em/1 var(--f-serif), 'Deck Serif SC', serif; letter-spacing: 0; background: var(--al-grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 0.06em; }
+.al-lead { width: 900u; margin: 20u auto 0; font: 400 21u/1.6 var(--f-sans); color: var(--al-body); }
+.al-lead.is-left { width: auto; max-width: 640u; margin: 26u 0 0; }
+.al-btn { display: inline-flex; align-items: center; gap: 10u; margin-top: 30u; padding: 17u 32u; border-radius: 999px; background: var(--ink); color: var(--canvas); font: 600 18u/1 var(--f-sans); cursor: pointer; transition: scale 300ms var(--al-spring), box-shadow 300ms ease; }
+.al-btn:hover { scale: 1.05; box-shadow: 0 16u 30u -14u rgb(239 79 125 / 0.6); }
+.al-k { font: 600 17u/1 var(--f-sans); letter-spacing: 0.08em; color: #c0612b; }
+.al-center { position: absolute; left: 0; right: 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
+
+/* ── Hero ── */
+.al-hero { position: absolute; left: 0; right: 0; top: 124u; display: flex; flex-direction: column; align-items: center; text-align: center; z-index: 2; }
+.al-fan { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.al-fan__arm { position: absolute; left: 845u; top: 690u; width: 230u; transform-origin: 115u 1400u; rotate: var(--a); animation: al-deal 1100ms var(--al-ease) both; pointer-events: auto; }
+.al-fan__arm .al-print { transition: translate 500ms var(--al-spring), box-shadow 400ms ease; cursor: pointer; }
+.al-fan__arm:hover .al-print { translate: 0 -46u; box-shadow: 0 40u 60u -20u rgb(20 33 61 / 0.45); }
+.al-chip { position: absolute; z-index: 3; padding: 10u 17u; border-radius: 999px; background: rgb(255 255 255 / 0.94); box-shadow: 0 8u 22u rgb(20 33 61 / 0.15); font: 600 17u/1 var(--f-sans); color: var(--ink); white-space: nowrap; animation: al-pop 600ms var(--al-spring) both, al-bob 5s ease-in-out infinite; }
+
+/* ── Layout ── */
+.al-lay__l { position: absolute; left: 120u; top: 230u; width: 660u; }
+.al-steps { display: grid; gap: 28u; margin: 52u 0 0; padding: 0; list-style: none; }
+.al-steps li { padding-left: 26u; border-left: 3u solid var(--line-strong); cursor: pointer; transition: border-color 300ms ease; }
+.al-steps b { font: 600 24u/1.3 var(--f-sans); color: var(--al-grey); transition: color 300ms ease; }
+.al-steps small { display: block; margin-top: 8u; font: 400 18u/1.6 var(--f-sans); color: var(--al-grey); transition: color 300ms ease; }
+.al-steps li:hover b { color: var(--ink); }
+.al-steps li.is-on { border-color: var(--ink); }
+.al-steps li.is-on b { color: var(--ink); }
+.al-steps li.is-on small { color: var(--al-body); }
+.al-table { position: absolute; left: 860u; top: 190u; width: 900u; height: 660u; border-radius: 30u; background: #fff; box-shadow: 0 50u 100u -30u rgb(20 33 61 / 0.35), 0 0 0 1px rgb(20 33 61 / 0.06), 0 0 120u 30u rgb(255 180 120 / 0.25); transform: perspective(2200u) rotateY(-14deg) rotateX(6deg); transition: transform 900ms var(--al-ease); }
+.al-table:hover { transform: perspective(2200u) rotateY(-6deg) rotateX(3deg); }
+.al-table img { position: absolute; box-sizing: border-box; object-fit: cover; border: 6u solid #fff; border-radius: 8u; box-shadow: 0 14u 28u -10u rgb(0 0 0 / 0.35); transition: left 900ms var(--al-spring), top 900ms var(--al-spring), width 900ms var(--al-spring), height 900ms var(--al-spring), rotate 900ms var(--al-spring), outline-color 300ms ease; outline: 3u dashed transparent; outline-offset: 6u; }
+.al-table img.is-picked { outline-color: var(--accent); }
+.al-tool { position: absolute; left: 50%; bottom: 24u; translate: -50% 0; display: flex; gap: 6u; padding: 8u; border-radius: 999px; background: #fff; box-shadow: 0 12u 30u rgb(20 33 61 / 0.18); }
+.al-tool i { display: grid; place-items: center; width: 48u; height: 48u; border-radius: 50%; font: 400 20u/1 var(--f-sans); font-style: normal; color: #4a5470; transition: background 300ms ease, color 300ms ease; }
+.al-tool i.is-on { background: #14213d; color: #fff; }
+.al-loose { position: absolute; padding-bottom: 12u; animation: al-bob 6s ease-in-out infinite; }
+.al-loose.is-0 { left: 1700u; top: 770u; width: 180u; rotate: 10deg; --h: 200u; }
+.al-loose.is-1 { left: 760u; top: 830u; width: 220u; rotate: -8deg; --h: 150u; animation-delay: 1.5s; }
+
+/* ── Week ── */
+.al-week__head { position: absolute; left: 120u; top: 120u; }
+.al-week__head .al-h2 { margin-top: 14u; }
+.al-line { position: absolute; left: 120u; right: 120u; top: 300u; height: 440u; }
+.al-line__rope { position: absolute; left: -120u; width: calc(100% + 240u); top: 0; height: 120u; overflow: visible; }
+.al-line__rope path { fill: none; stroke: color-mix(in srgb, #8b6b4a 70%, var(--canvas)); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.al-peg { all: unset; position: absolute; width: 196u; translate: -50% 0; transform-origin: 50% 0; rotate: var(--r); cursor: pointer; animation: al-swing 1400ms ease-out both; transition: scale 500ms var(--al-spring), translate 500ms var(--al-spring), filter 400ms ease; }
+.al-peg__pin { position: absolute; left: 50%; top: -12u; z-index: 2; width: 14u; height: 30u; translate: -50% 0; border-radius: 3u; background: linear-gradient(90deg, #c99a6b, #e6c39d 50%, #c99a6b); box-shadow: 0 2u 4u rgb(0 0 0 / 0.2); }
+.al-peg .al-print { --h: 200u; padding: 10u 10u 44u; }
+.al-peg .al-print figcaption { font-size: 20u; }
+.al-peg__day { display: block; margin-top: 16u; text-align: center; font: 600 17u/1 var(--f-sans); color: var(--al-grey); transition: color 300ms ease; }
+.al-peg:hover { translate: -50% -8u; }
+.al-peg.is-on { z-index: 3; scale: 1.14; translate: -50% 26u; }
+.al-peg.is-on .al-peg__day { color: var(--accent); }
+.al-line:has(.al-peg.is-on) .al-peg:not(.is-on) { filter: saturate(0.6) brightness(1.03); }
+.al-day { position: absolute; left: 0; right: 0; top: 790u; text-align: center; }
+.al-day__in { animation: al-write 600ms var(--ease-out) both; }
+.al-day b { display: block; font: italic 400 50u/1.1 var(--f-serif), 'Deck Serif SC', serif; color: var(--ink); }
+.al-day p { width: 900u; margin: 18u auto 0; font: 400 22u/1.6 var(--f-sans); color: var(--al-body); }
+.al-day small { display: inline-block; margin-top: 14u; font: 500 17u/1 var(--f-sans); color: var(--al-grey); }
+
+/* ── Stories ── */
+.al-stories__head { top: 116u; }
+.al-stories__head .al-h2 { margin-top: 14u; }
+.al-stories { position: absolute; left: 0; right: 0; top: 296u; display: flex; justify-content: center; gap: 70u; }
+.al-flip { width: 420u; height: 560u; perspective: 1800u; rotate: var(--r); cursor: pointer; transition: rotate 500ms var(--al-spring), translate 500ms var(--al-spring); }
+.al-flip:hover { rotate: 0deg; translate: 0 -10u; }
+.al-flip__in { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 900ms var(--al-ease); }
+.al-flip.is-flipped .al-flip__in { transform: rotateY(180deg); }
+.al-flip__front, .al-flip__back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.al-flip__front { --h: 470u; padding: 14u 14u 58u; }
+.al-flip__front figcaption { bottom: 14u; font-size: 26u; }
+.al-flip__back { display: flex; flex-direction: column; box-sizing: border-box; padding: 54u 46u 40u; border-radius: 10u; transform: rotateY(180deg); background: repeating-linear-gradient(transparent 0 47u, color-mix(in srgb, #e7d8c4 70%, transparent) 47u 48u) 0 54u / 100% calc(100% - 100u) no-repeat, #fffaf2; box-shadow: var(--al-shadow); }
+.al-flip__back p { margin: 0; font: 400 28u/48u 'Deck Serif SC', serif; color: #3b3226; }
+.al-flip__back div { margin-top: auto; }
+.al-flip__back b { display: block; font: italic 400 26u/1.2 var(--f-serif), 'Deck Serif SC', serif; color: #3b3226; }
+.al-flip__back small { display: block; margin-top: 6u; font: 400 17u/1.3 var(--f-sans); color: #8a7b66; }
+.al-stories__foot { position: absolute; left: 0; right: 0; bottom: 60u; text-align: center; }
+
+/* ── Plus ── */
+.al-float { position: absolute; padding-bottom: 12u; animation: al-pop 700ms var(--al-spring) both, al-bob 6s ease-in-out infinite; }
+.al-plus { position: absolute; left: 470u; top: 104u; width: 980u; box-sizing: border-box; padding: 50u 60u 46u; border-radius: 32u; background: #fff; box-shadow: 0 0 0 1px var(--line), 0 40u 80u -30u rgb(20 33 61 / 0.25); text-align: center; z-index: 2; }
+.al-plus h2 { margin: 0; font: 800 62u/1.1 'Deck Heavy SC', var(--f-sans); letter-spacing: -0.035em; color: #14213d; }
+.al-plus h2 i { font-style: normal; font-size: 38u; vertical-align: 24u; background: var(--al-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.al-plus > p { width: 720u; margin: 16u auto 0; font: 400 19u/1.6 var(--f-sans); color: #5b6480; }
+.al-feats { display: grid; grid-template-columns: 1fr 1fr; margin-top: 32u; border-top: 1px solid #eceef4; text-align: left; }
+.al-feats div { padding: 26u 26u 24u; border-bottom: 1px solid #eceef4; transition: background 300ms ease; }
+.al-feats div:hover { background: #fffaf3; }
+.al-feats div:nth-child(odd) { border-right: 1px solid #eceef4; }
+.al-feats i { display: inline-grid; place-items: center; width: 46u; height: 46u; border-radius: 14u; font: 400 21u/1 var(--f-sans); font-style: normal; color: #14213d; transition: rotate 400ms var(--al-spring); }
+.al-feats div:hover i { rotate: -10deg; }
+.al-feats .is-0 i { background: #eaf3ff; } .al-feats .is-1 i { background: #eefbf2; } .al-feats .is-2 i { background: #fff4e5; } .al-feats .is-3 i { background: #f6efff; }
+.al-feats b { display: block; margin-top: 12u; font: 700 21u/1.3 var(--f-sans); color: #14213d; }
+.al-feats small { display: block; margin-top: 6u; font: 400 17u/1.5 var(--f-sans); color: #5b6480; }
+.al-bill { display: flex; align-items: center; justify-content: space-between; margin-top: 30u; }
+.al-bill .al-btn { margin-top: 0; background: #14213d; color: #fff; }
+.al-switch { display: inline-flex; gap: 4u; padding: 5u; border-radius: 999px; background: #f3f4f8; }
+.al-switch button { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 8u; padding: 11u 20u; border-radius: 999px; font: 600 17u/1 var(--f-sans); color: #5b6480; transition: background 300ms ease, color 300ms ease, box-shadow 300ms ease; }
+.al-switch button.is-on { background: #fff; color: #14213d; box-shadow: 0 2u 8u rgb(20 33 61 / 0.12); }
+.al-switch em { padding: 4u 8u; border-radius: 999px; background: var(--accent-wash); font: 600 17u/1 var(--f-sans); font-style: normal; color: var(--accent-ink); }
+.al-price { overflow: hidden; font: italic 400 58u/1.1 var(--f-serif), 'Deck Serif SC', serif; color: #14213d; animation: al-roll 500ms var(--al-spring) both; }
+.al-price small { font: 400 20u/1 var(--f-sans); color: #5b6480; }
+.al-plus__foot { position: absolute; left: 0; right: 0; bottom: 56u; text-align: center; }
+
+/* ── Close ── */
+.al-close__l { position: absolute; left: 140u; top: 250u; width: 800u; }
+.al-ctas { display: flex; align-items: center; gap: 28u; margin-top: 34u; }
+.al-ctas .al-btn { margin-top: 0; }
+.al-ctas u { font: 600 18u/1 var(--f-sans); color: var(--ink); text-underline-offset: 6u; text-decoration-color: var(--line-strong); cursor: pointer; transition: text-decoration-color var(--hover); }
+.al-ctas u:hover { text-decoration-color: #ef4f7d; }
+.al-note { margin-top: 26u; font: 400 17u/1.5 var(--f-sans); color: var(--al-grey); }
+.al-pile { all: unset; position: absolute; left: 1150u; top: 190u; width: 460u; height: 640u; cursor: pointer; }
+.al-pile .al-print { position: absolute; left: 0; top: 0; width: 420u; --h: 470u; padding: 14u 14u 60u; transition: translate 600ms var(--al-spring), rotate 600ms var(--al-spring), opacity 400ms ease; }
+.al-pile .al-print figcaption { bottom: 16u; font-size: 26u; }
+.al-pile .al-print.is-out { animation: al-out 520ms var(--al-ease); }
+@keyframes al-out { 45% { translate: calc(520 * var(--u)) calc(-60 * var(--u)); rotate: 18deg; } 100% { translate: 0 0; } }
+.al-pile:hover .al-print:not(.is-out) { rotate: 0deg; }
+.al-pile__count { position: absolute; left: 0; bottom: -10u; font: 600 17u/1 var(--f-mono); color: var(--al-grey); }
+
+@media (prefers-reduced-motion: reduce) {
+  .al-glow, .al-fan__arm, .al-chip, .al-loose, .al-float, .al-peg { animation: none; }
+}

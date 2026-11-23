@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 9 个模板。返回索引：[../templates.md](../templates.md)。
+共 12 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `ServiceList` 巨字服务列表（内容 · 4–6 件事，一行一个大字）
 - 适合：我们做什么、流程有哪几步；每项能用一个词说清
@@ -57,3 +57,21 @@
 - 不适合：不是正好三条：用 NumberedColumns；需要数据支撑：用 KpiBoard
 - 上限：items 正好 3 个；tag ≤ 6 字，title ≤ 10 字，body ≤ 40 字；title 1–2 行，每行 ≤ 8 字；lead ≤ 50 字
 - 参考：src/decks/sig-platform 的 `priorities` 页；docs/zh-CN/components.md#priority-columns；交互：按 → 逐栏出现
+
+### `MarkerLog` 记号笔随笔（内容 · 日志与文章列表）
+- 适合：随笔、更新日志、读书笔记；想展示近期在想什么
+- 不适合：版本更新要分类：用 Changelog；条目超过 6 条：分两页
+- 上限：kicker ≤ 8 字，meta ≤ 14 字；entries 3–6 条：date ≤ 6 个字符，title ≤ 20 字，tag ≤ 4 字，body ≤ 50 字
+- 参考：src/decks/sig-marker 的 `log` 页；docs/zh-CN/components.md#marker-log；交互：点击一行展开摘要，箭头旋转；悬停行轻推
+
+### `AlbumWeek` 相册一周（内容 · 一周图记）
+- 适合：一周、一次旅行、一个项目的逐日回顾；每天一张图加一句话
+- 不适合：超过 7 天：用 Timeline；图要大看：用 DiptychWorks
+- 上限：kicker ≤ 12 字；title 1 行 ≤ 12 字；days 5–7 天：day ≤ 3 字，date ≤ 8 字，caption ≤ 6 字，note ≤ 40 字，place ≤ 10 字
+- 参考：src/decks/sig-album 的 `week` 页；docs/zh-CN/components.md#album-week；交互：照片在绳上晃动落定；点击放大选中那天，下方文字淡入
+
+### `SocialFeed` 个人主页动态流（内容 · 个人或品牌主页式的近况）
+- 适合：独立开发者、设计师、创作者介绍自己近况；想用“刷动态”的方式讲一段经历
+- 不适合：正式汇报：用 Timeline；动态超过 3 条：拆页
+- 上限：profile.name ≤ 6 字，role ≤ 10 字；menu 4–6 项 × ≤ 5 字；posts 2–3 条：text ≤ 34 字，time ≤ 6 字；只有第一条显示 0–2 张图；stories 0–4 个 × ≤ 3 字；boxes 0–2 个，各 2 条：title ≤ 12 字，note ≤ 10 字；say ≤ 26 字；clock.city ≤ 4 字
+- 参考：src/decks/mockui 的 `feed` 页；docs/zh-CN/components.md#social-feed；交互：点 ♡ 点赞并弹跳计数；点彩圈头像标为已看；菜单点击切换高亮；时钟冒号闪烁；动态依次滑入

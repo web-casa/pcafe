@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 6 个模板。返回索引：[../templates.md](../templates.md)。
+共 7 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `Cycle` 循环图（机制 · 首尾相接的阶段）
 - 适合：阶段会循环往复：开发周期、增长飞轮、复盘闭环；想强调“最后一步会喂回第一步”
@@ -39,3 +39,9 @@
 - 不适合：要讲层级关系：用 ArchLayers；要讲服务之间的调用：用 FlowDiagram
 - 上限：units 4–8 个：name ≤ 10 字，tag ≤ 12 个字符；points 1–3 条，每条 ≤ 36 字；label ≤ 12 个字符
 - 参考：src/decks/v3-p3 的 `rack` 页；docs/zh-CN/components.md#server-rack；交互：每按一次 → 一个机位通电
+
+### `EmberAgent` 暗场代理执行（机制 · 代理一步步完成任务）
+- 适合：讲清楚 AI 代理具体怎么干活；演示一次完整的委托：从一句话到交付
+- 不适合：步骤超过 6 个：用时间线类模板；没有可展示的产出：用 SlateSteps
+- 上限：title 2 行 × ≤ 10 字；task ≤ 40 字；steps 3–6 个：label ≤ 10 字，detail ≤ 24 字，tool ≤ 6 字；result.title ≤ 16 字；result.lines 3–6 条 × ≤ 26 字；pace 每步毫秒数，默认 1400
+- 参考：src/decks/sig-ember 的 `agent` 页；docs/zh-CN/components.md#ember-agent；交互：步骤自动依次完成，进度轨点亮；草稿逐行变清楚；“再跑一次”重新播放

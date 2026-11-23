@@ -1,0 +1,177 @@
+/* v4 · dusk signature templates (DuskHero, DuskFeature, DuskExplain, DuskStats,
+   DuskCases, DuskClose). Classes start with `du-`. A warm paper page, tight
+   sans headlines, and sunset gradient panels (orange into the theme accent into
+   violet) that hold small dark widgets in frosted frames; code sits on white
+   cards with red and green diff rows. */
+
+@keyframes du-drift { 50% { background-position: 100% 60%; } }
+@keyframes du-in { from { opacity: 0; translate: 0 10u; } }
+@keyframes du-rise { from { opacity: 0; transform: translateY(26u) scale(0.97); } }
+@keyframes du-grow { from { transform: scaleX(0); } }
+@keyframes du-draw { from { stroke-dashoffset: 1; } }
+@keyframes du-fill { from { width: 0; } to { width: 100%; } }
+@keyframes du-fade { from { opacity: 0; } }
+@keyframes du-line { from { opacity: 0; transform: translateX(-8u); } }
+
+.du { --du-ease: cubic-bezier(0.65, 0, 0.2, 1); --du-spring: cubic-bezier(0.34, 1.56, 0.64, 1); --du-body: color-mix(in srgb, var(--ink) 62%, var(--canvas)); --du-dark: #1b1a19; --du-sun: linear-gradient(120deg, #ff7a3d, color-mix(in oklab, var(--accent) 72%, #f0478a) 55%, color-mix(in oklab, var(--accent) 35%, #8a3ad8)); color: var(--ink); }
+
+/* ── Shared ── */
+.du-h1 { margin: 0; font: 500 86u/1.12 var(--f-sans); letter-spacing: -0.045em; color: var(--ink); }
+.du-h1 > span, .du-h2 > span { display: block; }
+.du-h2 { margin: 20u 0 0; font: 500 68u/1.14 var(--f-sans); letter-spacing: -0.04em; color: var(--ink); }
+.du-h2.is-one { font-size: 60u; }
+.du-lead { margin: 20u 0 0; font: 400 21u/1.5 var(--f-sans); color: var(--du-body); }
+.du-body { margin: 22u 0 0; font: 400 20u/1.65 var(--f-sans); color: var(--du-body); }
+.du-tag { display: inline-flex; align-items: center; gap: 10u; font: 500 17u/1 var(--f-mono); letter-spacing: 0.1em; color: var(--du-body); }
+.du-tag i { display: grid; place-items: center; width: 24u; height: 24u; border-radius: 6u; background: color-mix(in srgb, var(--accent) 14%, var(--card)); font: 500 17u/1 var(--f-sans); font-style: normal; color: var(--accent); }
+.du-ctas { display: flex; justify-content: center; gap: 10u; margin-top: 28u; }
+.du-btn { display: inline-flex; align-items: center; padding: 15u 22u; border-radius: 9u; background: var(--ink); color: var(--canvas); font: 500 18u/1 var(--f-sans); cursor: pointer; transition: translate 300ms var(--du-spring), box-shadow 300ms ease, background 300ms ease; }
+.du-btn:hover { translate: 0 -2u; box-shadow: 0 12u 24u -12u rgb(0 0 0 / 0.45); }
+.du-btn.is-soft { background: var(--panel); color: var(--ink); }
+.du-btn.is-soft:hover { background: var(--line-strong); box-shadow: none; }
+.du-btn.is-white { background: #fff; color: #16130f; }
+.du-head { position: absolute; left: 120u; top: 112u; }
+.du-foot { position: absolute; left: 120u; right: 120u; bottom: 44u; }
+.du-legend { display: flex; flex-wrap: wrap; gap: 16u; margin-top: 16u; font: 400 17u/1 var(--f-mono); color: #a39d93; }
+.du-legend span::before { content: '● '; color: var(--c); }
+
+/* Gradient panel + widget */
+.du-panel { position: relative; height: 100%; overflow: hidden; border-radius: 20u; background: radial-gradient(70% 90% at 20% 20%, #ffb36b, transparent 60%), radial-gradient(70% 90% at 80% 80%, color-mix(in oklab, var(--accent) 70%, #e8357b), transparent 60%), var(--du-sun); background-size: 140% 140%; animation: du-drift 14s ease-in-out infinite alternate; }
+.du-panel.is-pink { background: radial-gradient(70% 90% at 80% 10%, #ffc4a3, transparent 60%), radial-gradient(70% 90% at 20% 90%, color-mix(in oklab, var(--accent) 35%, #f6b0cf), transparent 60%), linear-gradient(160deg, #ffd6c0, color-mix(in oklab, var(--accent) 22%, #f8b6d2)); background-size: 140% 140%; }
+.du-wd { position: absolute; padding: 10u; border-radius: 16u; background: rgb(255 255 255 / 0.5); -webkit-backdrop-filter: blur(8u); backdrop-filter: blur(8u); box-shadow: 0 30u 50u -20u rgb(80 10 40 / 0.45); animation: du-rise 700ms var(--du-ease) both; }
+.du-wd__in { padding: 22u 24u; border-radius: 10u; background: var(--du-dark); color: #e9e4dc; }
+.du-wd__name { margin: 14u 6u 4u; font: 600 18u/1 var(--f-sans); color: #16130f; }
+.du-wd__h { font: 400 17u/1 var(--f-sans); color: #a39d93; }
+.du-wd__stat { margin-top: 14u; font: 400 17u/1.2 var(--f-sans); color: #a39d93; }
+.du-wd__stat b { margin-right: 4u; font: 500 34u/1 var(--f-sans); letter-spacing: -0.02em; color: #f4efe8; }
+.du-wd__bars { display: flex; gap: 8u; margin-top: 20u; }
+.du-wd__bars i { flex-basis: 0; height: 12u; border-radius: 12u; animation: du-grow 900ms var(--du-ease) 300ms both; transform-origin: left; }
+.du-tabs { position: absolute; left: 50%; top: 26u; translate: -50% 0; display: flex; gap: 4u; padding: 5u; border-radius: 11u; background: rgb(255 255 255 / 0.22); -webkit-backdrop-filter: blur(8u); backdrop-filter: blur(8u); }
+.du-tabs button { all: unset; cursor: pointer; padding: 9u 15u; border-radius: 7u; font: 400 17u/1 var(--f-sans); color: #fff; transition: background 300ms ease, color 300ms ease; }
+.du-tabs button:hover { background: rgb(255 255 255 / 0.18); }
+.du-tabs button.is-on { background: #fff; color: #16130f; }
+
+/* Code card */
+.du-code { box-sizing: border-box; height: 100%; overflow: hidden; padding: 22u 0; border-radius: 18u; background: var(--card); box-shadow: 0 0 0 1px var(--line); font: 400 17u/1.8 var(--f-mono); color: #4a453d; }
+.du-code__lines > div, .du-ex__blk > div { display: grid; grid-template-columns: 58u 1fr; white-space: pre; transition: background 300ms ease; }
+.du-code__lines > div { animation: du-line 380ms var(--du-ease) both; animation-delay: calc(var(--d0) + var(--i) * var(--step)); }
+.du-code__lines > div:hover { background: var(--panel); }
+.du-code em { padding-right: 18u; text-align: right; font-style: normal; color: #b9b2a7; }
+.du-code .is-del { background: #fdecec; color: #c0392b; }
+.du-code .is-add { background: #e9f8ec; color: #1f8a3d; }
+.du-code .is-cm { color: #a39d93; }
+.du-code__file { margin: -6u 0 14u; padding: 0 24u 16u; border-bottom: 1px solid var(--line); font: 500 17u/1 var(--f-mono); color: var(--ink); }
+
+/* ── Hero ── */
+.du-hero { position: absolute; left: 0; right: 0; top: 108u; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.du-ann { display: inline-flex; align-items: center; gap: 10u; height: 40u; padding: 0 18u; border-radius: 999px; background: #cdf5cf; font: 400 17u/1 var(--f-sans); color: #16130f; cursor: pointer; transition: background 300ms ease; }
+.du-ann:hover { background: #b9efbc; }
+.du-ann u { text-underline-offset: 4u; }
+.du-hero .du-h1 { margin-top: 30u; }
+.du-hero__panel { position: absolute; left: 80u; width: 1150u; top: 548u; bottom: 52u; }
+.du-hero__wd { left: 200u; top: 104u; width: 600u; }
+.du-hero__code { position: absolute; left: 1262u; right: 80u; top: 548u; bottom: 52u; }
+
+/* ── Feature ── */
+.du-ft { position: absolute; left: 110u; top: 200u; width: 650u; }
+.du-pts { display: grid; gap: 14u; margin: 32u 0 30u; padding: 0; list-style: none; }
+.du-pts li { display: flex; align-items: center; gap: 12u; font: 400 19u/1.3 var(--f-sans); color: var(--ink); }
+.du-pts li::before { content: '✓'; display: grid; place-items: center; width: 26u; height: 26u; border-radius: 6u; background: var(--ink); color: var(--canvas); font: 600 17u/1 var(--f-sans); }
+.du-ft__panel { position: absolute; left: 840u; right: 100u; top: 140u; bottom: 90u; }
+.du-ft__wd { left: 110u; right: 110u; top: 50%; translate: 0 -50%; }
+.du-scrub { display: block; width: 100%; height: 280u; margin-top: 14u; overflow: visible; cursor: crosshair; }
+.du-scrub__line { fill: none; stroke-width: 2.5; vector-effect: non-scaling-stroke; stroke-linecap: round; }
+.du-scrub__line:not([stroke-dasharray]) { stroke-dasharray: 1; animation: du-draw 1400ms var(--du-ease) 600ms both; }
+.du-scrub__rule { stroke: #4a4540; stroke-width: 1.5; vector-effect: non-scaling-stroke; transition: x1 200ms ease, x2 200ms ease; }
+.du-scrub__dot { stroke: var(--du-dark); stroke-width: 3; transition: cx 200ms ease, cy 200ms ease; }
+.du-scrub__read { display: flex; flex-wrap: wrap; align-items: center; gap: 20u; margin-top: 16u; font: 400 17u/1 var(--f-mono); color: #a39d93; }
+.du-scrub__read em { padding: 6u 10u; border-radius: 6u; background: rgb(255 255 255 / 0.08); font-style: normal; color: #e9e4dc; }
+.du-scrub__read span::before { content: '● '; color: var(--c); }
+.du-scrub__read b { margin-left: 4u; font-weight: 500; color: #f4efe8; }
+
+/* ── Explain ── */
+.du-ex__code { position: absolute; left: 120u; width: 880u; top: 280u; bottom: 100u; }
+.du-code.is-tall { padding-top: 26u; font-size: 21u; line-height: 1.9; }
+.du-code.is-tall em { padding-right: 22u; }
+.du-code.is-tall .du-ex__blk > div { grid-template-columns: 66u 1fr; }
+.du-ex__blk { all: unset; display: block; width: 100%; box-sizing: border-box; margin: 6u 0; padding: 12u 0; cursor: pointer; border-left: 3px solid transparent; opacity: 0.42; transition: opacity 400ms ease, background 400ms ease, border-color 400ms ease; }
+.du-ex__blk:hover { opacity: 0.75; }
+.du-ex__blk.is-on { opacity: 1; border-left-color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, var(--card)); }
+.du-ex__panel { position: absolute; left: 1040u; right: 120u; top: 280u; bottom: 100u; }
+.du-ex__steps { position: absolute; left: 40u; right: 40u; top: 34u; display: flex; gap: 8u; }
+.du-ex__steps i { flex: 1; height: 4u; border-radius: 4u; background: rgb(255 255 255 / 0.3); transition: background 400ms ease; }
+.du-ex__steps i.is-past, .du-ex__steps i.is-on { background: #fff; }
+.du-ex__wd { left: 40u; right: 40u; top: 50%; translate: 0 -50%; }
+.du-ex__wd .du-wd__in { padding: 30u 32u; }
+.du-ex__t { display: block; margin-top: 18u; font: 500 34u/1.25 var(--f-sans); letter-spacing: -0.02em; color: #f4efe8; }
+.du-ex__n { margin: 16u 0 0; font: 400 20u/1.65 var(--f-sans); color: #c9c2b8; }
+
+/* ── Stats ── */
+.du-stats { position: absolute; left: 120u; right: 120u; top: 300u; bottom: 100u; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20u; }
+.du-stats > * { min-height: 0; }
+.du-stat { position: relative; box-sizing: border-box; height: 100%; display: flex; flex-direction: column; padding: 34u 34u 0; overflow: hidden; border-radius: 20u; background: var(--card); box-shadow: 0 0 0 1px var(--line); cursor: default; transition: box-shadow 500ms ease, translate 500ms var(--du-spring); }
+.du-stat::before { content: ''; position: absolute; inset: 0; background: radial-gradient(70% 90% at 20% 20%, #ffb36b, transparent 60%), var(--du-sun); opacity: 0; transition: opacity 600ms var(--du-ease); }
+.du-stat > * { position: relative; }
+.du-stat small { font: 500 17u/1 var(--f-mono); letter-spacing: 0.08em; color: var(--du-body); transition: color 400ms ease; }
+.du-stat b { margin-top: 18u; font: 500 104u/1 var(--f-sans); letter-spacing: -0.05em; color: var(--ink); font-variant-numeric: tabular-nums; transition: color 400ms ease; }
+.du-stat p { min-height: 3.2em; margin: 14u 0 34u; font: 400 19u/1.6 var(--f-sans); color: var(--du-body); transition: color 400ms ease; }
+.du-stat svg, .du-stat__gap { flex: 1; min-height: 0; margin: 24u -34u 0; width: calc(100% + 68u); }
+.du-stat svg { color: var(--accent); transition: color 400ms ease; }
+.du-stat__area { animation: du-fade 900ms ease 900ms both; }
+.du-stat__line { fill: none; stroke: var(--accent); stroke-width: 3; vector-effect: non-scaling-stroke; stroke-dasharray: 1; animation: du-draw 1400ms var(--du-ease) 700ms both; transition: stroke 400ms ease; }
+.du-stat.is-on { translate: 0 -6u; box-shadow: 0 40u 60u -30u rgb(120 20 60 / 0.45); }
+.du-stat.is-on::before { opacity: 1; }
+.du-stat.is-on small, .du-stat.is-on p { color: rgb(255 255 255 / 0.85); }
+.du-stat.is-on b { color: #fff; }
+.du-stat.is-on .du-stat__line { stroke: #fff; }
+.du-stat.is-on svg { color: #fff; }
+
+/* ── Cases ── */
+.du-cases__head { position: absolute; left: 80u; top: 112u; }
+.du-case__wrap { position: absolute; left: 80u; width: 1060u; top: 270u; bottom: 80u; }
+.du-case { position: relative; height: 100%; overflow: hidden; border-radius: 22u; background: var(--du-dark); color: #fff; }
+.du-case img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; scale: 1.06; transition: opacity 900ms ease, scale 2400ms var(--du-ease); }
+.du-case img.is-on { opacity: 1; scale: 1; }
+.du-case::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(20 16 12 / 0.72), rgb(20 16 12 / 0) 62%), linear-gradient(0deg, rgb(20 16 12 / 0.5), transparent 40%); pointer-events: none; }
+.du-case__co { position: absolute; z-index: 2; left: 44u; top: 40u; font: 600 24u/1 var(--f-sans); animation: du-in 600ms var(--du-ease) both; }
+.du-case__tx { position: absolute; z-index: 2; left: 44u; bottom: 44u; width: 620u; animation: du-in 700ms var(--du-ease) 150ms both; }
+.du-case__tx p { margin: 0 0 24u; font: 500 42u/1.25 var(--f-sans); letter-spacing: -0.02em; }
+.du-case__nav { position: absolute; z-index: 2; right: 32u; bottom: 44u; display: flex; align-items: center; gap: 8u; }
+.du-case__dots { display: flex; gap: 6u; margin-right: 12u; }
+.du-case__dots i { position: relative; width: 26u; height: 4u; overflow: hidden; border-radius: 4u; background: rgb(255 255 255 / 0.3); }
+.du-case__dots i.is-on::after { content: ''; position: absolute; inset: 0; width: 0; background: #fff; animation: du-fill linear both; }
+.du-case__nav button { all: unset; cursor: pointer; display: grid; place-items: center; width: 46u; height: 46u; border-radius: 50%; background: rgb(255 255 255 / 0.2); -webkit-backdrop-filter: blur(8u); backdrop-filter: blur(8u); font: 400 24u/1 var(--f-sans); transition: background 300ms ease, color 300ms ease; }
+.du-case__nav button:hover { background: #fff; color: #16130f; }
+.du-voices { position: absolute; left: 1170u; right: 80u; top: 270u; bottom: 80u; display: grid; grid-template-rows: 1fr 1fr; gap: 20u; }
+.du-voices > * { min-height: 0; }
+.du-voice { box-sizing: border-box; height: 100%; margin: 0; display: flex; flex-direction: column; padding: 30u; border-radius: 18u; background: var(--card); box-shadow: 0 0 0 1px var(--line); transition: box-shadow 400ms ease, translate 400ms var(--du-spring); }
+.du-voice:hover { translate: 0 -4u; box-shadow: 0 0 0 1px var(--line-strong), 0 24u 40u -24u rgb(0 0 0 / 0.25); }
+.du-voice__co { font: 600 20u/1 var(--f-sans); color: var(--ink); }
+.du-voice blockquote { margin: 18u 0 0; font: 400 20u/1.6 var(--f-sans); color: color-mix(in srgb, var(--ink) 80%, var(--canvas)); }
+.du-voice figcaption { display: flex; align-items: center; gap: 12u; margin-top: auto; font: 500 18u/1.3 var(--f-sans); color: var(--ink); }
+.du-voice figcaption img { width: 48u; height: 48u; border-radius: 50%; object-fit: cover; }
+.du-voice small { display: block; font: 400 17u/1.3 var(--f-sans); color: var(--du-body); }
+
+/* ── Close ── */
+.du-close { position: absolute; left: 0; right: 0; top: 140u; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.du-h1.is-close { font-size: 80u; }
+.du-close__panel { position: absolute; left: 260u; right: 260u; top: 580u; bottom: 64u; }
+.du-term { left: 50%; top: 50%; width: 920u; translate: -50% -50%; }
+.du-term .du-wd__in { padding: 0 0 22u; overflow: hidden; }
+.du-term__bar { display: flex; gap: 8u; padding: 16u 20u; border-bottom: 1px solid #2c2a28; }
+.du-term__bar i { width: 12u; height: 12u; border-radius: 50%; background: #3a3734; }
+.du-term__bar i:first-child { background: #ef6f6f; }
+.du-term__bar i:nth-child(2) { background: #f5b84b; }
+.du-term__bar i:last-child { background: #8fd19e; }
+.du-term__cmd { display: flex; align-items: center; justify-content: space-between; gap: 20u; padding: 22u 24u 6u; font: 400 22u/1.4 var(--f-mono); color: #f4efe8; }
+.du-term__cmd em { font-style: normal; color: #8fd19e; }
+.du-term__cmd button { all: unset; cursor: pointer; padding: 9u 14u; border-radius: 8u; background: rgb(255 255 255 / 0.08); font: 400 17u/1 var(--f-sans); color: #e9e4dc; white-space: nowrap; transition: background 300ms ease, color 300ms ease; }
+.du-term__cmd button:hover { background: rgb(255 255 255 / 0.16); }
+.du-term__cmd button.is-on { background: #8fd19e; color: #16130f; }
+.du-term__out { padding: 0 24u; font: 400 17u/1.9 var(--f-mono); color: #a39d93; }
+.du-term__out div { animation: du-line 400ms var(--du-ease) both; animation-delay: calc(1800ms + var(--i) * 520ms); }
+.du-term__out div:last-child { color: #8fd19e; }
+
+@media (prefers-reduced-motion: reduce) {
+  .du-code__lines > div, .du-term__out div, .du-panel, .du-wd, .du-scrub__line, .du-stat__line, .du-case__dots i.is-on::after { animation: none; }
+}

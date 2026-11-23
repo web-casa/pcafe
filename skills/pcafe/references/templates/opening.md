@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 24 个模板。返回索引：[../templates.md](../templates.md)。
+共 32 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `Cover` 封面（开场 · 第 1 页）
 - 适合：整份演示的第一页；主题能浓缩成一个数字或短代号：版本号、年份、季度、排名
@@ -147,3 +147,51 @@
 - 不适合：没有产品界面可展示：用 Cover；要放真实截图：用 HeroPanel 或 DeviceFrame
 - 上限：brand ≤ 10 个字符；links ≤ 4 个 × ≤ 4 字；navCta ≤ 6 字；title ≤ 2 行 × 12 字；lead ≤ 30 字；ctas 每个 ≤ 6 字；cursors 2 个名字 × ≤ 4 字；dash.gauge.value 0–100；trend.values 6–12 个；team.faces ≤ 5 张，tasks 2 条（title ≤ 8 字，status ≤ 3 字）
 - 参考：src/decks/sig-sunrise 的 `hero` 页；docs/zh-CN/components.md#sunrise-hero；交互：光标在页边持续漂动；悬停柱子和头像有反馈
+
+### `FolioHero` 作品轨开场（开场 · 个人作品集首页）
+- 适合：产品设计师、独立设计师、自由职业者作品集的第一页；想让人一开场就看到人和作品
+- 不适合：没有 2 张以上作品图：用 Cover 或 PhotoCover；团队或机构介绍：用 AtelierHero
+- 上限：status ≤ 14 字；person.name ≤ 8 字，note ≤ 24 个字符；pre 和 title 各 ≤ 6 字；lead ≤ 60 字；ctas 每个 ≤ 8 字；tags 3–5 个 × ≤ 6 字；link ≤ 6 字；frames 2–4 张，caption ≤ 14 字
+- 参考：src/decks/sig-folio 的 `hero` 页；docs/zh-CN/components.md#folio-hero；交互：点击：右侧刻度让作品列上下滑动；状态绿点呼吸；悬停按钮和图片有反馈
+
+### `DiptychHero` 对页开场（开场 · 个人作品集首页）
+- 适合：独立设计师、摄影师、插画师作品集的第一页；作品是竖图，想一开场就放大看
+- 不适合：作品是横图或界面截图：用 FolioHero 或 AtelierHero；没有作品图：用 Cover
+- 上限：status ≤ 10 字；title 2–3 行 × ≤ 7 字；soft ≤ 4 字且出现在 title 里；lead ≤ 40 字；ctas 每个 ≤ 8 字；clients 4–8 个 × ≤ 10 个字符；shots 2–5 张竖图：title ≤ 8 字，meta ≤ 14 字；signature ≤ 12 个西文字符
+- 参考：src/decks/sig-diptych 的 `hero` 页；docs/zh-CN/components.md#diptych-hero；交互：左图自动轮播，进度条走满后切换；点箭头或进度条手动切换；客户名横向漂移，悬停暂停
+
+### `MarkerIntro` 记号笔开场（开场 · 一句话自我介绍）
+- 适合：个人主页、设计师、写作者的第一页；想用一句话而不是一个标题来介绍自己
+- 不适合：要放作品图：用 FolioHero 或 DiptychHero；要讲产品卖点：用 Statement
+- 上限：say ≤ 2 行 × 14 字，标记 1–3 处；aside ≤ 2 行 × 12 字；links 2–4 个 × ≤ 6 字；corners.left ≤ 20 字，city ≤ 6 字
+- 参考：src/decks/sig-marker 的 `intro` 页；docs/zh-CN/components.md#marker-intro；交互：荧光笔底色依次刷入；悬停标记词微微倾斜；右下角时钟每秒走动
+
+### `AlbumHero` 相册开场（开场 · 温暖的消费产品首页）
+- 适合：相册、日记、家庭、生活方式类产品的第一页；想要温暖、私密、有手感的开场
+- 不适合：B2B 或数据产品：用 SunriseHero；照片不够 5 张：用 AtelierHero
+- 上限：badge ≤ 8 字；hand ≤ 18 字；title 2 行 × ≤ 9 字；grad ≤ 4 字且在最后一行末尾；lead ≤ 40 字；cta ≤ 6 字；prints 5–9 张：caption ≤ 8 字；chips ≤ 3 个 × ≤ 10 字
+- 参考：src/decks/sig-album 的 `hero` 页；docs/zh-CN/components.md#album-hero；交互：拍立得依次发牌落下；悬停抽出一张；小标签轻轻浮动，晨光缓慢呼吸
+
+### `SlateHero` 立体看板开场（开场 · SaaS 产品首页）
+- 适合：SaaS、数据产品、效率工具的第一页；想一眼看出“这是一个有看板的产品”
+- 不适合：没有可展示的数字：用 SunriseHero；消费类、生活方式产品：用 AlbumHero
+- 上限：chip 标签 ≤ 6 个字符，后半句 ≤ 12 字；title 2 行 × ≤ 8 字，可放 {bolt} {up} {spark} {chart} {link} {shield} {clock} {check}；lead ≤ 50 字；ctas 各 ≤ 8 字；logos 3–5 个 × ≤ 10 个字符；dash.tabs 3–5 个 × ≤ 4 字；hello ≤ 12 字；note ≤ 24 字；dash.kpis 恰好 3 张：value ≤ 8 个字符，series 8–14 个数；float ≤ 8 字
+- 参考：src/decks/sig-slate 的 `hero` 页；docs/zh-CN/components.md#slate-hero；交互：看板从远处转进来；点 KPI 卡换图表；悬停看板转正；图标块悬停会弹一下
+
+### `EmberHero` 暗场开场（开场 · AI 产品首页）
+- 适合：AI 代理、智能助手、对话式产品的第一页；想让观众一眼看到“它是用来提问的”
+- 不适合：没有合适的暗调大图：用 NocturneHero；需要展示数据看板：用 SlateHero
+- 上限：badge 标签 ≤ 2 字，后半句 ≤ 18 字；title 2 行 × ≤ 9 字；ask.placeholder ≤ 20 字；prompts 2–5 条 × ≤ 26 字；ask.chips ≤ 3 个 × ≤ 6 字；ask.models ≤ 3 个 × ≤ 10 个字符；image 宜用暗底、单侧打光、主体居中的图
+- 参考：src/decks/sig-ember 的 `hero` 页；docs/zh-CN/components.md#ember-hero；交互：背景随鼠标漂移；提问框自动打字；开关可按；模型可切换；发送键换下一个问题
+
+### `DuskHero` 霞光面板开场（开场 · 开发者工具首页）
+- 适合：开发者工具、AI 编程助手、技术 SaaS 的第一页；想同时展示“产品界面”和“代码”
+- 不适合：非技术受众：用 SlateHero；没有代码可展示：用 SunriseHero
+- 上限：ann ≤ 20 字 + 链接 ≤ 4 字；title 2 行 × ≤ 8 字；lead ≤ 30 字；ctas 各 ≤ 6 字；tabs 2–5 个：label ≤ 4 字，head ≤ 8 字，bars 2–5 段 × ≤ 4 字，file ≤ 18 个字符；code 6–12 行 × ≤ 34 个字符；以 "- " "+ " "# " 开头分别表示删除、新增、注释
+- 参考：src/decks/sig-dusk 的 `hero` 页；docs/zh-CN/components.md#dusk-hero；交互：点标签切换小部件；代码逐行滑入；渐变面板缓慢流动
+
+### `AgencyStage` 电光蓝舞台开场（开场 · 机构或品牌第 1 页）
+- 适合：增长机构、咨询公司、品牌方案的封面；想要有冲击力、像官网首屏的开场
+- 不适合：没有英文字标：用 AgencyHero；正式汇报：用 Cover
+- 上限：title 2 行 × ≤ 9 字；cta ≤ 8 字；card.title ≤ 8 字，card.body ≤ 40 字；trust.faces 2–4 张，text 两行各 ≤ 12 字；word 3–7 个英文字母；mark 默认 ®；这一页在 deck 里请设 tone: 'dark'，页眉才是浅色
+- 参考：src/decks/sig-agency 的 `stage` 页；docs/zh-CN/components.md#agency-stage；交互：亮光跟随鼠标；字标字母依次升起，悬停单个字母抬起；照片卡悬停浮起；按钮箭头悬停转向

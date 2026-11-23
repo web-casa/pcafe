@@ -1,0 +1,7 @@
+export { Tile as SlateTile, type SlateIcon } from './parts'
+export * from './SlateHero'
+export * from './SlateSteps'
+export * from './SlateCompare'
+export * from './SlateTrend'
+export * from './SlatePricing'
+export * from './SlateConnect'

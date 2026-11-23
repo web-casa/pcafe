@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 import { emoji } from './vite.emoji.mjs'
 import { viteSingleFile } from 'vite-plugin-singlefile'
-import { designUnit, engineResolve, forbidRemote } from './vite.config'
+import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote } from './vite.config'
 
 // Display screens: one offline HTML file per screen.
 //   SCREEN=apollo11 npx vite build -c vite.screen.config.ts   writes dist/screen/apollo11.html
@@ -39,6 +39,7 @@ export default defineConfig({
   ],
   css: { postcss: { plugins: [designUnit] } },
   resolve: engineResolve,
+  optimizeDeps: engineOptimizeDeps,
   build: {
     outDir: 'dist/screen',
     emptyOutDir: false,

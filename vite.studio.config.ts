@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import { emoji } from './vite.emoji.mjs'
 import { viteSingleFile } from 'vite-plugin-singlefile'
 import { proVirtual } from './vite.pro'
-import { designUnit, engineResolve, forbidRemote, styleFonts } from './vite.config'
+import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote, styleFonts } from './vite.config'
 
 // Gallery build: `#/kit` at dist/studio.html, kept beside the deck output.
 // styleFonts runs here too so the gallery keeps the same font pruning as before
@@ -11,6 +11,7 @@ export default defineConfig({
   plugins: [styleFonts(), proVirtual(), ...emoji(), viteSingleFile({ removeViteModuleLoader: true }), forbidRemote()],
   css: { postcss: { plugins: [designUnit] } },
   resolve: engineResolve,
+  optimizeDeps: engineOptimizeDeps,
   build: {
     outDir: 'dist',
     emptyOutDir: false,

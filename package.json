@@ -1,11 +1,8 @@
 {
   "name": "@pcafe/pcafe",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "Fixed-template HTML slide decks for humans and AI: React templates, single-file offline build, automated layout QA.",
   "license": "CPAL-1.0",
-  "publishConfig": {
-    "access": "public"
-  },
   "type": "module",
   "types": "./src/engine/public.ts",
   "exports": {
@@ -26,6 +23,8 @@
     "cli/",
     "scripts/",
     "!scripts/consumers.mjs",
+    "!scripts/emoji-test.mjs",
+    "!scripts/licence-test.mjs",
     "!scripts/lint-package.mjs",
     "src/",
     "docs/",
@@ -49,6 +48,7 @@
     "vite.print.config.ts",
     "vite.studio.config.ts",
     "vite.pro.ts",
+    "vite.licence.ts",
     "vite.emoji.mjs",
     "vite.emoji.d.ts",
     "vite.unit.mjs",
@@ -97,12 +97,14 @@
     "docs": "node scripts/gen-docs.mjs && node scripts/zh-tw.mjs",
     "docs:check": "node scripts/zh-tw.mjs --check",
     "fonts:verify": "node scripts/font-coverage.mjs",
-    "check": "npm run typecheck && npm run build && node scripts/qa.mjs",
-    "check:engine": "npm run docs:check && npm run typecheck && npm run build && npm run qa && npm run qa:kit && npm run check:formats",
+    "check": "npm run typecheck && npm run build:deck && node scripts/qa.mjs",
+    "check:engine": "npm run docs:check && npm run typecheck && npm run build && node scripts/qa.mjs --full-engine && npm run qa:kit && npm run check:formats",
     "check:formats": "npx pcafe paper check report-solar && npx pcafe cards check solar-linkedin && npx pcafe video check solar-data && npx pcafe course check object-storage && npx pcafe screen check apollo11 && npx pcafe print check starter",
     "photos": "node scripts/fetch-photos.mjs",
     "test:style-fonts": "node scripts/style-fonts-test.mjs",
+    "test:emoji": "node scripts/emoji-test.mjs",
     "test:consumers": "node scripts/consumers.mjs",
+    "test:licence": "node scripts/licence-test.mjs",
     "lint:package": "node scripts/lint-package.mjs"
   },
   "dependencies": {

@@ -176,13 +176,34 @@ export function coveredCjk() {
   return covered
 }
 
-/** CJK characters in `text` that no committed subset can render. */
+/** Code points declared via unicode-range on embedded `Deck * SC` @font-face rules (e.g. Pro's cjk-supplement). */
+export function embeddedDeckCjk(text) {
+  const covered = new Set()
+  if (!text.includes('@font-face')) return covered
+  for (const [, block] of text.matchAll(/@font-face\s*\{([^{}]*)\}/gi)) {
+    const family = block.match(/font-family\s*:\s*([^;]+)/i)?.[1]
+    if (!family || !/['"]?Deck\s+[A-Za-z]+\s+SC['"]?/i.test(family)) continue
+    const range = block.match(/unicode-range\s*:\s*([^;]+)/i)?.[1]
+    if (!range) continue
+    for (const [, a, b] of range.matchAll(/U\+([0-9a-f?]+)(?:-([0-9a-f]+))?/gi)) {
+      const start = parseInt(a.replace(/\?/g, '0'), 16)
+      const end = b ? parseInt(b, 16) : parseInt(a.replace(/\?/g, 'f'), 16)
+      if (Number.isNaN(start) || Number.isNaN(end) || start < 0 || end < start || end > 0x10ffff) continue
+      if (end - start > 0x20000) continue
+      for (let cp = start; cp <= end; cp++) covered.add(cp)
+    }
+  }
+  return covered
+}
+
+/** CJK characters in `text` that neither a committed subset nor an embedded Deck * SC supplement can render. */
 export function missingCjk(text) {
   const covered = coveredCjk()
+  const extra = embeddedDeckCjk(text)
   const missing = new Set()
   for (const ch of text) {
     const cp = ch.codePointAt(0)
-    if (isCjk(cp) && !covered.has(cp)) missing.add(ch)
+    if (isCjk(cp) && !covered.has(cp) && !extra.has(cp)) missing.add(ch)
   }
   return [...missing].sort()
 }
@@ -191,9 +212,10 @@ function main() {
   const used = new Map()
   for (const file of sourceFiles()) {
     let text = readFileSync(file, 'utf8')
-    // Character-class regexes such as /[一-鿿]/ name range endpoints; they are
-    // code, not copy, so they must not count as rendered characters.
+    // Character-class regexes (/[一-鿿]/) and range strings ('⺀-鿿...') name
+    // range endpoints; they are code, not copy, so they must not count as rendered characters.
     text = text.replace(/\/\[[^\]\n]*[\u2e80-\u9fff\uf900-\ufaff\uff00-\uffef][^\]\n]*\]\/[a-z]*/g, '')
+    text = text.replace(/(['"])[^'"\n]*[\u2e80-\u9fff\uf900-\ufaff\uff00-\uffef]-[\u2e80-\u9fff\uf900-\ufaff\uff00-\uffef][^'"\n]*\1/g, '')
     for (const ch of text) {
       const cp = ch.codePointAt(0)
       if (isCjk(cp)) used.set(ch, (used.get(ch) ?? 0) + 1)

@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 10 个模板。返回索引：[../templates.md](../templates.md)。
+共 11 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `PanelCards` 面板卡片（产品 · 3–4 项能力各配一小块界面）
 - 适合：介绍产品的 3–4 项能力，每项都有能画出来的数据；把几组小数据并排展示
@@ -63,3 +63,9 @@
 - 不适合：流程是线性的步骤：用 StepTrack；要放真实截图：用 DeviceFrame
 - 上限：title ≤ 2 行 × 7 字；lead ≤ 36 字；points 2–4 条 × ≤ 16 字；columns 正好 3 列：name ≤ 4 字，每列 1–3 张卡；卡片：tag ≤ 4 字，title ≤ 12 字，due ≤ 8 个字符，progress 0–100；views ≤ 3 个 × ≤ 4 字；cursor ≤ 4 字
 - 参考：src/decks/sig-sunrise 的 `board` 页；docs/zh-CN/components.md#kanban-demo；交互：点击：任务卡移到下一列，计数更新；视图标签可切换
+
+### `DuskFeature` 霞光面板特性（产品 · 一项功能和它的图表）
+- 适合：一页讲清一项功能，并配一张能读数的图；调试、监控、分析类功能
+- 不适合：要讲多项功能：用 EmberBento 或要点类模板；图表需要坐标轴和精确刻度：用数据类图表模板
+- 上限：title 2 行 × ≤ 9 字；body ≤ 64 字；points 2–4 条 × ≤ 14 字；more ≤ 8 字；chart.series 2–3 条，每条 6–14 个数，长度一致；xs 与之等长；chart.name ≤ 12 字
+- 参考：src/decks/sig-dusk 的 `feature` 页；docs/zh-CN/components.md#dusk-feature；交互：曲线画出；鼠标左右移动时光标和读数跟随

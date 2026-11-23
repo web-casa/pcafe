@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 10 个模板。返回索引：[../templates.md](../templates.md)。
+共 18 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `BigStat` 单个大数字（证据 · 一个数字撑起一页）
 - 适合：一个数字本身就是论点：97%、9.34%、1/100；需要在一串文字页之间放一个视觉重音
@@ -63,3 +63,51 @@
 - 不适合：每个项目都要讲细节：一页一个，用 CaseStudy；要同时看到所有图：用 PhotoMosaic
 - 上限：title 1 行 ≤ 12 字；cta ≤ 8 字；projects 3–6 个：name ≤ 14 字，year ≤ 6 个字符；图片用竖图
 - 参考：src/decks/sig-monograph 的 `index` 页；docs/zh-CN/components.md#project-index；交互：点击或悬停：切换当前项目和右侧大图
+
+### `FolioCase` 作品轨案例（证据 · 单个项目详情）
+- 适合：作品集里讲一个项目：做了什么、多久、结果如何；有 2–3 个能量化的结果
+- 不适合：要讲改版前后对比：用 CaseStudy；只是展示多张作品：用 ProjectPair
+- 上限：kicker ≤ 24 个字符；title ≤ 8 字，sub ≤ 12 字；meta 2–4 行：label ≤ 5 字，value ≤ 20 字；stats 2–3 个：value ≤ 4 个字符，unit ≤ 2 个字符，label ≤ 8 字；link ≤ 10 字；frames 3–5 张
+- 参考：src/decks/sig-folio 的 `case` 页；docs/zh-CN/components.md#folio-case；交互：点击：刻度或露出的作品图让作品列滑动；悬停放大正中的图
+
+### `FolioWords` 作品轨评价（证据 · 客户原话）
+- 适合：作品集或服务介绍里放 2–4 条客户评价；每条评价能对上一个具体项目
+- 不适合：评价很多、想一页铺开：用 ProofMosaic；只有一条：用 Quote
+- 上限：kicker ≤ 20 个字符；words 2–4 条：text ≤ 56 字，name ≤ 6 字，role ≤ 16 字，metric.value ≤ 5 个字符，metric.label ≤ 8 字，caption ≤ 14 字
+- 参考：src/decks/sig-folio 的 `words` 页；docs/zh-CN/components.md#folio-words；交互：点击：箭头翻到下一条，文字淡入，作品列同步滑动
+
+### `DiptychWorks` 对页项目列表（证据 · 精选项目）
+- 适合：3–6 个项目，每个有一张好图；想让人自己挑着看
+- 不适合：只有两个项目：用 ProjectPair；项目要讲细节：用 FolioCase
+- 上限：kicker ≤ 16 字；title 1–2 行 × ≤ 8 字；works 3–6 个：name ≤ 6 字，kind ≤ 6 字，year ≤ 6 个字符
+- 参考：src/decks/sig-diptych 的 `works` 页；docs/zh-CN/components.md#diptych-works；交互：悬停或点击项目，左图交叉淡入对应作品，箭头滑入
+
+### `DiptychWords` 对页评价（证据 · 客户原话）
+- 适合：2–4 条评价，每条对应一个作品；想把评价和数字放在同一页
+- 不适合：评价没有对应作品：用 Quote；评价很多：用 ProofMosaic
+- 上限：kicker ≤ 16 字；words 2–4 条：text ≤ 50 字，name ≤ 6 字，role ≤ 16 字，project ≤ 8 字；stats 2–3 个：value ≤ 5 个字符，label ≤ 8 字
+- 参考：src/decks/sig-diptych 的 `words` 页；docs/zh-CN/components.md#diptych-words；交互：点击编号：原话淡入切换，左图同步交叉淡入
+
+### `MarkerWorks` 记号笔作品卡（证据 · 精选作品）
+- 适合：3–9 件小而精的作品：产品、物件、App；作品图是干净的产品照
+- 不适合：作品是横图截图：用 ProjectPair；要逐个讲细节：用 FolioCase
+- 上限：kicker ≤ 10 字；works 3–9 件，三件一页：name ≤ 6 字，no ≤ 4 个字符，year ≤ 10 个字符
+- 参考：src/decks/sig-marker 的 `works` 页；docs/zh-CN/components.md#marker-works；交互：悬停：取景角张开、图片上浮；点击箭头三张一页翻动
+
+### `AlbumStories` 相册翻面故事（证据 · 用户故事）
+- 适合：消费产品的用户故事、评价；想让人自己翻开看，而不是一次铺满
+- 不适合：评价要配数字：用 DiptychWords；超过 3 条：用 ProofMosaic
+- 上限：kicker ≤ 8 字；title 1 行 ≤ 14 字；stories 正好 3 条：caption ≤ 8 字，note ≤ 44 字，name ≤ 6 字，meta ≤ 10 字
+- 参考：src/decks/sig-album 的 `stories` 页；docs/zh-CN/components.md#album-stories；交互：点击照片立体翻面；悬停摆正上浮
+
+### `EmberWords` 暗场用户评价（证据 · 两位客户的话和结果）
+- 适合：用两位客户的原话加结果做证明；发布会、销售演示里的口碑页
+- 不适合：评价超过 2 条：用 FolioWords 或 AlbumStories；没有量化结果：用引语类模板
+- 上限：title ≤ 12 字；quotes 恰好 2 条：quote ≤ 40 字，role ≤ 16 字；value ≤ 5 个字符，数字部分会滚动；label ≤ 8 字
+- 参考：src/decks/sig-ember 的 `words` 页；docs/zh-CN/components.md#ember-words；交互：结果数字从零滚动；光斑跟随鼠标；悬停卡片浮起
+
+### `SocialPost` 一条发布动态（证据 · 一次上线或里程碑的反响）
+- 适合：讲一次上线、发布、里程碑，以及大家的反应；想让数字和评论显得像真实发生过
+- 不适合：数字是重点：用 StatRow；没有配图：用 QuoteHero
+- 上限：text 1–2 行 × ≤ 22 字；time ≤ 6 字；counts 如 ['12.8k', '932']；facts 2–3 条：value ≤ 8 个字符，note ≤ 10 字；comments 2–3 条：name ≤ 6 字，text ≤ 16 字
+- 参考：src/decks/mockui 的 `post` 页；docs/zh-CN/components.md#social-post；交互：点 ♡ 点赞并弹跳计数；评论依次出现；配图悬停推近；菜单点击切换高亮

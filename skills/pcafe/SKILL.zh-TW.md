@@ -12,20 +12,21 @@ PCafe 的簡報只由 `src/kit` 裡的固定範本拼成。寫得好不好，取
 
 參考檔案（由 `npx pcafe docs` 自動產生，不要手改）：
 
+- `npx pcafe spec <範本名...>` / `npx pcafe spec --search <關鍵詞>`：**優先使用**，離線秒查任意免費/Pro 範本的匯入路徑、適用場景、字數硬上限、完整 Props 和範例（支援 `--json`），不必翻閱龐大的 `docs/zh-TW/components.md`。
 - `references/templates.md`：範本索引，每組一行（組名、內容形狀、範本名）。先讀它選組。
 - `references/templates/<組>.md`：每組範本的「適合 / 不適合 / 上限 / 參考頁」。只讀用得到的組，不要一次讀完所有組檔案。
 - `references/styles.md`：全部風格（`DeckDef.style`）和配色（`DeckDef.theme`）。
 
 ## 還沒有 PCafe 專案時
 
-這份 skill 也可能被裝進 Agent 的全域技能目錄（`~/.claude/skills`、`~/.agents/skills` 等），在一個空資料夾或別的專案裡被觸發。先看目前目錄：根目錄同時有 `AGENTS.md` 和 `src/decks/`，才是 PCafe 專案。不是的話，先新建一個再開始（需要 Node.js 20.11 以上）：
+這份 skill 也可能被裝進 Agent 的全域性技能目錄（`~/.claude/skills`、`~/.agents/skills` 等），在一個空資料夾或別的專案裡被觸發。先看目前目錄：根目錄同時有 `AGENTS.md` 和 `src/decks/`，才是 PCafe 專案。不是的話，先建立一個再開始（需要 Node.js 20.11 以上）：
 
 ```bash
 npx @pcafe/pcafe init <name>
 cd <name> && npm install
 ```
 
-之後在 `<name>` 裡工作，先讀它的 `AGENTS.md`，再按下面的流程做。不能執行命令列時，只交付故事線和逐頁大綱（每頁寫明用哪個模板），並告訴使用者需要能執行 Node.js 的環境才能產生 HTML。
+之後在 `<name>` 裡工作，先讀它的 `AGENTS.md`，再按下面的流程做。不能執行指令列時，只交付故事線和逐頁大綱（每頁寫明用哪個範本），並告訴使用者需要能執行 Node.js 的環境才能產生 HTML。
 
 ## 安裝了 @pcafe/pro 時
 
@@ -98,7 +99,7 @@ cd <name> && npm install
 
 ### 6. 寫 deck 檔案
 
-先產生檔案：`npx pcafe new <name>`（從 `src/decks/starter/` 複製）。
+先產生檔案：`npx pcafe new <name>`（從 `src/decks/starter/` 複製）。超過 15 頁的長簡報推薦用 `npx pcafe new <name> --modular`，把各章/各頁拆到 `src/decks/<name>/slides/`，`index.tsx` 只做有序清單組裝，方便後續區域性修改與快速檢查。
 
 ```tsx
 // src/decks/<name>/index.tsx
@@ -140,7 +141,11 @@ export const deck: DeckDef = {
 1. 部分檢查（`--changed`、`--slides`）通過時會列印 `run a full check before delivery`：它不算最終檢查，交付前一定要跑一次完整檢查。想先知道會檢查哪些頁，可以加 `--explain`，它只說明，不檢查。
 2. 出現 FAIL 按 `docs/zh-TW/guide.md` 第 8 節（`#qa-fixes`）修；WARN 裡的「下半部分偏空」也要看一眼。修完只重跑相關的頁，不要每改一處就跑完整檢查。
 3. 報 `slide N never settled` 時，說明這頁有東西一直在變。真實的時鐘、跳動的數字這類活元素，給它加 `data-settle-ignore`；不要為了過檢查把它刪掉。
-4. 完整檢查後先看 `qa/contact-sheet.png`（整份簡報的縮圖），找出節奏和密度的問題；再逐頁開啟 `qa/slide-NN-1920x1080.png` 看：有沒有空白過多、一頁塞太滿、重點不突出、標題第二行只剩一兩個字。
+4. 完整檢查後先看 `qa/contact-sheet.png`（整份簡報的縮圖），找出節奏和密度的問題；再按頁數做視覺複核：
+   - **10 頁以內**：逐頁開啟 `qa/slide-NN-1920x1080.png` 檢視；
+   - **10 頁以上（長簡報）**：逐張開啟所有 `2560×1440` 高畫質 2×2 網格圖 `qa/grid-NN.png`（確保每一頁都被視覺檢查過，30 頁僅需看 8 張圖），並對**有 WARN、含複雜圖表/手繪裝飾、或剛修改過的頁**開啟對應的 `qa/slide-NN-1920x1080.png` 原圖放大複核；
+   - 區域性修改重跑後，只需複核本次修改頁對應的截圖。
+   看圖重點：有沒有空白過多、一頁塞太滿、重點不突出、標題第二行只剩一兩個字。
 5. 手繪圈、高亮、箭頭這類裝飾件放大 2 倍看一遍，位置要對準。
 6. 強調要對上文字：說「最長」就高亮最大的那一項，說「進行到第 3 步」就只填到第 3 步。
 
@@ -152,11 +157,11 @@ export const deck: DeckDef = {
 
 只有使用者明確說「先出個草稿看看」時，才可以不跑檢查，並且在回覆裡寫明「未檢查」。`npm run qa:kit` 和 `npm run check:engine` 是引擎維護者的自檢，做簡報時不要跑。
 
-完整檢查 `PASS`，並且每頁截圖都開啟看過，才算完成。向用戶簡報時說清楚跑的是哪種檢查（完整 / 部分 / 未檢查）、看了哪些截圖。沒開啟過的截圖，不要說「看過了」。
+完整檢查 `PASS`，並且完成上述視覺複核（10 頁以內逐頁原圖，10 頁以上全部 `grid-NN.png` + 重點/修改頁原圖），才算完成。向用戶簡報時說清楚跑的是哪種檢查（完整 / 部分 / 未檢查）、看了哪些截圖或網格圖。沒開啟過的圖，不要說「看過了」。
 
-## 長簡報（20 頁以上）與長報告
+## 長簡報（15–30 頁以上）與長報告
 
-- **先寫大綱再配範本。** 分 3–5 章，每章寫一句話結論和頁數，先給使用者確認，再逐章寫。開頭放目錄（`Agenda`、`PillAgenda` 或 `IndexStack`），每章用 `SectionBreak` 開頭，最後一頁用 `Closing` 重複 2–3 條要點。
+- **先寫大綱再配範本，按章拆檔案。** 分 3–5 章，每章寫一句話結論和頁數，先給使用者確認，再逐章寫。用 `npx pcafe new <name> --modular` 把每章/每頁拆到 `slides/`，由 `index.tsx` 按順序拼接，避免千行單檔案拖慢產生與二次修改。用 `npx pcafe spec <範本1> <範本2> ...` 一次拿齊本章所需範本的 props 與字數上限。開頭放目錄（`Agenda`、`PillAgenda` 或 `IndexStack`），每章用 `SectionBreak` 開頭，最後一頁用 `Closing` 重複 2–3 條要點。
 - **結構提示要處理。** check 會列印 `hint  deck.…`：沒有目錄、章節頁少、沒有收尾、同一範本連用 4 頁以上、逐條展開超過三分之一。能改就改。
 - **只放讀者需要看的東西。** 每一塊都問：當面講的時候，你會開啟這一頁給人看嗎？不會就刪。程式碼結構、內部決策、產生過程、換個說法重複一遍的內容都不放。
 - **能簡報的不描述。** 講「怎麼用」時用 `ChatDemo`（示意對話）或 `AppCards`（填好內容的介面），講流程時先給全貌再講細節。這類介面會標著「示意介面」，`source` 裡也寫明是示意，不冒充真實記錄或真實產品。

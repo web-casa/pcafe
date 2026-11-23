@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 3 个模板。返回索引：[../templates.md](../templates.md)。
+共 4 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `Screenshot` 截图标注（讲解 · 产品界面）
 - 适合：介绍产品界面、网站结构、报表怎么读；要让听众看着真实界面找到具体位置
@@ -21,3 +21,9 @@
 - 不适合：要点能列成条目：用 PhotoSplit；正文超过 150 字：拆页
 - 上限：title ≤ 2 行 × 8 字；standfirst ≤ 40 字；body 1–2 段，合计 ≤ 150 字；pull ≤ 26 字；folio ≤ 16 字
 - 参考：src/decks/v2-p1 的 `bleaching` 页；docs/zh-CN/components.md#magazine-spread；交互：build：引语最后出现
+
+### `DuskExplain` 霞光面板逐段讲解（讲解 · 代码逐段说成人话）
+- 适合：给非作者讲清楚一段代码、配置或脚本；技术分享、代码评审、新人培训
+- 不适合：代码超过 20 行：拆成多页；要展示改动前后：用 DuskHero 的差异行
+- 上限：title ≤ 16 字，单行；file ≤ 24 个字符；blocks 2–4 段：每段 2–5 行 × ≤ 40 个字符；每段 title ≤ 12 字，note ≤ 50 字；autoplay 默认 3600 毫秒，0 关闭
+- 参考：src/decks/sig-dusk 的 `explain` 页；docs/zh-CN/components.md#dusk-explain；交互：自动逐段讲解；点代码段切换并停止自动播放

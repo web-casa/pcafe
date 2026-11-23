@@ -2,26 +2,26 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 275 个模板，87 组。先读本页选组，再读组文件里的“适合 / 不适合 / 上限 / 参考”；完整 props 和示例见 docs/zh-CN/components.md。
+共 324 个模板，90 组。先读本页选组，再读组文件里的“适合 / 不适合 / 上限 / 参考”；完整 props 和示例见 docs/zh-CN/components.md。
 
 | 组 | 内容形状 | 模板 |
 | --- | --- | --- |
-| [开场](templates/opening.md) | 整份演示的第一页；主题能浓缩成一个数字或短代号：版本号、年份、季度、排名；产品、平台、工具的发布或介绍 | `Cover`、`HangingCover`、`HeroPanel`、`SplitWord`、`StickerCover`、`FloatCover`、`Desktop`、`KeyReveal`、`OrbCover`、`FloatHero`、`RibbonCover`、`SketchCover`、`AgencyHero`、`FanCover`、`PhotoCover`、`TextMask`、`GlobeCover`、`BadgeHero`、`ExhibitCover`、`AgendaMosaic`、`AtelierHero`、`MonographHero`、`NocturneHero`、`SunriseHero` |
+| [开场](templates/opening.md) | 整份演示的第一页；主题能浓缩成一个数字或短代号：版本号、年份、季度、排名；产品、平台、工具的发布或介绍 | `Cover`、`HangingCover`、`HeroPanel`、`SplitWord`、`StickerCover`、`FloatCover`、`Desktop`、`KeyReveal`、`OrbCover`、`FloatHero`、`RibbonCover`、`SketchCover`、`AgencyHero`、`FanCover`、`PhotoCover`、`TextMask`、`GlobeCover`、`BadgeHero`、`ExhibitCover`、`AgendaMosaic`、`AtelierHero`、`MonographHero`、`NocturneHero`、`SunriseHero`、`FolioHero`、`DiptychHero`、`MarkerIntro`、`AlbumHero`、`SlateHero`、`EmberHero`、`DuskHero`、`AgencyStage` |
 | [总览](templates/overview.md) | 需要一页讲清“这是什么”，并允许听众按兴趣深入；有 6 个并列主题，其中 1 个是最重要的（放在第 1 格）；产品或项目的一页总览 | `Bento`、`BentoBoard`、`MegaMenu` |
-| [数据](templates/data.md) | 几个可加总或可比较的数量：新增 / 更新 / 删除，收入构成，用户分层；需要让听众记住一个比例；一组“名称 → 版本 / 分数 / 数量”，其中一项是重点 | `MetricBars`、`SpotlightList`、`StatRow`、`CountCompare`、`Donut`、`BarChart`、`Bubble`、`Gauge`、`SparkCards`、`Pictogram`、`SlopeRank`、`BlockStats`、`GlowMetric`、`ProgressCards`、`RankingRace`、`BubbleCluster`、`Sankey`、`Treemap`、`Radar`、`Scatter`、`StackedArea`、`DotMap`、`GlowMetrics`、`Odometer`、`ArcGlobe`、`PopGrid`、`SpikeChart`、`ReachRings`、`YearBars`、`MetricMosaic`、`FramedStats` |
+| [数据](templates/data.md) | 几个可加总或可比较的数量：新增 / 更新 / 删除，收入构成，用户分层；需要让听众记住一个比例；一组“名称 → 版本 / 分数 / 数量”，其中一项是重点 | `MetricBars`、`SpotlightList`、`StatRow`、`CountCompare`、`Donut`、`BarChart`、`Bubble`、`Gauge`、`SparkCards`、`Pictogram`、`SlopeRank`、`BlockStats`、`GlowMetric`、`ProgressCards`、`RankingRace`、`BubbleCluster`、`Sankey`、`Treemap`、`Radar`、`Scatter`、`StackedArea`、`DotMap`、`GlowMetrics`、`Odometer`、`ArcGlobe`、`PopGrid`、`SpikeChart`、`ReachRings`、`YearBars`、`MetricMosaic`、`FramedStats`、`MarkerFacts`、`EmberSaves`、`DuskStats` |
 | [时间](templates/timeline.md) | 支持周期、合同期限、版本路线图、项目阶段；想让听众意识到“还剩多久”；软件版本、产品代际的支持期重叠 | `Timeline`、`ReleaseTrain` |
-| [对比](templates/compare.md) | 版本升级、政策调整、改版前后；每行都是同一维度的旧值与新值；两个方案、两档套餐、两种用法 | `CompareTable`、`DuoCards`、`DoubleFunnel`、`CompareSlider`、`ParadigmCards`、`ScoreTable`、`RevealCompare` |
+| [对比](templates/compare.md) | 版本升级、政策调整、改版前后；每行都是同一维度的旧值与新值；两个方案、两档套餐、两种用法 | `CompareTable`、`DuoCards`、`DoubleFunnel`、`CompareSlider`、`ParadigmCards`、`ScoreTable`、`RevealCompare`、`SlateCompare` |
 | [要点](templates/key-points.md) | 3–4 个同等重要的特性、原则或发现；每个要点都能用一个关键词标签概括；讲默认设置、功能开关、可选项 | `NumberedColumns`、`ToggleCard` |
 | [建议](templates/advice.md) | “谁该用 / 谁该等 / 谁不该”这类决策建议；选型结论、风险分级 | `VerdictColumns` |
 | [操作](templates/steps.md) | 上线前检查、升级前准备、验收标准；每项都能给出一条具体命令或动作；必须按顺序执行的流程：升级、部署、入职 | `Checklist`、`StepTrack`、`Terminal`、`ServiceIndex`、`WindowStack`、`UiSteps`、`StepTrio` |
 | [预告](templates/preview.md) | “接下来会发生什么”：下一版本、下一季度、路线图要点；章节过渡页；讲本期 / 下期、当前版本 / 下个版本 | `Teaser`、`GlowStack` |
-| [收尾](templates/closing.md) | 整份演示的最后一页；演示最后一页，给出明确的下一步；销售、合作、招募的收尾 | `Closing`、`ContactPanel`、`Thanks`、`RepeatClosing`、`PixelClosing`、`CtaBlock`、`StepGrid`、`BookingClose`、`MonographClose`、`WallClose` |
+| [收尾](templates/closing.md) | 整份演示的最后一页；演示最后一页，给出明确的下一步；销售、合作、招募的收尾 | `Closing`、`ContactPanel`、`Thanks`、`RepeatClosing`、`PixelClosing`、`CtaBlock`、`StepGrid`、`BookingClose`、`MonographClose`、`WallClose`、`FolioContact`、`DiptychContact`、`MarkerClose`、`AlbumClose`、`SlateConnect`、`EmberClose`、`DuskClose`、`AgencyBook`、`DirectChat` |
 | [变化](templates/change.md) | 配置文件、代码片段从旧格式换成新格式；两段写法等价，想让听众逐行对照；发行版、依赖、平台升级时的一批版本号 | `CodeDiff`、`SpecSheet` |
 | [现状](templates/status.md) | 架构、平台、职能、模块等一组对象的支持或就绪状态；想让听众一眼数出“几个好、几个有问题” | `StatusGrid` |
-| [机制](templates/mechanism.md) | 阶段会循环往复：开发周期、增长飞轮、复盘闭环；想强调“最后一步会喂回第一步”；解释一个系统或机制：数据怎么流、请求怎么处理 | `Cycle`、`FlowDiagram`、`ArchLayers`、`RequestJourney`、`ShieldLayers`、`ServerRack` |
+| [机制](templates/mechanism.md) | 阶段会循环往复：开发周期、增长飞轮、复盘闭环；想强调“最后一步会喂回第一步”；解释一个系统或机制：数据怎么流、请求怎么处理 | `Cycle`、`FlowDiagram`、`ArchLayers`、`RequestJourney`、`ShieldLayers`、`ServerRack`、`EmberAgent` |
 | [答疑](templates/qa.md) | 升级、上线、采购前常被问到的 4–6 个问题；每个问题都能用一两句话回答 | `Faq` |
 | [规划](templates/roadmap.md) | 路线图：现在、下一步、之后；按状态归类：已移除、将移除、已弃用；季度或半年粒度的产品、市场、销售路线图 | `Lanes`、`Roadmap` |
-| [趋势](templates/trend.md) | 4–12 个时间点的变化：版本、年份、季度、月份；要指出某个时间点发生了什么 | `LineChart` |
+| [趋势](templates/trend.md) | 4–12 个时间点的变化：版本、年份、季度、月份；要指出某个时间点发生了什么；复盘一年或一个季度的增长 | `LineChart`、`SlateTrend` |
 | [导航](templates/nav.md) | 15 页以上、分成几章的演示；想让听众先看到全貌，或者演讲中途要跳回某一章 | `Agenda` |
 | [分隔](templates/divider.md) | 配合 Agenda，每章开头放一页；演讲需要停顿、换话题的地方；章节开头 | `SectionBreak`、`ChapterNumber` |
 | [概念](templates/concept.md) | 给全场统一一个术语的定义；引用一句有分量的原话作为论点；几个维度共同决定一个结果 | `QuoteHero`、`Venn` |
@@ -29,17 +29,17 @@
 | [排查](templates/troubleshoot.md) | 任何一层出问题都会挡住后面的链路：网络、权限、发布流程；排查清单需要按顺序从上往下查 | `LayerStack` |
 | [对照](templates/contrast.md) | “谁在哪一类里叫什么”：厂商 × 用途、平台 × 接口、版本 × 功能；格子里是短标识而不是句子 | `Matrix` |
 | [并列](templates/parallel.md) | 6 或 8 个并列对象：平台、产品、角色、地区；每个对象一两句话就能说清；6 或 9 个并列的功能、集成、零件 | `IconGrid`、`TileWall`、`GradientCards`、`HairlineGrid`、`NoteCards`、`ArcCards`、`HaloRows`、`FanCarousel`、`TabSpec` |
-| [证据](templates/evidence.md) | 一个数字本身就是论点：97%、9.34%、1/100；需要在一串文字页之间放一个视觉重音；实验或改动前后的变化：引用率、转化率、耗时 | `BigStat`、`DeltaBars`、`Dumbbell`、`KeySpec`、`CaseCard`、`CaseStudy`、`DeviceFrame`、`OutageBoard`、`ProjectPair`、`ProjectIndex` |
-| [方法](templates/method.md) | 讲抽样误差、置信区间、预测范围；说明“样本量要多大才够”；讲合作流程，同时给一句客户背书 | `RangeBars`、`ProcessQuote` |
+| [证据](templates/evidence.md) | 一个数字本身就是论点：97%、9.34%、1/100；需要在一串文字页之间放一个视觉重音；实验或改动前后的变化：引用率、转化率、耗时 | `BigStat`、`DeltaBars`、`Dumbbell`、`KeySpec`、`CaseCard`、`CaseStudy`、`DeviceFrame`、`OutageBoard`、`ProjectPair`、`ProjectIndex`、`FolioCase`、`FolioWords`、`DiptychWorks`、`DiptychWords`、`MarkerWorks`、`AlbumStories`、`EmberWords`、`SocialPost` |
+| [方法](templates/method.md) | 讲抽样误差、置信区间、预测范围；说明“样本量要多大才够”；讲合作流程，同时给一句客户背书 | `RangeBars`、`ProcessQuote`、`FolioSteps`、`AlbumLayout`、`SlateSteps`、`AgencyAccordion` |
 | [计划](templates/plan.md) | 30–90 天的行动计划、试点排期；多条工作流互相重叠，需要看清先后 | `Gantt` |
 | [背景](templates/background.md) | 政策、标准、发布等一串有日期的事件；想让听众看到“事情是怎么一步步来的”；4–7 个历史节点 | `Milestones`、`TraceTimeline`、`TeamBanner`、`TeamPortraits` |
 | [佐证](templates/proof.md) | 平台、监管机构、权威文档的原话；客户访谈里的原话（要能追溯到记录） | `QuoteWall` |
 | [实证](templates/empirical.md) | 改版前后、优化前后；同一页面在两种条件下的样子：开关 JavaScript、桌面与移动、两个版本；“为什么选我们”，用三个数字撑腰 | `BeforeAfter`、`WhyStats` |
-| [讲解](templates/explain.md) | 介绍产品界面、网站结构、报表怎么读；要让听众看着真实界面找到具体位置；介绍一个对象或概念，图片帮助理解 | `Screenshot`、`PhotoSplit`、`MagazineSpread` |
+| [讲解](templates/explain.md) | 介绍产品界面、网站结构、报表怎么读；要让听众看着真实界面找到具体位置；介绍一个对象或概念，图片帮助理解 | `Screenshot`、`PhotoSplit`、`MagazineSpread`、`DuskExplain` |
 | [诊断](templates/diagnose.md) | 注册、激活、付费这类逐级转化的流程；想说明“先修哪一级”，而不只是展示数字 | `Funnel` |
 | [定位](templates/position.md) | 竞品定位、产品组合、优先级（影响 × 投入）；想让听众看到“哪块位置是空的” | `Quadrant` |
-| [客户](templates/customer.md) | B2B 采购小组：决策者、使用者、把关者；要让市场、销售、产品对“卖给谁”达成一致；客户评价、用户口碑页 | `PersonaCards`、`ProofMosaic` |
-| [定价](templates/pricing.md) | 产品分档与定价方案；想把大多数客户引到某一档；订阅制产品的价格页 | `PricingTiers`、`GlowPricing`、`BuyoutPricing` |
+| [客户](templates/customer.md) | B2B 采购小组：决策者、使用者、把关者；要让市场、销售、产品对“卖给谁”达成一致；客户评价、用户口碑页 | `PersonaCards`、`ProofMosaic`、`DuskCases`、`AgencyProof` |
+| [定价](templates/pricing.md) | 产品分档与定价方案；想把大多数客户引到某一档；订阅制产品的价格页 | `PricingTiers`、`GlowPricing`、`BuyoutPricing`、`FolioOffers`、`AlbumPlus`、`SlatePricing` |
 | [衡量](templates/measure.md) | 周会、月报、复盘的核心指标；想表达“一个结果指标由几个输入指标推动” | `KpiBoard` |
 | [分配](templates/allocation.md) | 预算、时间、渠道、流量的构成；几行之间比较构成怎么变化 | `ShareBar` |
 | [拆解](templates/breakdown.md) | ARR、利润、预算、人数等从期初到期末的变化拆解；想说明“增长被什么吃掉了” | `Waterfall` |
@@ -47,10 +47,10 @@
 | [分析](templates/analysis.md) | 复盘或诊断：指标为什么变了；咨询式分析的第一页：先把问题拆成互不重叠的几块；根据条件选方案、选工具 | `IssueTree`、`DecisionTree`、`Fishbone` |
 | [分布](templates/distribution.md) | 分批留存（签约月份 × 第几个月）；渠道 × 漏斗阶段的转化率、功能 × 客户群的使用率 | `Heatmap` |
 | [节奏](templates/group-41.md) | 刚讲完一页数据，要把结论单独立住；章节中间需要一个停顿，让听众记住一句话；开场就抛出最关键的一个数字 | `Statement`、`NumberOpener`、`ChapterProgress`、`Question`、`Contrast`、`Recap`、`FullBleed`、`PillAgenda`、`RibbonSection`、`AgencyManifesto` |
-| [产品](templates/group-42.md) | 介绍产品的 3–4 项能力，每项都有能画出来的数据；把几组小数据并排展示；演示搜索、分析、AI 助手能回答什么 | `PanelCards`、`AskAnswer`、`TabbedShot`、`BrandKit`、`ServiceTrio`、`ServiceLedger`、`FeatureBento`、`KitBento`、`HomeTrio`、`KanbanDemo` |
+| [产品](templates/group-42.md) | 介绍产品的 3–4 项能力，每项都有能画出来的数据；把几组小数据并排展示；演示搜索、分析、AI 助手能回答什么 | `PanelCards`、`AskAnswer`、`TabbedShot`、`BrandKit`、`ServiceTrio`、`ServiceLedger`、`FeatureBento`、`KitBento`、`HomeTrio`、`KanbanDemo`、`DuskFeature` |
 | [论证](templates/group-43.md) | 说明一个自动化能力是怎么设定的，以及效果；一句主张配两个硬数字；可以引用出处的奖项、排名、认证 | `ProofSplit`、`Laurels`、`Balance` |
 | [结构](templates/group-44.md) | 一页里要依次讲 3–5 个模块；模块各有一小块数据；生态、集成、技术栈、合作方 | `IndexStack`、`Orbit`、`Pyramid`、`Concentric`、`NodeGraph`、`AnatomyCard`、`StackBars` |
-| [内容](templates/group-45.md) | 我们做什么、流程有哪几步；每项能用一个词说清；三句能逐字引用、有出处的原话 | `ServiceList`、`QuoteArc`、`WorkCards`、`WordBlocks`、`FolderCards`、`AgencyRows`、`NumberTiles`、`IndexList`、`PriorityColumns` |
+| [内容](templates/group-45.md) | 我们做什么、流程有哪几步；每项能用一个词说清；三句能逐字引用、有出处的原话 | `ServiceList`、`QuoteArc`、`WorkCards`、`WordBlocks`、`FolderCards`、`AgencyRows`、`NumberTiles`、`IndexList`、`PriorityColumns`、`MarkerLog`、`AlbumWeek`、`SocialFeed` |
 | [开场 / 停顿](templates/group-46.md) | 封面、口号、规则宣讲；一句话里有一个关键词 | `PopPoster` |
 | [说明](templates/group-47.md) | 介绍一个功能、一个文件、一条命令；有两个关键数字和 3–4 行键值 | `BentoSpotlight` |
 | [安排](templates/group-48.md) | 评审、培训、答疑这类要约时间的安排；轻柔风格里放一个产品感的小界面 | `SlotPicker` |
@@ -93,3 +93,6 @@
 | [分类](templates/classify.md) | 一组条目有交叉分类，想逐个说明“这一类有哪些”；条目多但每个只要一句话 | `FilterChips` |
 | [动效](templates/motion.md) | 产品演示、案例：先让人认出画面，再看细节；一张图本身就是这一页的重点；把零散的事项理成有顺序的步骤 | `MediaExpand`、`ScatterOrder`、`TiltShot`、`ConvergeShots`、`StepVideo` |
 | [拟真界面](templates/realistic-ui.md) | 工具、助手、客服类产品：展示一次典型的交互；比列功能更直观的场合；同一件东西在几个平台、几种出口里的样子 | `ChatDemo`、`AppCards` |
+| [服务](templates/group-88.md) | 2–4 项服务，每项有交付物和大致报价；不想把所有服务挤在一页里 | `DiptychServices` |
+| [关于](templates/group-89.md) | 作品集里的自我介绍；想把经历和联系方式放在一起 | `DiptychAbout` |
+| [能力](templates/group-90.md) | 介绍自己做哪三类事；想顺便讲讲最近在忙什么；介绍 AI 产品的 4 项核心能力 | `MarkerSkills`、`EmberBento` |

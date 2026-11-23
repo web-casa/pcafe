@@ -28,6 +28,10 @@ const SITE = 'fedoraproject.org（2026-10 查阅）'
 
 export const deck: DeckDef = {
   title: '认识 Fedora Linux',
+  description: 'Fedora Linux 入门：它的来历和四个基础，六个正式版本与 Atomic、Spins、Labs 怎么选，大约半年一版的发布节奏，和 CentOS Stream、RHEL 的上下游关系，以及怎样开始用。',
+  url: 'https://p.cafe/learn/fedora-linux/',
+  image: 'https://p.cafe/shots/decks/v3-p1/01.webp',
+  author: { name: 'PCafe', url: 'https://p.cafe', type: 'Organization' },
   iconStyle: 'line-duotone',
   theme: 'cobalt',
   style: 'standard',

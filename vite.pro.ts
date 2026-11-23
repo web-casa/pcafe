@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, realpathSync } from 'node:fs'
 import { join } from 'node:path'
 import type { Plugin } from 'vite'
+import { findLicence, licenceProblem, type LicenceResult } from './vite.licence'
 
 const VIRTUAL = 'virtual:pcafe-pro'
 const RESOLVED = `\0${VIRTUAL}`
@@ -22,6 +23,8 @@ const LICENCE_RESOLVED = `\0${LICENCE}`
 export const proVirtual = (): Plugin => {
   let root = process.cwd()
   let warned = false
+  let licence: LicenceResult | null = null
+  const getLicence = () => (licence ??= findLicence(root))
   const warnLayout = (pkg: string, problem: string) => {
     if (warned) return
     warned = true
@@ -35,14 +38,30 @@ export const proVirtual = (): Plugin => {
     configResolved(config) {
       root = config.root
     },
+    buildStart() {
+      // Pro is installed but there is no usable licence file: say so once, since
+      // attribution: false will then leave the credit on.
+      const l = getLicence()
+      if (!l.ok && existsSync(join(root, 'node_modules', '@pcafe', 'pro', 'package.json'))) console.warn(`[pcafe] @pcafe/pro is installed, but ${licenceProblem(l)} Until then attribution: false has no effect.`)
+    },
+    // A licensed build carries its licence number, so a work without the credit can be
+    // traced to the licence it was made under. Nothing else about the licensee is written.
+    transformIndexHtml() {
+      const l = getLicence()
+      return l.ok ? [{ tag: 'meta', attrs: { name: 'pcafe-licence', content: l.id }, injectTo: 'head' }] : []
+    },
     resolveId(id) {
       if (id === LICENCE) return LICENCE_RESOLVED
       return id === VIRTUAL ? RESOLVED : null
     },
     load(id) {
-      // Only a flag: whether @pcafe/pro is installed. Builds read this instead of
-      // virtual:pcafe-pro so they never pull in the Pro demo decks.
-      if (id === LICENCE_RESOLVED) return `export const pro = ${existsSync(join(root, 'node_modules', '@pcafe', 'pro', 'package.json'))}\n`
+      // Whether this project holds a valid PCafe Pro licence file (see vite.licence.ts),
+      // and why not. Builds read this instead of virtual:pcafe-pro so they never pull in
+      // the Pro demo decks.
+      if (id === LICENCE_RESOLVED) {
+        const l = getLicence()
+        return `export const pro = ${l.ok}\nexport const licenceId = ${JSON.stringify(l.ok ? l.id : null)}\nexport const licenceProblem = ${JSON.stringify(licenceProblem(l))}\n`
+      }
       if (id !== RESOLVED) return null
       const installed = join(root, 'node_modules', '@pcafe', 'pro')
       // npm installs a `file:` dependency as a symlink; read the real package.

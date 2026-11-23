@@ -1,10 +1,12 @@
 // Deterministic audit for dist/index.html (PRD §6.1). Exit code 1 on any hard failure.
-// usage: node scripts/qa.mjs [--frames]   → qa/report.json + qa/*.png
+// usage: node scripts/qa.mjs [--frames] [--slides 3,5] [--changed] [--explain] [--full-engine] [--kit] [--jobs N]
 import { launchChromium } from './playwright.mjs'
 import { missingCjk } from './font-coverage.mjs'
-import { mkdirSync, readFileSync, statSync, writeFileSync, readdirSync, existsSync, unlinkSync } from 'node:fs'
+import { probeSlidesInNode } from './slide-fingerprints.mjs'
+import { findLiveLicence, safeWalkFiles } from './licence-util.mjs'
+import { mkdirSync, readFileSync, realpathSync, statSync, writeFileSync, readdirSync, existsSync, unlinkSync } from 'node:fs'
 import { createHash } from 'node:crypto'
-import { resolve, join, relative } from 'node:path'
+import { basename, resolve, join, relative } from 'node:path'
 import { homedir, availableParallelism } from 'node:os'
 import { pathToFileURL } from 'node:url'
 
@@ -19,9 +21,18 @@ const FRAMES = process.argv.includes('--frames')
 // Default: deck checks only. `--kit` runs the component-gallery checks, which
 // `npm run qa:kit` uses; `npm run check:engine` runs both.
 const KIT_ONLY = process.argv.includes('--kit')
+const FULL_ENGINE = process.argv.includes('--full-engine')
+function resolveActiveDeckName() {
+  if (process.env.PCAFE_DECK_NAME) return process.env.PCAFE_DECK_NAME
+  const active = join(ROOT, 'src', 'decks', 'active.ts')
+  if (!existsSync(active)) return ''
+  const m = readFileSync(active, 'utf8').match(/from\s+['"]\.\/([a-z0-9-]+)['"]/)
+  return m ? m[1] : ''
+}
+const DECK_NAME = resolveActiveDeckName()
 if (KIT_ONLY) console.log('deck checks skipped (--kit)')
 const jobsAt = process.argv.indexOf('--jobs')
-const DEFAULT_JOBS = Math.min(4, Math.max(1, Math.floor(availableParallelism() / 2)))
+const DEFAULT_JOBS = Math.min(6, Math.max(1, Math.floor(availableParallelism() / 2)))
 const JOBS = jobsAt >= 0 ? Math.max(1, Number(process.argv[jobsAt + 1]) || DEFAULT_JOBS) : DEFAULT_JOBS
 /** Loud failure threshold for a slide that never reports `data-settled`. */
 const SETTLE_TIMEOUT = 4000
@@ -35,12 +46,19 @@ let CHECK_N = 0 // slide number holding a Checklist, 0 if none
 let CARDS = []
 const card = (id) => `.card[data-card="${id}"]`
 const SHOT_VIEWPORTS = ['1920x1080', '1366x768']
-const VIEWPORTS = [
-  [1920, 1080],
-  [1366, 768],
-  [2560, 1440],
-  [1440, 900],
-]
+// Daily deck check audits both screenshot viewports with full normal animation;
+// `--full-engine` adds 2560x1440 and 1440x900 plus shell regression suites.
+const VIEWPORTS = FULL_ENGINE
+  ? [
+      [1920, 1080],
+      [1366, 768],
+      [2560, 1440],
+      [1440, 900],
+    ]
+  : [
+      [1920, 1080],
+      [1366, 768],
+    ]
 
 mkdirSync(OUT, { recursive: true })
 // Wall-clock per QA phase, printed at the end so a slow run says where time went.
@@ -79,45 +97,74 @@ const argValue = (name) => {
 const SLIDES_ARG = argValue('--slides')
 const CHANGED = argv.includes('--changed')
 const EXPLAIN = argv.includes('--explain')
-if (KIT_ONLY && (SLIDES_ARG || CHANGED)) {
-  console.error('qa: --slides and --changed check the deck; they cannot be combined with --kit.')
+if (KIT_ONLY && (SLIDES_ARG || CHANGED || FULL_ENGINE)) {
+  console.error('qa: --slides, --changed and --full-engine check the deck; they cannot be combined with --kit.')
+  process.exit(2)
+}
+if (FULL_ENGINE && (SLIDES_ARG || CHANGED)) {
+  console.error('qa: --full-engine always runs a full check; it cannot be combined with --slides or --changed.')
   process.exit(2)
 }
 const sha = (text) => createHash('sha256').update(text).digest('hex').slice(0, 20)
-const read = (file) => readFileSync(file, 'utf8')
 const CACHE_FILE = join(OUT, '.check-cache.json')
+const slideKey = (s) => `${s.n}:${s.id}#${s.occurrence ?? 1}`
 
-function walkFiles(dir, out = []) {
-  if (!existsSync(dir)) return out
-  for (const name of readdirSync(dir)) {
-    if (name === 'node_modules' || name === 'qa' || name === 'dist' || name === '.git') continue
-    const full = join(dir, name)
-    const st = statSync(full)
-    if (st.isDirectory()) walkFiles(full, out)
-    else out.push(full)
-  }
-  return out
+function withOccurrences(list) {
+  const seen = new Map()
+  return list.map((s) => {
+    const occ = (seen.get(s.id) ?? 0) + 1
+    seen.set(s.id, occ)
+    return { ...s, occurrence: s.occurrence ?? occ }
+  })
 }
 
-/** Engine, templates, styles, fonts, scripts and deck assets. A change here forces a full check. */
+const walkFiles = (dir) => safeWalkFiles(dir)
+
+/** Engine, templates, styles, fonts, scripts, config, Pro package and deck assets. A change here forces a full check. */
 function sharedFingerprint() {
   const files = []
-  for (const rel of ['src/deck', 'src/engine', 'src/kit', 'src/styles', 'src/assets']) walkFiles(join(ROOT, rel), files)
-  for (const rel of ['cli/pcafe.mjs', 'scripts/qa.mjs', 'vite.config.ts', 'vite.studio.config.ts', 'index.html', 'package.json']) {
+  for (const rel of ['src/deck', 'src/engine', 'src/kit', 'src/styles', 'src/assets']) files.push(...walkFiles(join(ROOT, rel)))
+  for (const rel of [
+    'cli/pcafe.mjs', 'scripts/qa.mjs', 'scripts/slide-fingerprints.mjs', 'scripts/licence-util.mjs',
+    'vite.config.ts', 'vite.studio.config.ts', 'vite.emoji.mjs', 'vite.pro.ts', 'vite.licence.ts', 'vite.unit.mjs',
+    'tsconfig.json', 'index.html', 'presentation.html', 'package.json', 'package-lock.json', 'pnpm-lock.yaml',
+  ]) {
     const full = join(ROOT, rel)
     if (existsSync(full)) files.push(full)
   }
-  // Deck-local assets (images, fonts, data files) are shared by the whole deck;
-  // .ts/.tsx files change per slide and are compared through rendered signatures.
+  // Scan all non-TS assets under src/decks so cross-deck asset imports (e.g. ../studio/assets/*)
+  // are covered and `npm run check` / `pcafe check <name>` always share an identical fingerprint.
   for (const full of walkFiles(join(ROOT, 'src', 'decks'))) {
-    if (!/\.(ts|tsx)$/.test(full) && !full.endsWith('/active.ts')) files.push(full)
+    if (!/\.(ts|tsx)$/.test(full) && basename(full) !== 'active.ts') files.push(full)
   }
-  const parts = files.sort().map((f) => `${relative(ROOT, f)}=${sha(readFileSync(f))}`)
+  const parts = [...new Set(files)].sort().map((f) => `${relative(ROOT, f)}=${sha(readFileSync(f))}`)
+  // Include installed @pcafe/pro metadata and full dist tree (resolving file: symlinks).
+  const proLink = join(ROOT, 'node_modules', '@pcafe', 'pro')
+  if (existsSync(proLink)) {
+    const proReal = realpathSync(proLink)
+    const pkgFile = join(proReal, 'package.json')
+    if (existsSync(pkgFile)) parts.push(`@pcafe/pro/package.json=${sha(readFileSync(pkgFile))}`)
+    const proDist = join(proReal, 'dist')
+    for (const f of safeWalkFiles(proDist, { skipDirs: new Set() }).sort()) {
+      parts.push(`@pcafe/pro/${relative(proReal, f)}=${sha(readFileSync(f))}`)
+    }
+  }
+  parts.push(`licence=${findLiveLicence(ROOT).stateKey}`)
   return { engine: sha(parts.join('\n')), files: parts.length }
 }
 
+/** Hash of all deck .ts/.tsx sources (excluding active.ts) so cross-deck data imports & client-only hooks are caught. */
+function deckSourceFingerprint() {
+  const files = walkFiles(join(ROOT, 'src', 'decks')).filter((f) => /\.(ts|tsx)$/.test(f) && basename(f) !== 'active.ts').sort()
+  return sha(files.map((f) => `${relative(ROOT, f)}=${sha(readFileSync(f))}`).join('\n'))
+}
+
+let browserPromise = null
+const getBrowser = () => (browserPromise ??= launchChromium({ executablePath: findChromium() }))
+
 /** Cheap pass over the built deck: count, real ids and theme/style settings, without settling. */
 async function probeDeck() {
+  const browser = await getBrowser()
   const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } })
   const page = await context.newPage()
   try {
@@ -130,7 +177,7 @@ async function probeDeck() {
       [document.documentElement.getAttribute('style') ?? '', document.body.className].join('\n'),
     )
     const ids = await page.$$eval('.progress__seg', (els) => els.map((e) => e.dataset.slideId ?? ''))
-    const slides = Array.from({ length: total }, (_, i) => ({ n: i + 1, id: ids[i] || String(i + 1), hash: null }))
+    const slides = withOccurrences(Array.from({ length: total }, (_, i) => ({ n: i + 1, id: ids[i] || String(i + 1), hash: null, nodeHash: null })))
     return { total, ids, slides, settings }
   } finally {
     await context.close()
@@ -141,59 +188,64 @@ async function probeDeck() {
 async function probeSignatures(numbers) {
   const list = [...new Set(numbers)].sort((a, b) => a - b)
   if (!list.length) return new Map()
-  const workers = Math.min(4, list.length)
+  const browser = await getBrowser()
+  const workers = Math.min(JOBS, list.length)
   const chunks = Array.from({ length: workers }, () => [])
   list.forEach((n, i) => chunks[i % workers].push(n))
   const results = new Map()
-  await Promise.all(
-    chunks.filter((c) => c.length).map(async (chunk) => {
-      const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } })
-      const page = await context.newPage()
-      const frameAt = (n) => `.slide-frame[data-slide-number="${n}"]`
-      try {
-        await page.goto(`${URL}#/1`)
-        await page.waitForSelector('.slide-frame', { timeout: 5000 })
-        let current = 1
-        for (const n of chunk) {
-          if (n !== current) {
-            await page.evaluate((i) => (location.hash = `#/${i}`), n)
-            current = n
-          }
-          try {
-            await page.waitForFunction(
-              ({ n: number, selector }) => {
-                const frame = document.querySelector(selector)
-                return location.hash === `#/${number}` && !!frame && frame.dataset.settled === 'true'
-              },
-              { n, selector: frameAt(n) },
-              { timeout: SETTLE_TIMEOUT, polling: 50 },
-            )
-          } catch {
-            throw new Error(`slide ${n} did not settle while probing`)
-          }
-          const data = await page.evaluate(({ selector }) => {
-            const frame = document.querySelector(selector)
-            if (!frame) return null
-            const clean = (el) => {
-              el.removeAttribute('data-settled')
-              if (el.hasAttribute('style')) {
-                for (const prop of ['transform', 'opacity', 'filter', 'clip-path', 'will-change', 'translate', 'scale', 'rotate']) el.style.removeProperty(prop)
-                if (!el.getAttribute('style')?.trim()) el.removeAttribute('style')
-              }
+  const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } })
+  try {
+    await Promise.all(
+      chunks.filter((c) => c.length).map(async (chunk) => {
+        const page = await context.newPage()
+        const frameAt = (n) => `.slide-frame[data-slide-number="${n}"]`
+        try {
+          await page.goto(`${URL}#/1`)
+          await page.waitForSelector('.slide-frame', { timeout: 5000 })
+          let current = 1
+          for (const n of chunk) {
+            if (n !== current) {
+              await page.evaluate((i) => (location.hash = `#/${i}`), n)
+              current = n
             }
-            const clone = frame.cloneNode(true)
-            clean(clone)
-            for (const el of clone.querySelectorAll('*')) clean(el)
-            return { id: frame.dataset.slide ?? '', html: clone.outerHTML }
-          }, { selector: frameAt(n) })
-          if (!data) throw new Error(`slide ${n} disappeared while probing`)
-          results.set(n, { id: data.id, hash: sha(data.html) })
+            try {
+              await page.waitForFunction(
+                ({ n: number, selector }) => {
+                  const frame = document.querySelector(selector)
+                  return location.hash === `#/${number}` && !!frame && frame.dataset.settled === 'true'
+                },
+                { n, selector: frameAt(n) },
+                { timeout: SETTLE_TIMEOUT, polling: 50 },
+              )
+            } catch {
+              throw new Error(`slide ${n} did not settle while probing`)
+            }
+            const data = await page.evaluate(({ selector }) => {
+              const frame = document.querySelector(selector)
+              if (!frame) return null
+              const clean = (el) => {
+                el.removeAttribute('data-settled')
+                if (el.hasAttribute('style')) {
+                  for (const prop of ['transform', 'opacity', 'filter', 'clip-path', 'will-change', 'translate', 'scale', 'rotate']) el.style.removeProperty(prop)
+                  if (!el.getAttribute('style')?.trim()) el.removeAttribute('style')
+                }
+              }
+              const clone = frame.cloneNode(true)
+              clean(clone)
+              for (const el of clone.querySelectorAll('*')) clean(el)
+              return { id: frame.dataset.slide ?? '', html: clone.outerHTML }
+            }, { selector: frameAt(n) })
+            if (!data) throw new Error(`slide ${n} disappeared while probing`)
+            results.set(n, { id: data.id, hash: sha(data.html) })
+          }
+        } finally {
+          await page.close()
         }
-      } finally {
-        await context.close()
-      }
-    }),
-  )
+      }),
+    )
+  } finally {
+    await context.close()
+  }
   return results
 }
 
@@ -213,22 +265,41 @@ const newest = (dir, filter = () => true) => {
 
 /** Pick the slides to audit; every full-run fallback prints its reason. */
 async function chooseSlides() {
-  // Cheap first pass: count, real ids and theme/style settings, without settling.
-  let probe
-  try {
-    probe = await probeDeck()
-  } catch (error) {
-    console.log(`full check: could not read the built deck (${error.message}); running every slide`)
-    return { all: true, fp: null }
-  }
   const shared = sharedFingerprint()
+  const deckSourceHash = deckSourceFingerprint()
+  // Fast Node-side SSR static probe: avoids launching Chromium to animate every slide on `--changed`.
+  const nodeProbe = await probeSlidesInNode(ROOT)
+  let probe = null
+  if (nodeProbe && nodeProbe.allSsrOk && nodeProbe.total > 0) {
+    probe = {
+      total: nodeProbe.total,
+      ids: nodeProbe.ids,
+      settings: nodeProbe.settings,
+      slides: nodeProbe.slides.map((s) => ({ n: s.n, id: s.id, occurrence: s.occurrence, nodeHash: s.hash, hash: null })),
+      fromNode: true,
+    }
+  } else {
+    try {
+      const bp = await probeDeck()
+      probe = { ...bp, fromNode: false }
+    } catch (error) {
+      console.log(`full check: could not read the built deck (${error.message}); running every slide`)
+      return { all: true, fp: null }
+    }
+  }
+
+  const distBuf = existsSync(DIST) ? readFileSync(DIST) : null
   const fp = {
+    deck: DECK_NAME || null,
     engine: shared.engine,
-    settings: sha(probe.settings),
+    settings: probe.fromNode ? `node:${probe.settings}` : `dom:${sha(probe.settings)}`,
     ids: probe.ids,
     slides: probe.slides,
-    build: existsSync(DIST) ? sha(readFileSync(DIST)) : null,
+    deckSourceHash,
+    build: distBuf ? sha(distBuf) : null,
+    hasOutline: distBuf ? distBuf.includes('<article class="pcafe-outline"') : false,
     total: probe.total,
+    fromNode: probe.fromNode,
   }
   const sign = async (numbers) => {
     const list = numbers === 'all' ? Array.from({ length: fp.total }, (_, i) => i + 1) : numbers
@@ -257,7 +328,6 @@ async function chooseSlides() {
       process.exit(2)
     }
     const selected = [...new Set(wanted)].sort((a, b) => a - b)
-    if (!(await sign(selected))) return { all: true, fp }
     return { all: selected.length === fp.total, selected, fp }
   }
   if (!CHANGED) return { all: true, fp }
@@ -266,16 +336,20 @@ async function chooseSlides() {
     console.log('full check: no cache; running every slide')
     return { all: true, fp }
   }
-  if (cache.version !== 1) {
+  if (cache.version !== 2) {
     console.log('full check: cache version changed; running every slide')
     return { all: true, fp }
   }
+  if (DECK_NAME && cache.deck && cache.deck !== DECK_NAME) {
+    console.log(`full check: deck changed (${cache.deck} → ${DECK_NAME}); running every slide`)
+    return { all: true, fp }
+  }
   if (cache.engine !== fp.engine) {
-    console.log('full check: engine, shared styles or fonts changed; running every slide')
+    console.log('full check: engine, shared styles, config or fonts changed; running every slide')
     return { all: true, fp }
   }
   if (cache.settings !== fp.settings) {
-    console.log('full check: theme or style changed; running every slide')
+    console.log('full check: theme, style or deck settings changed; running every slide')
     return { all: true, fp }
   }
   if (cache.ids.join('\u0000') !== fp.ids.join('\u0000')) {
@@ -284,16 +358,32 @@ async function chooseSlides() {
   }
   // active.ts is rewritten by `pcafe check` after each run; slide ids and
   // signatures already cover what it selects, so its time is not compared.
-  const deckSourceAt = Math.max(newest(join(ROOT, 'src', 'decks'), (f) => !f.endsWith('/active.ts')), newest(join(ROOT, 'src', 'kit')), newest(join(ROOT, 'src', 'styles')))
-  if (!fp.build || statSync(DIST).mtimeMs < deckSourceAt) {
+  const deckSourceAt = Math.max(newest(join(ROOT, 'src', 'decks'), (f) => basename(f) !== 'active.ts'), newest(join(ROOT, 'src', 'kit')), newest(join(ROOT, 'src', 'styles')))
+  if (!existsSync(DIST) || statSync(DIST).mtimeMs < deckSourceAt) {
     console.log('full check: build output is older than the deck source; running every slide')
     return { all: true, fp }
   }
+
+  if (fp.fromNode) {
+    const changed = fp.slides.filter((s) => cache.slides?.[slideKey(s)]?.nodeHash !== s.nodeHash)
+    if (changed.length) {
+      console.log(`changed: slides ${changed.map((s) => s.n).join(', ')} of ${fp.total} (node fingerprint)`)
+      return { all: false, selected: changed.map((s) => s.n), fp }
+    }
+    if (cache.deckSourceHash && cache.deckSourceHash === fp.deckSourceHash) {
+      return { all: false, selected: [], fp, noChanges: true }
+    }
+    // Static markup matched but deck .ts/.tsx changed (e.g. client-only useEffect or Bento detail): verify in browser.
+    console.log('changed: deck source changed with identical static markup; verifying in browser')
+  }
+
   if (!(await sign('all'))) return { all: true, fp }
-  const changed = fp.slides.filter((s) => cache.slides?.[`${s.n}:${s.id}`] !== s.hash)
+  const changed = fp.slides.filter((s) => cache.slides?.[slideKey(s)]?.domHash !== s.hash)
   if (!changed.length) {
-    if (cache.build !== fp.build) {
-      console.log('full check: the build changed but no slide shows it; running every slide')
+    const buildChanged = cache.hasOutline === fp.hasOutline && cache.build && fp.build && cache.build !== fp.build
+    const sourceChanged = !cache.deckSourceHash || cache.deckSourceHash !== fp.deckSourceHash
+    if (buildChanged || sourceChanged) {
+      console.log('full check: the deck source or build changed outside visible slide frames; running every slide')
       return { all: true, fp }
     }
     return { all: false, selected: [], fp, noChanges: true }
@@ -306,16 +396,38 @@ function writeCache(fp, checked, full) {
   if (!fp) return
   const old = readCache()
   // A partial run may carry untouched hashes only when the shared fingerprint,
-  // theme/style settings and slide order all match the old cache. After a
-  // shared change, every unchecked slide must look changed.
+  // theme/style settings and slide order all match the old cache.
   const sameShared =
-    old?.version === 1 &&
+    old?.version === 2 &&
+    (!DECK_NAME || !old.deck || old.deck === DECK_NAME) &&
     old.engine === fp.engine &&
     old.settings === fp.settings &&
     old.ids.join('\u0000') === fp.ids.join('\u0000')
   const slides = full ? {} : { ...(sameShared ? old.slides : {}) }
-  for (const slide of fp.slides) if (slide.hash && checked.includes(slide.n)) slides[`${slide.n}:${slide.id}`] = slide.hash
-  const data = { version: 1, last: full ? 'full' : 'partial', engine: fp.engine, settings: fp.settings, ids: fp.ids, build: fp.build, slides }
+  for (const slide of fp.slides) {
+    const key = slideKey(slide)
+    if (checked.includes(slide.n)) {
+      slides[key] = {
+        // Never inherit a stale nodeHash when running in browser fallback mode.
+        nodeHash: fp.fromNode ? (slide.nodeHash ?? null) : null,
+        domHash: slide.hash ?? slides[key]?.domHash ?? null,
+      }
+    }
+  }
+  const data = {
+    version: 2,
+    deck: fp.deck,
+    last: full ? 'full' : 'partial',
+    engine: fp.engine,
+    settings: fp.settings,
+    ids: fp.ids,
+    // Only a full passing check advances deckSourceHash and build hash; partial runs must
+    // not mask unchecked slides' client-only source edits.
+    deckSourceHash: full ? fp.deckSourceHash : (sameShared ? old.deckSourceHash ?? null : null),
+    build: full ? fp.build : (sameShared ? old.build ?? null : null),
+    hasOutline: full ? fp.hasOutline : (sameShared ? old.hasOutline ?? false : false),
+    slides,
+  }
   writeFileSync(CACHE_FILE, JSON.stringify(data, null, 1))
 }
 
@@ -333,19 +445,17 @@ function findChromium() {
 
 const twoFrames = (page) => page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
 
-const browser = await launchChromium({ executablePath: findChromium() })
-
 const selection = KIT_ONLY ? { all: true, fp: null } : await chooseSlides()
 const CHECK_ALL = selection.all
 const SELECTED = CHECK_ALL ? null : selection.selected
 const PARTIAL = !CHECK_ALL
 if (selection.fp) SLIDES = selection.fp.total
-if (selection.noChanges) {
+if (selection.noChanges && !FULL_ENGINE) {
   report.slides = SLIDES
   report.checked = []
   report.partial = { slides: [], total: SLIDES }
   writeFileSync(join(OUT, 'report.json'), JSON.stringify(report, null, 2))
-  await browser.close()
+  if (browserPromise) await (await browserPromise).close()
   console.log('changed: no slides changed since the last passing check')
   console.log('run a full check before delivery')
   if (EXPLAIN) {
@@ -357,11 +467,14 @@ if (selection.noChanges) {
   process.exit(0)
 }
 if (EXPLAIN) {
-  console.log(`explain: would run ${CHECK_ALL ? 'a full check' : `a partial check: slides ${SELECTED.join(', ')} of ${SLIDES}`}`)
+  const mode = FULL_ENGINE ? `full-engine (${VIEWPORTS.length} viewports + shell tests)` : `deck (${VIEWPORTS.length} viewports + navigation)`
+  console.log(`explain: mode=${mode}; would run ${CHECK_ALL ? 'a full check' : `a partial check: slides ${SELECTED.join(', ')} of ${SLIDES}`}`)
   console.log('PASS — explain only; no checks run')
-  await browser.close()
+  if (browserPromise) await (await browserPromise).close()
   process.exit(0)
 }
+
+const browser = await getBrowser()
 
 
 /**
@@ -460,20 +573,16 @@ async function goSlide(page, n, reportFail = fail) {
 }
 
 /**
- * The phase the old fixed waits produced at the screenshot moment, minus the
- * two frames between pin and capture. Slide 1 includes the 1900 ms open; a
- * backdrop that survived from an earlier slide has run for the whole old time.
+ * Deterministic backdrop capture phase: pure function of slide number so sharded,
+ * partial and full runs produce identical screenshot phases without depending on
+ * navigation history or wall-clock animation startTime.
  */
 async function backdropPhase(page, n) {
   return page.evaluate((slide) => {
     const layer = document.querySelector('.backdrop-layer')
     const anims = layer?.getAnimations({ subtree: true }) ?? []
     if (!anims.length) return 0
-    if (slide === 1) return 3618
-    const now = Number(document.timeline?.currentTime ?? performance.now())
-    const oldest = Math.min(...anims.map((a) => Number(a.startTime)).filter((x) => Number.isFinite(x)))
-    const persistent = Number.isFinite(oldest) && now - oldest > 2000
-    return persistent ? 1900 + slide * 1700 + 30 : 1661
+    return slide === 1 ? 3618 : 1661
   }, n)
 }
 
@@ -614,6 +723,16 @@ const rect = (page, sel) => page.locator(sel).evaluate((el) => el.getBoundingCli
 // 1 ─ Every slide at every viewport ──────────────────────────────────────
 let speakerNotes = ''
 if (!KIT_ONLY) {
+  // On a full run, remove stale slide/grid/contact-sheet images so switching decks
+  // never leaves outdated PNGs behind.
+  if (!PARTIAL) {
+    for (const f of readdirSync(OUT)) {
+      if (/^(?:slide-\d+-.*\.png|grid-\d+\.png|contact-sheet\.png)$/.test(f)) {
+        try { unlinkSync(join(OUT, f)) } catch {}
+      }
+    }
+  }
+
   /** Run `fn` over `items` with at most `limit` in flight; results keep input order. */
   async function mapLimit(items, limit, fn) {
     const out = new Array(items.length)
@@ -630,83 +749,155 @@ if (!KIT_ONLY) {
   }
 
   /**
-   * One viewport, one context. Everything it learns stays local so viewports can
-   * run at the same time; the caller merges the results in a fixed order.
+   * One viewport, one BrowserContext. When JOBS exceeds VIEWPORTS.length and the
+   * deck has enough slides, slides are sharded across pages inside the same context
+   * so total concurrent pages never exceed JOBS. Results merge in fixed slide order.
    */
+  const targetSlidesCount = SELECTED ? SELECTED.length : SLIDES
+  const shardsPerViewport =
+    VIEWPORTS.length > 0 && targetSlidesCount >= 6
+      ? Math.max(1, Math.min(3, Math.floor(JOBS / VIEWPORTS.length)))
+      : 1
+  const vpConcurrency = Math.max(1, Math.min(VIEWPORTS.length, Math.floor(JOBS / shardsPerViewport)))
+
   async function auditViewport(vp) {
     const key = vp.join('x')
-    const result = { key, slides: 0, bentoN: 0, checkN: 0, cards: [], issues: {}, warnings: [], failures: [] }
-    const wfail = (m) => result.failures.push(m)
-    const { context, page, external, errors } = await openPage(vp, {}, '#/1', URL, wfail)
-    result.slides = await page.locator('.progress__seg').count()
-    if (SLIDES && result.slides !== SLIDES) {
-      result.failures.push(`viewport ${key} found ${result.slides} slides, expected ${SLIDES}`)
-    }
-    result.checked = SELECTED ?? Array.from({ length: result.slides }, (_, i) => i + 1)
-    for (const n of result.checked) {
-      await goSlide(page, n, wfail)
-      if (key === '1920x1080') {
-        const html = await page.evaluate(() => {
-          const frame = document.querySelector('.slide-frame')
-          if (!frame) return ''
-          const clean = (el) => {
-            el.removeAttribute('data-settled')
-            if (el.hasAttribute('style')) {
-              for (const prop of ['transform', 'opacity', 'filter', 'clip-path', 'will-change', 'translate', 'scale', 'rotate']) el.style.removeProperty(prop)
-              if (!el.getAttribute('style')?.trim()) el.removeAttribute('style')
-            }
-          }
-          const clone = frame.cloneNode(true)
-          clean(clone)
-          for (const el of clone.querySelectorAll('*')) clean(el)
-          return clone.outerHTML
+    const result = { key, slides: 0, bentoN: 0, checkN: 0, cards: [], issues: {}, warnings: [], failures: [], hashes: {} }
+    const context = await browser.newContext({ viewport: { width: vp[0], height: vp[1] } })
+    try {
+      await context.setOffline(true)
+      const external = []
+      const errors = []
+      const attachListeners = (p) => {
+        p.on('request', (r) => {
+          const u = r.url()
+          if (!u.startsWith('file:') && !u.startsWith('data:') && !u.startsWith('blob:')) external.push(u)
         })
-        result.hashes ??= {}
-        result.hashes[n] = html ? sha(html) : null
+        p.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
+        p.on('pageerror', (e) => errors.push(String(e)))
       }
-      const issues = await slideAudit(page)
-      if (n === 1) {
-        // Fonts are checked on every deck, not only on decks with a Bento.
-        const fonts = await page.evaluate(async () => {
-          const specs = ['500 40px Geist', '400 40px "Geist Mono"', 'italic 400 40px "Instrument Serif"', '400 40px "Deck Sans SC"', '500 40px "Deck Sans SC"']
-          await Promise.all(specs.map((f) => document.fonts.load(f, '中a').catch(() => null)))
-          return {
+
+      const firstPage = await context.newPage()
+      attachListeners(firstPage)
+      await firstPage.goto(`${URL}#/1`)
+      await firstPage.waitForSelector('.slide, .kit')
+      await settleFrame(firstPage, `open ${key}`, (m) => result.failures.push(m))
+      result.slides = await firstPage.locator('.progress__seg').count()
+      if (SLIDES && result.slides !== SLIDES) {
+        result.failures.push(`viewport ${key} found ${result.slides} slides, expected ${SLIDES}`)
+      }
+      // Check embedded fonts once per viewport regardless of which slides are selected or how they are sharded.
+      const fonts = await firstPage.evaluate(async () => {
+        const specs = ['500 40px Geist', '400 40px "Geist Mono"', 'italic 400 40px "Instrument Serif"', '400 40px "Deck Sans SC"', '500 40px "Deck Sans SC"']
+        await Promise.all(specs.map((f) => document.fonts.load(f, '中a').catch(() => null)))
+        return {
           geist: document.fonts.check('500 40px Geist'),
           mono: document.fonts.check('400 40px "Geist Mono"'),
           serif: document.fonts.check('italic 400 40px "Instrument Serif"'),
           cjk400: document.fonts.check('400 40px "Deck Sans SC"', '中'),
           cjk500: document.fonts.check('500 40px "Deck Sans SC"', '中'),
+        }
+      })
+      Object.entries(fonts).forEach(([k, ok]) => ok || result.failures.push(`${key}: font ${k} not loaded`))
+
+      result.checked = SELECTED ?? Array.from({ length: result.slides }, (_, i) => i + 1)
+      const shardCount = Math.min(shardsPerViewport, Math.max(1, result.checked.length))
+      const shards = Array.from({ length: shardCount }, () => [])
+      // Contiguous chunks keep sequential locality within each shard.
+      const perShard = Math.ceil(result.checked.length / shardCount)
+      for (let i = 0; i < shardCount; i++) {
+        shards[i] = result.checked.slice(i * perShard, (i + 1) * perShard)
+      }
+
+      const perSlide = new Map()
+      const runShard = async (slideNums, idx) => {
+        if (!slideNums.length) return
+        const page = idx === 0 ? firstPage : await context.newPage()
+        try {
+          if (idx > 0) {
+            attachListeners(page)
+            await page.goto(`${URL}#/${slideNums[0]}`)
+            await page.waitForSelector('.slide, .kit')
+            await settleFrame(page, `open ${key} shard ${idx}`, (m) => {
+              const rec = perSlide.get(slideNums[0]) ?? { issues: [], warnings: [], failures: [], hash: null, isBento: false, isCheck: false, cards: [] }
+              rec.failures.push(m)
+              perSlide.set(slideNums[0], rec)
+            })
           }
-        })
-        Object.entries(fonts).forEach(([k, ok]) => ok || result.failures.push(`${key}: font ${k} not loaded`))
+          for (const n of slideNums) {
+            const rec = perSlide.get(n) ?? { issues: [], warnings: [], failures: [], hash: null, isBento: false, isCheck: false, cards: [] }
+            perSlide.set(n, rec)
+            const sfail = (m) => rec.failures.push(m)
+            await goSlide(page, n, sfail)
+            const frameSel = `.slide-frame[data-slide-number="${n}"]`
+            if (key === '1920x1080') {
+              const html = await page.evaluate((sel) => {
+                const frame = document.querySelector(sel) ?? document.querySelector('.slide-frame')
+                if (!frame) return ''
+                const clean = (el) => {
+                  el.removeAttribute('data-settled')
+                  if (el.hasAttribute('style')) {
+                    for (const prop of ['transform', 'opacity', 'filter', 'clip-path', 'will-change', 'translate', 'scale', 'rotate']) el.style.removeProperty(prop)
+                    if (!el.getAttribute('style')?.trim()) el.removeAttribute('style')
+                  }
+                }
+                const clone = frame.cloneNode(true)
+                clean(clone)
+                for (const el of clone.querySelectorAll('*')) clean(el)
+                return clone.outerHTML
+              }, frameSel)
+              rec.hash = html ? sha(html) : null
+            }
+            const issues = await slideAudit(page)
+            const scopedFrame = (await page.locator(frameSel).count()) ? frameSel : '.slide-frame'
+            if (await page.locator(`${scopedFrame} .prep__item`).count()) rec.isCheck = true
+            if (await page.locator(`${scopedFrame} .bento`).count()) {
+              rec.isBento = true
+              rec.cards = await page.$$eval(`${scopedFrame} .card[data-card]`, (els) => els.map((e) => e.dataset.card))
+              const audit = await layoutAudit(page, `${scopedFrame} .card`)
+              issues.push(...audit.issues)
+              if (Math.abs(audit.stage.ratio - 16 / 9) > 0.002) rec.failures.push(`${key}: stage ratio ${audit.stage.ratio}`)
+            }
+            if (key === '1920x1080') {
+              const { depth, min } = await contentDepth(page)
+              if (depth < min) rec.warnings.push(`slide ${n}: content ends at y=${depth} of 1080, the lower part looks empty (add an optional block or more items, see docs/zh-CN/README.md §8)`)
+            }
+            rec.issues = issues
+            issues.forEach((i) => rec.failures.push(`${key} slide ${n}: ${i}`))
+            if (SHOT_VIEWPORTS.includes(key)) {
+              await pinSlide(page, n === 1 ? 3600 : 1700, await backdropPhase(page, n))
+              await page.screenshot({ path: join(OUT, `slide-${String(n).padStart(2, '0')}-${key}.png`) })
+            }
+          }
+        } finally {
+          if (idx > 0) await page.close().catch(() => {})
+        }
       }
-      if (await page.locator('.slide-frame .prep__item').count()) result.checkN = n
-      if (await page.locator('.slide-frame .bento').count()) {
-        result.bentoN = n
-        result.cards = await page.$$eval('.card[data-card]', (els) => els.map((e) => e.dataset.card))
-        const audit = await layoutAudit(page, '.card')
-        issues.push(...audit.issues)
-        if (Math.abs(audit.stage.ratio - 16 / 9) > 0.002) result.failures.push(`${key}: stage ratio ${audit.stage.ratio}`)
+
+      await Promise.all(shards.map((chunk, idx) => runShard(chunk, idx)))
+      // Deterministic merge in ascending slide-number order.
+      for (const n of result.checked) {
+        const rec = perSlide.get(n)
+        if (!rec) continue
+        result.issues[n] = rec.issues
+        if (rec.hash) result.hashes[n] = rec.hash
+        if (rec.isCheck && !result.checkN) result.checkN = n
+        if (rec.isBento && !result.bentoN) {
+          result.bentoN = n
+          result.cards = rec.cards
+        }
+        rec.warnings.forEach((w) => result.warnings.push(w))
+        rec.failures.forEach((f) => result.failures.push(f))
       }
-      if (key === '1920x1080') {
-        const { depth, min } = await contentDepth(page)
-        if (depth < min) result.warnings.push(`slide ${n}: content ends at y=${depth} of 1080, the lower part looks empty (add an optional block or more items, see docs/zh-CN/README.md §8)`)
-      }
-      result.issues[n] = issues
-      issues.forEach((i) => result.failures.push(`${key} slide ${n}: ${i}`))
-      if (SHOT_VIEWPORTS.includes(key)) {
-        // Pin after the audit, so the audit sees the settled frame, and immediately before the shot.
-        await pinSlide(page, n === 1 ? 3600 : 1700, await backdropPhase(page, n))
-        await page.screenshot({ path: join(OUT, `slide-${String(n).padStart(2, '0')}-${key}.png`) })
-      }
+      if (external.length) result.failures.push(`${key}: external requests ${[...new Set(external)].join(', ')}`)
+      if (errors.length) result.failures.push(`${key}: console errors ${[...new Set(errors)].join(' | ')}`)
+      return result
+    } finally {
+      await context.close().catch(() => {})
     }
-    if (external.length) result.failures.push(`${key}: external requests ${external.join(', ')}`)
-    if (errors.length) result.failures.push(`${key}: console errors ${errors.join(' | ')}`)
-    await context.close()
-    return result
   }
 
-  const viewportResults = await mapLimit(VIEWPORTS, JOBS, auditViewport)
+  const viewportResults = await mapLimit(VIEWPORTS, vpConcurrency, auditViewport)
   const primary = viewportResults.find((r) => r.key === '1920x1080') ?? viewportResults[0]
   if (selection.fp && primary.hashes) {
     for (const slide of selection.fp.slides) {
@@ -715,6 +906,8 @@ if (!KIT_ONLY) {
     }
   }
   SLIDES = primary.slides
+  report.slides = SLIDES
+  report.checked = primary.checked
   BENTO_N = primary.bentoN || viewportResults.find((r) => r.bentoN)?.bentoN || 0
   CHECK_N = primary.checkN || viewportResults.find((r) => r.checkN)?.checkN || 0
   CARDS = primary.cards.length ? primary.cards : (viewportResults.find((r) => r.cards.length)?.cards ?? [])
@@ -726,13 +919,17 @@ if (!KIT_ONLY) {
   }
   phase('slides')
 
-  // Contact sheet: every 1920x1080 slide in one image, built from the screenshots
-  // above (no extra deck page loads). Full runs only; a partial sheet would lie.
+  // Contact sheet & 2×2 high-res review grids (2560×1440, 1280×720 per slide).
+  // Built from the screenshots above (no extra deck loads). Full runs only.
   if (!PARTIAL) {
     const cells = []
+    const files = []
     for (let n = 1; n <= SLIDES; n++) {
       const file = join(OUT, `slide-${String(n).padStart(2, '0')}-1920x1080.png`)
-      if (existsSync(file)) cells.push(`<figure><img src="${pathToFileURL(file).href}" alt="slide ${n}"><figcaption>${String(n).padStart(2, '0')}</figcaption></figure>`)
+      if (existsSync(file)) {
+        files.push({ n, file })
+        cells.push(`<figure><img src="${pathToFileURL(file).href}" alt="slide ${n}"><figcaption>${String(n).padStart(2, '0')}</figcaption></figure>`)
+      }
     }
     if (cells.length) {
       const htmlFile = join(OUT, '.contact.html')
@@ -748,6 +945,37 @@ if (!KIT_ONLY) {
       await sheet.screenshot({ path: join(OUT, 'contact-sheet.png'), fullPage: true })
       await sheet.close()
       unlinkSync(htmlFile)
+    }
+    // 2×2 high-resolution review grids (4 slides per 2560×1440 PNG) for long decks (> 10 slides),
+    // matching the <= 10 vs > 10 visual review rule in AGENTS.md and SKILL.md.
+    if (files.length > 10) {
+      report.grids = []
+      const gridPage = await browser.newPage({ viewport: { width: 2560, height: 1440 } })
+      const gridHtml = join(OUT, '.grid.html')
+      try {
+        for (let g = 0; g < files.length; g += 4) {
+          const batch = files.slice(g, g + 4)
+          const idx = Math.floor(g / 4) + 1
+          const outName = `grid-${String(idx).padStart(2, '0')}.png`
+          const items = batch
+            .map(({ n, file }) => `<figure><img src="${pathToFileURL(file).href}" alt="slide ${n}"><figcaption>${String(n).padStart(2, '0')}</figcaption></figure>`)
+            .join('')
+          writeFileSync(gridHtml, `<!doctype html><meta charset="utf-8"><style>
+            *{box-sizing:border-box}body{margin:0;width:2560px;height:1440px;padding:16px;background:#111;color:#eee;font:600 18px/1 system-ui,sans-serif;overflow:hidden}
+            main{display:grid;grid-template-columns:1256px 1256px;grid-template-rows:696px 696px;gap:16px}
+            figure{margin:0;position:relative;border:1px solid #333;background:#000;overflow:hidden}
+            img{display:block;width:100%;height:100%;object-fit:contain}
+            figcaption{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:6px;background:rgba(0,0,0,.78);color:#fff;font-variant-numeric:tabular-nums;border:1px solid rgba(255,255,255,.2)}
+          </style><main>${items}</main>`)
+          await gridPage.goto(pathToFileURL(gridHtml).href)
+          await gridPage.waitForFunction(() => [...document.images].every((img) => img.complete), null, { timeout: 5000 }).catch(() => {})
+          await gridPage.screenshot({ path: join(OUT, outName) })
+          report.grids.push(`qa/${outName}`)
+        }
+      } finally {
+        await gridPage.close()
+        if (existsSync(gridHtml)) unlinkSync(gridHtml)
+      }
     }
   }
 
@@ -821,6 +1049,9 @@ if (!KIT_ONLY) {
 
   phase('navigation')
 
+  // Engine-shell regression sections (walkthrough, 3x Bento details, reduced-motion,
+  // presenter sync/blank/freeze) run under `--full-engine` (used by `npm run check:engine`).
+  if (FULL_ENGINE) {
   // 1c ─ Keyboard walk-through: builds step, then advance; morph ghosts clean up; overview ─
   {
     const { context, page, errors } = await openPage([1366, 768], {}, '#/1')
@@ -1129,9 +1360,10 @@ if (!KIT_ONLY) {
     await context.close()
   }
   // ═══ END presenter tools ═══
+  phase('presenter')
+  }
   }
 }
-phase('presenter')
 
 
 if (KIT_ONLY) {
@@ -1187,16 +1419,16 @@ if (KIT_ONLY) {
   console.log(`gallery failures: ${failures.length}`)
 } else {
   console.log(`bundle ${(report.bytes / 1024 / 1024).toFixed(2)} MB`)
-  if (!PARTIAL) {
+  if (!PARTIAL && FULL_ENGINE) {
     console.log('round trips (max px drift):', JSON.stringify(report.roundTrips))
     console.log('keyboard walk-through:', JSON.stringify(report.walkthrough))
   }
-  console.log(`viewports: ${Object.keys(report.viewports).length} (${JOBS} job${JOBS === 1 ? '' : 's'})`)
+  console.log(`viewports: ${Object.keys(report.viewports).length} (${JOBS} job${JOBS === 1 ? '' : 's'}, mode: ${FULL_ENGINE ? 'full-engine' : 'deck'})`)
   console.log('timing (s):', Object.entries(timing).map(([k, v]) => `${k}=${v}`).join(' '))
   if (speakerNotes) console.log(`note: ${speakerNotes}`)
 }
 if (PARTIAL) {
-  console.log(`partial check: slides ${SELECTED.join(', ')} of ${SLIDES}; navigation, presenter and keyboard checks not run`)
+  console.log(`partial check: slides ${SELECTED.join(', ')} of ${SLIDES}; navigation and deck-wide checks not run`)
   console.log('run a full check before delivery')
 }
 if (warnings.length) console.log(`WARN (${warnings.length})\n- ${warnings.join('\n- ')}`)

@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 // pcafe CLI. Plain Node ESM, no dependencies beyond what the project template installs.
 import { spawn, spawnSync } from 'node:child_process'
-import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync, copyFileSync, symlinkSync } from 'node:fs'
+import { createHash } from 'node:crypto'
+import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, renameSync, rmSync, statSync, writeFileSync, copyFileSync, symlinkSync } from 'node:fs'
 import { basename, dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
+import { findLiveLicence, safeWalkFiles } from '../scripts/licence-util.mjs'
 
 const PKG_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const NAME_RE = /^[a-z0-9][a-z0-9-]*$/
@@ -36,20 +38,28 @@ const HELP = `pcafe - fixed-template HTML slide decks
 
 Usage:
   pcafe init <dir>       Copy the project template into <dir>
-  pcafe new <name>       Create src/decks/<name>/ from the starter deck
+  pcafe new <name> [--modular]
+                             Create src/decks/<name>/ from the starter deck
+                             (--modular splits slides into src/decks/<name>/slides/)
   pcafe dev [name]       Start the Vite dev server (opens ?deck=<name>)
-  pcafe check <name> [--slides 3,5] [--changed] [--explain] [--json]
-                             Typecheck + build + QA; last line is PASS or FAIL.
+  pcafe check <name> [--slides 3,5] [--changed] [--full-engine] [--explain] [--json]
+                             Typecheck + deck build + QA; last line is PASS or FAIL.
                              --slides checks only those slides; --changed checks
-                             slides whose built-page content changed since the last
-                             passing run (falls back to the full deck).
+                             slides whose content changed since the last passing run.
+                             --full-engine adds 4-viewport & shell regression tests.
                              --explain prints the selection and exits without checks.
                              --json prints only a JSON report (issues with stable
                              codes and the next step); the output goes to qa/reports/
   pcafe status [format] <name> [--json]
                              What to do next, from the last check: run it, fix the
                              listed issues, or look at the screenshots
-  pcafe build <name>     Build dist/<name>.html (single offline file)
+  pcafe build <name> [--force]
+                             Build dist/<name>.html (single offline file); reuses an
+                             up-to-date verified deck build unless --force is passed
+  pcafe spec <TemplateName...> [--json]
+  pcafe spec --search <query> [--json]
+                             Look up template props, limits, import path and examples
+                             offline (covers free templates and installed @pcafe/pro)
   pcafe pptx <name>      Write dist/<name>.pptx: editable text boxes over a
                              picture of each slide, notes included (builds first
                              if needed); dist/<name>.pptx.json lists what stayed
@@ -161,28 +171,113 @@ async function checked(root, format, name, flags, steps) {
   const issues = [...lib.parseOutput(format, output, root, name, startedAt), ...hints.map((h) => ({ level: 'hint', code: h.code ?? `copy.${h.id}`, message: h.text, file: `${h.file}:${h.line}`, fix: h.hint }))]
   if (code !== 0 && !issues.some((i) => i.level === 'fail')) issues.push({ level: 'fail', code: 'check.exit', message: `a step exited with code ${code}; see the log` })
   let partial
+  let checkedSlides
+  let grids = []
   if (format === 'deck') {
-    try {
-      const qa = JSON.parse(readFileSync(join(root, 'qa', 'report.json'), 'utf8'))
-      if (qa.partial) partial = qa.partial
-    } catch {}
+    const qaFile = join(root, 'qa', 'report.json')
+    if (existsSync(qaFile) && statSync(qaFile).mtimeMs >= startedAt) {
+      try {
+        const qa = JSON.parse(readFileSync(qaFile, 'utf8'))
+        if (qa.partial) partial = qa.partial
+        if (Array.isArray(qa.checked)) checkedSlides = qa.checked
+        if (Array.isArray(qa.grids)) grids = qa.grids
+      } catch {}
+    }
   }
-  const report = { format, name, ok: code === 0, startedAt, finishedAt: Date.now(), issues, screenshots: lib.screenshots(root, format, name), log: `qa/reports/${format}-${name}.log`, ...(partial ? { partial } : {}) }
+  const shots = lib.screenshots(root, format, name, partial && checkedSlides ? { checked: checkedSlides } : {})
+  const report = {
+    format,
+    name,
+    ok: code === 0,
+    startedAt,
+    finishedAt: Date.now(),
+    issues,
+    screenshots: shots,
+    ...(grids.length && !partial ? { grids } : {}),
+    log: `qa/reports/${format}-${name}.log`,
+    ...(partial ? { partial } : {}),
+  }
   mkdirSync(join(root, 'qa', 'reports'), { recursive: true })
   writeFileSync(join(root, report.log), output)
   writeFileSync(join(root, 'qa', 'reports', `${format}-${name}.json`), JSON.stringify(report, null, 2))
   const next = lib.nextStep(root, format, name, report)
-  if (partial && code === 0) {
-    next.action = 'run_check'
-    next.command = `npx pcafe check ${name}`
-    next.reason = 'partial check; run a full check before delivery'
-  }
   if (flags.includes('--json')) console.log(JSON.stringify({ ...report, next }, null, 2))
   else {
     printHintsOnly(hints)
     console.log(code === 0 ? 'PASS' : 'FAIL')
   }
   return code
+}
+
+const sha = (buf) => createHash('sha256').update(buf).digest('hex')
+
+/** Strict input fingerprint for deck HTML build reuse: covers all src (except active.ts), config, lockfiles, full Pro dist realpath, live licence & env. */
+function computeDeckBuildInputHash(root, name) {
+  const files = safeWalkFiles(join(root, 'src')).filter((f) => basename(f) !== 'active.ts')
+  for (const rel of [
+    'presentation.html', 'index.html', 'vite.config.ts', 'vite.emoji.mjs', 'vite.pro.ts',
+    'vite.licence.ts', 'vite.unit.mjs', 'tsconfig.json', 'package.json', 'package-lock.json', 'pnpm-lock.yaml',
+  ]) {
+    const f = join(root, rel)
+    if (existsSync(f)) files.push(f)
+  }
+  const unique = [...new Set(files)].sort()
+  const parts = [`deck=${name}`, ...unique.map((f) => `${relative(root, f)}=${sha(readFileSync(f))}`)]
+  const proLink = join(root, 'node_modules', '@pcafe', 'pro')
+  if (existsSync(proLink)) {
+    const proReal = realpathSync(proLink)
+    const pkgFile = join(proReal, 'package.json')
+    if (existsSync(pkgFile)) parts.push(`@pcafe/pro/package.json=${sha(readFileSync(pkgFile))}`)
+    for (const f of safeWalkFiles(join(proReal, 'dist'), { skipDirs: new Set() }).sort()) {
+      parts.push(`@pcafe/pro/${relative(proReal, f)}=${sha(readFileSync(f))}`)
+    }
+  } else {
+    parts.push('@pcafe/pro=none')
+  }
+  parts.push(`licence=${findLiveLicence(root).stateKey}`)
+  const envKeys = ['NODE_ENV', 'PCAFE_LICENCE', 'HOME', ...Object.keys(process.env).filter((k) => k.startsWith('VITE_')).sort()]
+  for (const k of envKeys) parts.push(`env:${k}=${process.env[k] ?? ''}`)
+  return sha(parts.join('\n'))
+}
+
+function buildMetaFile(root) {
+  return join(root, 'dist', '.pcafe-build-meta.json')
+}
+
+function recordDeckBuildMeta(root, name, expectedInputHash) {
+  const htmlPath = join(root, 'dist', 'index.html')
+  if (!existsSync(htmlPath)) return
+  const buf = readFileSync(htmlPath)
+  const hasOutline = buf.includes('<article class="pcafe-outline"')
+  if (!hasOutline) return
+  // Guard against TOCTOU edits during the build/QA window: only cache when inputs stayed unchanged.
+  const postHash = computeDeckBuildInputHash(root, name)
+  if (expectedInputHash && postHash !== expectedInputHash) return
+  const meta = {
+    version: 1,
+    deck: name,
+    hasOutline: true,
+    inputHash: postHash,
+    outputSha256: sha(buf),
+    builtAt: Date.now(),
+  }
+  const target = buildMetaFile(root)
+  const tmp = `${target}.${process.pid}.tmp`
+  writeFileSync(tmp, JSON.stringify(meta, null, 2) + '\n')
+  renameSync(tmp, target)
+}
+
+function canReuseDeckBuild(root, name) {
+  const htmlPath = join(root, 'dist', 'index.html')
+  const metaPath = buildMetaFile(root)
+  if (!existsSync(htmlPath) || !existsSync(metaPath)) return false
+  let meta
+  try { meta = JSON.parse(readFileSync(metaPath, 'utf8')) } catch { return false }
+  if (meta?.version !== 1 || meta.deck !== name || meta.hasOutline !== true) return false
+  const buf = readFileSync(htmlPath)
+  if (!buf.includes('<article class="pcafe-outline"')) return false
+  if (sha(buf) !== meta.outputSha256) return false
+  return computeDeckBuildInputHash(root, name) === meta.inputHash
 }
 
 function needDeps(root) {
@@ -266,11 +361,38 @@ const commands = {
     return 0
   },
 
-  new(name) {
+  new(name, ...flags) {
     const root = projectRoot()
     deckName(name, root, false)
+    for (const f of flags) {
+      if (f !== '--modular') {
+        console.error(`pcafe new: unknown option "${f}"`)
+        return 2
+      }
+    }
     const dir = join(root, 'src', 'decks', name)
     if (existsSync(dir)) fail(`src/decks/${name} already exists.`)
+    if (flags.includes('--modular')) {
+      mkdirSync(join(dir, 'slides'), { recursive: true })
+      writeFileSync(
+        join(dir, 'slides', '01-cover.tsx'),
+        `import type { SlideDef } from '../../../kit'\nimport { Cover } from '../../../kit'\n\nexport const coverSlides: SlideDef[] = [\n  {\n    id: 'cover',\n    label: '封面',\n    render: () => (\n      <Cover\n        kicker="Briefing · 主题简报"\n        title="主题名称"\n        subtitle="codename"\n        lead="一句话说明这份演示讲什么、给谁看、看完能做什么。"\n        facts={[\n          { label: '日期', value: '2026.11' },\n          { label: '页数', value: '3 页' },\n          { label: '用时', value: '5 分钟' },\n        ]}\n        numeral="01"\n        hint={<>按 <kbd>→</kbd> 或 <kbd>Space</kbd> 翻页</>}\n      />\n    ),\n  },\n]\n`,
+      )
+      writeFileSync(
+        join(dir, 'slides', '02-points.tsx'),
+        `import type { SlideDef } from '../../../kit'\nimport { NumberedColumns } from '../../../kit'\n\nexport const pointSlides: SlideDef[] = [\n  {\n    id: 'points',\n    label: '要点',\n    render: () => (\n      <NumberedColumns\n        kicker="要点"\n        title="标题写观点，不写话题"\n        lead="导语给出背景或证据，一到两句。"\n        items={[\n          { tag: 'keyword-one', title: '第一个要点', body: '用一到两句话说明这个要点，写具体的名词和数字，不写空话。' },\n          { tag: 'keyword-two', title: '第二个要点', body: '三个要点的分量相当，长度也尽量接近，这样三列的底边才整齐。' },\n          { tag: 'keyword-three', title: '第三个要点', body: '有先后顺序的内容改用 StepTrack，有轻重之分的改用 SpotlightList。' },\n        ]}\n        source="docs/zh-CN/README.md"\n      />\n    ),\n  },\n]\n`,
+      )
+      writeFileSync(
+        join(dir, 'slides', '03-closing.tsx'),
+        `import type { SlideDef } from '../../../kit'\nimport { Closing } from '../../../kit'\n\nexport const closingSlides: SlideDef[] = [\n  {\n    id: 'closing',\n    label: '结论',\n    render: () => (\n      <Closing\n        kicker="结论"\n        mark="01"\n        statement="一句话写出要让听众记住的结论。"\n        follow="第二句写行动：接下来谁做什么。"\n        takeaways={['第一条要点，对应前面某一页。', '第二条要点，对应前面某一页。', '第三条要点，对应前面某一页。']}\n        refs={['docs/zh-CN/README.md', 'docs/zh-CN/components.md']}\n      />\n    ),\n  },\n]\n`,
+      )
+      writeFileSync(
+        join(dir, 'index.tsx'),
+        `// Modular deck manifest: keep chapters/slides in ./slides/ and assemble in order here.\nimport type { DeckDef } from '../../kit'\nimport { coverSlides } from './slides/01-cover'\nimport { pointSlides } from './slides/02-points'\nimport { closingSlides } from './slides/03-closing'\n\nexport const deck: DeckDef = {\n  title: 'Modular Deck',\n  slides: [\n    ...coverSlides,\n    ...pointSlides,\n    ...closingSlides,\n  ],\n}\n`,
+      )
+      console.log(`Created modular deck at src/decks/${name}/ (index.tsx + slides/)\n\nNext:\n  npx pcafe dev ${name}\n  npx pcafe check ${name}`)
+      return 0
+    }
     const starter = join(root, 'src', 'decks', 'starter')
     if (!existsSync(join(starter, 'index.tsx'))) fail('starter deck missing (src/decks/starter/index.tsx).')
     cpSync(starter, dir, { recursive: true })
@@ -295,18 +417,53 @@ const commands = {
     needDeps(root)
     warnEngineVersion(root)
     const qaFlags = []
-    const at = flags.indexOf('--slides')
-    const eq = flags.find((f) => f.startsWith('--slides='))
-    if (at >= 0 && flags[at + 1]) qaFlags.push('--slides', flags[at + 1])
-    else if (eq) qaFlags.push('--slides', eq.slice('--slides='.length))
-    if (flags.includes('--changed')) qaFlags.push('--changed')
-    if (flags.includes('--explain')) qaFlags.push('--explain')
+    for (let i = 0; i < flags.length; i++) {
+      const f = flags[i]
+      if (f === '--slides') {
+        const val = flags[i + 1]
+        if (!val || val.startsWith('-')) {
+          console.error('pcafe check: --slides requires a slide list, e.g. --slides 3,5')
+          return 2
+        }
+        qaFlags.push('--slides', val)
+        i++
+      } else if (f.startsWith('--slides=')) {
+        const val = f.slice('--slides='.length)
+        if (!val || val.startsWith('-')) {
+          console.error('pcafe check: --slides requires a slide list, e.g. --slides=3,5')
+          return 2
+        }
+        qaFlags.push('--slides', val)
+      } else if (f === '--changed' || f === '--full-engine' || f === '--explain') {
+        qaFlags.push(f)
+      } else if (f === '--json') {
+        // handled by checked()
+      } else {
+        console.error(`pcafe check: unknown option "${f}"`)
+        return 2
+      }
+    }
+    if (qaFlags.includes('--full-engine') && (qaFlags.includes('--changed') || qaFlags.includes('--slides'))) {
+      console.error('pcafe check: --full-engine always runs a full check; it cannot be combined with --changed or --slides.')
+      return 2
+    }
+    const isPartialRequest = qaFlags.includes('--changed') || qaFlags.includes('--slides')
+    const env = {
+      PCAFE_DECK_NAME: name,
+      PCAFE_SKIP_OUTLINE: isPartialRequest ? '1' : '',
+    }
     if (flags.includes('--explain')) {
       // Debug path: print the selection without typecheck/build/audit.
-      return withDeck(root, name, () => runKept('node', ['scripts/qa.mjs', ...qaFlags], root))
+      return withDeck(root, name, () => runKept('node', ['scripts/qa.mjs', ...qaFlags], root, env))
     }
     return checked(root, 'deck', name, flags, () =>
-      withDeck(root, name, () => runKept('npm', ['run', 'check', ...(qaFlags.length ? ['--', ...qaFlags] : [])], root)),
+      withDeck(root, name, async () => {
+        const preHash = isPartialRequest ? null : computeDeckBuildInputHash(root, name)
+        const code = await runKept('npm', ['run', 'check', ...(qaFlags.length ? ['--', ...qaFlags] : [])], root, env)
+        // Record reusable build metadata only for full builds (with outline) whose inputs did not change mid-run.
+        if (code === 0 && !isPartialRequest) recordDeckBuildMeta(root, name, preHash)
+        return code
+      }),
     )
   },
 
@@ -328,23 +485,49 @@ const commands = {
       for (const [c, msgs] of Object.entries(next.issues)) msgs.forEach((m) => console.log(`  ${c}  ${m}`))
     }
     if (next.action === 'review') {
-      console.log(`next: look at ${next.screenshots.length} screenshots, then show the user`)
-      next.screenshots.forEach((p) => console.log(`  ${p}`))
+      if (next.grids?.length) {
+        console.log(`next: look at qa/contact-sheet.png and ${next.grids.length} review grids (2x2), then open full-size slides for any WARN or edited pages`)
+        next.grids.forEach((p) => console.log(`  ${p}`))
+      } else {
+        console.log(`next: look at ${next.screenshots.length} screenshots, then show the user`)
+        next.screenshots.forEach((p) => console.log(`  ${p}`))
+      }
       next.hints.forEach((h) => console.log(`  ${h.level}  ${h.code}  ${h.file ?? ''}  ${h.message}`))
     }
     return 0
   },
 
-  async build(name) {
+  async build(name, ...flags) {
     const root = projectRoot()
     deckName(name, root)
     needDeps(root)
-    const code = await withDeck(root, name, () => run('npm', ['run', 'build:deck'], root))
-    if (code !== 0) { console.error('build failed.'); return code }
+    for (const f of flags) {
+      if (f !== '--force' && f !== '--no-cache') {
+        console.error(`pcafe build: unknown option "${f}"`)
+        return 2
+      }
+    }
+    const force = flags.includes('--force') || flags.includes('--no-cache')
     const out = join(root, 'dist', `${name}.html`)
-    copyFileSync(join(root, 'dist', 'index.html'), out)
-    console.log(`wrote ${relative(root, out)}`)
-    return 0
+    return withDeck(root, name, () => {
+      if (!force && canReuseDeckBuild(root, name)) {
+        copyFileSync(join(root, 'dist', 'index.html'), out)
+        console.log(`wrote ${relative(root, out)} (reused up-to-date build)`)
+        return 0
+      }
+      const preHash = computeDeckBuildInputHash(root, name)
+      const code = run('npm', ['run', 'build:deck'], root, { PCAFE_DECK_NAME: name, PCAFE_SKIP_OUTLINE: '' })
+      if (code !== 0) { console.error('build failed.'); return code }
+      recordDeckBuildMeta(root, name, preHash)
+      copyFileSync(join(root, 'dist', 'index.html'), out)
+      console.log(`wrote ${relative(root, out)}`)
+      return 0
+    })
+  },
+
+  spec(...args) {
+    const root = projectRoot()
+    return run('node', [join(root, 'scripts', 'spec.mjs'), ...args], root)
   },
 
   pptx(name, ...flags) {

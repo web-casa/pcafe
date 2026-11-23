@@ -9,7 +9,11 @@ declare module 'virtual:pcafe-pro' {
   export const proDecks: Record<string, DeckDef>
 }
 
-// Filled in by vite.pro.ts: true when @pcafe/pro is installed in the project.
+// Filled in by vite.pro.ts from the project's PCafe Pro licence file (vite.licence.ts).
 declare module 'virtual:pcafe-licence' {
+  /** A valid, unexpired, PCafe-signed licence was found. */
   export const pro: boolean
+  export const licenceId: string | null
+  /** Why `pro` is false, for the build log; null when it is true. */
+  export const licenceProblem: string | null
 }

@@ -2,7 +2,7 @@ import { proVirtual } from './vite.pro'
 import { defineConfig, type Plugin } from 'vite'
 import { emoji } from './vite.emoji.mjs'
 import { viteSingleFile } from 'vite-plugin-singlefile'
-import { designUnit, engineResolve, forbidRemote } from './vite.config'
+import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote } from './vite.config'
 
 // Social cards: one offline HTML gallery per set. CARDSET picks the set at build time, so two
 // builds can run side by side without rewriting active.ts. CARDS_OUT keeps their output apart.
@@ -18,6 +18,7 @@ export default defineConfig({
   plugins: [proVirtual(), selectSet(process.env.CARDSET), ...emoji(), viteSingleFile({ removeViteModuleLoader: true }), forbidRemote()],
   css: { postcss: { plugins: [designUnit] } },
   resolve: engineResolve,
+  optimizeDeps: engineOptimizeDeps,
   build: {
     outDir: process.env.CARDS_OUT ?? 'dist/cards/_build',
     emptyOutDir: false,

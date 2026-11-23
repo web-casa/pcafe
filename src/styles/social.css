@@ -1,0 +1,114 @@
+/* Social templates (SocialFeed, SocialPost, DirectChat). Classes start with `so-`.
+   Cross-style: everything reads the deck's own tokens (canvas, card, panel, line,
+   ink, mute, accent, fonts and the --rs radius scale), so the same feed looks
+   native in a white SaaS style, a dark style or a paper style. */
+
+@keyframes so-in { from { opacity: 0; transform: translateY(14u); } }
+@keyframes so-pop { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
+@keyframes so-blink { 50% { opacity: 0.25; } }
+@keyframes so-dot { 0%, 60%, 100% { transform: translateY(0); opacity: 0.5; } 30% { transform: translateY(-6u); opacity: 1; } }
+@keyframes so-ring { to { rotate: 360deg; } }
+
+.so { --so-ease: cubic-bezier(0.65, 0, 0.2, 1); --so-spring: cubic-bezier(0.34, 1.56, 0.64, 1); --so-r: calc(18u * var(--rs, 1)); --so-soft: color-mix(in srgb, var(--ink) 4%, var(--canvas)); color: var(--ink); font-family: var(--f-sans); }
+.so-col--side { position: absolute; left: 80u; top: 112u; bottom: 76u; width: 290u; }
+.so-col--feed { position: absolute; left: 420u; width: 880u; top: 92u; bottom: 24u; }
+.so-col--rail { position: absolute; left: 1350u; right: 80u; top: 112u; display: grid; gap: 22u; }
+.so-foot { position: absolute; left: 1350u; right: 80u; bottom: 32u; }
+
+.so-ava { flex: none; width: calc(var(--s) * var(--u)); height: calc(var(--s) * var(--u)); border-radius: 50%; object-fit: cover; }
+.so-ava.is-ring { padding: 3u; background: var(--canvas); box-shadow: 0 0 0 2.5u var(--accent); transition: box-shadow 400ms ease, scale 400ms var(--so-spring); }
+.so-tick { width: 20u; height: 20u; fill: var(--accent); }
+
+/* Side */
+.so-side { position: relative; height: 100%; }
+.so-me { display: flex; align-items: center; gap: 14u; }
+.so-me b { display: block; font: 600 23u/1.2 var(--f-sans); }
+.so-me small { font: 400 17u/1.3 var(--f-sans); color: var(--mute); }
+.so-menu { display: grid; gap: 4u; margin-top: 40u; }
+.so-menu button { all: unset; display: flex; align-items: center; gap: 14u; padding: 13u 16u; border-radius: calc(12u * var(--rs, 1)); font: 400 19u/1.2 var(--f-sans); color: var(--ink-2); cursor: pointer; transition: background 300ms ease, color 300ms ease, translate 400ms var(--so-spring); }
+.so-menu button:hover { background: var(--so-soft); translate: 3u 0; }
+.so-menu button.is-on { background: var(--panel); color: var(--ink); font-weight: 600; }
+.so-clock { position: absolute; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr auto; gap: 10u; }
+.so-clock > div { padding: 18u 20u; border-radius: calc(16u * var(--rs, 1)); background: var(--panel); }
+.so-clock b { font: 600 38u/1 var(--f-mono); letter-spacing: -0.04em; }
+.so-clock b i { font-style: normal; animation: so-blink 2s steps(1) infinite; }
+.so-clock small { margin-left: 10u; font: 400 17u/1 var(--f-sans); color: var(--mute); }
+.so-clock__d { text-align: center; }
+.so-clock__d small { display: block; margin: 0 0 6u; font-weight: 600; color: var(--accent); }
+.so-clock__d b { font-size: 30u; }
+
+/* Feed column */
+.so-feed { box-sizing: border-box; height: 100%; overflow: hidden; padding: 24u 50u 0; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+.so-feed__h { margin: 0; padding-bottom: 20u; font: 600 21u/1.2 var(--f-sans); }
+.so-post { display: grid; grid-template-columns: 52u minmax(0, 1fr); gap: 14u; padding: 26u 0; border-top: 1px solid var(--line); animation: so-in 700ms var(--so-ease) both; animation-delay: calc(450ms + var(--i, 0) * 160ms); }
+.so-who { display: flex; align-items: center; gap: 6u; font: 400 18u/1.3 var(--f-sans); color: var(--mute); }
+.so-who b { font-weight: 600; color: var(--ink); }
+.so-who em { margin-left: 8u; padding: 4u 10u; border-radius: 999px; background: var(--panel); font: 500 17u/1 var(--f-sans); font-style: normal; color: var(--ink-2); }
+.so-post__text { margin: 8u 0 0; font: 400 20u/1.55 var(--f-sans); color: var(--ink); }
+.so-post__text.is-big { margin-top: 12u; font: 500 31u/1.4 var(--f-sans); letter-spacing: -0.01em; }
+.so-post__text.is-big span { display: block; }
+.so-media { display: flex; width: 520u; height: 380u; margin-top: 16u; overflow: hidden; border-radius: var(--so-r); box-shadow: 0 0 0 1px var(--line); }
+.so-media.is-two { width: 720u; height: 380u; }
+.so-media.is-wide { width: 770u; height: 500u; }
+.so-media img { flex: 1; min-width: 0; height: 100%; object-fit: cover; transition: scale 1400ms var(--so-ease); }
+.so-media:hover img { scale: 1.03; }
+.so-media.is-two img + img { border-left: 3u solid var(--canvas); }
+.so-acts { display: flex; gap: 30u; margin-top: 14u; font: 400 17u/1 var(--f-sans); color: var(--mute); }
+.so-act { all: unset; display: inline-flex; align-items: center; gap: 8u; padding: 6u 0; cursor: default; }
+.so-act svg { width: 22u; height: 22u; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+.so-like { cursor: pointer; transition: color 300ms ease; }
+.so-like:hover { color: #e5484d; }
+.so-like.is-on { color: #e5484d; }
+.so-like.is-on svg { fill: currentColor; animation: so-pop 450ms var(--so-spring); }
+
+/* Rail */
+.so-stories { display: flex; gap: 16u; }
+.so-stories button { all: unset; display: grid; justify-items: center; gap: 8u; font: 400 17u/1 var(--f-sans); color: var(--ink-2); cursor: pointer; }
+.so-stories button:hover .so-ava { scale: 1.06; }
+.so-stories button.is-seen .so-ava { box-shadow: 0 0 0 2.5u var(--line-strong); }
+.so-box { padding: 20u; border-radius: var(--so-r); background: var(--panel); }
+.so-box h5 { display: flex; justify-content: space-between; margin: 0 0 8u; font: 600 19u/1.2 var(--f-sans); }
+.so-box h5 span { color: var(--mute); transition: translate 400ms var(--so-spring), color 300ms ease; }
+.so-box:hover h5 span { translate: 4u 0; color: var(--accent); }
+.so-item { display: grid; grid-template-columns: 54u minmax(0, 1fr); align-items: center; gap: 14u; padding: 9u 0; }
+.so-item > img, .so-item > i { display: grid; place-items: center; width: 54u; height: 54u; border-radius: calc(12u * var(--rs, 1)); object-fit: cover; background: var(--canvas); font-style: normal; }
+.so-item b { display: block; font: 600 18u/1.3 var(--f-sans); }
+.so-item small { font: 400 17u/1.35 var(--f-sans); color: var(--mute); }
+.so-item.is-fact b { font: 600 26u/1.15 var(--f-sans); letter-spacing: -0.02em; }
+.so-item.is-fact > i { background: color-mix(in srgb, var(--accent) 12%, var(--canvas)); }
+.so-item.is-comment > img { border-radius: 50%; }
+.so-item.is-fact, .so-item.is-comment { animation: so-in 600ms var(--so-ease) both; animation-delay: calc(900ms + var(--i) * 220ms); }
+.so-bub { width: fit-content; max-width: 80%; padding: 14u 18u; border-radius: calc(18u * var(--rs, 1)); font: 400 18u/1.5 var(--f-sans); }
+.so-bub.is-me { margin-left: auto; border-bottom-right-radius: 6u; background: var(--accent); color: #fff; }
+.so-bub.is-you { border-bottom-left-radius: 6u; background: var(--card); box-shadow: 0 0 0 1px var(--line); color: var(--ink); }
+.so-say .so-bub { max-width: 100%; }
+.so-send { display: flex; align-items: center; gap: 10u; margin-top: 14u; padding: 8u 8u 8u 18u; border-radius: 999px; background: var(--card); box-shadow: 0 0 0 1px var(--line); font: 400 17u/1 var(--f-sans); color: var(--mute); }
+.so-send i { display: grid; place-items: center; width: 40u; height: 40u; margin-left: auto; border-radius: 50%; background: var(--accent); color: #fff; font: 500 19u/1 var(--f-sans); font-style: normal; transition: translate 400ms var(--so-spring); }
+.so-send:hover i { translate: 0 -3u; }
+.so-send.is-big { flex: none; margin-top: 0; padding: 10u 10u 10u 24u; font-size: 19u; }
+.so-send.is-big i { width: 48u; height: 48u; }
+
+/* DirectChat */
+.so-chat { position: absolute; left: 420u; right: 80u; top: 104u; bottom: 76u; box-sizing: border-box; display: flex; flex-direction: column; gap: 16u; padding: 30u 44u 30u; border-radius: calc(26u * var(--rs, 1)); background: var(--panel); }
+.so-chat__hd { display: flex; align-items: center; gap: 14u; padding-bottom: 18u; border-bottom: 1px solid var(--line); }
+.so-chat__hd b { font: 600 22u/1.2 var(--f-sans); }
+.so-chat__hd small { display: flex; align-items: center; gap: 8u; margin-top: 4u; font: 400 17u/1 var(--f-sans); color: #22a35a; }
+.so-chat__hd small i { width: 10u; height: 10u; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4u rgb(34 163 90 / 0.18); }
+.so-chat__list { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 14u; overflow: hidden; padding: 4u 2u; }
+.so-chat__list .so-bub { flex: none; max-width: 62%; font-size: 21u; animation: so-in 600ms var(--so-ease) both; animation-delay: calc(600ms + var(--i) * 260ms); }
+.so-chat__list .so-bub.is-live { animation-delay: 0ms; }
+.so-chat__list .so-bub.is-you { background: var(--canvas); }
+.so-bub.is-typing { display: flex; gap: 6u; padding: 18u 20u; }
+.so-bub.is-typing i { width: 9u; height: 9u; border-radius: 50%; background: #fff; animation: so-dot 1s ease-in-out infinite; }
+.so-bub.is-typing i:nth-child(2) { animation-delay: 150ms; }
+.so-bub.is-typing i:nth-child(3) { animation-delay: 300ms; }
+.so-offer { flex: none; display: grid; grid-template-columns: 200u minmax(0, 1fr); align-items: center; gap: 20u; width: 640u; padding: 14u; box-sizing: border-box; margin-left: auto; border-radius: var(--so-r); background: var(--canvas); box-shadow: 0 0 0 1px var(--line); animation: so-in 600ms var(--so-ease) both; animation-delay: calc(600ms + var(--i) * 260ms); transition: translate 500ms var(--so-spring), box-shadow 500ms ease; }
+.so-offer:hover { translate: 0 -4u; box-shadow: 0 0 0 1px var(--line), 0 24u 40u -24u rgb(0 0 0 / 0.3); }
+.so-offer img { width: 200u; height: 130u; border-radius: calc(12u * var(--rs, 1)); object-fit: cover; }
+.so-offer b { display: block; font: 600 21u/1.25 var(--f-sans); }
+.so-offer small { display: block; margin-top: 6u; font: 400 17u/1.4 var(--f-sans); color: var(--mute); }
+.so-offer em { display: block; margin-top: 8u; font: 600 19u/1 var(--f-sans); font-style: normal; color: var(--ink); }
+.so-quick { flex: none; display: flex; flex-wrap: wrap; gap: 10u; }
+.so-quick button { all: unset; padding: 12u 18u; border-radius: 999px; background: var(--canvas); box-shadow: 0 0 0 1px var(--line-strong); font: 400 18u/1 var(--f-sans); color: var(--ink); cursor: pointer; animation: so-in 500ms var(--so-ease) both; animation-delay: calc(1800ms + var(--i) * 90ms); transition: background 300ms ease, color 300ms ease, translate 400ms var(--so-spring), opacity 300ms ease; }
+.so-quick button:hover:not(:disabled) { background: var(--accent); color: #fff; box-shadow: none; translate: 0 -2u; }
+.so-quick button:disabled { opacity: 0.4; cursor: default; }

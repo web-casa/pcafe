@@ -61,5 +61,5 @@
 ### `AgencyManifesto` 观点大段落（节奏 · 一段观点）
 - 适合：讲问题或立场，一句话说不完；两段密集内容之间的停顿
 - 不适合：只有一句短话：用 Statement；有出处的引语：用 QuoteHero
-- 上限：text ≤ 64 字；label ≤ 8 字；marks 0–2 个，必须是 text 里原样出现的子串
+- 上限：text ≤ 64 字；label ≤ 8 字；marks 0–2 个，必须是 text 里原样出现的子串；by 可选：name ≤ 8 字，role ≤ 16 字
 - 参考：src/decks/home-northbound 的 `problem` 页；docs/zh-CN/components.md#agency-manifesto

@@ -21,13 +21,14 @@ const emojiStub: Plugin = {
  * actually sets. This also works when active.ts re-exports a deck from a
  * package, where a source regex cannot follow the import.
  */
-export async function deckStyle(root: string, resolveOptions: ResolveOptions = {}): Promise<string | undefined> {
+export async function deckStyle(root: string, resolveOptions: ResolveOptions = {}, plugins: Plugin[] = []): Promise<string | undefined> {
   const server = await createServer({
     root,
     configFile: false,
     logLevel: 'silent',
     appType: 'custom',
-    plugins: [emojiStub],
+    // `plugins`: virtual modules the deck imports, e.g. the licence flag from vite.pro.ts
+    plugins: [emojiStub, ...plugins],
     resolve: resolveOptions,
     server: { middlewareMode: true, hmr: false },
   })

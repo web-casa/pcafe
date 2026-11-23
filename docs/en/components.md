@@ -284,11 +284,60 @@
 | [`KanbanDemo`](#kanban-demo) Kanban demo | Product · interactive demo | A pill, title, lead and ticked points on the left; a task board on the right with view tabs and member faces on top, a teammate cursor gliding over the tabs, and three columns of cards. Click a card and it moves to the next column while the counts update; each column ends in a dashed "add task" slot. |
 | [`ProofMosaic`](#proof-mosaic) Proof mosaic | Customer · quotes and reviews | A mosaic under a centred title: a large dark quote card with a portrait in its right half; on the right, a sun-yellow headline figure above two short quote cards, each with a star rating, a measured result chip and a signed face. |
 | [`BuyoutPricing`](#buyout-pricing) Buyout pricing | Pricing · two plans and a close | Two plan cards and a sun-yellow closing card: each plan has a price, one line, a ticked list and two key facts in boxes, and clicking switches the picked plan; the closing card carries a call to action, a note, a row of faces with a user count and a black button. |
+| [`FolioHero`](#folio-hero) Folio hero | Opening · personal portfolio home | A text column on the left with a status pill and green dot, avatar and email, a two-tone grey and black title, a lead, two buttons and a row of skill chips; a rail of white-framed work on the right, the second frame peeking in at the bottom. Clicking a tick slides the rail like film to that frame. Made for the folio style; other styles work too. |
+| [`FolioCase`](#folio-case) Folio case | Evidence · one project in depth | Left: a mono case number, the project name with a grey subtitle, a two-to-four row fact table (client, role, timeline) and two or three results with accent superscript units. Right: the rail holds this project's picture in the middle with its neighbours peeking in above and below; ticks or a peeking frame switch it. |
+| [`FolioSteps`](#folio-steps) Folio steps | Method · step accordion | A numbered list of steps on the left that opens one at a time like an accordion: the open step's number turns the accent colour and its plus turns into a cross. The rail on the right slides to that step's picture, captioned with the step name. |
+| [`FolioWords`](#folio-words) Folio words | Evidence · client quotes | One client quote at a time in large type on the left; under a hairline sit the avatar, name and role, and one result figure in the accent colour. Two round arrows bottom left flip the quote, and the rail on the right slides to the project that quote is about. |
+| [`FolioOffers`](#folio-offers) Folio offers | Pricing · ways to work together | Two to four ways to work together as a priced list on the left; clicking a row raises an accent bar beside it and colours its number. The rail on the right rests on an empty dashed slot reading "your project here", which takes the picked offer and price; the dashes drift slowly. |
+| [`FolioContact`](#folio-contact) Folio contact | Closing · FAQ and booking | Three or four common questions on the left, each opening to its answer; in the middle of the rail sits a white booking card with avatar, name, a green "available" dot, a date and 3–6 time slots. Picking a time updates the accent button below. |
+| [`DiptychHero`](#diptych-hero) Diptych hero | Opening · personal portfolio home | A full-height picture card on the left with a handwritten Latin signature in the corner; work cross-fades with a slow push-in, progress bars along the foot fill as each shot plays, and a round arrow skips ahead. On the right: a status pill with a green dot, a three-line bold title with a few words in grey, a lead, two buttons, and a row of client names drifting along the foot. Made for the diptych style; other styles work too. |
+| [`DiptychWorks`](#diptych-works) Diptych works | Evidence · selected work | On the right a grey kicker, a two-line title and a numbered list of project names; the current row turns black and grows an accent arrow. Hovering a row fades the big left card to that project's picture, captioned with its name, kind and year. |
+| [`DiptychServices`](#diptych-services) Diptych services | Services · tabbed | Under the title a row of pill tabs (brand / website / product); picking one swaps in that service's line, a two-column list of deliverables and two big figures for timeline and budget, while the left card changes to its picture. |
+| [`DiptychWords`](#diptych-words) Diptych words | Evidence · client quotes | A row of small numbered pills on the right and one large client quote with its name at a time; clicking a number flips the quote and the left card to the project it is about. Two or three big figures sit under a hairline at the foot. |
+| [`DiptychAbout`](#diptych-about) Diptych about | About · career | A half-length portrait on the left; on the right a two-line title, a list of roles (title, note, years), a big underlined email that copies on click and flashes "copied", and two buttons. |
+| [`DiptychContact`](#diptych-contact) Diptych brief | Closing · pick-to-contact | Under a two-line title on the right, two or three rows of pill options (what, budget, when) that turn black when picked; a small accent badge on the big black button counts the picks and pops when it changes. The left card shows work. |
+| [`MarkerIntro`](#marker-intro) Marker intro | Opening · a one-sentence intro | A centred column on white: a small double-diamond mark and one large sentence of introduction whose ==…== phrases get yellow, green and purple highlighter strokes sweeping in one after another; a grey second sentence below and a row of mono links at the foot. The page foot carries a sign-off on the left and a city with a ticking clock on the right. |
+| [`MarkerWorks`](#marker-works) Marker works | Evidence · selected work | Three soft grey rounded cards side by side, each with the name and number on top, a portrait picture held by four bracket corners with a soft shadow, and the year at the foot. On hover the corners open out and the picture lifts; with more than three pieces, arrows bottom left page through in threes. |
+| [`MarkerSkills`](#marker-skills) Marker skills | Capabilities · what I do and what's now | Three soft grey cards across the top, each with a line-drawn isometric icon (screen, blocks, letter, stack, bars or pen) whose layers lift apart on hover; below, a "now" box in bracket corners with one sentence about what you are on, phrases marked by highlighter. |
+| [`MarkerLog`](#marker-log) Marker log | Content · notes and posts | A column of short dated entries, each title with one highlighter-marked phrase, a small tag and a slanted arrow on the right; clicking a row turns the arrow to the accent colour and unfolds a one-line summary. |
+| [`MarkerFacts`](#marker-facts) Marker facts | Data · a sentence and figures | One large sentence with highlighter marks on top and 3–4 soft grey boxes in bracket corners below, their big figures counting up from zero when the slide opens, with grey units and labels. |
+| [`MarkerClose`](#marker-close) Marker close | Closing · contact | The double-diamond mark, one closing sentence with highlighter marks, a large mono email whose accent underline draws across on hover and which copies on click with a "copied" chip, and a row of mono social links. |
+| [`AlbumHero`](#album-hero) Album hero | Opening · warm consumer product home | A warm sunrise glow at the top: a small pill, a handwritten-feel serif line, a two-line bold title whose last word turns into italic serif with an orange-to-rose-to-violet gradient, a lead and one button. Along the foot 5–9 instant prints fan out on a wide arc, dealt in one by one; the one you point at slides up, and a few small chips float nearby. |
+| [`AlbumLayout`](#album-layout) Album layout | Method · three-step demo | A title with one word in gradient italic and three steps on the left; on the right a tilted white tabletop with five photos and a round toolbar. Picking a step rearranges the table: the photos pile up, then spread out at different sizes, then settle into a neat page with the picked one outlined in dashes. |
+| [`AlbumWeek`](#album-week) Album week | Content · a week in pictures | A slightly sagging string runs across the slide with 5–7 instant prints pegged on it, swinging gently as the slide opens. Click one and it grows and drops while the others fade, and the date, a line and the place write in below in italic serif. |
+| [`AlbumStories`](#album-stories) Album stories | Evidence · user stories | Three large instant prints set at slight angles that straighten on hover; clicking one flips it over in 3D to a lined-paper back where the person's words and name are written in serif. |
+| [`AlbumPlus`](#album-plus) Album plus | Pricing · single membership | One large white card in the middle: the plan name with a gradient star, a short note, a 2 × 2 grid of four features with tinted rounded icons that tilt on hover, and a row with a monthly / yearly switch, a big italic serif price and a button; switching rolls the price up from below. Instant prints float around the card. |
+| [`AlbumClose`](#album-close) Album close | Closing · call to action and a pile of prints | A handwritten-feel line, a two-line title with the last word in gradient italic, a lead, buttons and a small note on the left; on the right a pile of instant prints where each click sends the top one flying out and back underneath, revealing the next, with a counter in the corner. |
+| [`SlateHero`](#slate-hero) Slate hero | Opening · SaaS product home | On the left a version pill, a two-line headline with a small tilted gradient icon tile set into it, a lead, a button with a text link and a row of customer wordmarks. On the right a dashboard tilts inward in 3D: tabs, a greeting, three KPI cards and a bar chart. Click a KPI card and it lights up in the accent gradient while the chart redraws its trend; hovering the dashboard slowly turns it face-on. |
+| [`SlateSteps`](#slate-steps) Slate steps | Method · three steps to start | A centred dot label, a two-line title and a subtitle; below, three white cards side by side. Each has a small animated picture on top (linked nodes, bars, a half gauge, a donut, horizontal rows or a sound wave) and an accent tag, step name and one-line note below. Cards lift on hover. |
+| [`SlateCompare`](#slate-compare) Slate comparison table | Comparison · us versus the alternative | Title, lead, button and three small stat cards on the left; on the right a white comparison table whose 'us' column is lit as a whole by one accent gradient bar, ticks in white circles and crosses in dark ones. A switch at the top right collapses the rows where both sides agree, leaving only the differences. |
+| [`SlateTrend`](#slate-trend) Slate trend | Trend · several metrics over time | A title at the top left; a column of metric cards (name, current value, green change) on the left and, in a large white card on the right, an area line chart whose end is marked by a dot and a dark bubble with the current value. Click a metric card and it lights up in the accent gradient while the line redraws its trend. |
+| [`SlatePricing`](#slate-pricing) Slate pricing | Pricing · per-seat plans | A title at the top with a team-size stepper (− / +) on the right; below, three plan cards side by side, the middle one lit as a whole in the accent gradient with a 'most popular' tag. Prices are recalculated from the seat count as you go; an enterprise plan can say 'contact us' instead. |
+| [`SlateConnect`](#slate-connect) Slate integrations | Closing · integrations and call to action | On the left a title (which may hold an icon tile), a lead, two buttons and a small line; on the right an integration map: a large icon tile in the middle and 6–8 tool icons around a dashed ring, with light pulses running along each spoke towards the centre. Hover a tool and it and its spoke light up. |
+| [`EmberHero`](#ember-hero) Ember hero | Opening · AI product home | A full-bleed dark, lit picture (for example a head silhouette traced by rim light) that drifts gently with the pointer; a 'new' pill at the top, a two-line serif headline in the middle and a translucent prompt box below. Example requests type themselves in letter by letter and erase again, the attach and web chips are switches you can press, the model name changes on click and the send button sends out a ring of light and moves to the next request. |
+| [`EmberBento`](#ember-bento) Ember feature bento | Capabilities · four features | A centred serif title over four dark cards fitted together: two tall picture cards left and right, a picture card top-centre with a floating row of tool icons (click one to light it and show its name), and a card bottom-centre holding a list of working switches. Each card ends in a small ember icon square, a title and one line; pictures push in slowly on hover. |
+| [`EmberAgent`](#ember-agent) Ember agent run | Mechanism · an agent finishing a task step by step | On the left a serif title, a request bubble from 'you' and a draft being written; on the right an 'activity' card whose 3–6 steps spin and tick off in turn while a progress rail lights up beside them, each showing the tool used and the time taken. As steps finish, the draft's lines sharpen one by one from blur; when all are done the status turns green with the total time, and 'run again' replays it. |
+| [`EmberSaves`](#ember-saves) Ember time saved | Data · time saved per task | On the left a serif title, a lead and a huge gradient serif number (hours saved per week); on the right a card listing 3–6 tasks, one bar each: it first shows the time done by hand, then shrinks to the time with the agent and lights up in ember, leaving the old length as a dotted ghost. A segmented switch at the top flips between the two. |
+| [`EmberWords`](#ember-words) Ember testimonials | Evidence · two customers, their words and results | A centred title under an ember glow and two large dark cards side by side: a serif quote on top, an avatar, name and role at the bottom left, and a huge serif result (such as 26% or 3×) at the bottom right that counts up from zero. A pool of light follows the pointer across the card. |
+| [`EmberClose`](#ember-close) Ember closing | Closing · call to action with a prompt box | A ring of fire breathing slowly in the middle of the slide; inside it two lines of large serif type, a lead and a compact prompt box (which also types by itself), then a light button, a text link and a small line. |
+| [`DuskHero`](#dusk-hero) Dusk hero | Opening · developer tool home | A mint announcement pill at the top, a centred two-line tight headline, a lead and a dark and a light button. Below on the left a big sunset gradient panel with a row of tabs: click one and the dark widget in a frosted frame at its centre switches to that item's number and segmented bar. On the right a white code card marks removed and added lines in red and green, sliding in line by line. |
+| [`DuskFeature`](#dusk-feature) Dusk feature | Product · one feature and its chart | On the left a small tag, a two-line title, a paragraph, two to four ticked points and a light button; on the right a soft pink gradient panel whose dark widget holds 2–3 smooth lines. Move the pointer across the chart and a vertical cursor follows, reading out every line's value at that point underneath. |
+| [`DuskExplain`](#dusk-explain) Dusk code explainer | Explanation · code told in plain words, block by block | On the left a white code card split into 2–4 blocks: the current one lights up with an accent edge and the rest fade. On the right, inside a sunset gradient panel, a dark card explains in a large title and plain sentences what that block does, with a progress bar on top showing which block you are on. It moves on by itself; click any block to stop there. |
+| [`DuskStats`](#dusk-stats) Dusk result cards | Data · three results | Under a one-line title, three tall cards side by side: a small label and an area line spanning the card at the top, a huge number (counting up from zero) and one line of explanation at the bottom. The card you point at turns into the sunset gradient, its text and line go white and it lifts slightly. |
+| [`DuskCases`](#dusk-cases) Dusk customer stories | Customer · case carousel with two quotes | On the left a large photo case card: the customer name top left, a one-line result in large type and a white button bottom left, progress dots and arrows bottom right; 2–4 cases rotate on their own as photos cross-fade and slowly pull back. On the right two white cards, each a customer quote with an avatar, name and role at the foot. |
+| [`DuskClose`](#dusk-close) Dusk closing | Closing · call to action with an install command | A centred two-line headline, a lead and two buttons; below, a sunset gradient panel holds a dark terminal: three small dots, a command you can copy with one click, and a few output lines printing one after another, the last turning green when ready. |
+| [`AgencyStage`](#agency-stage) Electric-blue stage opening | Opening · first page for an agency or brand | The whole page is an electric-blue gradient mixed from the theme accent with fine grain, and a soft light slowly follows the pointer. Top left, a light two-line headline and a white pill button whose round arrow turns on hover; top right, a frosted photo card that lifts on hover; below it a row of round faces with a two-line note. A giant Latin wordmark bleeds off the bottom edge, its letters rising one by one and lifting under the pointer. |
+| [`AgencyAccordion`](#agency-accordion) Portrait with accordion | Method · mission, services or approach in detail | A small white pill top left and a light two-line title on the right half. On the left a tall portrait with a name chip; on the right 3–4 numbered white accordion rows. The open row fills the remaining height with a sentence, soft chips and a landscape photo, plus an accent progress line along its foot. Rows open in turn every few seconds until someone clicks one. |
+| [`AgencyProof`](#agency-proof) Navy quote with bento | Customer · testimonials and results | A small white pill top left and a light two-line title on the right half. Across the middle a long navy card: a client quote with arrows and a counter on the left, a portrait with name and role on the right; 1–3 quotes rotate as portraits cross-fade. Below, three tiles: a one-line statement on an accent gradient that flows on hover, a picture with a caption that pushes in on hover, and a big number that counts up beside round faces. |
+| [`AgencyBook`](#agency-book) Electric-blue booking close | Closing · book a call | The whole page is the electric-blue gradient with fine grain. On the left a frosted pill, a light two- or three-line headline and a lead; on the right a frosted booking card with a heading and the host's face, a row of 4–5 days and 3–6 time slots that light up when picked. A long white button reads the picked day and time back and turns into a green tick when clicked. An optional row of contact facts runs along the bottom. |
+| [`SocialFeed`](#social-feed) Personal feed | Content · recent news as a personal or brand home | A three-column social home page. On the left an avatar, a name, six menu items that highlight on click and a clock tile with a blinking colon (fixed or live). In the middle a column of posts; the first carries one or two pictures, and every post has a heart that pops and adds one when clicked plus a share action. On the right a row of ringed avatars that grey out once viewed, two small list boxes and a chat bubble with an input. It uses only the current style's colours and radii, so it works in every style. |
+| [`SocialPost`](#social-post) Launch post | Evidence · the response to a launch or milestone | The same three-column shell with one big post in the middle: a back link, the author line, a two-line announcement in large type, a wide picture, and a clickable heart, comment count and share. On the right a box lists 2–3 launch figures with icons, and below it 2–3 top comments arrive one by one. It uses only the current style's colours and radii. |
+| [`DirectChat`](#direct-chat) Direct message invite | Closing · invite the audience to get in touch | The same avatar, menu and clock on the left; on the right a full direct-message window with the owner's face, name and a green reply-time line. Messages stack from the bottom: the visitor's white bubbles and the owner's accent bubbles arrive in turn, with an optional offer card (picture, title, note, price) between them. A row of quick replies sits at the foot; clicking one sends it, three typing dots bounce, then the owner answers, and used replies grey out. It uses only the current style's colours and radii. |
 
 Free templates all come from `src/kit`:
 
 ```tsx
-import { Cover, Bento, MetricBars, Timeline, SpotlightList, CompareTable, NumberedColumns, VerdictColumns, Checklist, StepTrack, Teaser, Closing, Terminal, CodeDiff, StatusGrid, SpecSheet, Cycle, Faq, Lanes, LineChart, Agenda, SectionBreak, QuoteHero, FlowDiagram, ClaimCards, LayerStack, Matrix, IconGrid, BigStat, DeltaBars, Dumbbell, RangeBars, Gantt, Milestones, QuoteWall, BeforeAfter, Screenshot, Funnel, Quadrant, PersonaCards, PricingTiers, KpiBoard, ShareBar, Waterfall, Team, IssueTree, Heatmap, Roadmap, Statement, HangingCover, PanelCards, AskAnswer, ProofSplit, IndexStack, ContactPanel, Orbit, NumberOpener, ChapterProgress, Question, Contrast, Recap, HeroPanel, TabbedShot, BrandKit, Laurels, FullBleed, Thanks, SplitWord, PillAgenda, StatRow, CountCompare, Donut, BarChart, Bubble, Gauge, ServiceList, QuoteArc, WorkCards, RepeatClosing, StickerCover, WordBlocks, FolderCards, SparkCards, Pictogram, SlopeRank, PixelClosing, FloatCover, TileWall, ServiceIndex, GlowStack, DuoCards, Desktop, WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone, Swimlane, ArchLayers, Balance, DoubleFunnel, KeyReveal, KeySpec, OrbCover, GradientCards, BlockStats, PopPoster, BentoBoard, BentoSpotlight, SlotPicker, UiSteps, FloatHero, TranscriptCard, RetroTabs, RetroLog, GlowMetric, HairlineGrid, RibbonCover, RibbonSection, ChatThread, NoteCards, RevealStatement, SketchCover, ArcCards, CaseCard, AgencyHero, AgencyRows, AgencyManifesto, HaloHero, HaloRows, HaloMarquee, FanCover, PillSentence, OpenList, PhotoCover, PhotoSplit, PhotoMosaic, PolaroidWall, FilmStrip, MagazineSpread, CaseStudy, DeviceFrame, CompareSlider, PhotoStack, FlipCards, CardStack, FanCarousel, DepthCarousel, Envelope, FlipBook, Lanyard, ProgressCards, ProcessAccordion, NotebookCover, Halftone, ProgressiveBlur, MaskReveal, LogoWall, PhotoClosing, RankingRace, BubbleCluster, NodeGraph, Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics, Typewriter, RotatingWord, MorphHeadline, TextArc, Odometer, MarkerSweep, TextMask, SplitFlap, NewsTicker, KaraokeLines, ParadigmCards, AnatomyCard, ExplorerFlip, VerbCards, NinesDial, TierLadder, LifecycleRail, MeterCards, ShelfGallery, TabSpec, TokenStream, MoeRouter, ContextWindow, ScoreMatrix, ModelSpecCard, TokenPriceGrid, AttentionMask, EffortDial, PeakClock, AliasRoute, GlobeCover, ArcGlobe, PopGrid, RequestJourney, ShieldLayers, SpikeChart, OutageBoard, ReachRings, ServerRack, TraceTimeline, QueryPlan, SchemaEr, ResultGrid, CodeCallouts, RequestResponse, BeamFlow, TupleVersions, BTreeIndex, JsonTree, SessionSequence, BadgeHero, TabPanels, EditionPicker, ReleaseTrain, MegaMenu, PathCrumbs, FilterChips, CtaBlock, FooterClosing, FaqAccordion, MediaExpand, ScatterOrder, TiltShot, ConvergeShots, StepVideo, ExhibitCover, YearBars, NumberTiles, ScoreTable, MetricMosaic, StepGrid, FramedStats, IndexList, AgendaMosaic, MethodSteps, PriorityColumns, ChapterNumber, StackBars, ChatDemo, AppCards, AtelierHero, ProjectPair, ProcessQuote, ServiceTrio, TeamBanner, BookingClose, MonographHero, ProjectIndex, WhyStats, TeamPortraits, ServiceLedger, MonographClose, NocturneHero, FeatureBento, GlowPricing, StepTrio, RevealCompare, WallClose, SunriseHero, KitBento, HomeTrio, KanbanDemo, ProofMosaic, BuyoutPricing } from '../../kit'
+import { Cover, Bento, MetricBars, Timeline, SpotlightList, CompareTable, NumberedColumns, VerdictColumns, Checklist, StepTrack, Teaser, Closing, Terminal, CodeDiff, StatusGrid, SpecSheet, Cycle, Faq, Lanes, LineChart, Agenda, SectionBreak, QuoteHero, FlowDiagram, ClaimCards, LayerStack, Matrix, IconGrid, BigStat, DeltaBars, Dumbbell, RangeBars, Gantt, Milestones, QuoteWall, BeforeAfter, Screenshot, Funnel, Quadrant, PersonaCards, PricingTiers, KpiBoard, ShareBar, Waterfall, Team, IssueTree, Heatmap, Roadmap, Statement, HangingCover, PanelCards, AskAnswer, ProofSplit, IndexStack, ContactPanel, Orbit, NumberOpener, ChapterProgress, Question, Contrast, Recap, HeroPanel, TabbedShot, BrandKit, Laurels, FullBleed, Thanks, SplitWord, PillAgenda, StatRow, CountCompare, Donut, BarChart, Bubble, Gauge, ServiceList, QuoteArc, WorkCards, RepeatClosing, StickerCover, WordBlocks, FolderCards, SparkCards, Pictogram, SlopeRank, PixelClosing, FloatCover, TileWall, ServiceIndex, GlowStack, DuoCards, Desktop, WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone, Swimlane, ArchLayers, Balance, DoubleFunnel, KeyReveal, KeySpec, OrbCover, GradientCards, BlockStats, PopPoster, BentoBoard, BentoSpotlight, SlotPicker, UiSteps, FloatHero, TranscriptCard, RetroTabs, RetroLog, GlowMetric, HairlineGrid, RibbonCover, RibbonSection, ChatThread, NoteCards, RevealStatement, SketchCover, ArcCards, CaseCard, AgencyHero, AgencyRows, AgencyManifesto, HaloHero, HaloRows, HaloMarquee, FanCover, PillSentence, OpenList, PhotoCover, PhotoSplit, PhotoMosaic, PolaroidWall, FilmStrip, MagazineSpread, CaseStudy, DeviceFrame, CompareSlider, PhotoStack, FlipCards, CardStack, FanCarousel, DepthCarousel, Envelope, FlipBook, Lanyard, ProgressCards, ProcessAccordion, NotebookCover, Halftone, ProgressiveBlur, MaskReveal, LogoWall, PhotoClosing, RankingRace, BubbleCluster, NodeGraph, Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics, Typewriter, RotatingWord, MorphHeadline, TextArc, Odometer, MarkerSweep, TextMask, SplitFlap, NewsTicker, KaraokeLines, ParadigmCards, AnatomyCard, ExplorerFlip, VerbCards, NinesDial, TierLadder, LifecycleRail, MeterCards, ShelfGallery, TabSpec, TokenStream, MoeRouter, ContextWindow, ScoreMatrix, ModelSpecCard, TokenPriceGrid, AttentionMask, EffortDial, PeakClock, AliasRoute, GlobeCover, ArcGlobe, PopGrid, RequestJourney, ShieldLayers, SpikeChart, OutageBoard, ReachRings, ServerRack, TraceTimeline, QueryPlan, SchemaEr, ResultGrid, CodeCallouts, RequestResponse, BeamFlow, TupleVersions, BTreeIndex, JsonTree, SessionSequence, BadgeHero, TabPanels, EditionPicker, ReleaseTrain, MegaMenu, PathCrumbs, FilterChips, CtaBlock, FooterClosing, FaqAccordion, MediaExpand, ScatterOrder, TiltShot, ConvergeShots, StepVideo, ExhibitCover, YearBars, NumberTiles, ScoreTable, MetricMosaic, StepGrid, FramedStats, IndexList, AgendaMosaic, MethodSteps, PriorityColumns, ChapterNumber, StackBars, ChatDemo, AppCards, AtelierHero, ProjectPair, ProcessQuote, ServiceTrio, TeamBanner, BookingClose, MonographHero, ProjectIndex, WhyStats, TeamPortraits, ServiceLedger, MonographClose, NocturneHero, FeatureBento, GlowPricing, StepTrio, RevealCompare, WallClose, SunriseHero, KitBento, HomeTrio, KanbanDemo, ProofMosaic, BuyoutPricing, FolioHero, FolioCase, FolioSteps, FolioWords, FolioOffers, FolioContact, DiptychHero, DiptychWorks, DiptychServices, DiptychWords, DiptychAbout, DiptychContact, MarkerIntro, MarkerWorks, MarkerSkills, MarkerLog, MarkerFacts, MarkerClose, AlbumHero, AlbumLayout, AlbumWeek, AlbumStories, AlbumPlus, AlbumClose, SlateHero, SlateSteps, SlateCompare, SlateTrend, SlatePricing, SlateConnect, EmberHero, EmberBento, EmberAgent, EmberSaves, EmberWords, EmberClose, DuskHero, DuskFeature, DuskExplain, DuskStats, DuskCases, DuskClose, AgencyStage, AgencyAccordion, AgencyProof, AgencyBook, SocialFeed, SocialPost, DirectChat } from '../../kit'
 ```
 
 <a id="cover"></a>
@@ -6565,6 +6614,7 @@ A small grey pill label, then a full block of tight oversized bold text, indente
 - text ≤ 64 chars
 - label ≤ 8 chars
 - marks 0–2, each must appear verbatim in text
+- by optional: name ≤ 8 chars, role ≤ 16 chars
 
 **Props**
 
@@ -6574,6 +6624,7 @@ A small grey pill label, then a full block of tight oversized bold text, indente
 | `icon` | `IconName` |  | Icon in the label |
 | `text` | `string` | yes | The paragraph of the position |
 | `marks` | `string[]` |  | Words in the accent colour |
+| `by` | `{ name, role, image? }` |  | Signature under the paragraph |
 | `source` | `string` |  | Source for the facts |
 
 **Example**
@@ -13147,6 +13198,2236 @@ Two plan cards and a sun-yellow closing card: each plan has a price, one line, a
 
 ```tsx
 <BuyoutPricing title="一次买断，永久使用" plans={[{ name: '个人版', price: '¥299', unit: '一次性', items: ['…'], cta: '购买个人版' }, { name: '团队版', price: '¥899', badge: '推荐', items: ['…'], cta: '购买团队版' }]} close={{ title: ['今天开始，', '周末上线。'], cta: '免费预览' }} />
+```
+
+<a id="folio-hero"></a>
+
+## 276 · Folio hero `<FolioHero />`
+
+**Position**: Opening · personal portfolio home; **Reference slide**: `src/decks/sig-folio` — `hero`
+
+A text column on the left with a status pill and green dot, avatar and email, a two-tone grey and black title, a lead, two buttons and a row of skill chips; a rail of white-framed work on the right, the second frame peeking in at the bottom. Clicking a tick slides the rail like film to that frame. Made for the folio style; other styles work too.
+
+**Use when**
+
+- First slide of a product designer, freelancer or solo portfolio
+- You want the person and the work visible from the start
+
+**Avoid**
+
+- Fewer than 2 work images: use Cover or PhotoCover
+- A team or agency: use AtelierHero
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- status ≤ 14 chars
+- person.name ≤ 8 chars, note ≤ 24 characters
+- pre and title ≤ 6 chars each
+- lead ≤ 60 chars
+- ctas ≤ 8 chars each
+- tags 3–5 × ≤ 6 chars; link ≤ 6 chars
+- frames 2–4, caption ≤ 14 chars
+
+**Interaction**: Click: ticks slide the work rail; the status dot breathes; buttons and images react on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `status` | `string` | yes | Status pill with a green dot |
+| `person` | `{ avatar, name, note? }` |  | Avatar, name and email |
+| `pre` | `string` | yes | Grey first line |
+| `title` | `string` | yes | Black second line |
+| `lead` | `string` |  | Lead |
+| `ctas` | `[string, string?]` |  | Black main button and a plain button |
+| `tags` | `string[]` |  | Skill chips along the foot |
+| `link` | `string` |  | Underlined link after the chips |
+| `frames` | `{ image, tag?, caption? }[]` | yes | Work frames on the right |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<FolioHero status="接受新项目 · 12 月起" person={{ avatar: me, name: '林屿', note: 'hello@linyu.example' }} pre="你的下一位" title="产品设计师" ctas={['聊聊项目', '看作品']} frames={[{ image: a, tag: '01', caption: '透明相机' }, { image: b }]} />
+```
+
+<a id="folio-case"></a>
+
+## 277 · Folio case `<FolioCase />`
+
+**Position**: Evidence · one project in depth; **Reference slide**: `src/decks/sig-folio` — `case`
+
+Left: a mono case number, the project name with a grey subtitle, a two-to-four row fact table (client, role, timeline) and two or three results with accent superscript units. Right: the rail holds this project's picture in the middle with its neighbours peeking in above and below; ticks or a peeking frame switch it.
+
+**Use when**
+
+- One portfolio project: what, how long, what changed
+- You have 2–3 measurable results
+
+**Avoid**
+
+- Before / after of a redesign: use CaseStudy
+- Just showing several pieces: use ProjectPair
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 24 characters
+- title ≤ 8 chars, sub ≤ 12 chars
+- meta 2–4 rows: label ≤ 5 chars, value ≤ 20 chars
+- stats 2–3: value ≤ 4 characters, unit ≤ 2 characters, label ≤ 8 chars
+- link ≤ 10 chars
+- frames 3–5
+
+**Interaction**: Click: ticks or a peeking frame slide the rail; hover zooms the centred picture
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Mono case line |
+| `title` | `string` | yes | Project name |
+| `sub` | `string` |  | Grey subtitle |
+| `meta` | `{ label, value }[]` | yes | Fact table |
+| `stats` | `{ value, unit?, label }[]` |  | Results |
+| `link` | `string` |  | Underlined link along the foot |
+| `frames` | `{ image, tag?, caption? }[]` | yes | Work rail |
+| `focus` | `number` |  | Frame in view at the start, default 1 |
+| `source` | `string` |  | Source or illustrative note |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<FolioCase kicker="CASE 02 / 04 · 2026" title="琥珀" sub="一块会发光的路由器" meta={[{ label: '客户', value: '远山网络' }, { label: '周期', value: '14 周' }]} stats={[{ value: '3', unit: '×', label: '配网成功率提升' }]} frames={[{ image: a }, { image: b, tag: '02', caption: '琥珀' }, { image: c }]} focus={1} />
+```
+
+<a id="folio-steps"></a>
+
+## 278 · Folio steps `<FolioSteps />`
+
+**Position**: Method · step accordion; **Reference slide**: `src/decks/sig-folio` — `steps`
+
+A numbered list of steps on the left that opens one at a time like an accordion: the open step's number turns the accent colour and its plus turns into a cross. The rail on the right slides to that step's picture, captioned with the step name.
+
+**Use when**
+
+- How you work, a design method or project phases
+- Each step has a process picture to show
+
+**Avoid**
+
+- Steps without pictures: use ProcessQuote or Steps
+- More than 5 steps: use Timeline
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 20 characters
+- title ≤ 8 chars, sub ≤ 10 chars
+- steps 3–5: name ≤ 6 chars, time ≤ 6 chars, body ≤ 36 chars, caption ≤ 14 chars
+
+**Interaction**: Click: opens a step and slides the rail to its picture
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Mono line |
+| `title` | `string` | yes | Title |
+| `sub` | `string` |  | Grey subtitle |
+| `steps` | `{ name, time?, body, image, caption? }[]` | yes | One picture per step |
+| `open` | `number` |  | Step open at the start |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<FolioSteps kicker="PROCESS · 6–14 周" title="四步做完" steps={[{ name: '现场观察', time: '第 1 周', body: '…', image: a }, { name: '草图打样', time: '第 2–4 周', body: '…', image: b }, …]} />
+```
+
+<a id="folio-words"></a>
+
+## 279 · Folio words `<FolioWords />`
+
+**Position**: Evidence · client quotes; **Reference slide**: `src/decks/sig-folio` — `words`
+
+One client quote at a time in large type on the left; under a hairline sit the avatar, name and role, and one result figure in the accent colour. Two round arrows bottom left flip the quote, and the rail on the right slides to the project that quote is about.
+
+**Use when**
+
+- 2–4 client quotes in a portfolio or service pitch
+- Each quote maps to a specific project
+
+**Avoid**
+
+- Many quotes on one slide: use ProofMosaic
+- Only one quote: use Quote
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 20 characters
+- words 2–4: text ≤ 56 chars, name ≤ 6 chars, role ≤ 16 chars, metric.value ≤ 5 characters, metric.label ≤ 8 chars, caption ≤ 14 chars
+
+**Interaction**: Click: arrows flip the quote with a fade and slide the rail in step
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Mono line |
+| `words` | `{ text, name, role, avatar?, metric?, image, caption? }[]` | yes | Each quote with a project picture |
+| `source` | `string` |  | Source or illustrative note |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<FolioWords kicker="客户怎么说" words={[{ text: '…', name: '许棠', role: '产品负责人 · 远山网络', metric: { value: '3×', label: '配网成功率' }, image: a }, …]} />
+```
+
+<a id="folio-offers"></a>
+
+## 280 · Folio offers `<FolioOffers />`
+
+**Position**: Pricing · ways to work together; **Reference slide**: `src/decks/sig-folio` — `offers`
+
+Two to four ways to work together as a priced list on the left; clicking a row raises an accent bar beside it and colours its number. The rail on the right rests on an empty dashed slot reading "your project here", which takes the picked offer and price; the dashes drift slowly.
+
+**Use when**
+
+- Services and prices for a freelancer or small studio
+- You want an empty spot to invite the next project
+
+**Avoid**
+
+- Subscription plans compared line by line: use PricingTiers
+- A single price: use BookingClose
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 20 characters
+- title ≤ 8 chars, sub ≤ 10 chars
+- offers 2–4: name ≤ 6 chars, note ≤ 22 chars, price ≤ 6 characters, unit ≤ 3 chars
+- slot.title ≤ 8 chars, note ≤ 18 chars, cta ≤ 8 chars, label ≤ 18 characters
+- frames 1–2
+- foot ≤ 24 chars
+
+**Interaction**: Click: picks an offer and writes it into the slot; the dashed border drifts
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Mono line |
+| `title` | `string` | yes | Title |
+| `sub` | `string` |  | Grey subtitle |
+| `offers` | `{ name, note, price, unit? }[]` | yes | Ways to work together |
+| `picked` | `number` |  | Offer picked at the start |
+| `slot` | `{ title, note?, cta, label? }` | yes | Dashed open slot |
+| `frames` | `{ image }[]` | yes | Work peeking above the slot |
+| `foot` | `string` |  | Small line along the foot |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<FolioOffers kicker="SERVICES · 2026" title="三种合作方式" offers={[{ name: '设计冲刺', note: '…', price: '¥28k' }, { name: '长期合伙', note: '…', price: '¥36k', unit: '/ 月' }]} slot={{ title: '你的项目，放这里', cta: '一起做点什么' }} frames={[{ image: a }]} />
+```
+
+<a id="folio-contact"></a>
+
+## 281 · Folio contact `<FolioContact />`
+
+**Position**: Closing · FAQ and booking; **Reference slide**: `src/decks/sig-folio` — `contact`
+
+Three or four common questions on the left, each opening to its answer; in the middle of the rail sits a white booking card with avatar, name, a green "available" dot, a date and 3–6 time slots. Picking a time updates the accent button below.
+
+**Use when**
+
+- Last slide of a portfolio or service pitch
+- Answer doubts and book a call on the same slide
+
+**Avoid**
+
+- A full month calendar: use BookingClose
+- Just contact details: use Closing
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 20 characters
+- title ≤ 8 chars, sub ≤ 10 chars
+- faqs 3–4: q ≤ 16 chars, a ≤ 48 chars
+- card.name ≤ 8 chars, note ≤ 14 chars, status ≤ 8 chars, day ≤ 14 chars, slots 3–6 × ≤ 5 characters, cta ≤ 8 chars, mail ≤ 26 characters
+- frames 1–2
+- foot ≤ 24 chars
+
+**Interaction**: Click: opens a question; picking a slot updates the time on the button
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Mono line |
+| `title` | `string` | yes | Title |
+| `sub` | `string` |  | Grey subtitle |
+| `faqs` | `{ q, a }[]` | yes | Common questions |
+| `card` | `{ avatar, name, note?, status?, day?, slots, cta, mail? }` | yes | Booking card |
+| `frames` | `{ image }[]` | yes | Work peeking around the card |
+| `foot` | `string` |  | Small line along the foot |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<FolioContact kicker="FAQ" title="开始之前" faqs={[{ q: '远程怎么合作？', a: '…' }, …]} card={{ avatar: me, name: '林屿', status: '可预约', slots: ['10:00', '14:00', '17:00'], cta: '预约' }} frames={[{ image: a }, { image: b }]} />
+```
+
+<a id="diptych-hero"></a>
+
+## 282 · Diptych hero `<DiptychHero />`
+
+**Position**: Opening · personal portfolio home; **Reference slide**: `src/decks/sig-diptych` — `hero`
+
+A full-height picture card on the left with a handwritten Latin signature in the corner; work cross-fades with a slow push-in, progress bars along the foot fill as each shot plays, and a round arrow skips ahead. On the right: a status pill with a green dot, a three-line bold title with a few words in grey, a lead, two buttons, and a row of client names drifting along the foot. Made for the diptych style; other styles work too.
+
+**Use when**
+
+- First slide of a solo designer, photographer or illustrator portfolio
+- The work is portrait-shaped and should be seen big from the start
+
+**Avoid**
+
+- Landscape work or UI screenshots: use FolioHero or AtelierHero
+- No work images: use Cover
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- status ≤ 10 chars
+- title 2–3 lines × ≤ 7 chars; soft ≤ 4 chars and inside title
+- lead ≤ 40 chars
+- ctas ≤ 8 chars each
+- clients 4–8 × ≤ 10 characters
+- shots 2–5 portrait images: title ≤ 8 chars, meta ≤ 14 chars
+- signature ≤ 12 Latin characters
+
+**Interaction**: The left card autoplays with filling progress bars; the arrow or bars switch by hand; client names drift and pause on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `status` | `string` | yes | Status pill with a green dot |
+| `title` | `string[]` | yes | Big title, one item per line |
+| `soft` | `string` |  | Words in the title set in grey |
+| `lead` | `string` |  | Lead |
+| `ctas` | `[string, string?]` |  | Black main button and a plain button |
+| `clients` | `string[]` |  | Client names drifting along the foot |
+| `shots` | `{ image, title?, meta? }[]` | yes | Work cycling on the left card |
+| `signature` | `string` |  | Latin signature in the card corner |
+| `autoplay` | `number` |  | Milliseconds per shot, 0 turns it off, default 5200 |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DiptychHero status="接受预约中" title={['我设计并搭建', '让人心动', '的产品']} soft="心动" ctas={['约个时间聊聊', '看看项目']} signature="Baiyi" shots={[{ image: a, title: '焰', meta: '视觉设计 · 2026' }, { image: b }]} />
+```
+
+<a id="diptych-works"></a>
+
+## 283 · Diptych works `<DiptychWorks />`
+
+**Position**: Evidence · selected work; **Reference slide**: `src/decks/sig-diptych` — `works`
+
+On the right a grey kicker, a two-line title and a numbered list of project names; the current row turns black and grows an accent arrow. Hovering a row fades the big left card to that project's picture, captioned with its name, kind and year.
+
+**Use when**
+
+- 3–6 projects, each with one strong picture
+- Let people pick what to look at
+
+**Avoid**
+
+- Only two projects: use ProjectPair
+- A project needs detail: use FolioCase
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 16 chars
+- title 1–2 lines × ≤ 8 chars
+- works 3–6: name ≤ 6 chars, kind ≤ 6 chars, year ≤ 6 characters
+
+**Interaction**: Hover or click a project: the left card cross-fades to it and the arrow slides in
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Grey kicker |
+| `title` | `string[]` | yes | Title |
+| `soft` | `string` |  | Words in the title set in grey |
+| `works` | `{ name, kind, year?, image }[]` | yes | Projects |
+| `active` | `number` |  | Project lit at the start |
+| `signature` | `string` |  | Card signature |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DiptychWorks kicker="精选项目 · 2023—2026" title={['做得不多，', '每一个都做透。']} soft="每一个都做透。" works={[{ name: '焰', kind: '视觉设计', year: '2026', image: a }, …]} />
+```
+
+<a id="diptych-services"></a>
+
+## 284 · Diptych services `<DiptychServices />`
+
+**Position**: Services · tabbed; **Reference slide**: `src/decks/sig-diptych` — `services`
+
+Under the title a row of pill tabs (brand / website / product); picking one swaps in that service's line, a two-column list of deliverables and two big figures for timeline and budget, while the left card changes to its picture.
+
+**Use when**
+
+- 2–4 services with deliverables and rough prices
+- You don't want every service crammed onto one slide
+
+**Avoid**
+
+- Prices side by side: use PricingTiers
+- The service is a process: use FolioSteps
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 1–2 lines × ≤ 8 chars
+- services 2–4: name ≤ 4 chars, body ≤ 40 chars, items 3–5 × ≤ 10 chars, time and price ≤ 8 chars each
+- labels ≤ 4 chars each
+
+**Interaction**: Click a tab: the content fades over and the left card cross-fades in step
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Grey kicker |
+| `title` | `string[]` | yes | Title |
+| `soft` | `string` |  | Words in the title set in grey |
+| `services` | `{ name, body, items, time?, price?, image }[]` | yes | Services |
+| `labels` | `[string, string]` |  | Small labels for timeline and budget |
+| `signature` | `string` |  | Card signature |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DiptychServices kicker="我能帮你做" title={['三件事，', '从头到尾一个人。']} services={[{ name: '品牌', body: '…', items: ['标志与字标', '视觉规范'], time: '4–6 周', price: '¥60k 起', image: a }, …]} />
+```
+
+<a id="diptych-words"></a>
+
+## 285 · Diptych words `<DiptychWords />`
+
+**Position**: Evidence · client quotes; **Reference slide**: `src/decks/sig-diptych` — `words`
+
+A row of small numbered pills on the right and one large client quote with its name at a time; clicking a number flips the quote and the left card to the project it is about. Two or three big figures sit under a hairline at the foot.
+
+**Use when**
+
+- 2–4 quotes, each tied to a piece of work
+- Quotes and figures on the same slide
+
+**Avoid**
+
+- Quotes without matching work: use Quote
+- Many quotes: use ProofMosaic
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 16 chars
+- words 2–4: text ≤ 50 chars, name ≤ 6 chars, role ≤ 16 chars, project ≤ 8 chars
+- stats 2–3: value ≤ 5 characters, label ≤ 8 chars
+
+**Interaction**: Click a number: the quote fades over and the left card cross-fades in step
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Grey kicker |
+| `words` | `{ text, name, role, image, project? }[]` | yes | Quotes, each with a work picture |
+| `stats` | `{ value, label }[]` |  | Figures at the foot |
+| `signature` | `string` |  | Card signature |
+| `source` | `string` |  | Source or illustrative note |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DiptychWords kicker="合作过的人说" words={[{ text: '…', name: '许岚', role: '主理人 · 素瓶', image: a, project: '素瓶' }, …]} stats={[{ value: '40+', label: '完成的项目' }]} />
+```
+
+<a id="diptych-about"></a>
+
+## 286 · Diptych about `<DiptychAbout />`
+
+**Position**: About · career; **Reference slide**: `src/decks/sig-diptych` — `about`
+
+A half-length portrait on the left; on the right a two-line title, a list of roles (title, note, years), a big underlined email that copies on click and flashes "copied", and two buttons.
+
+**Use when**
+
+- Self-introduction in a portfolio
+- Career and contact on the same slide
+
+**Avoid**
+
+- A team: use TeamBanner
+- More than 4 roles: use Timeline
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 1–2 lines × ≤ 8 chars
+- roles 2–4: role ≤ 14 chars, note ≤ 14 chars, years ≤ 11 characters
+- mail ≤ 22 characters; copied ≤ 6 chars
+- ctas ≤ 8 chars each
+- shots 1–3
+
+**Interaction**: Click the email: copies it and shows a note; role rows nudge on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Grey kicker |
+| `title` | `string[]` | yes | Title |
+| `soft` | `string` |  | Words in the title set in grey |
+| `roles` | `{ role, note?, years }[]` | yes | Roles, newest first |
+| `mail` | `string` |  | Big email, copies on click |
+| `copied` | `string` |  | Note after copying |
+| `ctas` | `[string, string?]` |  | Buttons |
+| `shots` | `{ image, title?, meta? }[]` | yes | Left card, a portrait |
+| `signature` | `string` |  | Card signature |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DiptychAbout kicker="关于我" title={['九年，从印刷品', '做到屏幕里。']} roles={[{ role: '独立设计师', note: '品牌、网站与产品', years: '2022 — 至今' }, …]} mail="hi@baiyi.example" shots={[{ image: me }]} />
+```
+
+<a id="diptych-contact"></a>
+
+## 287 · Diptych brief `<DiptychContact />`
+
+**Position**: Closing · pick-to-contact; **Reference slide**: `src/decks/sig-diptych` — `contact`
+
+Under a two-line title on the right, two or three rows of pill options (what, budget, when) that turn black when picked; a small accent badge on the big black button counts the picks and pops when it changes. The left card shows work.
+
+**Use when**
+
+- Last slide of a portfolio or service pitch
+- Let people state their need in seconds
+
+**Avoid**
+
+- Booking a time: use FolioContact or BookingClose
+- Just contact details: use Closing
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 1–2 lines × ≤ 8 chars
+- groups 2–3: label ≤ 10 chars, options 2–5 × ≤ 6 chars
+- cta ≤ 6 chars; note ≤ 24 chars
+- shots 1–3
+
+**Interaction**: Click pills to pick; the count on the button pops as it updates
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Grey kicker |
+| `title` | `string[]` | yes | Title |
+| `soft` | `string` |  | Words in the title set in grey |
+| `groups` | `{ label, options, multi? }[]` | yes | Option groups; multi allows several |
+| `cta` | `string` | yes | Send button |
+| `note` | `string` |  | Small line by the button |
+| `shots` | `{ image, title?, meta? }[]` | yes | Left card |
+| `signature` | `string` |  | Card signature |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DiptychContact kicker="开始一个项目" title={['先告诉我', '你想做什么。']} groups={[{ label: '想做什么', options: ['品牌', '官网', 'App'], multi: true }, { label: '预算', options: ['5 万以内', '5–15 万'] }]} cta="发给我" shots={[{ image: a }]} />
+```
+
+<a id="marker-intro"></a>
+
+## 288 · Marker intro `<MarkerIntro />`
+
+**Position**: Opening · a one-sentence intro; **Reference slide**: `src/decks/sig-marker` — `intro`
+
+A centred column on white: a small double-diamond mark and one large sentence of introduction whose ==…== phrases get yellow, green and purple highlighter strokes sweeping in one after another; a grey second sentence below and a row of mono links at the foot. The page foot carries a sign-off on the left and a city with a ticking clock on the right.
+
+**Use when**
+
+- First slide of a personal site, designer or writer
+- Introduce yourself with a sentence rather than a title
+
+**Avoid**
+
+- You want work pictures: use FolioHero or DiptychHero
+- Product selling points: use Statement
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- say ≤ 2 lines × 14 chars, 1–3 marks
+- aside ≤ 2 lines × 12 chars
+- links 2–4 × ≤ 6 chars
+- corners.left ≤ 20 chars, city ≤ 6 chars
+
+**Interaction**: Highlighter strokes sweep in one by one; marked words tilt on hover; the corner clock ticks every second
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `say` | `string` | yes | Main sentence, ==words== to mark, \n for a break |
+| `aside` | `string` |  | Grey second sentence, same syntax |
+| `links` | `string[]` |  | Mono links at the foot |
+| `corners` | `{ left?, city?, zone? }` |  | Foot sign-off and clock; zone is an IANA time zone |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<MarkerIntro say={'我是 周拾，一个做 ==安静的界面==\n和 ==小工具== 的设计师。'} aside="说个秘密？我收集 ==没用过的速写本==。" links={['精选作品', '现在']} corners={{ left: '回头见', city: '杭州', zone: 'Asia/Shanghai' }} />
+```
+
+<a id="marker-works"></a>
+
+## 289 · Marker works `<MarkerWorks />`
+
+**Position**: Evidence · selected work; **Reference slide**: `src/decks/sig-marker` — `works`
+
+Three soft grey rounded cards side by side, each with the name and number on top, a portrait picture held by four bracket corners with a soft shadow, and the year at the foot. On hover the corners open out and the picture lifts; with more than three pieces, arrows bottom left page through in threes.
+
+**Use when**
+
+- 3–9 small, well-made pieces: products, objects, apps
+- Clean product photos
+
+**Avoid**
+
+- Landscape screenshots: use ProjectPair
+- One piece in depth: use FolioCase
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 10 chars
+- works 3–9, three per page: name ≤ 6 chars, no ≤ 4 characters, year ≤ 10 characters
+
+**Interaction**: Hover: the corners open and the picture lifts; arrows page in threes
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Mono label |
+| `works` | `{ name, no?, year?, image }[]` | yes | Pieces |
+| `corners` | `{ left?, city?, zone? }` |  | Foot sign-off and clock |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<MarkerWorks kicker="精选作品" works={[{ name: '港口笔记', no: '001', year: '2024', image: a }, …]} />
+```
+
+<a id="marker-skills"></a>
+
+## 290 · Marker skills `<MarkerSkills />`
+
+**Position**: Capabilities · what I do and what's now; **Reference slide**: `src/decks/sig-marker` — `skills`
+
+Three soft grey cards across the top, each with a line-drawn isometric icon (screen, blocks, letter, stack, bars or pen) whose layers lift apart on hover; below, a "now" box in bracket corners with one sentence about what you are on, phrases marked by highlighter.
+
+**Use when**
+
+- The three kinds of work you do
+- Add a note on what you are up to lately
+
+**Avoid**
+
+- Services with prices: use FolioOffers
+- More than three: use IconGrid
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 10 chars
+- skills exactly 3: name ≤ 5 chars, no ≤ 4 characters, note ≤ 8 chars, icon one of six
+- nowLabel ≤ 6 chars, updated ≤ 14 chars
+- now ≤ 2 lines × 22 chars
+
+**Interaction**: Hover: icon layers lift and the corners open
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Mono label |
+| `skills` | `{ name, no?, note?, icon }[]` | yes | icon: screen / blocks / type / stack / chart / pen |
+| `nowLabel` | `string` |  | "Now" label |
+| `updated` | `string` |  | Updated line on the right |
+| `now` | `string` | yes | Now sentence, ==words== to mark |
+| `corners` | `{ city?, zone? }` |  | Foot clock |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<MarkerSkills kicker="我做什么" skills={[{ name: '界面', no: '001', note: '产品界面', icon: 'screen' }, { name: '小工具', icon: 'blocks' }, { name: '字体', icon: 'type' }]} now="此刻我在做 ==一个很小的排版工具==。" />
+```
+
+<a id="marker-log"></a>
+
+## 291 · Marker log `<MarkerLog />`
+
+**Position**: Content · notes and posts; **Reference slide**: `src/decks/sig-marker` — `log`
+
+A column of short dated entries, each title with one highlighter-marked phrase, a small tag and a slanted arrow on the right; clicking a row turns the arrow to the accent colour and unfolds a one-line summary.
+
+**Use when**
+
+- Notes, changelogs, reading notes
+- Show what you have been thinking about
+
+**Avoid**
+
+- Release notes by category: use Changelog
+- More than 6 entries: split across slides
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 8 chars, meta ≤ 14 chars
+- entries 3–6: date ≤ 6 characters, title ≤ 20 chars, tag ≤ 4 chars, body ≤ 50 chars
+
+**Interaction**: Click a row to unfold its summary as the arrow turns; rows nudge on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Mono label |
+| `meta` | `string` |  | Mono line on the right |
+| `entries` | `{ date, title, tag?, body? }[]` | yes | Entries, newest first |
+| `open` | `number` |  | Entry open at the start, -1 for none |
+| `corners` | `{ left?, city?, zone? }` |  | Foot sign-off and clock |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<MarkerLog kicker="随笔" entries={[{ date: '09.18', title: '为什么我只用 ==两种字重==', tag: '排版', body: '…' }, …]} />
+```
+
+<a id="marker-facts"></a>
+
+## 292 · Marker facts `<MarkerFacts />`
+
+**Position**: Data · a sentence and figures; **Reference slide**: `src/decks/sig-marker` — `facts`
+
+One large sentence with highlighter marks on top and 3–4 soft grey boxes in bracket corners below, their big figures counting up from zero when the slide opens, with grey units and labels.
+
+**Use when**
+
+- A few running totals for a person or small team
+- Figures that need one sentence of context
+
+**Avoid**
+
+- Comparison or trend: use BarChart or StatRow
+- A single figure: use BigNumber
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- say ≤ 2 lines × 18 chars
+- facts 3–4: value a whole number, unit ≤ 3 characters, label ≤ 10 chars
+- note ≤ 24 chars
+
+**Interaction**: Figures count up from zero; box corners open on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `say` | `string` | yes | Sentence on top, ==words== to mark |
+| `facts` | `{ value, unit?, label }[]` | yes | Figures that count up |
+| `note` | `string` |  | Mono line below |
+| `corners` | `{ left?, city?, zone? }` |  | Foot sign-off and clock |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<MarkerFacts say="八年里，我画过 ==很多界面==。" facts={[{ value: 42, label: '上线的界面' }, { value: 1280, unit: '+', label: '画满的速写页' }]} />
+```
+
+<a id="marker-close"></a>
+
+## 293 · Marker close `<MarkerClose />`
+
+**Position**: Closing · contact; **Reference slide**: `src/decks/sig-marker` — `close`
+
+The double-diamond mark, one closing sentence with highlighter marks, a large mono email whose accent underline draws across on hover and which copies on click with a "copied" chip, and a row of mono social links.
+
+**Use when**
+
+- Last slide of a personal site or portfolio
+- You only want to leave one way to reach you
+
+**Avoid**
+
+- Booking a time: use FolioContact
+- Collecting a brief: use DiptychContact
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- say ≤ 2 lines × 12 chars
+- mail ≤ 24 characters; copied ≤ 6 chars
+- links 2–4 × ≤ 10 characters
+
+**Interaction**: Hovering the email draws an underline; clicking copies it with a note
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `say` | `string` | yes | Closing sentence, ==words== to mark |
+| `mail` | `string` | yes | Email that copies on click |
+| `copied` | `string` |  | Note after copying |
+| `links` | `string[]` |  | Mono social links |
+| `corners` | `{ left?, city?, zone? }` |  | Foot sign-off and clock |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<MarkerClose say={'有个 ==安静的想法==？\n写信给我。'} mail="hi@zhoushi.example" links={['即刻', 'GitHub']} />
+```
+
+<a id="album-hero"></a>
+
+## 294 · Album hero `<AlbumHero />`
+
+**Position**: Opening · warm consumer product home; **Reference slide**: `src/decks/sig-album` — `hero`
+
+A warm sunrise glow at the top: a small pill, a handwritten-feel serif line, a two-line bold title whose last word turns into italic serif with an orange-to-rose-to-violet gradient, a lead and one button. Along the foot 5–9 instant prints fan out on a wide arc, dealt in one by one; the one you point at slides up, and a few small chips float nearby.
+
+**Use when**
+
+- First slide of a photo album, journal, family or lifestyle product
+- A warm, private, hand-made opening
+
+**Avoid**
+
+- B2B or data products: use SunriseHero
+- Fewer than 5 photos: use AtelierHero
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- badge ≤ 8 chars; hand ≤ 18 chars
+- title 2 lines × ≤ 9 chars; grad ≤ 4 chars at the end of the last line
+- lead ≤ 40 chars; cta ≤ 6 chars
+- prints 5–9: caption ≤ 8 chars
+- chips ≤ 3 × ≤ 10 chars
+
+**Interaction**: Prints are dealt in one by one; hover pulls one up; chips bob and the glow breathes
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `badge` | `string` |  | Small pill on top |
+| `hand` | `string` |  | Handwritten-feel line above the title |
+| `title` | `string[]` | yes | Two-line title |
+| `grad` | `string` |  | Word at the end of the last line in gradient italic |
+| `lead` | `string` |  | Lead |
+| `cta` | `string` |  | Button |
+| `prints` | `{ image, caption? }[]` | yes | Fanned instant prints |
+| `chips` | `string[]` |  | Floating chips |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<AlbumHero badge="私密内测中" hand="给那些拍了，却从没洗出来的照片" title={['有些时刻，值得', '被好好记住。']} grad="记住。" cta="开始记录" prints={[{ image: a, caption: '午后的窗' }, …]} chips={['✦ 本周 +42 张']} />
+```
+
+<a id="album-layout"></a>
+
+## 295 · Album layout `<AlbumLayout />`
+
+**Position**: Method · three-step demo; **Reference slide**: `src/decks/sig-album` — `layout`
+
+A title with one word in gradient italic and three steps on the left; on the right a tilted white tabletop with five photos and a round toolbar. Picking a step rearranges the table: the photos pile up, then spread out at different sizes, then settle into a neat page with the picked one outlined in dashes.
+
+**Use when**
+
+- Show an organise / lay out / edit process
+- The product is about arranging by hand
+
+**Avoid**
+
+- More than 3 steps: use FolioSteps or Steps
+- Real UI screenshots: use DeviceFrame
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 2 lines × ≤ 9 chars; em ≤ 4 chars inside the first line
+- steps exactly 3: name ≤ 10 chars, note ≤ 26 chars
+- photos exactly 5; loose 0–2
+
+**Interaction**: Click a step: the five photos spring to new positions, sizes and angles; hovering the table eases its tilt
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `title` | `string[]` | yes | Two-line title |
+| `em` | `string` |  | Word in the first line set in gradient italic |
+| `steps` | `{ name, note }[]` | yes | Three steps, each with its own arrangement |
+| `photos` | `PhotoImage[]` | yes | Five photos on the table |
+| `loose` | `PhotoImage[]` |  | Photos floating beside the table |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<AlbumLayout title={['亲手排一排，', '才像自己的相册。']} em="排一排" steps={[{ name: '放进一卷', note: '…' }, { name: '决定大小', note: '…' }, { name: '摆好', note: '…' }]} photos={[a, b, c, d, e]} />
+```
+
+<a id="album-week"></a>
+
+## 296 · Album week `<AlbumWeek />`
+
+**Position**: Content · a week in pictures; **Reference slide**: `src/decks/sig-album` — `week`
+
+A slightly sagging string runs across the slide with 5–7 instant prints pegged on it, swinging gently as the slide opens. Click one and it grows and drops while the others fade, and the date, a line and the place write in below in italic serif.
+
+**Use when**
+
+- A day-by-day look back at a week, a trip or a project
+- One picture and one line per day
+
+**Avoid**
+
+- More than 7 days: use Timeline
+- Pictures should be big: use DiptychWorks
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 12 chars; title 1 line ≤ 12 chars
+- days 5–7: day ≤ 3 chars, date ≤ 8 chars, caption ≤ 6 chars, note ≤ 40 chars, place ≤ 10 chars
+
+**Interaction**: Prints swing and settle on the string; click to lift a day and fade its text in below
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` |  | Small label |
+| `title` | `string` | yes | Title |
+| `days` | `{ day, date, image, caption?, note?, place? }[]` | yes | One picture per day |
+| `picked` | `number` |  | Day picked at the start |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<AlbumWeek kicker="第 24 周" title="这一周，一天一张" days={[{ day: '周一', date: '6 月 10 日', image: a, caption: '早班车', note: '…', place: '老城区' }, …]} />
+```
+
+<a id="album-stories"></a>
+
+## 297 · Album stories `<AlbumStories />`
+
+**Position**: Evidence · user stories; **Reference slide**: `src/decks/sig-album` — `stories`
+
+Three large instant prints set at slight angles that straighten on hover; clicking one flips it over in 3D to a lined-paper back where the person's words and name are written in serif.
+
+**Use when**
+
+- User stories or reviews for a consumer product
+- Let people turn them over rather than show everything at once
+
+**Avoid**
+
+- Quotes with figures: use DiptychWords
+- More than 3: use ProofMosaic
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- kicker ≤ 8 chars; title 1 line ≤ 14 chars
+- stories exactly 3: caption ≤ 8 chars, note ≤ 44 chars, name ≤ 6 chars, meta ≤ 10 chars
+
+**Interaction**: Click a print to flip it in 3D; hover straightens and lifts it
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` |  | Small label |
+| `title` | `string` | yes | Title |
+| `stories` | `{ image, caption, note, name, meta? }[]` | yes | Three prints with words on the back |
+| `source` | `string` |  | Source or illustrative note |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<AlbumStories title="照片背后，写着一句话" stories={[{ image: a, caption: '外婆的厨房', note: '…', name: '小满', meta: '用了 2 年' }, …]} />
+```
+
+<a id="album-plus"></a>
+
+## 298 · Album plus `<AlbumPlus />`
+
+**Position**: Pricing · single membership; **Reference slide**: `src/decks/sig-album` — `plus`
+
+One large white card in the middle: the plan name with a gradient star, a short note, a 2 × 2 grid of four features with tinted rounded icons that tilt on hover, and a row with a monthly / yearly switch, a big italic serif price and a button; switching rolls the price up from below. Instant prints float around the card.
+
+**Use when**
+
+- A single paid membership
+- Subscription page for a consumer product
+
+**Avoid**
+
+- Several plans: use PricingTiers
+- One-time purchase: use BuyoutPricing
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- name ≤ 10 characters; lead ≤ 46 chars
+- feats exactly 4: icon one character, title ≤ 7 chars, note ≤ 24 chars
+- prices two × ≤ 6 characters; cta ≤ 8 chars
+- around 2–4
+
+**Interaction**: Click to switch monthly / yearly and roll the price; prints float gently
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `name` | `string` | yes | Plan name |
+| `lead` | `string` |  | Note |
+| `feats` | `{ icon, title, note }[]` | yes | Four features |
+| `prices` | `[string, string]` | yes | Monthly and yearly price |
+| `periods` | `{ month, year, perMonth, perYear, save? }` |  | Text for the switch and units, Chinese by default |
+| `cta` | `string` | yes | Button |
+| `around` | `PhotoImage[]` |  | Photos floating around |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<AlbumPlus name="拾光 Plus" feats={[{ icon: '☁', title: '原图不限量', note: '…' }, …]} prices={['¥18', '¥168']} cta="加入 Plus" around={[a, b, c, d]} />
+```
+
+<a id="album-close"></a>
+
+## 299 · Album close `<AlbumClose />`
+
+**Position**: Closing · call to action and a pile of prints; **Reference slide**: `src/decks/sig-album` — `close`
+
+A handwritten-feel line, a two-line title with the last word in gradient italic, a lead, buttons and a small note on the left; on the right a pile of instant prints where each click sends the top one flying out and back underneath, revealing the next, with a counter in the corner.
+
+**Use when**
+
+- Last slide of a consumer product pitch
+- Leave one small thing to play with
+
+**Avoid**
+
+- Leave contact details: use MarkerClose
+- Collect a brief: use DiptychContact
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- hand ≤ 16 chars
+- title 2 lines × ≤ 8 chars; grad ≤ 4 chars
+- lead ≤ 40 chars; ctas ≤ 8 chars each; note ≤ 24 chars
+- prints 3–8
+
+**Interaction**: Click the pile: the top print flies out and tucks underneath, the counter updates; hovering straightens the prints
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `hand` | `string` |  | Handwritten-feel line |
+| `title` | `string[]` | yes | Two-line title |
+| `grad` | `string` |  | Word at the end of the last line in gradient italic |
+| `lead` | `string` |  | Lead |
+| `ctas` | `[string, string?]` |  | Button and a text link |
+| `note` | `string` |  | Small line under the buttons |
+| `prints` | `{ image, caption? }[]` | yes | Pile of prints |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<AlbumClose title={['把这一周，', '留给以后的你。']} grad="以后的你。" ctas={['开始记录', '先看看示例']} prints={[{ image: a, caption: '洗出来了' }, …]} />
+```
+
+<a id="slate-hero"></a>
+
+## 300 · Slate hero `<SlateHero />`
+
+**Position**: Opening · SaaS product home; **Reference slide**: `src/decks/sig-slate` — `hero`
+
+On the left a version pill, a two-line headline with a small tilted gradient icon tile set into it, a lead, a button with a text link and a row of customer wordmarks. On the right a dashboard tilts inward in 3D: tabs, a greeting, three KPI cards and a bar chart. Click a KPI card and it lights up in the accent gradient while the chart redraws its trend; hovering the dashboard slowly turns it face-on.
+
+**Use when**
+
+- First slide of a SaaS, data product or productivity tool
+- You want it obvious at a glance that the product has a dashboard
+
+**Avoid**
+
+- No numbers to show: use SunriseHero
+- Consumer or lifestyle products: use AlbumHero
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- chip tag ≤ 6 chars, line ≤ 12 chars
+- title 2 lines × ≤ 8 chars; may hold {bolt} {up} {spark} {chart} {link} {shield} {clock} {check}
+- lead ≤ 50 chars; ctas ≤ 8 chars each; logos 3–5 × ≤ 10 chars
+- dash.tabs 3–5 × ≤ 4 chars; hello ≤ 12 chars; note ≤ 24 chars
+- dash.kpis exactly 3: value ≤ 8 chars, series 8–14 numbers
+- float ≤ 8 chars
+
+**Interaction**: The dashboard turns in from a distance; clicking a KPI card redraws the chart; hovering turns the dashboard face-on; icon tiles bounce on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `chip` | `[string, string]` |  | Version tag and the line after it |
+| `title` | `string[]` | yes | Two headline lines; may hold icon tiles |
+| `lead` | `string` |  | Lead paragraph |
+| `ctas` | `[string, string?]` |  | Button and text link |
+| `logos` | `string[]` |  | Customer wordmarks |
+| `dash` | `{ tabs, hello, note?, kpis, chart? }` | yes | The tilted dashboard |
+| `float` | `string` |  | Small chip floating by the dashboard |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<SlateHero chip={['2.0 版', '更聪明，也更快']} title={['用 {bolt} 数衡', '理顺你的工作流']} ctas={['免费试用', '看演示 →']} dash={{ tabs: ['总览', '收入'], hello: '早上好', kpis: [{ label: '本月收入', value: '¥156.6万', delta: '+12%', series: [42, 50, …] }, …] }} />
+```
+
+<a id="slate-steps"></a>
+
+## 301 · Slate steps `<SlateSteps />`
+
+**Position**: Method · three steps to start; **Reference slide**: `src/decks/sig-slate` — `steps`
+
+A centred dot label, a two-line title and a subtitle; below, three white cards side by side. Each has a small animated picture on top (linked nodes, bars, a half gauge, a donut, horizontal rows or a sound wave) and an accent tag, step name and one-line note below. Cards lift on hover.
+
+**Use when**
+
+- Explaining how to get started or how the product works
+- Each of three steps can carry a simple picture
+
+**Avoid**
+
+- More than 3 steps: use a timeline template
+- Each step needs a long explanation: use FolioSteps
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 2 lines × ≤ 12 chars; lead ≤ 24 chars
+- steps exactly 3: tag ≤ 6 chars, title ≤ 10 chars, body ≤ 34 chars
+- vis is bars / gauge / wave / donut / rows / nodes; gauge and donut need value 0–100
+
+**Interaction**: Pictures grow and sweep in turn; cards lift on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | Dot label on top |
+| `title` | `string[]` | yes | Title |
+| `lead` | `string` |  | Subtitle |
+| `steps` | `{ tag, title, body, vis, value? }[]` | yes | The three steps |
+| `source` | `string` |  | Footnote |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<SlateSteps title={['接入、整理、行动，', '一个下午就能跑起来']} steps={[{ tag: '步骤 1', title: '连上现有工具', body: '…', vis: 'nodes' }, …]} />
+```
+
+<a id="slate-compare"></a>
+
+## 302 · Slate comparison table `<SlateCompare />`
+
+**Position**: Comparison · us versus the alternative; **Reference slide**: `src/decks/sig-slate` — `compare`
+
+Title, lead, button and three small stat cards on the left; on the right a white comparison table whose 'us' column is lit as a whole by one accent gradient bar, ticks in white circles and crosses in dark ones. A switch at the top right collapses the rows where both sides agree, leaving only the differences.
+
+**Use when**
+
+- Comparing item by item with the old way or a competitor
+- Making the difference visible at a glance
+
+**Avoid**
+
+- More than 2 things to compare: use a multi-column comparison template
+- The items are numbers rather than yes/no: use SlateTrend or a data template
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 2 lines × ≤ 10 chars; lead ≤ 50 chars; cta ≤ 6 chars
+- stats ≤ 3: value ≤ 5 chars, label ≤ 8 chars
+- cols 2 × ≤ 5 chars
+- rows 4–8: label ≤ 10 chars, icon 1 char
+
+**Interaction**: The switch collapses identical rows; row labels turn accent on hover; stat cards lift on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | Dot label |
+| `title` | `string[]` | yes | Title |
+| `lead` | `string` |  | Lead paragraph |
+| `cta` | `string` |  | Button |
+| `stats` | `{ value, label }[]` |  | Small stat cards |
+| `cols` | `[string, string]` | yes | Column names for us and them |
+| `rows` | `{ icon?, label, ours, theirs }[]` | yes | Item-by-item comparison |
+| `diffLabel` | `string` |  | Switch label, default 'only differences' |
+| `source` | `string` |  | Data source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<SlateCompare title={['同样的预算，', '少开一半的会']} cols={['数衡', '传统报表']} rows={[{ label: '实时同步数据', ours: true, theirs: false }, …]} />
+```
+
+<a id="slate-trend"></a>
+
+## 303 · Slate trend `<SlateTrend />`
+
+**Position**: Trend · several metrics over time; **Reference slide**: `src/decks/sig-slate` — `trend`
+
+A title at the top left; a column of metric cards (name, current value, green change) on the left and, in a large white card on the right, an area line chart whose end is marked by a dot and a dark bubble with the current value. Click a metric card and it lights up in the accent gradient while the line redraws its trend.
+
+**Use when**
+
+- Looking back on a year or quarter of growth
+- 2–4 metrics you want to show in turn on one slide
+
+**Avoid**
+
+- Only one number: use a big-number template
+- Several lines must be compared at once: use a multi-series data chart
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 14 chars
+- series 2–4: label ≤ 8 chars, value ≤ 8 chars, delta ≤ 6 chars, points as long as xs
+- xs 6–14 × ≤ 4 chars
+- note ≤ 30 chars
+
+**Interaction**: The line draws from left to right; clicking a metric card switches the line; the end dot and bubble pop in
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | Dot label |
+| `title` | `string` | yes | Title |
+| `series` | `{ label, value, delta?, points }[]` | yes | Metrics and their points |
+| `xs` | `string[]` | yes | X-axis labels |
+| `note` | `string` |  | Footnote |
+| `source` | `string` |  | Data source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<SlateTrend title="每一条曲线都在往上走" series={[{ label: '月度经常性收入', value: '¥156.6万', delta: '+212%', points: [50, 56, …] }, …]} xs={['1月', …, '12月']} />
+```
+
+<a id="slate-pricing"></a>
+
+## 304 · Slate pricing `<SlatePricing />`
+
+**Position**: Pricing · per-seat plans; **Reference slide**: `src/decks/sig-slate` — `pricing`
+
+A title at the top with a team-size stepper (− / +) on the right; below, three plan cards side by side, the middle one lit as a whole in the accent gradient with a 'most popular' tag. Prices are recalculated from the seat count as you go; an enterprise plan can say 'contact us' instead.
+
+**Use when**
+
+- Per-seat SaaS pricing
+- Letting the audience feel how team size changes the price
+
+**Avoid**
+
+- A single plan: use AlbumPlus
+- Usage-based billing: explain the tiers with a data template
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 14 chars
+- plans exactly 3: name ≤ 4 chars, note ≤ 14 chars, items 3–5 × ≤ 12 chars, cta ≤ 6 chars
+- perSeat is the monthly price per person; without perSeat use custom (≤ 6 chars)
+- seats defaults to 10, step to 5
+
+**Interaction**: − / + change the seat count and prices update live; plan cards lift on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | Dot label |
+| `title` | `string` | yes | Title |
+| `plans` | `{ name, note, perSeat?, custom?, items, cta }[]` | yes | Three plans, the middle one recommended |
+| `seats` | `number` |  | Starting seat count |
+| `step` | `number` |  | Seats added or removed per click |
+| `labels` | `{ seats, month, currency, popular? }` |  | Interface text and currency |
+| `source` | `string` |  | Footnote |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<SlatePricing title="按人数付费，随时增减" plans={[{ name: '入门', note: '…', perSeat: 39, items: […], cta: '免费开始' }, …]} />
+```
+
+<a id="slate-connect"></a>
+
+## 305 · Slate integrations `<SlateConnect />`
+
+**Position**: Closing · integrations and call to action; **Reference slide**: `src/decks/sig-slate` — `connect`
+
+On the left a title (which may hold an icon tile), a lead, two buttons and a small line; on the right an integration map: a large icon tile in the middle and 6–8 tool icons around a dashed ring, with light pulses running along each spoke towards the centre. Hover a tool and it and its spoke light up.
+
+**Use when**
+
+- Showing which existing tools the product plugs into
+- The last slide of a SaaS demo, asking people to try it
+
+**Avoid**
+
+- Listing dozens of real integrations: use a checklist template
+- Explaining how to connect: use SlateSteps
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 2 lines × ≤ 10 chars; may hold icon tiles
+- lead ≤ 50 chars; ctas ≤ 8 chars each; note ≤ 30 chars
+- tools 6–8: name ≤ 4 chars, mark 1–3 chars
+- Use generic category names, not real brands
+
+**Interaction**: Light pulses run along the spokes; hovering a tool lights its spoke
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | Dot label |
+| `title` | `string[]` | yes | Title |
+| `lead` | `string` |  | Lead paragraph |
+| `ctas` | `[string, string?]` |  | Button and text link |
+| `note` | `string` |  | Small line under the buttons |
+| `hub` | `SlateIcon` |  | Centre icon, default link |
+| `tools` | `{ name, mark }[]` | yes | Tools around the ring |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<SlateConnect title={['你已经在用的工具，', '{link} 都能接上']} tools={[{ name: '表格', mark: '▦' }, …]} />
+```
+
+<a id="ember-hero"></a>
+
+## 306 · Ember hero `<EmberHero />`
+
+**Position**: Opening · AI product home; **Reference slide**: `src/decks/sig-ember` — `hero`
+
+A full-bleed dark, lit picture (for example a head silhouette traced by rim light) that drifts gently with the pointer; a 'new' pill at the top, a two-line serif headline in the middle and a translucent prompt box below. Example requests type themselves in letter by letter and erase again, the attach and web chips are switches you can press, the model name changes on click and the send button sends out a ring of light and moves to the next request.
+
+**Use when**
+
+- First slide of an AI agent, assistant or chat product
+- You want it obvious at a glance that the product is something you ask
+
+**Avoid**
+
+- No suitable dark hero picture: use NocturneHero
+- You need to show a data dashboard: use SlateHero
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- badge tag ≤ 2 chars, news ≤ 18 chars
+- title 2 lines × ≤ 9 chars
+- ask.placeholder ≤ 20 chars; prompts 2–5 × ≤ 26 chars
+- ask.chips ≤ 3 × ≤ 6 chars; ask.models ≤ 3 × ≤ 10 chars
+- image works best dark, lit from one side, subject centred
+
+**Interaction**: The background drifts with the pointer; the prompt box types by itself; chips toggle; the model switches; send moves to the next request
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `badge` | `[string, string]` |  | Top pill |
+| `title` | `string[]` | yes | Two serif headline lines |
+| `image` | `PhotoImage` | yes | Full-bleed background picture |
+| `ask` | `EmberAskProps` | yes | Prompt box: placeholder, prompts, chips, models |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<EmberHero badge={['新', '4.1 版支持多代理协作']} title={['让 AI 代理', '替你把事办完。']} image={head} ask={{ placeholder: '今天想让它帮你处理什么？', prompts: ['把会议纪要整理成周报'], chips: ['＋ 附件'], models: ['4.1'] }} />
+```
+
+<a id="ember-bento"></a>
+
+## 307 · Ember feature bento `<EmberBento />`
+
+**Position**: Capabilities · four features; **Reference slide**: `src/decks/sig-ember` — `bento`
+
+A centred serif title over four dark cards fitted together: two tall picture cards left and right, a picture card top-centre with a floating row of tool icons (click one to light it and show its name), and a card bottom-centre holding a list of working switches. Each card ends in a small ember icon square, a title and one line; pictures push in slowly on hover.
+
+**Use when**
+
+- Introducing four core capabilities of an AI product
+- You want atmosphere pictures and a little interface to play with
+
+**Avoid**
+
+- More than 4 capabilities: use FeatureBento
+- No pictures: use a key-points template
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 16 chars, one line
+- cards exactly 4: title ≤ 8 chars, body ≤ 34 chars
+- cards 1 and 3 suit portrait pictures; tools 3–6; toggles 2–4 × ≤ 8 chars
+
+**Interaction**: Tool icons switch and show their name; switches flip; pictures push in and cards take an accent edge on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | Dot label |
+| `title` | `string` | yes | Title |
+| `cards` | `{ icon, title, body, image?, tools?, toggles? }[]` | yes | The four cards |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<EmberBento title="更聪明的能力，无尽的可能。" cards={[{ icon: '◐', title: '对话式 AI', body: '…', image: dots }, { icon: '◎', title: '多模态理解', body: '…', image: lake, tools: [{ mark: '▤', name: '文档' }, …] }, …]} />
+```
+
+<a id="ember-agent"></a>
+
+## 308 · Ember agent run `<EmberAgent />`
+
+**Position**: Mechanism · an agent finishing a task step by step; **Reference slide**: `src/decks/sig-ember` — `agent`
+
+On the left a serif title, a request bubble from 'you' and a draft being written; on the right an 'activity' card whose 3–6 steps spin and tick off in turn while a progress rail lights up beside them, each showing the tool used and the time taken. As steps finish, the draft's lines sharpen one by one from blur; when all are done the status turns green with the total time, and 'run again' replays it.
+
+**Use when**
+
+- Showing concretely how an AI agent does the work
+- Demonstrating a whole delegation, from one sentence to the result
+
+**Avoid**
+
+- More than 6 steps: use a timeline template
+- No output to show: use SlateSteps
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 2 lines × ≤ 10 chars; task ≤ 40 chars
+- steps 3–6: label ≤ 10 chars, detail ≤ 24 chars, tool ≤ 6 chars
+- result.title ≤ 16 chars; result.lines 3–6 × ≤ 26 chars
+- pace is milliseconds per step, default 1400
+
+**Interaction**: Steps complete on their own and the rail lights up; the draft sharpens line by line; 'run again' replays
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | Dot label |
+| `title` | `string[]` | yes | Title |
+| `task` | `string` | yes | The person's request |
+| `steps` | `{ label, detail, tool?, secs? }[]` | yes | Steps the agent runs |
+| `result` | `{ title, lines }` | yes | Draft that fills in step by step |
+| `labels` | `{ you, run, done, replay, log }` |  | Interface text |
+| `pace` | `number` |  | Milliseconds per step |
+| `source` | `string` |  | Footnote |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<EmberAgent title={['你只说一句话，', '剩下的交给它。']} task="把上周的会议纪要整理成周报" steps={[{ label: '读取会议纪要', detail: '…', tool: '文档库', secs: 4 }, …]} result={{ title: '第 45 周 · 团队周报', lines: ['…'] }} />
+```
+
+<a id="ember-saves"></a>
+
+## 309 · Ember time saved `<EmberSaves />`
+
+**Position**: Data · time saved per task; **Reference slide**: `src/decks/sig-ember` — `saves`
+
+On the left a serif title, a lead and a huge gradient serif number (hours saved per week); on the right a card listing 3–6 tasks, one bar each: it first shows the time done by hand, then shrinks to the time with the agent and lights up in ember, leaving the old length as a dotted ghost. A segmented switch at the top flips between the two.
+
+**Use when**
+
+- Quantifying the time an AI tool or automation saves
+- Before and after for several tasks in the same unit
+
+**Avoid**
+
+- Mixed units: use a data template
+- Only one before/after number: use a big-number template
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 2 lines × ≤ 10 chars; lead ≤ 40 chars
+- tasks 3–6: name ≤ 8 chars, before ≥ after
+- labels.unit ≤ 2 chars
+
+**Interaction**: Bars shrink from 'by hand' to 'with the agent' and the total appears; the segmented switch flips back and forth
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | Dot label |
+| `title` | `string[]` | yes | Title |
+| `lead` | `string` |  | Lead paragraph |
+| `tasks` | `{ name, before, after }[]` | yes | Hours before and after per task |
+| `labels` | `{ before, after, total, unit }` |  | Interface text and unit |
+| `source` | `string` |  | Data source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<EmberSaves title={['每周多出来的，', '是整整一天半。']} tasks={[{ name: '写周报', before: 3, after: 0.5 }, …]} />
+```
+
+<a id="ember-words"></a>
+
+## 310 · Ember testimonials `<EmberWords />`
+
+**Position**: Evidence · two customers, their words and results; **Reference slide**: `src/decks/sig-ember` — `words`
+
+A centred title under an ember glow and two large dark cards side by side: a serif quote on top, an avatar, name and role at the bottom left, and a huge serif result (such as 26% or 3×) at the bottom right that counts up from zero. A pool of light follows the pointer across the card.
+
+**Use when**
+
+- Proof from two customers' own words plus a result
+- The testimonial slide of a launch or sales demo
+
+**Avoid**
+
+- More than 2 testimonials: use FolioWords or AlbumStories
+- No measurable result: use a quote template
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 12 chars
+- quotes exactly 2: quote ≤ 40 chars, role ≤ 16 chars
+- value ≤ 5 chars, the number part counts up; label ≤ 8 chars
+
+**Interaction**: Results count up from zero; a light follows the pointer; cards lift on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | Dot label |
+| `title` | `string` | yes | Title |
+| `quotes` | `{ quote, name, role, avatar?, value, label }[]` | yes | The two testimonials |
+| `source` | `string` |  | Footnote |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<EmberWords title="听听用户怎么说" quotes={[{ quote: '…', name: '邓帆', role: '产品负责人 · 远舟数据', value: '26%', label: '演示转化提升' }, …]} />
+```
+
+<a id="ember-close"></a>
+
+## 311 · Ember closing `<EmberClose />`
+
+**Position**: Closing · call to action with a prompt box; **Reference slide**: `src/decks/sig-ember` — `close`
+
+A ring of fire breathing slowly in the middle of the slide; inside it two lines of large serif type, a lead and a compact prompt box (which also types by itself), then a light button, a text link and a small line.
+
+**Use when**
+
+- The last slide of an AI product demo
+- You want the audience to leave wanting to ask it something right away
+
+**Avoid**
+
+- You need contact details or a QR code: use a contact template
+- A light-themed deck: use SlateConnect
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 2 lines × ≤ 9 chars; lead ≤ 36 chars
+- ctas ≤ 8 chars each; note ≤ 30 chars
+- image works best as a ring of light with an empty centre
+
+**Interaction**: The ring breathes slowly; the prompt box types by itself; the button glows in the accent on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `title` | `string[]` | yes | Two large lines inside the ring |
+| `lead` | `string` |  | Lead paragraph |
+| `image` | `PhotoImage` | yes | Ring background |
+| `ask` | `EmberAskProps` |  | Compact prompt box |
+| `ctas` | `[string, string?]` |  | Button and text link |
+| `note` | `string` |  | Small line at the foot |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<EmberClose title={['把今天的第一件事，', '交给观止。']} image={ring} ask={{ placeholder: '…', prompts: ['…'] }} ctas={['开始使用', '预约团队演示']} />
+```
+
+<a id="dusk-hero"></a>
+
+## 312 · Dusk hero `<DuskHero />`
+
+**Position**: Opening · developer tool home; **Reference slide**: `src/decks/sig-dusk` — `hero`
+
+A mint announcement pill at the top, a centred two-line tight headline, a lead and a dark and a light button. Below on the left a big sunset gradient panel with a row of tabs: click one and the dark widget in a frosted frame at its centre switches to that item's number and segmented bar. On the right a white code card marks removed and added lines in red and green, sliding in line by line.
+
+**Use when**
+
+- First slide of a developer tool, AI coding assistant or technical SaaS
+- Showing the product interface and the code at the same time
+
+**Avoid**
+
+- Non-technical audience: use SlateHero
+- No code to show: use SunriseHero
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- ann ≤ 20 chars + link ≤ 4 chars
+- title 2 lines × ≤ 8 chars; lead ≤ 30 chars; ctas ≤ 6 chars each
+- tabs 2–5: label ≤ 4 chars, head ≤ 8 chars, bars 2–5 × ≤ 4 chars, file ≤ 18 chars
+- code 6–12 lines × ≤ 34 chars; start with "- " "+ " "# " for removed, added, comment
+
+**Interaction**: Tabs swap the widget; code slides in line by line; the gradient panel drifts slowly
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `ann` | `[string, string?]` |  | Announcement pill |
+| `title` | `string[]` | yes | Two headline lines |
+| `lead` | `string` |  | Lead paragraph |
+| `ctas` | `[string, string?]` |  | Dark and light buttons |
+| `tabs` | `{ label, head, stat, unit, bars, file }[]` | yes | Panel tabs and their widget content |
+| `code` | `string[]` | yes | Code lines on the right |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DuskHero ann={['完成 A 轮融资', '阅读全文']} title={['把复杂代码', '讲成人话的 AI']} tabs={[{ label: '编辑器', head: '时间分布', stat: '24', unit: '个运行周期', bars: [{ label: '解释', value: 22 }, …], file: 'AuthService.ts' }, …]} code={['# 解释补丁', '- if (a && b)', '+ if (a || b)']} />
+```
+
+<a id="dusk-feature"></a>
+
+## 313 · Dusk feature `<DuskFeature />`
+
+**Position**: Product · one feature and its chart; **Reference slide**: `src/decks/sig-dusk` — `feature`
+
+On the left a small tag, a two-line title, a paragraph, two to four ticked points and a light button; on the right a soft pink gradient panel whose dark widget holds 2–3 smooth lines. Move the pointer across the chart and a vertical cursor follows, reading out every line's value at that point underneath.
+
+**Use when**
+
+- Explaining one feature with a chart you can read
+- Debugging, monitoring or analytics features
+
+**Avoid**
+
+- Several features: use EmberBento or a key-points template
+- The chart needs axes and exact ticks: use a data chart template
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 2 lines × ≤ 9 chars; body ≤ 64 chars
+- points 2–4 × ≤ 14 chars; more ≤ 8 chars
+- chart.series 2–3, each 6–14 numbers of equal length; xs the same length
+- chart.name ≤ 12 chars
+
+**Interaction**: Lines draw in; the cursor and readout follow the pointer
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `tag` | `{ icon?, label }` |  | Small tag |
+| `title` | `string[]` | yes | Title |
+| `body` | `string` |  | Paragraph |
+| `points` | `string[]` |  | Ticked points |
+| `more` | `string` |  | Light button |
+| `chart` | `{ stat, unit, series, xs?, name? }` | yes | Line chart with a scrubbing cursor |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DuskFeature tag={{ icon: '◆', label: '调试' }} title={['在问题变大之前，', '先看见它。']} chart={{ stat: '37', unit: '个问题', series: [{ label: '严重', points: [3, 6, 8, …] }, …] }} />
+```
+
+<a id="dusk-explain"></a>
+
+## 314 · Dusk code explainer `<DuskExplain />`
+
+**Position**: Explanation · code told in plain words, block by block; **Reference slide**: `src/decks/sig-dusk` — `explain`
+
+On the left a white code card split into 2–4 blocks: the current one lights up with an accent edge and the rest fade. On the right, inside a sunset gradient panel, a dark card explains in a large title and plain sentences what that block does, with a progress bar on top showing which block you are on. It moves on by itself; click any block to stop there.
+
+**Use when**
+
+- Explaining a piece of code, config or script to someone who didn't write it
+- Tech talks, code reviews and onboarding
+
+**Avoid**
+
+- More than 20 lines of code: split over several slides
+- Showing before and after: use the diff rows in DuskHero
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 16 chars, one line; file ≤ 24 chars
+- blocks 2–4: 2–5 lines each × ≤ 40 chars
+- each title ≤ 12 chars, note ≤ 50 chars
+- autoplay defaults to 3600 ms; 0 turns it off
+
+**Interaction**: Explains block by block on its own; clicking a block selects it and stops autoplay
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `tag` | `{ icon?, label }` |  | Small tag |
+| `title` | `string` | yes | Title |
+| `file` | `string` |  | File name |
+| `blocks` | `{ lines, title, note }[]` | yes | Code blocks and their explanations |
+| `autoplay` | `number` |  | Auto-advance interval |
+| `source` | `string` |  | Footnote |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DuskExplain title="一段一段，讲给你听。" file="billing/retry.ts" blocks={[{ lines: ['async function retry(order) {', '  const max = 3'], title: '先定好重试几次', note: '…' }, …]} />
+```
+
+<a id="dusk-stats"></a>
+
+## 315 · Dusk result cards `<DuskStats />`
+
+**Position**: Data · three results; **Reference slide**: `src/decks/sig-dusk` — `stats`
+
+Under a one-line title, three tall cards side by side: a small label and an area line spanning the card at the top, a huge number (counting up from zero) and one line of explanation at the bottom. The card you point at turns into the sunset gradient, its text and line go white and it lifts slightly.
+
+**Use when**
+
+- Summing up the effect in three numbers
+- Each number has a change over time you can draw
+
+**Avoid**
+
+- More than 3 numbers: use a data template
+- No trend to show: use a big-number template
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 16 chars, one line
+- stats exactly 3: value ≤ 7 chars, label ≤ 10 chars, note ≤ 30 chars
+- series 6–12 numbers
+
+**Interaction**: Numbers count up and lines draw in; the hovered card turns into the gradient
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `tag` | `{ icon?, label }` |  | Small tag |
+| `title` | `string` | yes | Title |
+| `stats` | `{ value, label, note?, series? }[]` | yes | The three results |
+| `source` | `string` |  | Data source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DuskStats title="团队用了之后，变化很具体。" stats={[{ value: '3.2×', label: '读懂旧代码', note: '…', series: [1, 1.2, …] }, …]} />
+```
+
+<a id="dusk-cases"></a>
+
+## 316 · Dusk customer stories `<DuskCases />`
+
+**Position**: Customer · case carousel with two quotes; **Reference slide**: `src/decks/sig-dusk` — `cases`
+
+On the left a large photo case card: the customer name top left, a one-line result in large type and a white button bottom left, progress dots and arrows bottom right; 2–4 cases rotate on their own as photos cross-fade and slowly pull back. On the right two white cards, each a customer quote with an avatar, name and role at the foot.
+
+**Use when**
+
+- Proof through realistic customer stories
+- You have both case studies and a few short quotes
+
+**Avoid**
+
+- No photos: use EmberWords
+- More than 2 quotes: use a testimonial wall template
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title ≤ 16 chars, one line
+- cases 2–4: company ≤ 10 chars, headline ≤ 26 chars
+- voices exactly 2: quote ≤ 44 chars, role ≤ 12 chars
+- cta ≤ 6 chars; autoplay defaults to 5200 ms
+
+**Interaction**: Cases rotate on their own and arrows switch them; dots time each one; quote cards lift on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `tag` | `{ icon?, label }` |  | Small tag |
+| `title` | `string` | yes | Title |
+| `cases` | `{ company, headline, image }[]` | yes | Cases in the carousel |
+| `voices` | `{ company, quote, name, role, avatar? }[]` | yes | Two quotes |
+| `cta` | `string` |  | Case button |
+| `autoplay` | `number` |  | Carousel interval |
+| `source` | `string` |  | Footnote |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DuskCases title="用解码交付的团队，都更快。" cases={[{ company: '✳ 常青科技', headline: '平台改版快了 3 倍', image: a }, …]} voices={[{ company: '◼ 模块实验室', quote: '…', name: '罗振', role: 'CEO' }, …]} />
+```
+
+<a id="dusk-close"></a>
+
+## 317 · Dusk closing `<DuskClose />`
+
+**Position**: Closing · call to action with an install command; **Reference slide**: `src/decks/sig-dusk` — `close`
+
+A centred two-line headline, a lead and two buttons; below, a sunset gradient panel holds a dark terminal: three small dots, a command you can copy with one click, and a few output lines printing one after another, the last turning green when ready.
+
+**Use when**
+
+- The last slide of a developer product demo
+- You want the audience to leave with a command they can run
+
+**Avoid**
+
+- Non-technical audience: use SlateConnect or EmberClose
+- You need contact details or a QR code: use a contact template
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 2 lines × ≤ 10 chars; lead ≤ 30 chars; ctas ≤ 6 chars each
+- command ≤ 30 chars
+- output 2–4 lines × ≤ 36 chars
+
+**Interaction**: 'Copy' puts the command on the clipboard; output prints line by line
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `title` | `string[]` | yes | Title |
+| `lead` | `string` |  | Lead paragraph |
+| `ctas` | `[string, string?]` |  | Buttons |
+| `command` | `string` | yes | Command to copy |
+| `output` | `string[]` |  | Output that prints line by line |
+| `labels` | `{ copy, copied }` |  | Copy button text |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DuskClose title={['下一段看不懂的代码，', '交给解码。']} command="npx jiema init" output={['✓ 已连接代码仓库', '✓ 已就绪']} />
+```
+
+<a id="agency-stage"></a>
+
+## 318 · Electric-blue stage opening `<AgencyStage />`
+
+**Position**: Opening · first page for an agency or brand; **Reference slide**: `src/decks/sig-agency` — `stage`
+
+The whole page is an electric-blue gradient mixed from the theme accent with fine grain, and a soft light slowly follows the pointer. Top left, a light two-line headline and a white pill button whose round arrow turns on hover; top right, a frosted photo card that lifts on hover; below it a row of round faces with a two-line note. A giant Latin wordmark bleeds off the bottom edge, its letters rising one by one and lifting under the pointer.
+
+**Use when**
+
+- Cover for a growth agency, consultancy or brand proposal
+- An opening that hits like a website hero
+
+**Avoid**
+
+- No Latin wordmark: use AgencyHero
+- Formal reports: use Cover
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- title 2 lines × ≤ 9 chars; cta ≤ 8 chars
+- card.title ≤ 8 chars, card.body ≤ 40 chars
+- trust.faces 2–4, text two lines ≤ 12 chars each
+- word 3–7 Latin letters; mark defaults to ®
+- Set tone: 'dark' on this slide so the header turns light
+
+**Interaction**: Light follows the pointer; wordmark letters rise in turn and lift on hover; the card lifts on hover; the button arrow turns on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `title` | `string[]` | yes | Two-line headline |
+| `cta` | `string` | yes | White pill button |
+| `card` | `{ image, title, body }` | yes | Frosted photo card |
+| `trust` | `{ faces, text }` |  | Faces and note |
+| `word` | `string` | yes | Giant wordmark |
+| `mark` | `string` |  | Small mark after the wordmark |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<AgencyStage title={['为认真做增长的', '品牌而生']} cta="预约一次诊断" card={{ image: night, title: '增长策略', body: '…' }} trust={{ faces: [a, b, c], text: ['已服务 120+ 家', '快速成长的品牌'] }} word="LANQI" />
+```
+
+<a id="agency-accordion"></a>
+
+## 319 · Portrait with accordion `<AgencyAccordion />`
+
+**Position**: Method · mission, services or approach in detail; **Reference slide**: `src/decks/sig-agency` — `mission`
+
+A small white pill top left and a light two-line title on the right half. On the left a tall portrait with a name chip; on the right 3–4 numbered white accordion rows. The open row fills the remaining height with a sentence, soft chips and a landscape photo, plus an accent progress line along its foot. Rows open in turn every few seconds until someone clicks one.
+
+**Use when**
+
+- An agency's mission, method or services, each needing a sentence
+- You have one representative portrait
+
+**Avoid**
+
+- 5 or more items: use AgencyRows
+- Every item must be visible at once: use IconGrid
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- tag ≤ 6 chars; title 2 lines × ≤ 12 chars
+- items 3–4: title ≤ 10 chars, body ≤ 40 chars, chips 0–3 × ≤ 5 chars, optional image
+- photo.caption ≤ 12 chars
+- autoplay defaults to 5600 ms; 0 turns it off
+
+**Interaction**: Rows open in turn with a progress line; clicking a row opens it and stops the cycle; row titles tint on hover; the portrait pushes in on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `tag` | `string` | yes | Small pill |
+| `title` | `string[]` | yes | Two-line title |
+| `photo` | `{ image, caption? }` | yes | Tall portrait |
+| `items` | `{ title, body, chips?, image? }[]` | yes | Accordion rows |
+| `open` | `number` |  | Row open at the start |
+| `autoplay` | `number` |  | Auto-advance interval |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<AgencyAccordion tag="我们的使命" title={['我们把策略做成系统，', '让增长不靠运气。']} photo={{ image: p, caption: '策略总监 · 周以宁' }} items={[{ title: '策略与执行', body: '…', chips: ['用户研究'], image: t }, …]} />
+```
+
+<a id="agency-proof"></a>
+
+## 320 · Navy quote with bento `<AgencyProof />`
+
+**Position**: Customer · testimonials and results; **Reference slide**: `src/decks/sig-agency` — `proof`
+
+A small white pill top left and a light two-line title on the right half. Across the middle a long navy card: a client quote with arrows and a counter on the left, a portrait with name and role on the right; 1–3 quotes rotate as portraits cross-fade. Below, three tiles: a one-line statement on an accent gradient that flows on hover, a picture with a caption that pushes in on hover, and a big number that counts up beside round faces.
+
+**Use when**
+
+- Client testimonials for an agency or product
+- You want one quote plus one result number
+
+**Avoid**
+
+- More than 3 quotes: use a testimonial wall
+- No portraits: use QuoteBlock
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- tag ≤ 6 chars; title 2 lines × ≤ 12 chars
+- quotes 1–3: text ≤ 40 chars, role ≤ 14 chars
+- statement ≤ 14 chars; visual.caption ≤ 10 chars
+- stat.value like "+65%"; label ≤ 8 chars; foot ≤ 8 chars; faces 0–4
+- autoplay defaults to 6400 ms
+
+**Interaction**: Quotes rotate on their own; arrows switch and stop the rotation; the number counts up; the gradient tile flows on hover; the picture pushes in on hover; faces spread on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `tag` | `string` | yes | Small pill |
+| `title` | `string[]` | yes | Two-line title |
+| `quotes` | `{ text, name, role, image }[]` | yes | Quotes |
+| `statement` | `string` | yes | Gradient tile line |
+| `visual` | `{ image, caption }` | yes | Picture tile |
+| `stat` | `{ value, label, foot, faces? }` | yes | Number tile |
+| `autoplay` | `number` |  | Rotation interval |
+| `source` | `string` |  | Source |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<AgencyProof tag="客户评价" title={['官网改完那个季度，', '线索翻了一倍。']} quotes={[{ text: '…', name: '陈嘉禾', role: '市场负责人 · 栖木家居', image: f }]} statement="把数字体验做到能转化" visual={{ image: g, caption: '策略先行的创意' }} stat={{ value: '+65%', label: '客户平均增长', foot: '增长已交付' }} />
+```
+
+<a id="agency-book"></a>
+
+## 321 · Electric-blue booking close `<AgencyBook />`
+
+**Position**: Closing · book a call; **Reference slide**: `src/decks/sig-agency` — `book`
+
+The whole page is the electric-blue gradient with fine grain. On the left a frosted pill, a light two- or three-line headline and a lead; on the right a frosted booking card with a heading and the host's face, a row of 4–5 days and 3–6 time slots that light up when picked. A long white button reads the picked day and time back and turns into a green tick when clicked. An optional row of contact facts runs along the bottom.
+
+**Use when**
+
+- Last page of an agency proposal or sales demo
+- You want the audience to book the next call on the spot
+
+**Avoid**
+
+- Only a closing line: use Closing
+- Online launch with no booking: use DuskClose
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- tag ≤ 8 chars; title 2–3 lines × ≤ 9 chars; lead ≤ 44 chars
+- heading ≤ 12 chars; days 4–5 as [weekday, date]; slots 3–6
+- cta ≤ 4 chars; note ≤ 24 chars
+- contacts 0–4: label ≤ 6 chars, value ≤ 16 chars
+- Set tone: 'dark' on this slide
+
+**Interaction**: Pick a day and a slot and the button text updates; clicking the button shows a booked tick; slots pop in one by one; the button arrow nudges on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `tag` | `string` |  | Small pill |
+| `title` | `string[]` | yes | Headline |
+| `lead` | `string` | yes | Lead |
+| `heading` | `string` | yes | Card heading |
+| `days` | `[string, string][]` | yes | Days |
+| `slots` | `string[]` | yes | Time slots |
+| `cta` | `string` |  | Button verb |
+| `host` | `{ image, name, role }` | yes | Host |
+| `note` | `string` |  | Line under the button |
+| `contacts` | `{ label, value }[]` |  | Contact row |
+| `pick` | `[number, number]` |  | Day and slot picked at the start |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<AgencyBook title={['下一季的增长，', '从一次诊断开始']} lead="…" heading="预约一次增长诊断" days={[['周一', '11/10'], …]} slots={['10:00', '14:00']} host={{ image: p, name: '周以宁', role: '策略总监' }} />
+```
+
+<a id="social-feed"></a>
+
+## 322 · Personal feed `<SocialFeed />`
+
+**Position**: Content · recent news as a personal or brand home; **Reference slide**: `src/decks/mockui` — `feed`
+
+A three-column social home page. On the left an avatar, a name, six menu items that highlight on click and a clock tile with a blinking colon (fixed or live). In the middle a column of posts; the first carries one or two pictures, and every post has a heart that pops and adds one when clicked plus a share action. On the right a row of ringed avatars that grey out once viewed, two small list boxes and a chat bubble with an input. It uses only the current style's colours and radii, so it works in every style.
+
+**Use when**
+
+- An indie maker, designer or creator sharing recent news
+- Telling a story as if scrolling a feed
+
+**Avoid**
+
+- Formal reports: use Timeline
+- More than 3 posts: split the slide
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- profile.name ≤ 6 chars, role ≤ 10 chars; menu 4–6 × ≤ 5 chars
+- posts 2–3: text ≤ 34 chars, time ≤ 6 chars; only the first shows 0–2 pictures
+- stories 0–4 × ≤ 3 chars; boxes 0–2 with 2 items each: title ≤ 12 chars, note ≤ 10 chars
+- say ≤ 26 chars; clock.city ≤ 4 chars
+
+**Interaction**: Heart pops and counts on click; ringed avatars mark as viewed; menu items switch highlight; the clock colon blinks; posts slide in one by one
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `profile` | `{ name, role, avatar }` | yes | Avatar and name |
+| `menu` | `{ icon, label }[]` | yes | Left menu |
+| `active` | `number` |  | Highlighted menu item |
+| `clock` | `{ city, time?, date? }` |  | Clock tile; without time it runs live |
+| `heading` | `string` |  | Middle column heading |
+| `posts` | `{ text, time, pinned?, media?, likes? }[]` | yes | Posts |
+| `stories` | `{ label, image }[]` |  | Ringed avatars |
+| `boxes` | `{ title, items }[]` |  | Small boxes on the right |
+| `say` | `string` |  | Chat bubble |
+| `placeholder` | `string` |  | Input placeholder |
+| `source` | `string` |  | Footnote |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<SocialFeed profile={{ name: '许知夏', role: '设计 · 独立开发', avatar: a }} menu={[{ icon: 'home', label: '首页' }, …]} posts={[{ text: '…', time: '9 个月前', pinned: true, media: [p, q], likes: '2.3k' }, …]} say="最近正好在看新机会 👋" />
+```
+
+<a id="social-post"></a>
+
+## 323 · Launch post `<SocialPost />`
+
+**Position**: Evidence · the response to a launch or milestone; **Reference slide**: `src/decks/mockui` — `post`
+
+The same three-column shell with one big post in the middle: a back link, the author line, a two-line announcement in large type, a wide picture, and a clickable heart, comment count and share. On the right a box lists 2–3 launch figures with icons, and below it 2–3 top comments arrive one by one. It uses only the current style's colours and radii.
+
+**Use when**
+
+- A launch, release or milestone and how people reacted
+- Making numbers and comments feel like they really happened
+
+**Avoid**
+
+- The numbers are the point: use StatRow
+- No picture: use QuoteHero
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- text 1–2 lines × ≤ 22 chars; time ≤ 6 chars
+- counts like ['12.8k', '932']
+- facts 2–3: value ≤ 8 chars, note ≤ 10 chars
+- comments 2–3: name ≤ 6 chars, text ≤ 16 chars
+
+**Interaction**: Heart pops and counts on click; comments arrive one by one; the picture pushes in on hover; menu items switch highlight
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `profile` | `{ name, role, avatar }` | yes | Avatar and name |
+| `menu` | `{ icon, label }[]` | yes | Left menu |
+| `active` | `number` |  | Highlighted menu item |
+| `clock` | `{ city, time?, date? }` |  | Clock tile |
+| `back` | `string` |  | Back link text |
+| `time` | `string` | yes | Post time |
+| `text` | `string[]` | yes | Announcement |
+| `image` | `PhotoImage` | yes | Wide picture |
+| `counts` | `[string, string?]` |  | Likes and comments |
+| `facts` | `{ title, items }` |  | Figures box |
+| `comments` | `{ title, items }` |  | Comments box |
+| `source` | `string` |  | Footnote |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<SocialPost profile={me} menu={menu} time="去年" text={['夏至 AI 上线了。', '…']} image={shot} counts={['12.8k', '932']} facts={{ title: '这次上线', items: [{ icon: 'clock', value: '11 个月', note: '一个人从零做完' }] }} />
+```
+
+<a id="direct-chat"></a>
+
+## 324 · Direct message invite `<DirectChat />`
+
+**Position**: Closing · invite the audience to get in touch; **Reference slide**: `src/decks/mockui` — `dm`
+
+The same avatar, menu and clock on the left; on the right a full direct-message window with the owner's face, name and a green reply-time line. Messages stack from the bottom: the visitor's white bubbles and the owner's accent bubbles arrive in turn, with an optional offer card (picture, title, note, price) between them. A row of quick replies sits at the foot; clicking one sends it, three typing dots bounce, then the owner answers, and used replies grey out. It uses only the current style's colours and radii.
+
+**Use when**
+
+- Last page of a portfolio, personal intro or service proposal
+- Showing what happens after someone says hello
+
+**Avoid**
+
+- Demoing an AI assistant: use ChatDemo
+- Only contact details: use Closing
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- messages 3–5 × ≤ 40 chars
+- offer optional: title ≤ 10 chars, note ≤ 18 chars, price ≤ 10 chars; after is the message it follows (from 0)
+- quick 2–4: label ≤ 5 chars, reply ≤ 30 chars
+- status ≤ 12 chars; placeholder ≤ 8 chars
+
+**Interaction**: Messages arrive in turn; a quick reply sends a message, typing dots bounce, then an answer arrives; the offer card lifts on hover
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `profile` | `{ name, role, avatar }` | yes | Avatar and name |
+| `menu` | `{ icon, label }[]` | yes | Left menu |
+| `active` | `number` |  | Highlighted menu item |
+| `clock` | `{ city, time?, date? }` |  | Clock tile |
+| `status` | `string` |  | Green status under the name |
+| `messages` | `{ from: 'me' \| 'you', text }[]` | yes | Conversation |
+| `offer` | `{ after, image, title, note, price? }` |  | Offer card |
+| `quick` | `{ label, reply }[]` |  | Quick replies and answers |
+| `placeholder` | `string` |  | Input placeholder |
+| `source` | `string` |  | Footnote |
+| `hint` | `string` |  | Header hint |
+
+**Example**
+
+```tsx
+<DirectChat profile={me} menu={menu} messages={[{ from: 'you', text: '…' }, { from: 'me', text: '…' }]} offer={{ after: 1, image: d, title: '首屏诊断 · 一周', note: '…', price: '¥12,000 起' }} quick={[{ label: '约个时间', reply: '…' }]} />
 ```
 
 <a id="icons"></a>

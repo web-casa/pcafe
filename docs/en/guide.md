@@ -129,6 +129,20 @@ npx pcafe check q3-review
 
 Done means `PASS` **and** every screenshot reviewed.
 
+## Search engines and sharing
+
+`pcafe build` writes the deck's words into the built HTML: every slide's headings, text, lists and tables as an outline inside the page, which the slides replace once the deck loads. Search engines that do not run scripts, AI crawlers and link previews can read the content, and opening the file with scripts off shows a readable article. Speaker notes are left out.
+
+A few `DeckDef` fields make it better:
+
+- `description`: one or two sentences on what the deck covers (≤ 120 characters of Chinese, or about 200 Latin), used for search snippets and link previews. Left out, the first paragraph is used.
+- `url`: where the deck is published, written as the canonical URL. Copies forwarded or hosted elsewhere then credit this address.
+- `image`: a cover image for link previews, as a full URL, e.g. a screenshot of the first slide.
+- `author`: the author or organization for the structured data. A string, or `{ name, url, type: 'Person' | 'Organization' }`.
+- `lang`: the language of the text, `zh-CN` by default.
+
+The built file also carries `<title>`, a description, Open Graph tags and a schema.org `PresentationDigitalDocument`.
+
 ## Attribution
 
 Works made with PCafe (decks, papers, cards, courses, screens, print, video) keep the "Made with PCafe" credit linking to https://p.cafe: decks show it in the first and last slide header and in the controls; the other formats show it in the footer.

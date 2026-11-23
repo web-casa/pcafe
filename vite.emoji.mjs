@@ -34,6 +34,20 @@ function sourceFiles(dir) {
 }
 const scan = (text) => text.match(RGI) ?? []
 
+/**
+ * Strip only binary base64 data URIs (fonts, raster images, media) before
+ * scanning a bundled chunk for emoji. Textual SVG data URIs (`image/svg+xml`)
+ * are preserved so any emoji inside an inline SVG is still caught.
+ */
+const BINARY_BASE64_URI = /data:(?:image\/(?!svg\+xml)|font\/|audio\/|video\/|application\/)[a-z0-9.+-]+;base64,[A-Za-z0-9+/=]{64,}/gi
+
+/** Fast scan for RGI emoji in a bundled chunk without running Unicode regex over megabytes of base64 font/image payloads. */
+export function scanChunkEmoji(code) {
+  const scrubbed = code.includes(';base64,') ? code.replace(BINARY_BASE64_URI, '') : code
+  if (!/[^\x00-\x7F]/.test(scrubbed)) return []
+  return [...new Set(scan(scrubbed))]
+}
+
 /** Keeps text inside any template, in every format, drawn by one emoji set on every machine. */
 export function emoji({ root = import.meta.dirname } = {}) {
   let dev = false
@@ -52,7 +66,7 @@ export function emoji({ root = import.meta.dirname } = {}) {
     },
     renderChunk(code) {
       if (!code.includes(PLACEHOLDER)) return null
-      const used = [...new Set(scan(code))]
+      const used = scanChunkEmoji(code)
       const unknown = used.filter((c) => !sets(assets).fluent[c])
       if (unknown.length) this.error(`emoji not in the bundled set: ${unknown.join(' ')}. Flags and skin tones are not included; the list is at #/kit/emoji.`)
       const literal = JSON.stringify(JSON.stringify({ notice: NOTICE, ...tableFor(used, assets) }))

@@ -1,0 +1,7 @@
+export { DiptychPlate, type DiptychShot, type DiptychPlateProps } from './parts'
+export * from './DiptychHero'
+export * from './DiptychWorks'
+export * from './DiptychServices'
+export * from './DiptychAbout'
+export * from './DiptychWords'
+export * from './DiptychContact'

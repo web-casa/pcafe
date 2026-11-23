@@ -1,7 +1,8 @@
 // Attribution required by the PCafe licence (CPAL-1.0, Exhibit B): works made
 // with the free edition show "Made with PCafe" linked to https://p.cafe. Holders
-// of a PCafe Pro licence may switch it off with `attribution: false`.
-import { pro } from 'virtual:pcafe-licence'
+// of a PCafe Pro licence may switch it off with `attribution: false`; the build
+// must find their signed licence file (vite.licence.ts), checked offline.
+import { pro, licenceProblem } from 'virtual:pcafe-licence'
 
 export const CREDIT_URL = 'https://p.cafe'
 
@@ -13,7 +14,7 @@ export function creditOn(optOut?: boolean): boolean {
   if (pro) return false
   if (!warned) {
     warned = true
-    console.warn('[pcafe] attribution: false needs PCafe Pro (see LICENSE, Exhibit B). The "Made with PCafe" credit stays on.')
+    console.warn(`[pcafe] attribution: false needs a PCafe Pro licence (LICENSE, Exhibit B), and ${licenceProblem ?? 'none was found'} The "Made with PCafe" credit stays on.`)
   }
   return true
 }

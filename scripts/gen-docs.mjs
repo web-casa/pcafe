@@ -485,3 +485,39 @@ for (const [k, v] of Object.entries(STYLES)) {
 enSty.push('', '| theme | label |', '| --- | --- |', ...Object.keys(THEMES).map((k) => `| \`${k}\` | ${THEME_EN[k]} |`), '')
 writeFileSync(join(enSkill, 'styles.md'), enSty.join('\n'))
 console.log(`wrote skills/pcafe/references/en (templates.md index, ${enGroups.length} group files, styles.md)`)
+
+// Machine-readable JSON catalog for `pcafe spec` (plain JSON so Node 20.11+ reads it with zero TS stripping).
+const jsonCatalog = freeCatalog.map((c) => {
+  const e = catalogEn[c.id]
+  const props = c.props.map((p) => {
+    const wholeBase = p.name.includes(' / ') && p.name.split(' / ').every((n) => BASE_PROPS.includes(n))
+    const noteEn = wholeBase
+      ? 'Base header fields'
+      : BASE_PROPS.includes(p.name) ? (e.props[p.name] ?? sharedPropNotes[p.name]) : (e.props[p.name] ?? p.note)
+    return { ...p, noteEn }
+  })
+  return {
+    id: c.id,
+    component: c.component,
+    name: c.name,
+    nameEn: e.name,
+    role: c.role,
+    roleEn: e.role,
+    summary: c.summary,
+    summaryEn: e.summary,
+    deck: c.deck ?? 'release',
+    demo: c.demo,
+    importFrom: '../../kit',
+    useWhen: c.useWhen,
+    useWhenEn: e.useWhen,
+    avoidWhen: c.avoidWhen,
+    avoidWhenEn: e.avoidWhen,
+    limits: c.limits,
+    limitsEn: e.limits,
+    ...(c.interaction ? { interaction: c.interaction, interactionEn: e.interaction } : {}),
+    props,
+    ...(c.example ? { example: c.example } : {}),
+  }
+})
+writeFileSync(resolve(skill, 'catalog.json'), JSON.stringify(jsonCatalog, null, 2) + '\n')
+console.log(`wrote skills/pcafe/references/catalog.json (${jsonCatalog.length} free templates)`)

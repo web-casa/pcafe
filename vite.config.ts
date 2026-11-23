@@ -2,6 +2,8 @@ import { existsSync, realpathSync, renameSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 import { deckStyle, filterStyleFonts } from './src/engine/style-fonts'
+import { deckOutline } from './src/engine/outline-plugin'
+import { createDeckSsrSession, type DeckSsrSession } from './src/engine/ssr-session'
 import { emoji } from './vite.emoji.mjs'
 import { proVirtual } from './vite.pro'
 import { designUnit } from './vite.unit.mjs'
@@ -22,13 +24,19 @@ export const engineResolve = {
 
 export { designUnit } from './vite.unit.mjs'
 
+// @pcafe/pro imports the engine as 'pcafe'. Pre-bundling it in dev would inline
+// a second copy of the engine, so registerStyle() from Pro would fill a registry
+// the deck never reads ("unknown style"). Every config that serves Pro uses this.
+export const engineOptimizeDeps = { exclude: ['@pcafe/pro'] }
+
 // The deck must open from file:// with no network at all.
 export const forbidRemote = (): Plugin => ({
   name: 'forbid-remote-urls',
   enforce: 'post',
   generateBundle(_opts, bundle) {
     for (const file of Object.values(bundle)) {
-      const text = file.type === 'chunk' ? file.code : String(file.source)
+      // Links (<a href>, rel=canonical) point elsewhere but load nothing; only resources count.
+      const text = (file.type === 'chunk' ? file.code : String(file.source)).replace(/<a\s[^>]*>|<link rel="canonical"[^>]*>/g, '')
       const hit = text.match(/(?:src|href)=["']https?:\/\/|@import\s+url\(["']?https?:|fonts\.googleapis/)
       if (hit) this.error(`${file.fileName} references a remote resource: ${hit[0]}`)
     }
@@ -38,48 +46,71 @@ export const forbidRemote = (): Plugin => ({
 // Ported styles bring their own display faces. A deck build keeps only the faces
 // tagged with the style that deck uses, so each file carries one style's fonts.
 // When the style cannot be read, keep every face and warn: never prune silently.
-export const styleFonts = (): Plugin => {
+export const styleFonts = (session?: DeckSsrSession): Plugin => {
+  let root = process.cwd()
   let pending: Promise<string | undefined> | undefined
   let warned = false
   return {
     name: 'style-fonts',
     apply: 'build',
-    async transform(code, id) {
-      if (!id.endsWith('/style-fonts.css')) return
-      pending ??= deckStyle(process.cwd(), engineResolve)
-      const style = await pending
-      if (!style) {
-        if (!warned) {
-          warned = true
-          this.warn('style-fonts: could not read DeckDef.style from src/decks/active.ts; keeping every style font.')
+    configResolved(config) {
+      root = config.root
+      session?.setRoot(config.root)
+    },
+    buildStart() {
+      pending = undefined
+      warned = false
+    },
+    transform: {
+      filter: { id: /style-fonts\.css(?:\?.*)?$/ },
+      async handler(code, id) {
+        const file = id.split('?')[0].replaceAll('\\', '/')
+        if (!file.endsWith('/style-fonts.css')) return
+        pending ??= session ? session.getStyle() : deckStyle(root, engineResolve, [proVirtual()])
+        const style = await pending
+        if (!style) {
+          if (!warned) {
+            warned = true
+            this.warn('style-fonts: could not read DeckDef.style from src/decks/active.ts; keeping every style font.')
+          }
+          return
         }
-        return
-      }
-      return filterStyleFonts(code, style)
+        return filterStyleFonts(code, style)
+      },
     },
   }
 }
 
 /** Vite names the output after the input HTML; the deck must be dist/index.html. */
-const presentationOutput = (): Plugin => ({
+const presentationOutput = (session?: DeckSsrSession): Plugin => ({
   name: 'presentation-output',
   apply: 'build',
-  closeBundle() {
+  async buildEnd(err) {
+    if (err && session) await session.close()
+  },
+  async closeBundle() {
+    if (session) await session.close()
     const from = resolve('dist', 'presentation.html')
     if (existsSync(from)) renameSync(from, resolve('dist', 'index.html'))
   },
 })
 
-export default defineConfig({
-  plugins: [styleFonts(), proVirtual(), ...emoji(), viteSingleFile({ removeViteModuleLoader: true }), forbidRemote(), presentationOutput()],
-  css: { postcss: { plugins: [designUnit] } },
-  resolve: engineResolve,
-  server: { fs: { allow: [...new Set([process.cwd(), proRoot, proRealRoot])] } },
-  build: {
-    target: 'es2022',
-    cssCodeSplit: false,
-    assetsInlineLimit: () => true,
-    reportCompressedSize: false,
-    rollupOptions: { input: 'presentation.html' },
-  },
+export default defineConfig(() => {
+  const mainPro = proVirtual()
+  const ssrPro = proVirtual()
+  const sharedSsr = createDeckSsrSession(engineResolve, [ssrPro])
+  return {
+    plugins: [styleFonts(sharedSsr), mainPro, ...emoji(), deckOutline(engineResolve, [ssrPro], sharedSsr), viteSingleFile({ removeViteModuleLoader: true }), forbidRemote(), presentationOutput(sharedSsr)],
+    css: { postcss: { plugins: [designUnit] } },
+    resolve: engineResolve,
+    optimizeDeps: engineOptimizeDeps,
+    server: { fs: { allow: [...new Set([process.cwd(), proRoot, proRealRoot])] } },
+    build: {
+      target: 'es2022',
+      cssCodeSplit: false,
+      assetsInlineLimit: () => true,
+      reportCompressedSize: false,
+      rollupOptions: { input: 'presentation.html' },
+    },
+  }
 })

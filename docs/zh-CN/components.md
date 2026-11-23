@@ -284,11 +284,60 @@
 | [`KanbanDemo`](#kanban-demo) 可玩的看板 | 产品 · 交互演示 | 左边小标签、标题、导语和几条打勾要点；右边一块任务看板：顶部视图切换和成员头像，协作者光标在视图标签上滑动；三列任务卡，点一下卡片就移到下一列，计数跟着变；每列底部是虚线“添加任务”位。 |
 | [`ProofMosaic`](#proof-mosaic) 口碑拼图 | 客户 · 评价与口碑 | 居中标题下的拼图：左边一张深色大引言卡，右半是人像；右侧上方一块晨光黄的大数字，下面两张短评卡，每张带星级、一个量化结果小标签和头像署名。 |
 | [`BuyoutPricing`](#buyout-pricing) 买断价格 | 定价 · 两档加收尾 | 两张套餐卡加一张晨光黄收尾卡：套餐卡里有价格、一句话、勾选清单和两格关键数字，点一下切换选中；收尾卡写一句号召、说明、一排头像和使用人数，底部黑色按钮。 |
+| [`FolioHero`](#folio-hero) 作品轨开场 | 开场 · 个人作品集首页 | 左边一栏：绿点状态胶囊、头像和邮箱、灰黑两行的大标题、导语和两枚按钮，底边一排技能胶囊；右边一列白框作品图，第二张从下边露出一截。点右侧刻度，整列图像胶片一样上下滑到那一张。为作品轨风格设计，其他风格也能用。 |
+| [`FolioCase`](#folio-case) 作品轨案例 | 证据 · 单个项目详情 | 左边：等宽小字编号、项目名加灰色副标题、一张两三行的事实表（客户、角色、周期）和两三个结果数字，单位用主题色上标；右边作品列把这个项目的图停在正中，上下相邻的作品各露出一截，点刻度或露出的图可以切换。 |
+| [`FolioSteps`](#folio-steps) 作品轨流程 | 方法 · 分步折叠 | 左边一列编号步骤，像手风琴一样一次展开一步，展开的那步编号变主题色、加号转成叉；右边作品列跟着滑到这一步对应的图，图上写着步骤名。 |
+| [`FolioWords`](#folio-words) 作品轨评价 | 证据 · 客户原话 | 左边一次只放一条客户原话，大字号，下面一条细线隔开头像、名字职位和一个主题色结果数字；左下角两枚圆形箭头翻页。翻到哪条，右边作品列就滑到那条评价说的项目。 |
+| [`FolioOffers`](#folio-offers) 作品轨报价 | 定价 · 合作方式 | 左边 2–4 种合作方式排成带价格的清单，点哪一行，那行左边升起一道主题色竖条、编号变色；右边作品列停在一格虚线边框的空位上，写着“你的项目，放这里”，选中的方式和价格会写进这格空位，虚线缓慢流动。 |
+| [`FolioContact`](#folio-contact) 作品轨问答预约 | 收尾 · 常见问题与预约 | 左边 3–4 个常见问题，点开一个看回答；右边作品列中间停着一张白色预约卡：头像、名字、绿点“可预约”、日期和 3–6 个时间格，点一个时间，底部主题色按钮上的时间跟着变。 |
+| [`DiptychHero`](#diptych-hero) 对页开场 | 开场 · 个人作品集首页 | 左边一整张高图卡，左上角一行手写体西文签名，作品图自动交叉淡入、缓慢推近，底边进度条跟着走满，右下圆形箭头切到下一张；右边绿点状态胶囊、三行粗体大标题（其中几个字变灰）、导语和两枚按钮，最下面一行客户名缓缓横向漂移。为对页风格设计，其他风格也能用。 |
+| [`DiptychWorks`](#diptych-works) 对页项目列表 | 证据 · 精选项目 | 右边灰色小字、两行标题和一列带编号的项目名，当前那行变黑、右端出现主题色箭头；鼠标移到哪一行，左边大图卡就淡入那个项目的图，图上写着项目名和类型年份。 |
+| [`DiptychServices`](#diptych-services) 对页服务 | 服务 · 分标签介绍 | 右边标题下一排胶囊标签（品牌 / 网站 / 产品），点一个，下面换成这项服务的一句话、两列交付清单和周期、预算两个大数字，左边图卡同时换成对应的图。 |
+| [`DiptychWords`](#diptych-words) 对页评价 | 证据 · 客户原话 | 右边一排编号小胶囊，一次放一条大字号客户原话和署名；点编号换一条，左边图卡同时换成那条评价说的项目。底部一条细线下面是两三个大数字。 |
+| [`DiptychAbout`](#diptych-about) 对页关于 | 关于 · 个人经历 | 左边一张半身照，右边两行标题、一列经历（职位、说明、年份），下面一行带下划线的大号邮箱，点一下复制并弹出“已复制”，最后两枚按钮。 |
+| [`DiptychContact`](#diptych-contact) 对页需求单 | 收尾 · 选项式联系 | 右边两行标题下两三组胶囊选项（想做什么、预算、何时开始），点选后变黑；底部黑色大按钮上的主题色小圆标显示一共选了几项，每次变化会弹一下。左边图卡放作品。 |
+| [`MarkerIntro`](#marker-intro) 记号笔开场 | 开场 · 一句话自我介绍 | 白底中间一栏：一个双菱形小标记、一句大字号的自我介绍，里面用 ==…== 圈出的词会像荧光笔一样依次从左到右刷上黄、绿、紫三色底；下面一句灰色的补充，最下面一排等宽小链接。页脚左边一句落款，右边城市加一只走动的时钟。 |
+| [`MarkerWorks`](#marker-works) 记号笔作品卡 | 证据 · 精选作品 | 三张浅灰大圆角卡并排，每张顶上写作品名和编号，中间一张竖图被四个取景角框住、带一点投影，底下一行年份。悬停时取景角向外张开、图片上浮；作品多于三件时，左下角箭头三张一页横向翻。 |
+| [`MarkerSkills`](#marker-skills) 记号笔能力卡 | 能力 · 我做什么与近况 | 上半页三张浅灰卡，每张一个线描等轴小图标（屏幕、积木、字母、叠层、柱子、笔六选一），悬停时图标的几层会向上分开；下半页一个取景角框住的“现在”，一句带荧光笔标记的近况。 |
+| [`MarkerLog`](#marker-log) 记号笔随笔 | 内容 · 日志与文章列表 | 一列带日期的短条目，每条标题里有一处荧光笔标记，右边一个小标签和斜箭头；点一行，箭头转向主题色，下面展开一句摘要。 |
+| [`MarkerFacts`](#marker-facts) 记号笔数字 | 数据 · 一句话加数字 | 上面一句带荧光笔标记的大字，下面 3–4 个取景角框住的浅灰格子，大数字在翻到这页时从 0 滚动到目标值，单位和说明是灰色。 |
+| [`MarkerClose`](#marker-close) 记号笔收尾 | 收尾 · 联系方式 | 双菱形小标记、一句带荧光笔标记的收尾语，下面一行等宽大字邮箱，悬停时主题色下划线从左划过，点一下复制并亮起“已复制”；最下面一排等宽社交链接。 |
+| [`AlbumHero`](#album-hero) 相册开场 | 开场 · 温暖的消费产品首页 | 页面顶部一团暖黄晨光：小胶囊、一行手写感衬线小字、两行粗体大标题（最后一个词换成斜体衬线，带橙→玫红→紫的渐变）、导语和一枚按钮；底部 5–9 张拍立得沿一段大圆弧扇形发开，像发牌一样依次落下，悬停的那张会抽出来一截，旁边飘着几枚小标签。 |
+| [`AlbumLayout`](#album-layout) 相册桌面排版 | 方法 · 三步演示 | 左边标题（一个词换成渐变斜体）和三步说明，右边一张斜放的白色桌面上摆着五张照片和一条圆形工具栏。点哪一步，桌上的照片就跟着变：第一步堆成一叠，第二步大小不一地摊开，第三步整齐排好、被选中的那张描上虚线框。 |
+| [`AlbumWeek`](#album-week) 相册一周 | 内容 · 一周图记 | 一根微微下垂的细绳横过页面，5–7 张拍立得用小木夹夹在上面，翻到这页时轻轻晃动；点一张，它放大落下，其余几张褪色，下方用斜体衬线写出日期、一句话和地点。 |
+| [`AlbumStories`](#album-stories) 相册翻面故事 | 证据 · 用户故事 | 三张大拍立得略带角度排开，悬停时摆正；点一张会立体翻到背面，背面是带横线的信纸，用衬线字写着这位用户的一句话和署名。 |
+| [`AlbumPlus`](#album-plus) 相册会员 | 定价 · 单一会员 | 居中一张白色大卡：会员名带一枚渐变星号、一段说明、2×2 四个功能格（彩色圆角图标，悬停时图标歪一下），底部一排月付 / 年付切换、斜体衬线的大价格和按钮；切换时价格从下面滚上来。卡片四周漂着几张拍立得。 |
+| [`AlbumClose`](#album-close) 相册收尾 | 收尾 · 号召与照片堆 | 左边手写感小字、两行大标题（最后一个词渐变斜体）、导语、按钮和一行小字；右边一叠拍立得，点一下最上面那张飞出去再插回底部，下一张露出来，角落写着第几张。 |
+| [`SlateHero`](#slate-hero) 立体看板开场 | 开场 · SaaS 产品首页 | 左侧一枚版本小胶囊、两行大标题（标题里嵌一枚斜放的渐变图标块）、导语、主按钮加文字链接和一排客户字标；右侧一块数据看板在 3D 里向内倾斜：标签栏、问候语、三张 KPI 卡和一张柱状图。点哪张 KPI 卡，它就被渐变点亮，柱状图换成它的走势；悬停看板会慢慢转正。 |
+| [`SlateSteps`](#slate-steps) 立体看板三步 | 方法 · 三步上手 | 居中的小圆点标签、两行标题和副标题；下面三张白卡并排，每张上半是一幅会动的小图（节点连线、柱状、半圆仪表、圆环、横条或声波），下半是渐变小标签、步骤名和一句说明。悬停卡片会浮起。 |
+| [`SlateCompare`](#slate-compare) 立体看板对比表 | 对比 · 我们与替代方案 | 左侧标题、导语、按钮和三张小数字卡；右侧一张白色对比表，“我们”那一列被一根渐变竖条整体点亮，打勾为白圈、打叉为深色圈。右上角的开关打开后，两边相同的行会收起，只剩差异。 |
+| [`SlateTrend`](#slate-trend) 立体看板趋势 | 趋势 · 多指标走势 | 左上标题；左侧一列指标卡（名称、当前值、绿色涨幅），右侧一张大白卡里画面积折线图，末端一颗圆点和深色气泡标出当前值。点哪张指标卡，它被渐变点亮，曲线重新画成它的走势。 |
+| [`SlatePricing`](#slate-pricing) 立体看板定价 | 定价 · 按人数计价 | 顶部标题，右侧一个团队人数步进器（− / +）；下面三张方案卡并排，中间那张整体被渐变点亮并带“最多人选”标签。价格随人数实时算出，企业方案可以写“联系我们”。 |
+| [`SlateConnect`](#slate-connect) 立体看板集成 | 收尾 · 集成与号召 | 左侧标题（可嵌图标块）、导语、两个按钮和一行小字；右侧一个集成星图：中间一枚大图标块，外圈 6–8 个工具图标沿虚线环排开，每根辐条上有光点流向中心。悬停某个工具，它和它的辐条被点亮。 |
+| [`EmberHero`](#ember-hero) 暗场开场 | 开场 · AI 产品首页 | 满版一张暗调光影图（例如被轮廓光勾出的人头侧影），随鼠标轻轻漂移；顶部一枚“新”字胶囊，中间两行衬线大标题，下面一个半透明提问框：示例问题会自己一个字一个字打出来再删掉，附件和联网是可以按下的开关，模型名点一下会换，发送键会发出一圈光并换下一个问题。 |
+| [`EmberBento`](#ember-bento) 暗场能力拼贴 | 能力 · 四项功能 | 居中一行衬线标题，下面四张暗色卡片拼成一块：左右两张竖长的图片卡，中间上方一张图片卡浮着一排工具图标（点哪个就点亮并显示名字），中间下方一张卡是可以拨动的开关列表。每张卡底部是余烬色小方块图标、标题和一句说明，悬停时图片缓慢推近。 |
+| [`EmberAgent`](#ember-agent) 暗场代理执行 | 机制 · 代理一步步完成任务 | 左侧衬线标题、一条“你”发出的请求气泡，以及一份正在生成的草稿；右侧一张“执行过程”卡，3–6 个步骤依次转圈、打勾，左边的进度轨随之点亮，每步显示用到的工具和耗时。步骤推进时，左边草稿的行一条条从模糊变清楚，全部完成后状态变绿并显示总用时，可以点“再跑一次”。 |
+| [`EmberSaves`](#ember-saves) 暗场省时对比 | 数据 · 每项工作省下的时间 | 左侧衬线标题、导语和一个巨大的渐变衬线数字（每周省下多少小时）；右侧一张卡列出 3–6 项工作，每行一根横条：先显示自己做要花的时间，随后缩短成交给代理后的时间并亮起余烬色，原来的长度留成一段虚线。顶部的分段按钮可以在两种情况之间来回切。 |
+| [`EmberWords`](#ember-words) 暗场用户评价 | 证据 · 两位客户的话和结果 | 一团余烬色光晕下居中标题，两张暗色大卡并排：上面是衬线体引语，底部左边头像、姓名和职位，右边一个巨大的衬线结果数字（如 26%、3×）从零数上来。鼠标在卡片上移动时，一团光跟着走。 |
+| [`EmberClose`](#ember-close) 暗场收尾 | 收尾 · 号召与提问框 | 画面中央一圈缓慢呼吸的火光，环里是两行衬线大字、一句导语和一个小号提问框（同样会自己打字），下面一个浅色按钮、一条文字链接和一行小字。 |
+| [`DuskHero`](#dusk-hero) 霞光面板开场 | 开场 · 开发者工具首页 | 顶部一枚薄荷绿公告胶囊，居中两行紧凑大标题、导语和一黑一浅两个按钮；下方左边一块日落渐变大面板，上面一排标签，点哪个，面板中央半透明框住的深色小部件就换成那一项的数字和分段条；右边一张白色代码卡，删改行用红绿底色标出，逐行滑入。 |
+| [`DuskFeature`](#dusk-feature) 霞光面板特性 | 产品 · 一项功能和它的图表 | 左侧小标签、两行标题、一段说明、两到四条打勾要点和一个浅色按钮；右侧一块浅粉渐变面板，中间深色小部件里是 2–3 条平滑曲线，鼠标在图上左右移动，竖线光标跟着走，底部读出那一刻每条线的数值。 |
+| [`DuskExplain`](#dusk-explain) 霞光面板逐段讲解 | 讲解 · 代码逐段说成人话 | 左边一张白色代码卡，代码分成 2–4 段，当前那段亮起并带主色左边线，其余变淡；右边日落渐变面板里，深色卡片用大字标题和一段白话解释这段代码在做什么，顶部进度条显示讲到第几段。会自动往下讲，点任意一段就停在那里。 |
+| [`DuskStats`](#dusk-stats) 霞光面板结果卡 | 数据 · 三个结果 | 一行标题下三张高卡片并排：上面是小标签和一条占满卡宽的面积曲线，底部是巨大的数字（从零数上来）和一句说明。鼠标停在哪张，哪张就变成日落渐变、文字和曲线变白并微微浮起。 |
+| [`DuskCases`](#dusk-cases) 霞光面板客户案例 | 客户 · 案例轮播与两句评价 | 左边一张大照片案例卡：左上客户名，左下一句结果大字和白色按钮，右下进度点和左右箭头，2–4 个案例会自动轮播（照片交叉淡入并缓慢推远）；右边上下两张白卡各是一句客户原话，底部是头像、姓名和职位。 |
+| [`DuskClose`](#dusk-close) 霞光面板收尾 | 收尾 · 号召与安装命令 | 居中两行大标题、一句导语和两个按钮；下方一块日落渐变面板里放着一个深色终端：三个小圆点、一行可以一键复制的命令，下面几行输出依次打印出来，最后一行变绿表示就绪。 |
+| [`AgencyStage`](#agency-stage) 电光蓝舞台开场 | 开场 · 机构或品牌第 1 页 | 整页由主题色调出的电光蓝渐变加细颗粒，一团亮光跟着鼠标缓慢移动；左上两行细体大标题和白色胶囊按钮（圆形箭头悬停时转向），右上一张毛玻璃照片卡（悬停浮起、照片推近），下方一排圆头像和两行说明；底部一个巨大的英文字标出血到页面下沿，字母依次升起，指到哪个字母哪个微微抬起。 |
+| [`AgencyAccordion`](#agency-accordion) 人像加手风琴 | 方法 · 使命、服务或做法展开讲 | 左上白色小胶囊，右半边两行细体标题；左边一张竖幅人像带姓名小签，右边 3–4 行编号白色手风琴：展开的那一行撑满剩余高度，显示一句说明、浅色小胶囊和一张横幅照片，底边一条主题色进度线；不点时每隔几秒自动展开下一行，点任意一行就停在那一行。 |
+| [`AgencyProof`](#agency-proof) 深蓝评价加便当格 | 客户 · 评价与成果 | 左上白色小胶囊，右半边两行细体标题；中间一张深蓝长卡，左边一句客户原话和左右箭头、页码，右边一张人像带姓名职位，1–3 条评价自动轮换（人像交叉淡入）；下面三格：主题色渐变一句话（悬停渐变流动）、一张图片带说明（悬停推近）、一个从零数上去的大数字配圆头像。 |
+| [`AgencyBook`](#agency-book) 电光蓝预约收尾 | 收尾 · 预约一次沟通 | 整页电光蓝渐变加细颗粒；左边毛玻璃小胶囊、两三行细体大标题和导语；右边一张毛玻璃预约卡：标题和接待人头像，一排 4–5 天日期、3–6 个时间段，选哪个哪个变亮，底部白色长按钮实时读出“预约 周三 11/12 · 14:00”，点一下变成绿色对勾“已预约”；页面底部可加一排联系方式。 |
+| [`SocialFeed`](#social-feed) 个人主页动态流 | 内容 · 个人或品牌主页式的近况 | 仿社交主页的三栏：左边头像、名字、六项菜单（点哪项哪项高亮）和一块时钟（冒号闪烁，可写死时间或走实时）；中间一列动态，第一条带一到两张图，每条都有可点的 ♡（心形弹一下、数字加一）和分享；右边一排彩圈头像（点过变灰表示已看）、两个小方框列表和一个“聊两句”气泡加输入框。只用当前风格的颜色和圆角，任何风格都能用。 |
+| [`SocialPost`](#social-post) 一条发布动态 | 证据 · 一次上线或里程碑的反响 | 同一套三栏外壳，中间只放一条大动态：返回链接、作者行、两行大字公告、一张宽幅图和可点的 ♡、评论数、分享；右边一个“这次上线”方框列 2–3 个带图标的数字，下面“热门评论”方框里 2–3 条评论依次出现。只用当前风格的颜色和圆角。 |
+| [`DirectChat`](#direct-chat) 私信邀约 | 收尾 · 邀请对方联系或合作 | 左边同一套头像菜单时钟，右边一整块私信窗口：顶部头像、名字和绿色“通常 1 小时内回复”；对话从底部往上排，访客的白气泡和主人的主题色气泡依次出现，中间可以插一张报价卡（图、标题、说明、价格）；底部一排快捷回复，点一个就发出去，主人显示“正在输入”的三个跳点后回答，用过的快捷回复变灰。只用当前风格的颜色和圆角。 |
 
 免费模板都从 `src/kit` 导入：
 
 ```tsx
-import { Cover, Bento, MetricBars, Timeline, SpotlightList, CompareTable, NumberedColumns, VerdictColumns, Checklist, StepTrack, Teaser, Closing, Terminal, CodeDiff, StatusGrid, SpecSheet, Cycle, Faq, Lanes, LineChart, Agenda, SectionBreak, QuoteHero, FlowDiagram, ClaimCards, LayerStack, Matrix, IconGrid, BigStat, DeltaBars, Dumbbell, RangeBars, Gantt, Milestones, QuoteWall, BeforeAfter, Screenshot, Funnel, Quadrant, PersonaCards, PricingTiers, KpiBoard, ShareBar, Waterfall, Team, IssueTree, Heatmap, Roadmap, Statement, HangingCover, PanelCards, AskAnswer, ProofSplit, IndexStack, ContactPanel, Orbit, NumberOpener, ChapterProgress, Question, Contrast, Recap, HeroPanel, TabbedShot, BrandKit, Laurels, FullBleed, Thanks, SplitWord, PillAgenda, StatRow, CountCompare, Donut, BarChart, Bubble, Gauge, ServiceList, QuoteArc, WorkCards, RepeatClosing, StickerCover, WordBlocks, FolderCards, SparkCards, Pictogram, SlopeRank, PixelClosing, FloatCover, TileWall, ServiceIndex, GlowStack, DuoCards, Desktop, WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone, Swimlane, ArchLayers, Balance, DoubleFunnel, KeyReveal, KeySpec, OrbCover, GradientCards, BlockStats, PopPoster, BentoBoard, BentoSpotlight, SlotPicker, UiSteps, FloatHero, TranscriptCard, RetroTabs, RetroLog, GlowMetric, HairlineGrid, RibbonCover, RibbonSection, ChatThread, NoteCards, RevealStatement, SketchCover, ArcCards, CaseCard, AgencyHero, AgencyRows, AgencyManifesto, HaloHero, HaloRows, HaloMarquee, FanCover, PillSentence, OpenList, PhotoCover, PhotoSplit, PhotoMosaic, PolaroidWall, FilmStrip, MagazineSpread, CaseStudy, DeviceFrame, CompareSlider, PhotoStack, FlipCards, CardStack, FanCarousel, DepthCarousel, Envelope, FlipBook, Lanyard, ProgressCards, ProcessAccordion, NotebookCover, Halftone, ProgressiveBlur, MaskReveal, LogoWall, PhotoClosing, RankingRace, BubbleCluster, NodeGraph, Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics, Typewriter, RotatingWord, MorphHeadline, TextArc, Odometer, MarkerSweep, TextMask, SplitFlap, NewsTicker, KaraokeLines, ParadigmCards, AnatomyCard, ExplorerFlip, VerbCards, NinesDial, TierLadder, LifecycleRail, MeterCards, ShelfGallery, TabSpec, TokenStream, MoeRouter, ContextWindow, ScoreMatrix, ModelSpecCard, TokenPriceGrid, AttentionMask, EffortDial, PeakClock, AliasRoute, GlobeCover, ArcGlobe, PopGrid, RequestJourney, ShieldLayers, SpikeChart, OutageBoard, ReachRings, ServerRack, TraceTimeline, QueryPlan, SchemaEr, ResultGrid, CodeCallouts, RequestResponse, BeamFlow, TupleVersions, BTreeIndex, JsonTree, SessionSequence, BadgeHero, TabPanels, EditionPicker, ReleaseTrain, MegaMenu, PathCrumbs, FilterChips, CtaBlock, FooterClosing, FaqAccordion, MediaExpand, ScatterOrder, TiltShot, ConvergeShots, StepVideo, ExhibitCover, YearBars, NumberTiles, ScoreTable, MetricMosaic, StepGrid, FramedStats, IndexList, AgendaMosaic, MethodSteps, PriorityColumns, ChapterNumber, StackBars, ChatDemo, AppCards, AtelierHero, ProjectPair, ProcessQuote, ServiceTrio, TeamBanner, BookingClose, MonographHero, ProjectIndex, WhyStats, TeamPortraits, ServiceLedger, MonographClose, NocturneHero, FeatureBento, GlowPricing, StepTrio, RevealCompare, WallClose, SunriseHero, KitBento, HomeTrio, KanbanDemo, ProofMosaic, BuyoutPricing } from '../../kit'
+import { Cover, Bento, MetricBars, Timeline, SpotlightList, CompareTable, NumberedColumns, VerdictColumns, Checklist, StepTrack, Teaser, Closing, Terminal, CodeDiff, StatusGrid, SpecSheet, Cycle, Faq, Lanes, LineChart, Agenda, SectionBreak, QuoteHero, FlowDiagram, ClaimCards, LayerStack, Matrix, IconGrid, BigStat, DeltaBars, Dumbbell, RangeBars, Gantt, Milestones, QuoteWall, BeforeAfter, Screenshot, Funnel, Quadrant, PersonaCards, PricingTiers, KpiBoard, ShareBar, Waterfall, Team, IssueTree, Heatmap, Roadmap, Statement, HangingCover, PanelCards, AskAnswer, ProofSplit, IndexStack, ContactPanel, Orbit, NumberOpener, ChapterProgress, Question, Contrast, Recap, HeroPanel, TabbedShot, BrandKit, Laurels, FullBleed, Thanks, SplitWord, PillAgenda, StatRow, CountCompare, Donut, BarChart, Bubble, Gauge, ServiceList, QuoteArc, WorkCards, RepeatClosing, StickerCover, WordBlocks, FolderCards, SparkCards, Pictogram, SlopeRank, PixelClosing, FloatCover, TileWall, ServiceIndex, GlowStack, DuoCards, Desktop, WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone, Swimlane, ArchLayers, Balance, DoubleFunnel, KeyReveal, KeySpec, OrbCover, GradientCards, BlockStats, PopPoster, BentoBoard, BentoSpotlight, SlotPicker, UiSteps, FloatHero, TranscriptCard, RetroTabs, RetroLog, GlowMetric, HairlineGrid, RibbonCover, RibbonSection, ChatThread, NoteCards, RevealStatement, SketchCover, ArcCards, CaseCard, AgencyHero, AgencyRows, AgencyManifesto, HaloHero, HaloRows, HaloMarquee, FanCover, PillSentence, OpenList, PhotoCover, PhotoSplit, PhotoMosaic, PolaroidWall, FilmStrip, MagazineSpread, CaseStudy, DeviceFrame, CompareSlider, PhotoStack, FlipCards, CardStack, FanCarousel, DepthCarousel, Envelope, FlipBook, Lanyard, ProgressCards, ProcessAccordion, NotebookCover, Halftone, ProgressiveBlur, MaskReveal, LogoWall, PhotoClosing, RankingRace, BubbleCluster, NodeGraph, Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics, Typewriter, RotatingWord, MorphHeadline, TextArc, Odometer, MarkerSweep, TextMask, SplitFlap, NewsTicker, KaraokeLines, ParadigmCards, AnatomyCard, ExplorerFlip, VerbCards, NinesDial, TierLadder, LifecycleRail, MeterCards, ShelfGallery, TabSpec, TokenStream, MoeRouter, ContextWindow, ScoreMatrix, ModelSpecCard, TokenPriceGrid, AttentionMask, EffortDial, PeakClock, AliasRoute, GlobeCover, ArcGlobe, PopGrid, RequestJourney, ShieldLayers, SpikeChart, OutageBoard, ReachRings, ServerRack, TraceTimeline, QueryPlan, SchemaEr, ResultGrid, CodeCallouts, RequestResponse, BeamFlow, TupleVersions, BTreeIndex, JsonTree, SessionSequence, BadgeHero, TabPanels, EditionPicker, ReleaseTrain, MegaMenu, PathCrumbs, FilterChips, CtaBlock, FooterClosing, FaqAccordion, MediaExpand, ScatterOrder, TiltShot, ConvergeShots, StepVideo, ExhibitCover, YearBars, NumberTiles, ScoreTable, MetricMosaic, StepGrid, FramedStats, IndexList, AgendaMosaic, MethodSteps, PriorityColumns, ChapterNumber, StackBars, ChatDemo, AppCards, AtelierHero, ProjectPair, ProcessQuote, ServiceTrio, TeamBanner, BookingClose, MonographHero, ProjectIndex, WhyStats, TeamPortraits, ServiceLedger, MonographClose, NocturneHero, FeatureBento, GlowPricing, StepTrio, RevealCompare, WallClose, SunriseHero, KitBento, HomeTrio, KanbanDemo, ProofMosaic, BuyoutPricing, FolioHero, FolioCase, FolioSteps, FolioWords, FolioOffers, FolioContact, DiptychHero, DiptychWorks, DiptychServices, DiptychWords, DiptychAbout, DiptychContact, MarkerIntro, MarkerWorks, MarkerSkills, MarkerLog, MarkerFacts, MarkerClose, AlbumHero, AlbumLayout, AlbumWeek, AlbumStories, AlbumPlus, AlbumClose, SlateHero, SlateSteps, SlateCompare, SlateTrend, SlatePricing, SlateConnect, EmberHero, EmberBento, EmberAgent, EmberSaves, EmberWords, EmberClose, DuskHero, DuskFeature, DuskExplain, DuskStats, DuskCases, DuskClose, AgencyStage, AgencyAccordion, AgencyProof, AgencyBook, SocialFeed, SocialPost, DirectChat } from '../../kit'
 ```
 
 <a id="cover"></a>
@@ -6566,6 +6615,7 @@ import entryShot from './assets/shot-kit-entry.webp'
 - text ≤ 64 字
 - label ≤ 8 字
 - marks 0–2 个，必须是 text 里原样出现的子串
+- by 可选：name ≤ 8 字，role ≤ 16 字
 
 **Props**
 
@@ -6575,6 +6625,7 @@ import entryShot from './assets/shot-kit-entry.webp'
 | `icon` | `IconName` |  | 标签里的图标 |
 | `text` | `string` | 是 | 观点段落 |
 | `marks` | `string[]` |  | 强调色的词 |
+| `by` | `{ name, role, image? }` |  | 段落下方的署名 |
 | `source` | `string` |  | 事实出处 |
 
 **示例**
@@ -13148,6 +13199,2236 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 ```tsx
 <BuyoutPricing title="一次买断，永久使用" plans={[{ name: '个人版', price: '¥299', unit: '一次性', items: ['…'], cta: '购买个人版' }, { name: '团队版', price: '¥899', badge: '推荐', items: ['…'], cta: '购买团队版' }]} close={{ title: ['今天开始，', '周末上线。'], cta: '免费预览' }} />
+```
+
+<a id="folio-hero"></a>
+
+## 276 · 作品轨开场 `<FolioHero />`
+
+**位置**：开场 · 个人作品集首页　**参考页**：`src/decks/sig-folio` 中的 `hero`
+
+左边一栏：绿点状态胶囊、头像和邮箱、灰黑两行的大标题、导语和两枚按钮，底边一排技能胶囊；右边一列白框作品图，第二张从下边露出一截。点右侧刻度，整列图像胶片一样上下滑到那一张。为作品轨风格设计，其他风格也能用。
+
+**适合**
+
+- 产品设计师、独立设计师、自由职业者作品集的第一页
+- 想让人一开场就看到人和作品
+
+**避免**
+
+- 没有 2 张以上作品图：用 Cover 或 PhotoCover
+- 团队或机构介绍：用 AtelierHero
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- status ≤ 14 字
+- person.name ≤ 8 字，note ≤ 24 个字符
+- pre 和 title 各 ≤ 6 字
+- lead ≤ 60 字
+- ctas 每个 ≤ 8 字
+- tags 3–5 个 × ≤ 6 字；link ≤ 6 字
+- frames 2–4 张，caption ≤ 14 字
+
+**交互**：点击：右侧刻度让作品列上下滑动；状态绿点呼吸；悬停按钮和图片有反馈
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `status` | `string` | 是 | 带绿点的状态胶囊 |
+| `person` | `{ avatar, name, note? }` |  | 头像、名字和邮箱 |
+| `pre` | `string` | 是 | 灰色第一行 |
+| `title` | `string` | 是 | 黑色第二行 |
+| `lead` | `string` |  | 导语 |
+| `ctas` | `[string, string?]` |  | 黑色主按钮和普通按钮 |
+| `tags` | `string[]` |  | 底边技能胶囊 |
+| `link` | `string` |  | 胶囊后的下划线链接 |
+| `frames` | `{ image, tag?, caption? }[]` | 是 | 右侧作品图 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<FolioHero status="接受新项目 · 12 月起" person={{ avatar: me, name: '林屿', note: 'hello@linyu.example' }} pre="你的下一位" title="产品设计师" ctas={['聊聊项目', '看作品']} frames={[{ image: a, tag: '01', caption: '透明相机' }, { image: b }]} />
+```
+
+<a id="folio-case"></a>
+
+## 277 · 作品轨案例 `<FolioCase />`
+
+**位置**：证据 · 单个项目详情　**参考页**：`src/decks/sig-folio` 中的 `case`
+
+左边：等宽小字编号、项目名加灰色副标题、一张两三行的事实表（客户、角色、周期）和两三个结果数字，单位用主题色上标；右边作品列把这个项目的图停在正中，上下相邻的作品各露出一截，点刻度或露出的图可以切换。
+
+**适合**
+
+- 作品集里讲一个项目：做了什么、多久、结果如何
+- 有 2–3 个能量化的结果
+
+**避免**
+
+- 要讲改版前后对比：用 CaseStudy
+- 只是展示多张作品：用 ProjectPair
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- kicker ≤ 24 个字符
+- title ≤ 8 字，sub ≤ 12 字
+- meta 2–4 行：label ≤ 5 字，value ≤ 20 字
+- stats 2–3 个：value ≤ 4 个字符，unit ≤ 2 个字符，label ≤ 8 字
+- link ≤ 10 字
+- frames 3–5 张
+
+**交互**：点击：刻度或露出的作品图让作品列滑动；悬停放大正中的图
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 等宽编号行 |
+| `title` | `string` | 是 | 项目名 |
+| `sub` | `string` |  | 灰色副标题 |
+| `meta` | `{ label, value }[]` | 是 | 事实表 |
+| `stats` | `{ value, unit?, label }[]` |  | 结果数字 |
+| `link` | `string` |  | 底边下划线链接 |
+| `frames` | `{ image, tag?, caption? }[]` | 是 | 作品列 |
+| `focus` | `number` |  | 一开始停在哪张，默认 1 |
+| `source` | `string` |  | 出处或示意说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<FolioCase kicker="CASE 02 / 04 · 2026" title="琥珀" sub="一块会发光的路由器" meta={[{ label: '客户', value: '远山网络' }, { label: '周期', value: '14 周' }]} stats={[{ value: '3', unit: '×', label: '配网成功率提升' }]} frames={[{ image: a }, { image: b, tag: '02', caption: '琥珀' }, { image: c }]} focus={1} />
+```
+
+<a id="folio-steps"></a>
+
+## 278 · 作品轨流程 `<FolioSteps />`
+
+**位置**：方法 · 分步折叠　**参考页**：`src/decks/sig-folio` 中的 `steps`
+
+左边一列编号步骤，像手风琴一样一次展开一步，展开的那步编号变主题色、加号转成叉；右边作品列跟着滑到这一步对应的图，图上写着步骤名。
+
+**适合**
+
+- 讲合作流程、设计方法、项目阶段
+- 每一步都有一张能拿出来的过程图
+
+**避免**
+
+- 步骤没有配图：用 ProcessQuote 或 Steps
+- 超过 5 步：用 Timeline
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- kicker ≤ 20 个字符
+- title ≤ 8 字，sub ≤ 10 字
+- steps 3–5 步：name ≤ 6 字，time ≤ 6 字，body ≤ 36 字，caption ≤ 14 字
+
+**交互**：点击：展开一步，右侧作品列滑到对应的图
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 等宽小字 |
+| `title` | `string` | 是 | 标题 |
+| `sub` | `string` |  | 灰色副标题 |
+| `steps` | `{ name, time?, body, image, caption? }[]` | 是 | 每步一张图 |
+| `open` | `number` |  | 一开始展开哪一步 |
+| `source` | `string` |  | 出处 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<FolioSteps kicker="PROCESS · 6–14 周" title="四步做完" steps={[{ name: '现场观察', time: '第 1 周', body: '…', image: a }, { name: '草图打样', time: '第 2–4 周', body: '…', image: b }, …]} />
+```
+
+<a id="folio-words"></a>
+
+## 279 · 作品轨评价 `<FolioWords />`
+
+**位置**：证据 · 客户原话　**参考页**：`src/decks/sig-folio` 中的 `words`
+
+左边一次只放一条客户原话，大字号，下面一条细线隔开头像、名字职位和一个主题色结果数字；左下角两枚圆形箭头翻页。翻到哪条，右边作品列就滑到那条评价说的项目。
+
+**适合**
+
+- 作品集或服务介绍里放 2–4 条客户评价
+- 每条评价能对上一个具体项目
+
+**避免**
+
+- 评价很多、想一页铺开：用 ProofMosaic
+- 只有一条：用 Quote
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- kicker ≤ 20 个字符
+- words 2–4 条：text ≤ 56 字，name ≤ 6 字，role ≤ 16 字，metric.value ≤ 5 个字符，metric.label ≤ 8 字，caption ≤ 14 字
+
+**交互**：点击：箭头翻到下一条，文字淡入，作品列同步滑动
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 等宽小字 |
+| `words` | `{ text, name, role, avatar?, metric?, image, caption? }[]` | 是 | 每条评价配一张项目图 |
+| `source` | `string` |  | 出处或示意说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<FolioWords kicker="客户怎么说" words={[{ text: '…', name: '许棠', role: '产品负责人 · 远山网络', metric: { value: '3×', label: '配网成功率' }, image: a }, …]} />
+```
+
+<a id="folio-offers"></a>
+
+## 280 · 作品轨报价 `<FolioOffers />`
+
+**位置**：定价 · 合作方式　**参考页**：`src/decks/sig-folio` 中的 `offers`
+
+左边 2–4 种合作方式排成带价格的清单，点哪一行，那行左边升起一道主题色竖条、编号变色；右边作品列停在一格虚线边框的空位上，写着“你的项目，放这里”，选中的方式和价格会写进这格空位，虚线缓慢流动。
+
+**适合**
+
+- 独立设计师或小工作室的服务和报价
+- 想用一个留白的位置邀请对方开始
+
+**避免**
+
+- 订阅套餐要逐项对比：用 PricingTiers
+- 只有一个价格：用 BookingClose
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- kicker ≤ 20 个字符
+- title ≤ 8 字，sub ≤ 10 字
+- offers 2–4 个：name ≤ 6 字，note ≤ 22 字，price ≤ 6 个字符，unit ≤ 3 字
+- slot.title ≤ 8 字，note ≤ 18 字，cta ≤ 8 字，label ≤ 18 个字符
+- frames 1–2 张
+- foot ≤ 24 字
+
+**交互**：点击：选中一种方式，空位里的方式和价格随之更新；虚线边框缓慢流动
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 等宽小字 |
+| `title` | `string` | 是 | 标题 |
+| `sub` | `string` |  | 灰色副标题 |
+| `offers` | `{ name, note, price, unit? }[]` | 是 | 合作方式 |
+| `picked` | `number` |  | 一开始选中哪一个 |
+| `slot` | `{ title, note?, cta, label? }` | 是 | 虚线空位 |
+| `frames` | `{ image }[]` | 是 | 空位上方露出的作品 |
+| `foot` | `string` |  | 底边小字 |
+| `source` | `string` |  | 出处 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<FolioOffers kicker="SERVICES · 2026" title="三种合作方式" offers={[{ name: '设计冲刺', note: '…', price: '¥28k' }, { name: '长期合伙', note: '…', price: '¥36k', unit: '/ 月' }]} slot={{ title: '你的项目，放这里', cta: '一起做点什么' }} frames={[{ image: a }]} />
+```
+
+<a id="folio-contact"></a>
+
+## 281 · 作品轨问答预约 `<FolioContact />`
+
+**位置**：收尾 · 常见问题与预约　**参考页**：`src/decks/sig-folio` 中的 `contact`
+
+左边 3–4 个常见问题，点开一个看回答；右边作品列中间停着一张白色预约卡：头像、名字、绿点“可预约”、日期和 3–6 个时间格，点一个时间，底部主题色按钮上的时间跟着变。
+
+**适合**
+
+- 作品集或服务介绍的最后一页
+- 想把顾虑和预约放在一起
+
+**避免**
+
+- 要一个完整的月历：用 BookingClose
+- 只是留联系方式：用 Closing
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- kicker ≤ 20 个字符
+- title ≤ 8 字，sub ≤ 10 字
+- faqs 3–4 条：q ≤ 16 字，a ≤ 48 字
+- card.name ≤ 8 字，note ≤ 14 字，status ≤ 8 字，day ≤ 14 字，slots 3–6 个 × ≤ 5 个字符，cta ≤ 8 字，mail ≤ 26 个字符
+- frames 1–2 张
+- foot ≤ 24 字
+
+**交互**：点击：展开问题；点时间格，按钮上的时间随之更新
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 等宽小字 |
+| `title` | `string` | 是 | 标题 |
+| `sub` | `string` |  | 灰色副标题 |
+| `faqs` | `{ q, a }[]` | 是 | 常见问题 |
+| `card` | `{ avatar, name, note?, status?, day?, slots, cta, mail? }` | 是 | 预约卡 |
+| `frames` | `{ image }[]` | 是 | 预约卡上下露出的作品 |
+| `foot` | `string` |  | 底边小字 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<FolioContact kicker="FAQ" title="开始之前" faqs={[{ q: '远程怎么合作？', a: '…' }, …]} card={{ avatar: me, name: '林屿', status: '可预约', slots: ['10:00', '14:00', '17:00'], cta: '预约' }} frames={[{ image: a }, { image: b }]} />
+```
+
+<a id="diptych-hero"></a>
+
+## 282 · 对页开场 `<DiptychHero />`
+
+**位置**：开场 · 个人作品集首页　**参考页**：`src/decks/sig-diptych` 中的 `hero`
+
+左边一整张高图卡，左上角一行手写体西文签名，作品图自动交叉淡入、缓慢推近，底边进度条跟着走满，右下圆形箭头切到下一张；右边绿点状态胶囊、三行粗体大标题（其中几个字变灰）、导语和两枚按钮，最下面一行客户名缓缓横向漂移。为对页风格设计，其他风格也能用。
+
+**适合**
+
+- 独立设计师、摄影师、插画师作品集的第一页
+- 作品是竖图，想一开场就放大看
+
+**避免**
+
+- 作品是横图或界面截图：用 FolioHero 或 AtelierHero
+- 没有作品图：用 Cover
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- status ≤ 10 字
+- title 2–3 行 × ≤ 7 字；soft ≤ 4 字且出现在 title 里
+- lead ≤ 40 字
+- ctas 每个 ≤ 8 字
+- clients 4–8 个 × ≤ 10 个字符
+- shots 2–5 张竖图：title ≤ 8 字，meta ≤ 14 字
+- signature ≤ 12 个西文字符
+
+**交互**：左图自动轮播，进度条走满后切换；点箭头或进度条手动切换；客户名横向漂移，悬停暂停
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `status` | `string` | 是 | 带绿点的状态胶囊 |
+| `title` | `string[]` | 是 | 大标题，每项一行 |
+| `soft` | `string` |  | 标题里要变灰的字 |
+| `lead` | `string` |  | 导语 |
+| `ctas` | `[string, string?]` |  | 黑色主按钮和普通按钮 |
+| `clients` | `string[]` |  | 底边漂移的客户名 |
+| `shots` | `{ image, title?, meta? }[]` | 是 | 左边图卡轮播的作品 |
+| `signature` | `string` |  | 图卡左上角的西文签名 |
+| `autoplay` | `number` |  | 每张停留毫秒数，0 关闭，默认 5200 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DiptychHero status="接受预约中" title={['我设计并搭建', '让人心动', '的产品']} soft="心动" ctas={['约个时间聊聊', '看看项目']} signature="Baiyi" shots={[{ image: a, title: '焰', meta: '视觉设计 · 2026' }, { image: b }]} />
+```
+
+<a id="diptych-works"></a>
+
+## 283 · 对页项目列表 `<DiptychWorks />`
+
+**位置**：证据 · 精选项目　**参考页**：`src/decks/sig-diptych` 中的 `works`
+
+右边灰色小字、两行标题和一列带编号的项目名，当前那行变黑、右端出现主题色箭头；鼠标移到哪一行，左边大图卡就淡入那个项目的图，图上写着项目名和类型年份。
+
+**适合**
+
+- 3–6 个项目，每个有一张好图
+- 想让人自己挑着看
+
+**避免**
+
+- 只有两个项目：用 ProjectPair
+- 项目要讲细节：用 FolioCase
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- kicker ≤ 16 字
+- title 1–2 行 × ≤ 8 字
+- works 3–6 个：name ≤ 6 字，kind ≤ 6 字，year ≤ 6 个字符
+
+**交互**：悬停或点击项目，左图交叉淡入对应作品，箭头滑入
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 灰色小字 |
+| `title` | `string[]` | 是 | 标题 |
+| `soft` | `string` |  | 标题里变灰的字 |
+| `works` | `{ name, kind, year?, image }[]` | 是 | 项目 |
+| `active` | `number` |  | 一开始亮哪个 |
+| `signature` | `string` |  | 图卡签名 |
+| `source` | `string` |  | 出处 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DiptychWorks kicker="精选项目 · 2023—2026" title={['做得不多，', '每一个都做透。']} soft="每一个都做透。" works={[{ name: '焰', kind: '视觉设计', year: '2026', image: a }, …]} />
+```
+
+<a id="diptych-services"></a>
+
+## 284 · 对页服务 `<DiptychServices />`
+
+**位置**：服务 · 分标签介绍　**参考页**：`src/decks/sig-diptych` 中的 `services`
+
+右边标题下一排胶囊标签（品牌 / 网站 / 产品），点一个，下面换成这项服务的一句话、两列交付清单和周期、预算两个大数字，左边图卡同时换成对应的图。
+
+**适合**
+
+- 2–4 项服务，每项有交付物和大致报价
+- 不想把所有服务挤在一页里
+
+**避免**
+
+- 要并排比较价格：用 PricingTiers
+- 服务就是一个流程：用 FolioSteps
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 1–2 行 × ≤ 8 字
+- services 2–4 个：name ≤ 4 字，body ≤ 40 字，items 3–5 条 × ≤ 10 字，time 和 price 各 ≤ 8 字
+- labels 每个 ≤ 4 字
+
+**交互**：点击标签：内容淡入切换，左图同步交叉淡入
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 灰色小字 |
+| `title` | `string[]` | 是 | 标题 |
+| `soft` | `string` |  | 标题里变灰的字 |
+| `services` | `{ name, body, items, time?, price?, image }[]` | 是 | 服务 |
+| `labels` | `[string, string]` |  | 周期和预算的小标签，默认“周期”“预算” |
+| `signature` | `string` |  | 图卡签名 |
+| `source` | `string` |  | 出处 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DiptychServices kicker="我能帮你做" title={['三件事，', '从头到尾一个人。']} services={[{ name: '品牌', body: '…', items: ['标志与字标', '视觉规范'], time: '4–6 周', price: '¥60k 起', image: a }, …]} />
+```
+
+<a id="diptych-words"></a>
+
+## 285 · 对页评价 `<DiptychWords />`
+
+**位置**：证据 · 客户原话　**参考页**：`src/decks/sig-diptych` 中的 `words`
+
+右边一排编号小胶囊，一次放一条大字号客户原话和署名；点编号换一条，左边图卡同时换成那条评价说的项目。底部一条细线下面是两三个大数字。
+
+**适合**
+
+- 2–4 条评价，每条对应一个作品
+- 想把评价和数字放在同一页
+
+**避免**
+
+- 评价没有对应作品：用 Quote
+- 评价很多：用 ProofMosaic
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- kicker ≤ 16 字
+- words 2–4 条：text ≤ 50 字，name ≤ 6 字，role ≤ 16 字，project ≤ 8 字
+- stats 2–3 个：value ≤ 5 个字符，label ≤ 8 字
+
+**交互**：点击编号：原话淡入切换，左图同步交叉淡入
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 灰色小字 |
+| `words` | `{ text, name, role, image, project? }[]` | 是 | 评价，每条配一张作品图 |
+| `stats` | `{ value, label }[]` |  | 底部数字 |
+| `signature` | `string` |  | 图卡签名 |
+| `source` | `string` |  | 出处或示意说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DiptychWords kicker="合作过的人说" words={[{ text: '…', name: '许岚', role: '主理人 · 素瓶', image: a, project: '素瓶' }, …]} stats={[{ value: '40+', label: '完成的项目' }]} />
+```
+
+<a id="diptych-about"></a>
+
+## 286 · 对页关于 `<DiptychAbout />`
+
+**位置**：关于 · 个人经历　**参考页**：`src/decks/sig-diptych` 中的 `about`
+
+左边一张半身照，右边两行标题、一列经历（职位、说明、年份），下面一行带下划线的大号邮箱，点一下复制并弹出“已复制”，最后两枚按钮。
+
+**适合**
+
+- 作品集里的自我介绍
+- 想把经历和联系方式放在一起
+
+**避免**
+
+- 团队介绍：用 TeamBanner
+- 经历超过 4 段：用 Timeline
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 1–2 行 × ≤ 8 字
+- roles 2–4 段：role ≤ 14 字，note ≤ 14 字，years ≤ 11 个字符
+- mail ≤ 22 个字符；copied ≤ 6 字
+- ctas 每个 ≤ 8 字
+- shots 1–3 张
+
+**交互**：点击邮箱：复制并弹出提示；悬停经历行轻推
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 灰色小字 |
+| `title` | `string[]` | 是 | 标题 |
+| `soft` | `string` |  | 标题里变灰的字 |
+| `roles` | `{ role, note?, years }[]` | 是 | 经历，新的在前 |
+| `mail` | `string` |  | 大号邮箱，点击复制 |
+| `copied` | `string` |  | 复制后的提示，默认“已复制” |
+| `ctas` | `[string, string?]` |  | 按钮 |
+| `shots` | `{ image, title?, meta? }[]` | 是 | 左边图卡，放人像 |
+| `signature` | `string` |  | 图卡签名 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DiptychAbout kicker="关于我" title={['九年，从印刷品', '做到屏幕里。']} roles={[{ role: '独立设计师', note: '品牌、网站与产品', years: '2022 — 至今' }, …]} mail="hi@baiyi.example" shots={[{ image: me }]} />
+```
+
+<a id="diptych-contact"></a>
+
+## 287 · 对页需求单 `<DiptychContact />`
+
+**位置**：收尾 · 选项式联系　**参考页**：`src/decks/sig-diptych` 中的 `contact`
+
+右边两行标题下两三组胶囊选项（想做什么、预算、何时开始），点选后变黑；底部黑色大按钮上的主题色小圆标显示一共选了几项，每次变化会弹一下。左边图卡放作品。
+
+**适合**
+
+- 作品集或服务介绍的最后一页
+- 想让对方几秒钟说清需求
+
+**避免**
+
+- 要约具体时间：用 FolioContact 或 BookingClose
+- 只留联系方式：用 Closing
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 1–2 行 × ≤ 8 字
+- groups 2–3 组：label ≤ 10 字，options 2–5 个 × ≤ 6 字
+- cta ≤ 6 字；note ≤ 24 字
+- shots 1–3 张
+
+**交互**：点击胶囊选择，按钮上的计数弹跳更新
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 灰色小字 |
+| `title` | `string[]` | 是 | 标题 |
+| `soft` | `string` |  | 标题里变灰的字 |
+| `groups` | `{ label, options, multi? }[]` | 是 | 选项组，multi 为可多选 |
+| `cta` | `string` | 是 | 发送按钮 |
+| `note` | `string` |  | 按钮旁的小字 |
+| `shots` | `{ image, title?, meta? }[]` | 是 | 左边图卡 |
+| `signature` | `string` |  | 图卡签名 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DiptychContact kicker="开始一个项目" title={['先告诉我', '你想做什么。']} groups={[{ label: '想做什么', options: ['品牌', '官网', 'App'], multi: true }, { label: '预算', options: ['5 万以内', '5–15 万'] }]} cta="发给我" shots={[{ image: a }]} />
+```
+
+<a id="marker-intro"></a>
+
+## 288 · 记号笔开场 `<MarkerIntro />`
+
+**位置**：开场 · 一句话自我介绍　**参考页**：`src/decks/sig-marker` 中的 `intro`
+
+白底中间一栏：一个双菱形小标记、一句大字号的自我介绍，里面用 ==…== 圈出的词会像荧光笔一样依次从左到右刷上黄、绿、紫三色底；下面一句灰色的补充，最下面一排等宽小链接。页脚左边一句落款，右边城市加一只走动的时钟。
+
+**适合**
+
+- 个人主页、设计师、写作者的第一页
+- 想用一句话而不是一个标题来介绍自己
+
+**避免**
+
+- 要放作品图：用 FolioHero 或 DiptychHero
+- 要讲产品卖点：用 Statement
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- say ≤ 2 行 × 14 字，标记 1–3 处
+- aside ≤ 2 行 × 12 字
+- links 2–4 个 × ≤ 6 字
+- corners.left ≤ 20 字，city ≤ 6 字
+
+**交互**：荧光笔底色依次刷入；悬停标记词微微倾斜；右下角时钟每秒走动
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `say` | `string` | 是 | 主句，==词== 标记，\n 换行 |
+| `aside` | `string` |  | 灰色补充句，同样语法 |
+| `links` | `string[]` |  | 底部等宽链接 |
+| `corners` | `{ left?, city?, zone? }` |  | 页脚落款和时钟，zone 用 IANA 时区 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<MarkerIntro say={'我是 周拾，一个做 ==安静的界面==\n和 ==小工具== 的设计师。'} aside="说个秘密？我收集 ==没用过的速写本==。" links={['精选作品', '现在']} corners={{ left: '回头见', city: '杭州', zone: 'Asia/Shanghai' }} />
+```
+
+<a id="marker-works"></a>
+
+## 289 · 记号笔作品卡 `<MarkerWorks />`
+
+**位置**：证据 · 精选作品　**参考页**：`src/decks/sig-marker` 中的 `works`
+
+三张浅灰大圆角卡并排，每张顶上写作品名和编号，中间一张竖图被四个取景角框住、带一点投影，底下一行年份。悬停时取景角向外张开、图片上浮；作品多于三件时，左下角箭头三张一页横向翻。
+
+**适合**
+
+- 3–9 件小而精的作品：产品、物件、App
+- 作品图是干净的产品照
+
+**避免**
+
+- 作品是横图截图：用 ProjectPair
+- 要逐个讲细节：用 FolioCase
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- kicker ≤ 10 字
+- works 3–9 件，三件一页：name ≤ 6 字，no ≤ 4 个字符，year ≤ 10 个字符
+
+**交互**：悬停：取景角张开、图片上浮；点击箭头三张一页翻动
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 等宽小标签 |
+| `works` | `{ name, no?, year?, image }[]` | 是 | 作品 |
+| `corners` | `{ left?, city?, zone? }` |  | 页脚落款和时钟 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<MarkerWorks kicker="精选作品" works={[{ name: '港口笔记', no: '001', year: '2024', image: a }, …]} />
+```
+
+<a id="marker-skills"></a>
+
+## 290 · 记号笔能力卡 `<MarkerSkills />`
+
+**位置**：能力 · 我做什么与近况　**参考页**：`src/decks/sig-marker` 中的 `skills`
+
+上半页三张浅灰卡，每张一个线描等轴小图标（屏幕、积木、字母、叠层、柱子、笔六选一），悬停时图标的几层会向上分开；下半页一个取景角框住的“现在”，一句带荧光笔标记的近况。
+
+**适合**
+
+- 介绍自己做哪三类事
+- 想顺便讲讲最近在忙什么
+
+**避免**
+
+- 服务要配价格：用 FolioOffers
+- 超过三类：用 IconGrid
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- kicker ≤ 10 字
+- skills 正好 3 个：name ≤ 5 字，no ≤ 4 个字符，note ≤ 8 字，icon 六选一
+- nowLabel ≤ 6 字，updated ≤ 14 字
+- now ≤ 2 行 × 22 字
+
+**交互**：悬停：图标分层上浮，取景角张开
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 等宽小标签 |
+| `skills` | `{ name, no?, note?, icon }[]` | 是 | icon：screen / blocks / type / stack / chart / pen |
+| `nowLabel` | `string` |  | “现在”标签 |
+| `updated` | `string` |  | 右侧更新时间 |
+| `now` | `string` | 是 | 近况句子，==词== 标记 |
+| `corners` | `{ city?, zone? }` |  | 页脚时钟 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<MarkerSkills kicker="我做什么" skills={[{ name: '界面', no: '001', note: '产品界面', icon: 'screen' }, { name: '小工具', icon: 'blocks' }, { name: '字体', icon: 'type' }]} now="此刻我在做 ==一个很小的排版工具==。" />
+```
+
+<a id="marker-log"></a>
+
+## 291 · 记号笔随笔 `<MarkerLog />`
+
+**位置**：内容 · 日志与文章列表　**参考页**：`src/decks/sig-marker` 中的 `log`
+
+一列带日期的短条目，每条标题里有一处荧光笔标记，右边一个小标签和斜箭头；点一行，箭头转向主题色，下面展开一句摘要。
+
+**适合**
+
+- 随笔、更新日志、读书笔记
+- 想展示近期在想什么
+
+**避免**
+
+- 版本更新要分类：用 Changelog
+- 条目超过 6 条：分两页
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- kicker ≤ 8 字，meta ≤ 14 字
+- entries 3–6 条：date ≤ 6 个字符，title ≤ 20 字，tag ≤ 4 字，body ≤ 50 字
+
+**交互**：点击一行展开摘要，箭头旋转；悬停行轻推
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 等宽小标签 |
+| `meta` | `string` |  | 右侧等宽小字 |
+| `entries` | `{ date, title, tag?, body? }[]` | 是 | 条目，新的在前 |
+| `open` | `number` |  | 一开始展开哪一条，-1 不展开 |
+| `corners` | `{ left?, city?, zone? }` |  | 页脚落款和时钟 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<MarkerLog kicker="随笔" entries={[{ date: '09.18', title: '为什么我只用 ==两种字重==', tag: '排版', body: '…' }, …]} />
+```
+
+<a id="marker-facts"></a>
+
+## 292 · 记号笔数字 `<MarkerFacts />`
+
+**位置**：数据 · 一句话加数字　**参考页**：`src/decks/sig-marker` 中的 `facts`
+
+上面一句带荧光笔标记的大字，下面 3–4 个取景角框住的浅灰格子，大数字在翻到这页时从 0 滚动到目标值，单位和说明是灰色。
+
+**适合**
+
+- 个人或小团队的几个累计数字
+- 想让数字有一句话的上下文
+
+**避免**
+
+- 数字需要对比或趋势：用 BarChart 或 StatRow
+- 只有一个数字：用 BigNumber
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- say ≤ 2 行 × 18 字
+- facts 3–4 个：value 为整数，unit ≤ 3 个字符，label ≤ 10 字
+- note ≤ 24 字
+
+**交互**：数字从 0 滚动计数；悬停格子取景角张开
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `say` | `string` | 是 | 上方句子，==词== 标记 |
+| `facts` | `{ value, unit?, label }[]` | 是 | 会滚动计数的数字 |
+| `note` | `string` |  | 下方等宽小字 |
+| `corners` | `{ left?, city?, zone? }` |  | 页脚落款和时钟 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<MarkerFacts say="八年里，我画过 ==很多界面==。" facts={[{ value: 42, label: '上线的界面' }, { value: 1280, unit: '+', label: '画满的速写页' }]} />
+```
+
+<a id="marker-close"></a>
+
+## 293 · 记号笔收尾 `<MarkerClose />`
+
+**位置**：收尾 · 联系方式　**参考页**：`src/decks/sig-marker` 中的 `close`
+
+双菱形小标记、一句带荧光笔标记的收尾语，下面一行等宽大字邮箱，悬停时主题色下划线从左划过，点一下复制并亮起“已复制”；最下面一排等宽社交链接。
+
+**适合**
+
+- 个人主页或作品集的最后一页
+- 只想留一个联系方式
+
+**避免**
+
+- 要预约时间：用 FolioContact
+- 要收集需求：用 DiptychContact
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- say ≤ 2 行 × 12 字
+- mail ≤ 24 个字符；copied ≤ 6 字
+- links 2–4 个 × ≤ 10 个字符
+
+**交互**：悬停邮箱划出下划线；点击复制并提示
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `say` | `string` | 是 | 收尾句，==词== 标记 |
+| `mail` | `string` | 是 | 点击复制的邮箱 |
+| `copied` | `string` |  | 复制后的提示，默认“已复制” |
+| `links` | `string[]` |  | 等宽社交链接 |
+| `corners` | `{ left?, city?, zone? }` |  | 页脚落款和时钟 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<MarkerClose say={'有个 ==安静的想法==？\n写信给我。'} mail="hi@zhoushi.example" links={['即刻', 'GitHub']} />
+```
+
+<a id="album-hero"></a>
+
+## 294 · 相册开场 `<AlbumHero />`
+
+**位置**：开场 · 温暖的消费产品首页　**参考页**：`src/decks/sig-album` 中的 `hero`
+
+页面顶部一团暖黄晨光：小胶囊、一行手写感衬线小字、两行粗体大标题（最后一个词换成斜体衬线，带橙→玫红→紫的渐变）、导语和一枚按钮；底部 5–9 张拍立得沿一段大圆弧扇形发开，像发牌一样依次落下，悬停的那张会抽出来一截，旁边飘着几枚小标签。
+
+**适合**
+
+- 相册、日记、家庭、生活方式类产品的第一页
+- 想要温暖、私密、有手感的开场
+
+**避免**
+
+- B2B 或数据产品：用 SunriseHero
+- 照片不够 5 张：用 AtelierHero
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- badge ≤ 8 字；hand ≤ 18 字
+- title 2 行 × ≤ 9 字；grad ≤ 4 字且在最后一行末尾
+- lead ≤ 40 字；cta ≤ 6 字
+- prints 5–9 张：caption ≤ 8 字
+- chips ≤ 3 个 × ≤ 10 字
+
+**交互**：拍立得依次发牌落下；悬停抽出一张；小标签轻轻浮动，晨光缓慢呼吸
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `badge` | `string` |  | 顶部小胶囊 |
+| `hand` | `string` |  | 标题上方的手写感小字 |
+| `title` | `string[]` | 是 | 两行大标题 |
+| `grad` | `string` |  | 最后一行末尾变成渐变斜体的词 |
+| `lead` | `string` |  | 导语 |
+| `cta` | `string` |  | 按钮 |
+| `prints` | `{ image, caption? }[]` | 是 | 扇形拍立得 |
+| `chips` | `string[]` |  | 漂浮的小标签 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<AlbumHero badge="私密内测中" hand="给那些拍了，却从没洗出来的照片" title={['有些时刻，值得', '被好好记住。']} grad="记住。" cta="开始记录" prints={[{ image: a, caption: '午后的窗' }, …]} chips={['✦ 本周 +42 张']} />
+```
+
+<a id="album-layout"></a>
+
+## 295 · 相册桌面排版 `<AlbumLayout />`
+
+**位置**：方法 · 三步演示　**参考页**：`src/decks/sig-album` 中的 `layout`
+
+左边标题（一个词换成渐变斜体）和三步说明，右边一张斜放的白色桌面上摆着五张照片和一条圆形工具栏。点哪一步，桌上的照片就跟着变：第一步堆成一叠，第二步大小不一地摊开，第三步整齐排好、被选中的那张描上虚线框。
+
+**适合**
+
+- 演示一个“整理 / 排版 / 编辑”的过程
+- 产品的核心是亲手摆放
+
+**避免**
+
+- 步骤超过 3 个：用 FolioSteps 或 Steps
+- 要放真实界面截图：用 DeviceFrame
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 2 行 × ≤ 9 字；em ≤ 4 字且在第一行里
+- steps 正好 3 步：name ≤ 10 字，note ≤ 26 字
+- photos 正好 5 张；loose 0–2 张
+
+**交互**：点击步骤：五张照片带弹性地移动、缩放、旋转到新位置；悬停桌面倾角变小
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `title` | `string[]` | 是 | 两行标题 |
+| `em` | `string` |  | 第一行里变成渐变斜体的词 |
+| `steps` | `{ name, note }[]` | 是 | 三步，每步对应一种摆法 |
+| `photos` | `PhotoImage[]` | 是 | 桌面上的五张照片 |
+| `loose` | `PhotoImage[]` |  | 桌面外漂浮的照片 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<AlbumLayout title={['亲手排一排，', '才像自己的相册。']} em="排一排" steps={[{ name: '放进一卷', note: '…' }, { name: '决定大小', note: '…' }, { name: '摆好', note: '…' }]} photos={[a, b, c, d, e]} />
+```
+
+<a id="album-week"></a>
+
+## 296 · 相册一周 `<AlbumWeek />`
+
+**位置**：内容 · 一周图记　**参考页**：`src/decks/sig-album` 中的 `week`
+
+一根微微下垂的细绳横过页面，5–7 张拍立得用小木夹夹在上面，翻到这页时轻轻晃动；点一张，它放大落下，其余几张褪色，下方用斜体衬线写出日期、一句话和地点。
+
+**适合**
+
+- 一周、一次旅行、一个项目的逐日回顾
+- 每天一张图加一句话
+
+**避免**
+
+- 超过 7 天：用 Timeline
+- 图要大看：用 DiptychWorks
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- kicker ≤ 12 字；title 1 行 ≤ 12 字
+- days 5–7 天：day ≤ 3 字，date ≤ 8 字，caption ≤ 6 字，note ≤ 40 字，place ≤ 10 字
+
+**交互**：照片在绳上晃动落定；点击放大选中那天，下方文字淡入
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` |  | 小标签 |
+| `title` | `string` | 是 | 标题 |
+| `days` | `{ day, date, image, caption?, note?, place? }[]` | 是 | 每天一张 |
+| `picked` | `number` |  | 一开始选中哪天 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<AlbumWeek kicker="第 24 周" title="这一周，一天一张" days={[{ day: '周一', date: '6 月 10 日', image: a, caption: '早班车', note: '…', place: '老城区' }, …]} />
+```
+
+<a id="album-stories"></a>
+
+## 297 · 相册翻面故事 `<AlbumStories />`
+
+**位置**：证据 · 用户故事　**参考页**：`src/decks/sig-album` 中的 `stories`
+
+三张大拍立得略带角度排开，悬停时摆正；点一张会立体翻到背面，背面是带横线的信纸，用衬线字写着这位用户的一句话和署名。
+
+**适合**
+
+- 消费产品的用户故事、评价
+- 想让人自己翻开看，而不是一次铺满
+
+**避免**
+
+- 评价要配数字：用 DiptychWords
+- 超过 3 条：用 ProofMosaic
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- kicker ≤ 8 字；title 1 行 ≤ 14 字
+- stories 正好 3 条：caption ≤ 8 字，note ≤ 44 字，name ≤ 6 字，meta ≤ 10 字
+
+**交互**：点击照片立体翻面；悬停摆正上浮
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` |  | 小标签 |
+| `title` | `string` | 是 | 标题 |
+| `stories` | `{ image, caption, note, name, meta? }[]` | 是 | 三张，背面写着原话 |
+| `source` | `string` |  | 出处或示意说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<AlbumStories title="照片背后，写着一句话" stories={[{ image: a, caption: '外婆的厨房', note: '…', name: '小满', meta: '用了 2 年' }, …]} />
+```
+
+<a id="album-plus"></a>
+
+## 298 · 相册会员 `<AlbumPlus />`
+
+**位置**：定价 · 单一会员　**参考页**：`src/decks/sig-album` 中的 `plus`
+
+居中一张白色大卡：会员名带一枚渐变星号、一段说明、2×2 四个功能格（彩色圆角图标，悬停时图标歪一下），底部一排月付 / 年付切换、斜体衬线的大价格和按钮；切换时价格从下面滚上来。卡片四周漂着几张拍立得。
+
+**适合**
+
+- 只有一档付费会员
+- 消费产品的订阅页
+
+**避免**
+
+- 多档套餐：用 PricingTiers
+- 一次性买断：用 BuyoutPricing
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- name ≤ 10 个字符；lead ≤ 46 字
+- feats 正好 4 个：icon 一个字符，title ≤ 7 字，note ≤ 24 字
+- prices 两个 × ≤ 6 个字符；cta ≤ 8 字
+- around 2–4 张
+
+**交互**：点击切换月付 / 年付，价格滚动更新；照片轻轻浮动
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `name` | `string` | 是 | 会员名 |
+| `lead` | `string` |  | 说明 |
+| `feats` | `{ icon, title, note }[]` | 是 | 四个功能 |
+| `prices` | `[string, string]` | 是 | 月付和年付价格 |
+| `periods` | `{ month, year, perMonth, perYear, save? }` |  | 切换按钮和单位的文字，默认中文 |
+| `cta` | `string` | 是 | 按钮 |
+| `around` | `PhotoImage[]` |  | 四周漂浮的照片 |
+| `source` | `string` |  | 出处 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<AlbumPlus name="拾光 Plus" feats={[{ icon: '☁', title: '原图不限量', note: '…' }, …]} prices={['¥18', '¥168']} cta="加入 Plus" around={[a, b, c, d]} />
+```
+
+<a id="album-close"></a>
+
+## 299 · 相册收尾 `<AlbumClose />`
+
+**位置**：收尾 · 号召与照片堆　**参考页**：`src/decks/sig-album` 中的 `close`
+
+左边手写感小字、两行大标题（最后一个词渐变斜体）、导语、按钮和一行小字；右边一叠拍立得，点一下最上面那张飞出去再插回底部，下一张露出来，角落写着第几张。
+
+**适合**
+
+- 消费产品演示的最后一页
+- 想留一个可以玩一下的小动作
+
+**避免**
+
+- 要留联系方式：用 MarkerClose
+- 要收集需求：用 DiptychContact
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- hand ≤ 16 字
+- title 2 行 × ≤ 8 字；grad ≤ 4 字
+- lead ≤ 40 字；ctas 每个 ≤ 8 字；note ≤ 24 字
+- prints 3–8 张
+
+**交互**：点击照片堆：最上面一张飞出插回底部，计数更新；悬停时照片摆正
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `hand` | `string` |  | 手写感小字 |
+| `title` | `string[]` | 是 | 两行标题 |
+| `grad` | `string` |  | 最后一行末尾变成渐变斜体的词 |
+| `lead` | `string` |  | 导语 |
+| `ctas` | `[string, string?]` |  | 按钮和文字链接 |
+| `note` | `string` |  | 按钮下的小字 |
+| `prints` | `{ image, caption? }[]` | 是 | 照片堆 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<AlbumClose title={['把这一周，', '留给以后的你。']} grad="以后的你。" ctas={['开始记录', '先看看示例']} prints={[{ image: a, caption: '洗出来了' }, …]} />
+```
+
+<a id="slate-hero"></a>
+
+## 300 · 立体看板开场 `<SlateHero />`
+
+**位置**：开场 · SaaS 产品首页　**参考页**：`src/decks/sig-slate` 中的 `hero`
+
+左侧一枚版本小胶囊、两行大标题（标题里嵌一枚斜放的渐变图标块）、导语、主按钮加文字链接和一排客户字标；右侧一块数据看板在 3D 里向内倾斜：标签栏、问候语、三张 KPI 卡和一张柱状图。点哪张 KPI 卡，它就被渐变点亮，柱状图换成它的走势；悬停看板会慢慢转正。
+
+**适合**
+
+- SaaS、数据产品、效率工具的第一页
+- 想一眼看出“这是一个有看板的产品”
+
+**避免**
+
+- 没有可展示的数字：用 SunriseHero
+- 消费类、生活方式产品：用 AlbumHero
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- chip 标签 ≤ 6 个字符，后半句 ≤ 12 字
+- title 2 行 × ≤ 8 字，可放 {bolt} {up} {spark} {chart} {link} {shield} {clock} {check}
+- lead ≤ 50 字；ctas 各 ≤ 8 字；logos 3–5 个 × ≤ 10 个字符
+- dash.tabs 3–5 个 × ≤ 4 字；hello ≤ 12 字；note ≤ 24 字
+- dash.kpis 恰好 3 张：value ≤ 8 个字符，series 8–14 个数
+- float ≤ 8 字
+
+**交互**：看板从远处转进来；点 KPI 卡换图表；悬停看板转正；图标块悬停会弹一下
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `chip` | `[string, string]` |  | 版本标签和后半句 |
+| `title` | `string[]` | 是 | 两行标题，可嵌图标块 |
+| `lead` | `string` |  | 导语 |
+| `ctas` | `[string, string?]` |  | 主按钮和文字链接 |
+| `logos` | `string[]` |  | 客户字标 |
+| `dash` | `{ tabs, hello, note?, kpis, chart? }` | 是 | 倾斜的看板 |
+| `float` | `string` |  | 看板旁浮动的小标签 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<SlateHero chip={['2.0 版', '更聪明，也更快']} title={['用 {bolt} 数衡', '理顺你的工作流']} ctas={['免费试用', '看演示 →']} dash={{ tabs: ['总览', '收入'], hello: '早上好', kpis: [{ label: '本月收入', value: '¥156.6万', delta: '+12%', series: [42, 50, …] }, …] }} />
+```
+
+<a id="slate-steps"></a>
+
+## 301 · 立体看板三步 `<SlateSteps />`
+
+**位置**：方法 · 三步上手　**参考页**：`src/decks/sig-slate` 中的 `steps`
+
+居中的小圆点标签、两行标题和副标题；下面三张白卡并排，每张上半是一幅会动的小图（节点连线、柱状、半圆仪表、圆环、横条或声波），下半是渐变小标签、步骤名和一句说明。悬停卡片会浮起。
+
+**适合**
+
+- 讲清楚产品怎么上手、怎么运作
+- 三个步骤各自能配一幅简单的图
+
+**避免**
+
+- 步骤超过 3 个：用时间线类模板
+- 每步需要长段说明：用 FolioSteps
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 2 行 × ≤ 12 字；lead ≤ 24 字
+- steps 恰好 3 个：tag ≤ 6 字，title ≤ 10 字，body ≤ 34 字
+- vis 取 bars / gauge / wave / donut / rows / nodes；gauge 与 donut 需 value 0–100
+
+**交互**：小图依次生长、扫过；悬停卡片浮起
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | 顶部圆点标签 |
+| `title` | `string[]` | 是 | 标题 |
+| `lead` | `string` |  | 副标题 |
+| `steps` | `{ tag, title, body, vis, value? }[]` | 是 | 三个步骤 |
+| `source` | `string` |  | 底部说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<SlateSteps title={['接入、整理、行动，', '一个下午就能跑起来']} steps={[{ tag: '步骤 1', title: '连上现有工具', body: '…', vis: 'nodes' }, …]} />
+```
+
+<a id="slate-compare"></a>
+
+## 302 · 立体看板对比表 `<SlateCompare />`
+
+**位置**：对比 · 我们与替代方案　**参考页**：`src/decks/sig-slate` 中的 `compare`
+
+左侧标题、导语、按钮和三张小数字卡；右侧一张白色对比表，“我们”那一列被一根渐变竖条整体点亮，打勾为白圈、打叉为深色圈。右上角的开关打开后，两边相同的行会收起，只剩差异。
+
+**适合**
+
+- 和传统做法或竞品逐项比较
+- 想让差异一眼可见
+
+**避免**
+
+- 要比较的对象超过 2 个：用多列对比模板
+- 比较项是数字而非有无：用 SlateTrend 或数据类模板
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 2 行 × ≤ 10 字；lead ≤ 50 字；cta ≤ 6 字
+- stats ≤ 3 个：value ≤ 5 个字符，label ≤ 8 字
+- cols 2 个 × ≤ 5 字
+- rows 4–8 行：label ≤ 10 字，icon 1 个字符
+
+**交互**：开关收起相同的行；悬停行名变主色；小数字卡悬停浮起
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | 圆点标签 |
+| `title` | `string[]` | 是 | 标题 |
+| `lead` | `string` |  | 导语 |
+| `cta` | `string` |  | 按钮 |
+| `stats` | `{ value, label }[]` |  | 小数字卡 |
+| `cols` | `[string, string]` | 是 | 我们 / 对方的列名 |
+| `rows` | `{ icon?, label, ours, theirs }[]` | 是 | 逐项对比 |
+| `diffLabel` | `string` |  | 开关文字，默认“只看差异” |
+| `source` | `string` |  | 数据来源 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<SlateCompare title={['同样的预算，', '少开一半的会']} cols={['数衡', '传统报表']} rows={[{ label: '实时同步数据', ours: true, theirs: false }, …]} />
+```
+
+<a id="slate-trend"></a>
+
+## 303 · 立体看板趋势 `<SlateTrend />`
+
+**位置**：趋势 · 多指标走势　**参考页**：`src/decks/sig-slate` 中的 `trend`
+
+左上标题；左侧一列指标卡（名称、当前值、绿色涨幅），右侧一张大白卡里画面积折线图，末端一颗圆点和深色气泡标出当前值。点哪张指标卡，它被渐变点亮，曲线重新画成它的走势。
+
+**适合**
+
+- 复盘一年或一个季度的增长
+- 2–4 个指标想放在同一页轮流看
+
+**避免**
+
+- 只有一个数字：用大数字类模板
+- 要同时比较多条曲线：用数据类多序列图表
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title ≤ 14 字
+- series 2–4 个：label ≤ 8 字，value ≤ 8 个字符，delta ≤ 6 个字符，points 与 xs 等长
+- xs 6–14 个 × ≤ 4 个字符
+- note ≤ 30 字
+
+**交互**：曲线从左往右画出；点指标卡换曲线；末端圆点和气泡弹出
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | 圆点标签 |
+| `title` | `string` | 是 | 标题 |
+| `series` | `{ label, value, delta?, points }[]` | 是 | 指标与数据点 |
+| `xs` | `string[]` | 是 | 横轴标签 |
+| `note` | `string` |  | 底部说明 |
+| `source` | `string` |  | 数据来源 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<SlateTrend title="每一条曲线都在往上走" series={[{ label: '月度经常性收入', value: '¥156.6万', delta: '+212%', points: [50, 56, …] }, …]} xs={['1月', …, '12月']} />
+```
+
+<a id="slate-pricing"></a>
+
+## 304 · 立体看板定价 `<SlatePricing />`
+
+**位置**：定价 · 按人数计价　**参考页**：`src/decks/sig-slate` 中的 `pricing`
+
+顶部标题，右侧一个团队人数步进器（− / +）；下面三张方案卡并排，中间那张整体被渐变点亮并带“最多人选”标签。价格随人数实时算出，企业方案可以写“联系我们”。
+
+**适合**
+
+- 按席位收费的 SaaS 定价
+- 想让观众自己感受人数对价格的影响
+
+**避免**
+
+- 只有一个方案：用 AlbumPlus
+- 按用量计费：用数据类模板讲清楚阶梯
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title ≤ 14 字
+- plans 恰好 3 个：name ≤ 4 字，note ≤ 14 字，items 3–5 条 × ≤ 12 字，cta ≤ 6 字
+- perSeat 为单人月价；不填 perSeat 时用 custom（≤ 6 字）
+- seats 默认 10，step 默认 5
+
+**交互**：− / + 改人数，价格实时重算；方案卡悬停浮起
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | 圆点标签 |
+| `title` | `string` | 是 | 标题 |
+| `plans` | `{ name, note, perSeat?, custom?, items, cta }[]` | 是 | 三个方案，中间为推荐 |
+| `seats` | `number` |  | 起始人数 |
+| `step` | `number` |  | 每次增减的人数 |
+| `labels` | `{ seats, month, currency, popular? }` |  | 界面文字与币种 |
+| `source` | `string` |  | 底部说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<SlatePricing title="按人数付费，随时增减" plans={[{ name: '入门', note: '…', perSeat: 39, items: […], cta: '免费开始' }, …]} />
+```
+
+<a id="slate-connect"></a>
+
+## 305 · 立体看板集成 `<SlateConnect />`
+
+**位置**：收尾 · 集成与号召　**参考页**：`src/decks/sig-slate` 中的 `connect`
+
+左侧标题（可嵌图标块）、导语、两个按钮和一行小字；右侧一个集成星图：中间一枚大图标块，外圈 6–8 个工具图标沿虚线环排开，每根辐条上有光点流向中心。悬停某个工具，它和它的辐条被点亮。
+
+**适合**
+
+- 讲产品能接入哪些现有工具
+- SaaS 演示的最后一页号召试用
+
+**避免**
+
+- 要列出几十个真实集成：用清单类模板
+- 需要讲接入步骤：用 SlateSteps
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 2 行 × ≤ 10 字，可嵌图标块
+- lead ≤ 50 字；ctas 各 ≤ 8 字；note ≤ 30 字
+- tools 6–8 个：name ≤ 4 字，mark 1–3 个字符
+- 请用通用类别名，不要写真实品牌
+
+**交互**：光点沿辐条流向中心；悬停工具点亮它的辐条
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | 圆点标签 |
+| `title` | `string[]` | 是 | 标题 |
+| `lead` | `string` |  | 导语 |
+| `ctas` | `[string, string?]` |  | 按钮和文字链接 |
+| `note` | `string` |  | 按钮下的小字 |
+| `hub` | `SlateIcon` |  | 中心图标，默认 link |
+| `tools` | `{ name, mark }[]` | 是 | 外圈工具 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<SlateConnect title={['你已经在用的工具，', '{link} 都能接上']} tools={[{ name: '表格', mark: '▦' }, …]} />
+```
+
+<a id="ember-hero"></a>
+
+## 306 · 暗场开场 `<EmberHero />`
+
+**位置**：开场 · AI 产品首页　**参考页**：`src/decks/sig-ember` 中的 `hero`
+
+满版一张暗调光影图（例如被轮廓光勾出的人头侧影），随鼠标轻轻漂移；顶部一枚“新”字胶囊，中间两行衬线大标题，下面一个半透明提问框：示例问题会自己一个字一个字打出来再删掉，附件和联网是可以按下的开关，模型名点一下会换，发送键会发出一圈光并换下一个问题。
+
+**适合**
+
+- AI 代理、智能助手、对话式产品的第一页
+- 想让观众一眼看到“它是用来提问的”
+
+**避免**
+
+- 没有合适的暗调大图：用 NocturneHero
+- 需要展示数据看板：用 SlateHero
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- badge 标签 ≤ 2 字，后半句 ≤ 18 字
+- title 2 行 × ≤ 9 字
+- ask.placeholder ≤ 20 字；prompts 2–5 条 × ≤ 26 字
+- ask.chips ≤ 3 个 × ≤ 6 字；ask.models ≤ 3 个 × ≤ 10 个字符
+- image 宜用暗底、单侧打光、主体居中的图
+
+**交互**：背景随鼠标漂移；提问框自动打字；开关可按；模型可切换；发送键换下一个问题
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `badge` | `[string, string]` |  | 顶部胶囊 |
+| `title` | `string[]` | 是 | 两行衬线标题 |
+| `image` | `PhotoImage` | 是 | 满版背景图 |
+| `ask` | `EmberAskProps` | 是 | 提问框：placeholder、prompts、chips、models |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<EmberHero badge={['新', '4.1 版支持多代理协作']} title={['让 AI 代理', '替你把事办完。']} image={head} ask={{ placeholder: '今天想让它帮你处理什么？', prompts: ['把会议纪要整理成周报'], chips: ['＋ 附件'], models: ['4.1'] }} />
+```
+
+<a id="ember-bento"></a>
+
+## 307 · 暗场能力拼贴 `<EmberBento />`
+
+**位置**：能力 · 四项功能　**参考页**：`src/decks/sig-ember` 中的 `bento`
+
+居中一行衬线标题，下面四张暗色卡片拼成一块：左右两张竖长的图片卡，中间上方一张图片卡浮着一排工具图标（点哪个就点亮并显示名字），中间下方一张卡是可以拨动的开关列表。每张卡底部是余烬色小方块图标、标题和一句说明，悬停时图片缓慢推近。
+
+**适合**
+
+- 介绍 AI 产品的 4 项核心能力
+- 既想要氛围图，又想有一点可以动手的界面
+
+**避免**
+
+- 能力超过 4 项：用 FeatureBento
+- 没有图片：用要点类模板
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title ≤ 16 字，单行
+- cards 恰好 4 张：title ≤ 8 字，body ≤ 34 字
+- 第 1、3 张宜放竖图；tools 3–6 个；toggles 2–4 个 × ≤ 8 字
+
+**交互**：点工具图标切换并显示名字；开关可拨；悬停图片推近、卡片描出主色边
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | 圆点标签 |
+| `title` | `string` | 是 | 标题 |
+| `cards` | `{ icon, title, body, image?, tools?, toggles? }[]` | 是 | 四张卡 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<EmberBento title="更聪明的能力，无尽的可能。" cards={[{ icon: '◐', title: '对话式 AI', body: '…', image: dots }, { icon: '◎', title: '多模态理解', body: '…', image: lake, tools: [{ mark: '▤', name: '文档' }, …] }, …]} />
+```
+
+<a id="ember-agent"></a>
+
+## 308 · 暗场代理执行 `<EmberAgent />`
+
+**位置**：机制 · 代理一步步完成任务　**参考页**：`src/decks/sig-ember` 中的 `agent`
+
+左侧衬线标题、一条“你”发出的请求气泡，以及一份正在生成的草稿；右侧一张“执行过程”卡，3–6 个步骤依次转圈、打勾，左边的进度轨随之点亮，每步显示用到的工具和耗时。步骤推进时，左边草稿的行一条条从模糊变清楚，全部完成后状态变绿并显示总用时，可以点“再跑一次”。
+
+**适合**
+
+- 讲清楚 AI 代理具体怎么干活
+- 演示一次完整的委托：从一句话到交付
+
+**避免**
+
+- 步骤超过 6 个：用时间线类模板
+- 没有可展示的产出：用 SlateSteps
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 2 行 × ≤ 10 字；task ≤ 40 字
+- steps 3–6 个：label ≤ 10 字，detail ≤ 24 字，tool ≤ 6 字
+- result.title ≤ 16 字；result.lines 3–6 条 × ≤ 26 字
+- pace 每步毫秒数，默认 1400
+
+**交互**：步骤自动依次完成，进度轨点亮；草稿逐行变清楚；“再跑一次”重新播放
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | 圆点标签 |
+| `title` | `string[]` | 是 | 标题 |
+| `task` | `string` | 是 | 用户的请求 |
+| `steps` | `{ label, detail, tool?, secs? }[]` | 是 | 执行步骤 |
+| `result` | `{ title, lines }` | 是 | 逐步生成的草稿 |
+| `labels` | `{ you, run, done, replay, log }` |  | 界面文字 |
+| `pace` | `number` |  | 每步毫秒数 |
+| `source` | `string` |  | 底部说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<EmberAgent title={['你只说一句话，', '剩下的交给它。']} task="把上周的会议纪要整理成周报" steps={[{ label: '读取会议纪要', detail: '…', tool: '文档库', secs: 4 }, …]} result={{ title: '第 45 周 · 团队周报', lines: ['…'] }} />
+```
+
+<a id="ember-saves"></a>
+
+## 309 · 暗场省时对比 `<EmberSaves />`
+
+**位置**：数据 · 每项工作省下的时间　**参考页**：`src/decks/sig-ember` 中的 `saves`
+
+左侧衬线标题、导语和一个巨大的渐变衬线数字（每周省下多少小时）；右侧一张卡列出 3–6 项工作，每行一根横条：先显示自己做要花的时间，随后缩短成交给代理后的时间并亮起余烬色，原来的长度留成一段虚线。顶部的分段按钮可以在两种情况之间来回切。
+
+**适合**
+
+- 量化 AI 工具或自动化省下的时间
+- 前后对比，单位一致的几项工作
+
+**避免**
+
+- 数字单位不一致：用数据类模板
+- 只有一个对比数字：用大数字类模板
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 2 行 × ≤ 10 字；lead ≤ 40 字
+- tasks 3–6 项：name ≤ 8 字，before ≥ after
+- labels.unit ≤ 2 字
+
+**交互**：横条从“自己做”缩到“交给代理”，总数随之出现；分段按钮来回切换
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | 圆点标签 |
+| `title` | `string[]` | 是 | 标题 |
+| `lead` | `string` |  | 导语 |
+| `tasks` | `{ name, before, after }[]` | 是 | 每项工作前后耗时 |
+| `labels` | `{ before, after, total, unit }` |  | 界面文字与单位 |
+| `source` | `string` |  | 数据来源 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<EmberSaves title={['每周多出来的，', '是整整一天半。']} tasks={[{ name: '写周报', before: 3, after: 0.5 }, …]} />
+```
+
+<a id="ember-words"></a>
+
+## 310 · 暗场用户评价 `<EmberWords />`
+
+**位置**：证据 · 两位客户的话和结果　**参考页**：`src/decks/sig-ember` 中的 `words`
+
+一团余烬色光晕下居中标题，两张暗色大卡并排：上面是衬线体引语，底部左边头像、姓名和职位，右边一个巨大的衬线结果数字（如 26%、3×）从零数上来。鼠标在卡片上移动时，一团光跟着走。
+
+**适合**
+
+- 用两位客户的原话加结果做证明
+- 发布会、销售演示里的口碑页
+
+**避免**
+
+- 评价超过 2 条：用 FolioWords 或 AlbumStories
+- 没有量化结果：用引语类模板
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title ≤ 12 字
+- quotes 恰好 2 条：quote ≤ 40 字，role ≤ 16 字
+- value ≤ 5 个字符，数字部分会滚动；label ≤ 8 字
+
+**交互**：结果数字从零滚动；光斑跟随鼠标；悬停卡片浮起
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `dot` | `string` |  | 圆点标签 |
+| `title` | `string` | 是 | 标题 |
+| `quotes` | `{ quote, name, role, avatar?, value, label }[]` | 是 | 两条评价 |
+| `source` | `string` |  | 说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<EmberWords title="听听用户怎么说" quotes={[{ quote: '…', name: '邓帆', role: '产品负责人 · 远舟数据', value: '26%', label: '演示转化提升' }, …]} />
+```
+
+<a id="ember-close"></a>
+
+## 311 · 暗场收尾 `<EmberClose />`
+
+**位置**：收尾 · 号召与提问框　**参考页**：`src/decks/sig-ember` 中的 `close`
+
+画面中央一圈缓慢呼吸的火光，环里是两行衬线大字、一句导语和一个小号提问框（同样会自己打字），下面一个浅色按钮、一条文字链接和一行小字。
+
+**适合**
+
+- AI 产品演示的最后一页
+- 想让观众带着“现在就去问它一句”离开
+
+**避免**
+
+- 需要列出联系方式或二维码：用联系类模板
+- 亮色风格的演示：用 SlateConnect
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 2 行 × ≤ 9 字；lead ≤ 36 字
+- ctas 各 ≤ 8 字；note ≤ 30 字
+- image 宜用中心留空的光环图
+
+**交互**：光环缓慢呼吸；提问框自动打字；按钮悬停发出主色光
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `title` | `string[]` | 是 | 环内两行大字 |
+| `lead` | `string` |  | 导语 |
+| `image` | `PhotoImage` | 是 | 光环背景 |
+| `ask` | `EmberAskProps` |  | 小号提问框 |
+| `ctas` | `[string, string?]` |  | 按钮和文字链接 |
+| `note` | `string` |  | 底部小字 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<EmberClose title={['把今天的第一件事，', '交给观止。']} image={ring} ask={{ placeholder: '…', prompts: ['…'] }} ctas={['开始使用', '预约团队演示']} />
+```
+
+<a id="dusk-hero"></a>
+
+## 312 · 霞光面板开场 `<DuskHero />`
+
+**位置**：开场 · 开发者工具首页　**参考页**：`src/decks/sig-dusk` 中的 `hero`
+
+顶部一枚薄荷绿公告胶囊，居中两行紧凑大标题、导语和一黑一浅两个按钮；下方左边一块日落渐变大面板，上面一排标签，点哪个，面板中央半透明框住的深色小部件就换成那一项的数字和分段条；右边一张白色代码卡，删改行用红绿底色标出，逐行滑入。
+
+**适合**
+
+- 开发者工具、AI 编程助手、技术 SaaS 的第一页
+- 想同时展示“产品界面”和“代码”
+
+**避免**
+
+- 非技术受众：用 SlateHero
+- 没有代码可展示：用 SunriseHero
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- ann ≤ 20 字 + 链接 ≤ 4 字
+- title 2 行 × ≤ 8 字；lead ≤ 30 字；ctas 各 ≤ 6 字
+- tabs 2–5 个：label ≤ 4 字，head ≤ 8 字，bars 2–5 段 × ≤ 4 字，file ≤ 18 个字符
+- code 6–12 行 × ≤ 34 个字符；以 "- " "+ " "# " 开头分别表示删除、新增、注释
+
+**交互**：点标签切换小部件；代码逐行滑入；渐变面板缓慢流动
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `ann` | `[string, string?]` |  | 公告胶囊 |
+| `title` | `string[]` | 是 | 两行标题 |
+| `lead` | `string` |  | 导语 |
+| `ctas` | `[string, string?]` |  | 深色与浅色按钮 |
+| `tabs` | `{ label, head, stat, unit, bars, file }[]` | 是 | 面板标签与小部件内容 |
+| `code` | `string[]` | 是 | 右侧代码行 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DuskHero ann={['完成 A 轮融资', '阅读全文']} title={['把复杂代码', '讲成人话的 AI']} tabs={[{ label: '编辑器', head: '时间分布', stat: '24', unit: '个运行周期', bars: [{ label: '解释', value: 22 }, …], file: 'AuthService.ts' }, …]} code={['# 解释补丁', '- if (a && b)', '+ if (a || b)']} />
+```
+
+<a id="dusk-feature"></a>
+
+## 313 · 霞光面板特性 `<DuskFeature />`
+
+**位置**：产品 · 一项功能和它的图表　**参考页**：`src/decks/sig-dusk` 中的 `feature`
+
+左侧小标签、两行标题、一段说明、两到四条打勾要点和一个浅色按钮；右侧一块浅粉渐变面板，中间深色小部件里是 2–3 条平滑曲线，鼠标在图上左右移动，竖线光标跟着走，底部读出那一刻每条线的数值。
+
+**适合**
+
+- 一页讲清一项功能，并配一张能读数的图
+- 调试、监控、分析类功能
+
+**避免**
+
+- 要讲多项功能：用 EmberBento 或要点类模板
+- 图表需要坐标轴和精确刻度：用数据类图表模板
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 2 行 × ≤ 9 字；body ≤ 64 字
+- points 2–4 条 × ≤ 14 字；more ≤ 8 字
+- chart.series 2–3 条，每条 6–14 个数，长度一致；xs 与之等长
+- chart.name ≤ 12 字
+
+**交互**：曲线画出；鼠标左右移动时光标和读数跟随
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `tag` | `{ icon?, label }` |  | 小标签 |
+| `title` | `string[]` | 是 | 标题 |
+| `body` | `string` |  | 说明 |
+| `points` | `string[]` |  | 打勾要点 |
+| `more` | `string` |  | 浅色按钮 |
+| `chart` | `{ stat, unit, series, xs?, name? }` | 是 | 可拖动光标的曲线图 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DuskFeature tag={{ icon: '◆', label: '调试' }} title={['在问题变大之前，', '先看见它。']} chart={{ stat: '37', unit: '个问题', series: [{ label: '严重', points: [3, 6, 8, …] }, …] }} />
+```
+
+<a id="dusk-explain"></a>
+
+## 314 · 霞光面板逐段讲解 `<DuskExplain />`
+
+**位置**：讲解 · 代码逐段说成人话　**参考页**：`src/decks/sig-dusk` 中的 `explain`
+
+左边一张白色代码卡，代码分成 2–4 段，当前那段亮起并带主色左边线，其余变淡；右边日落渐变面板里，深色卡片用大字标题和一段白话解释这段代码在做什么，顶部进度条显示讲到第几段。会自动往下讲，点任意一段就停在那里。
+
+**适合**
+
+- 给非作者讲清楚一段代码、配置或脚本
+- 技术分享、代码评审、新人培训
+
+**避免**
+
+- 代码超过 20 行：拆成多页
+- 要展示改动前后：用 DuskHero 的差异行
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title ≤ 16 字，单行；file ≤ 24 个字符
+- blocks 2–4 段：每段 2–5 行 × ≤ 40 个字符
+- 每段 title ≤ 12 字，note ≤ 50 字
+- autoplay 默认 3600 毫秒，0 关闭
+
+**交互**：自动逐段讲解；点代码段切换并停止自动播放
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `tag` | `{ icon?, label }` |  | 小标签 |
+| `title` | `string` | 是 | 标题 |
+| `file` | `string` |  | 文件名 |
+| `blocks` | `{ lines, title, note }[]` | 是 | 代码分段与解释 |
+| `autoplay` | `number` |  | 自动前进间隔 |
+| `source` | `string` |  | 底部说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DuskExplain title="一段一段，讲给你听。" file="billing/retry.ts" blocks={[{ lines: ['async function retry(order) {', '  const max = 3'], title: '先定好重试几次', note: '…' }, …]} />
+```
+
+<a id="dusk-stats"></a>
+
+## 315 · 霞光面板结果卡 `<DuskStats />`
+
+**位置**：数据 · 三个结果　**参考页**：`src/decks/sig-dusk` 中的 `stats`
+
+一行标题下三张高卡片并排：上面是小标签和一条占满卡宽的面积曲线，底部是巨大的数字（从零数上来）和一句说明。鼠标停在哪张，哪张就变成日落渐变、文字和曲线变白并微微浮起。
+
+**适合**
+
+- 用三个数字总结效果
+- 每个数字都有一段可以画出来的变化
+
+**避免**
+
+- 数字超过 3 个：用数据类模板
+- 没有变化趋势：用大数字类模板
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title ≤ 16 字，单行
+- stats 恰好 3 个：value ≤ 7 个字符，label ≤ 10 字，note ≤ 30 字
+- series 6–12 个数
+
+**交互**：数字滚动、曲线画出；悬停的卡片变成渐变
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `tag` | `{ icon?, label }` |  | 小标签 |
+| `title` | `string` | 是 | 标题 |
+| `stats` | `{ value, label, note?, series? }[]` | 是 | 三个结果 |
+| `source` | `string` |  | 数据来源 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DuskStats title="团队用了之后，变化很具体。" stats={[{ value: '3.2×', label: '读懂旧代码', note: '…', series: [1, 1.2, …] }, …]} />
+```
+
+<a id="dusk-cases"></a>
+
+## 316 · 霞光面板客户案例 `<DuskCases />`
+
+**位置**：客户 · 案例轮播与两句评价　**参考页**：`src/decks/sig-dusk` 中的 `cases`
+
+左边一张大照片案例卡：左上客户名，左下一句结果大字和白色按钮，右下进度点和左右箭头，2–4 个案例会自动轮播（照片交叉淡入并缓慢推远）；右边上下两张白卡各是一句客户原话，底部是头像、姓名和职位。
+
+**适合**
+
+- 用真实感的客户故事做证明
+- 既有案例又有几句短评价
+
+**避免**
+
+- 没有照片：用 EmberWords
+- 评价超过 2 条：用评价墙类模板
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title ≤ 16 字，单行
+- cases 2–4 个：company ≤ 10 字，headline ≤ 26 字
+- voices 恰好 2 条：quote ≤ 44 字，role ≤ 12 字
+- cta ≤ 6 字；autoplay 默认 5200 毫秒
+
+**交互**：案例自动轮播，箭头切换；进度点计时；评价卡悬停浮起
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `tag` | `{ icon?, label }` |  | 小标签 |
+| `title` | `string` | 是 | 标题 |
+| `cases` | `{ company, headline, image }[]` | 是 | 轮播案例 |
+| `voices` | `{ company, quote, name, role, avatar? }[]` | 是 | 两句评价 |
+| `cta` | `string` |  | 案例按钮 |
+| `autoplay` | `number` |  | 轮播间隔 |
+| `source` | `string` |  | 说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DuskCases title="用解码交付的团队，都更快。" cases={[{ company: '✳ 常青科技', headline: '平台改版快了 3 倍', image: a }, …]} voices={[{ company: '◼ 模块实验室', quote: '…', name: '罗振', role: 'CEO' }, …]} />
+```
+
+<a id="dusk-close"></a>
+
+## 317 · 霞光面板收尾 `<DuskClose />`
+
+**位置**：收尾 · 号召与安装命令　**参考页**：`src/decks/sig-dusk` 中的 `close`
+
+居中两行大标题、一句导语和两个按钮；下方一块日落渐变面板里放着一个深色终端：三个小圆点、一行可以一键复制的命令，下面几行输出依次打印出来，最后一行变绿表示就绪。
+
+**适合**
+
+- 开发者产品演示的最后一页
+- 想让观众带走一行能直接运行的命令
+
+**避免**
+
+- 非技术受众：用 SlateConnect 或 EmberClose
+- 需要联系方式或二维码：用联系类模板
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 2 行 × ≤ 10 字；lead ≤ 30 字；ctas 各 ≤ 6 字
+- command ≤ 30 个字符
+- output 2–4 行 × ≤ 36 个字符
+
+**交互**：点“复制”把命令放进剪贴板；输出逐行打印
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `title` | `string[]` | 是 | 标题 |
+| `lead` | `string` |  | 导语 |
+| `ctas` | `[string, string?]` |  | 按钮 |
+| `command` | `string` | 是 | 可复制的命令 |
+| `output` | `string[]` |  | 依次打印的输出 |
+| `labels` | `{ copy, copied }` |  | 复制按钮文字 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DuskClose title={['下一段看不懂的代码，', '交给解码。']} command="npx jiema init" output={['✓ 已连接代码仓库', '✓ 已就绪']} />
+```
+
+<a id="agency-stage"></a>
+
+## 318 · 电光蓝舞台开场 `<AgencyStage />`
+
+**位置**：开场 · 机构或品牌第 1 页　**参考页**：`src/decks/sig-agency` 中的 `stage`
+
+整页由主题色调出的电光蓝渐变加细颗粒，一团亮光跟着鼠标缓慢移动；左上两行细体大标题和白色胶囊按钮（圆形箭头悬停时转向），右上一张毛玻璃照片卡（悬停浮起、照片推近），下方一排圆头像和两行说明；底部一个巨大的英文字标出血到页面下沿，字母依次升起，指到哪个字母哪个微微抬起。
+
+**适合**
+
+- 增长机构、咨询公司、品牌方案的封面
+- 想要有冲击力、像官网首屏的开场
+
+**避免**
+
+- 没有英文字标：用 AgencyHero
+- 正式汇报：用 Cover
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- title 2 行 × ≤ 9 字；cta ≤ 8 字
+- card.title ≤ 8 字，card.body ≤ 40 字
+- trust.faces 2–4 张，text 两行各 ≤ 12 字
+- word 3–7 个英文字母；mark 默认 ®
+- 这一页在 deck 里请设 tone: 'dark'，页眉才是浅色
+
+**交互**：亮光跟随鼠标；字标字母依次升起，悬停单个字母抬起；照片卡悬停浮起；按钮箭头悬停转向
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `title` | `string[]` | 是 | 两行标题 |
+| `cta` | `string` | 是 | 白色胶囊按钮 |
+| `card` | `{ image, title, body }` | 是 | 毛玻璃照片卡 |
+| `trust` | `{ faces, text }` |  | 头像与说明 |
+| `word` | `string` | 是 | 底部巨型字标 |
+| `mark` | `string` |  | 字标右上小标记 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<AgencyStage title={['为认真做增长的', '品牌而生']} cta="预约一次诊断" card={{ image: night, title: '增长策略', body: '…' }} trust={{ faces: [a, b, c], text: ['已服务 120+ 家', '快速成长的品牌'] }} word="LANQI" />
+```
+
+<a id="agency-accordion"></a>
+
+## 319 · 人像加手风琴 `<AgencyAccordion />`
+
+**位置**：方法 · 使命、服务或做法展开讲　**参考页**：`src/decks/sig-agency` 中的 `mission`
+
+左上白色小胶囊，右半边两行细体标题；左边一张竖幅人像带姓名小签，右边 3–4 行编号白色手风琴：展开的那一行撑满剩余高度，显示一句说明、浅色小胶囊和一张横幅照片，底边一条主题色进度线；不点时每隔几秒自动展开下一行，点任意一行就停在那一行。
+
+**适合**
+
+- 讲机构的使命、方法或服务，每项都需要一句展开说明
+- 有一张代表人物照片
+
+**避免**
+
+- 5 项以上：用 AgencyRows
+- 每项都要同时可见：用 IconGrid
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- tag ≤ 6 字；title 2 行 × ≤ 12 字
+- items 3–4 行：title ≤ 10 字，body ≤ 40 字，chips 0–3 个 × ≤ 5 字，image 可选
+- photo.caption ≤ 12 字
+- autoplay 默认 5600 毫秒，0 关闭
+
+**交互**：自动依次展开并显示进度线；点击任意行展开并停止自动；悬停行标题变色；照片悬停推近
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `tag` | `string` | 是 | 左上小胶囊 |
+| `title` | `string[]` | 是 | 两行标题 |
+| `photo` | `{ image, caption? }` | 是 | 左侧竖幅人像 |
+| `items` | `{ title, body, chips?, image? }[]` | 是 | 手风琴各行 |
+| `open` | `number` |  | 初始展开的行 |
+| `autoplay` | `number` |  | 自动展开间隔 |
+| `source` | `string` |  | 出处 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<AgencyAccordion tag="我们的使命" title={['我们把策略做成系统，', '让增长不靠运气。']} photo={{ image: p, caption: '策略总监 · 周以宁' }} items={[{ title: '策略与执行', body: '…', chips: ['用户研究'], image: t }, …]} />
+```
+
+<a id="agency-proof"></a>
+
+## 320 · 深蓝评价加便当格 `<AgencyProof />`
+
+**位置**：客户 · 评价与成果　**参考页**：`src/decks/sig-agency` 中的 `proof`
+
+左上白色小胶囊，右半边两行细体标题；中间一张深蓝长卡，左边一句客户原话和左右箭头、页码，右边一张人像带姓名职位，1–3 条评价自动轮换（人像交叉淡入）；下面三格：主题色渐变一句话（悬停渐变流动）、一张图片带说明（悬停推近）、一个从零数上去的大数字配圆头像。
+
+**适合**
+
+- 机构或产品的客户评价页
+- 既要一句原话，又要一个成果数字
+
+**避免**
+
+- 评价超过 3 条：用评价墙类模板
+- 没有人像照片：用 QuoteBlock
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- tag ≤ 6 字；title 2 行 × ≤ 12 字
+- quotes 1–3 条：text ≤ 40 字，role ≤ 14 字
+- statement ≤ 14 字；visual.caption ≤ 10 字
+- stat.value 如 "+65%"；label ≤ 8 字；foot ≤ 8 字；faces 0–4 张
+- autoplay 默认 6400 毫秒
+
+**交互**：评价自动轮换，箭头切换并停止自动；数字从零数上去；渐变格悬停流动；图片格悬停推近；头像悬停散开
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `tag` | `string` | 是 | 左上小胶囊 |
+| `title` | `string[]` | 是 | 两行标题 |
+| `quotes` | `{ text, name, role, image }[]` | 是 | 评价 |
+| `statement` | `string` | 是 | 渐变格的一句话 |
+| `visual` | `{ image, caption }` | 是 | 图片格 |
+| `stat` | `{ value, label, foot, faces? }` | 是 | 数字格 |
+| `autoplay` | `number` |  | 轮换间隔 |
+| `source` | `string` |  | 出处 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<AgencyProof tag="客户评价" title={['官网改完那个季度，', '线索翻了一倍。']} quotes={[{ text: '…', name: '陈嘉禾', role: '市场负责人 · 栖木家居', image: f }]} statement="把数字体验做到能转化" visual={{ image: g, caption: '策略先行的创意' }} stat={{ value: '+65%', label: '客户平均增长', foot: '增长已交付' }} />
+```
+
+<a id="agency-book"></a>
+
+## 321 · 电光蓝预约收尾 `<AgencyBook />`
+
+**位置**：收尾 · 预约一次沟通　**参考页**：`src/decks/sig-agency` 中的 `book`
+
+整页电光蓝渐变加细颗粒；左边毛玻璃小胶囊、两三行细体大标题和导语；右边一张毛玻璃预约卡：标题和接待人头像，一排 4–5 天日期、3–6 个时间段，选哪个哪个变亮，底部白色长按钮实时读出“预约 周三 11/12 · 14:00”，点一下变成绿色对勾“已预约”；页面底部可加一排联系方式。
+
+**适合**
+
+- 机构提案、销售演示的最后一页
+- 希望听众当场约下一次沟通
+
+**避免**
+
+- 只要一句结束语：用 Closing
+- 线上发布、没有预约环节：用 DuskClose
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- tag ≤ 8 字；title 2–3 行 × ≤ 9 字；lead ≤ 44 字
+- heading ≤ 12 字；days 4–5 天 [星期, 日期]；slots 3–6 个
+- cta ≤ 4 字；note ≤ 24 字
+- contacts 0–4 条：label ≤ 6 字，value ≤ 16 个字符
+- 这一页在 deck 里请设 tone: 'dark'
+
+**交互**：点日期和时间段选中，按钮文字随之更新；点按钮变成已预约对勾；时间段依次弹出；按钮箭头悬停前移
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `tag` | `string` |  | 小胶囊 |
+| `title` | `string[]` | 是 | 大标题 |
+| `lead` | `string` | 是 | 导语 |
+| `heading` | `string` | 是 | 预约卡标题 |
+| `days` | `[string, string][]` | 是 | 日期 |
+| `slots` | `string[]` | 是 | 时间段 |
+| `cta` | `string` |  | 按钮动词 |
+| `host` | `{ image, name, role }` | 是 | 接待人 |
+| `note` | `string` |  | 按钮下小字 |
+| `contacts` | `{ label, value }[]` |  | 底部联系方式 |
+| `pick` | `[number, number]` |  | 初始选中的日期和时间 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<AgencyBook title={['下一季的增长，', '从一次诊断开始']} lead="…" heading="预约一次增长诊断" days={[['周一', '11/10'], …]} slots={['10:00', '14:00']} host={{ image: p, name: '周以宁', role: '策略总监' }} />
+```
+
+<a id="social-feed"></a>
+
+## 322 · 个人主页动态流 `<SocialFeed />`
+
+**位置**：内容 · 个人或品牌主页式的近况　**参考页**：`src/decks/mockui` 中的 `feed`
+
+仿社交主页的三栏：左边头像、名字、六项菜单（点哪项哪项高亮）和一块时钟（冒号闪烁，可写死时间或走实时）；中间一列动态，第一条带一到两张图，每条都有可点的 ♡（心形弹一下、数字加一）和分享；右边一排彩圈头像（点过变灰表示已看）、两个小方框列表和一个“聊两句”气泡加输入框。只用当前风格的颜色和圆角，任何风格都能用。
+
+**适合**
+
+- 独立开发者、设计师、创作者介绍自己近况
+- 想用“刷动态”的方式讲一段经历
+
+**避免**
+
+- 正式汇报：用 Timeline
+- 动态超过 3 条：拆页
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- profile.name ≤ 6 字，role ≤ 10 字；menu 4–6 项 × ≤ 5 字
+- posts 2–3 条：text ≤ 34 字，time ≤ 6 字；只有第一条显示 0–2 张图
+- stories 0–4 个 × ≤ 3 字；boxes 0–2 个，各 2 条：title ≤ 12 字，note ≤ 10 字
+- say ≤ 26 字；clock.city ≤ 4 字
+
+**交互**：点 ♡ 点赞并弹跳计数；点彩圈头像标为已看；菜单点击切换高亮；时钟冒号闪烁；动态依次滑入
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `profile` | `{ name, role, avatar }` | 是 | 左上头像与名字 |
+| `menu` | `{ icon, label }[]` | 是 | 左侧菜单 |
+| `active` | `number` |  | 高亮的菜单项 |
+| `clock` | `{ city, time?, date? }` |  | 时钟方块，不写 time 则走实时 |
+| `heading` | `string` |  | 中间栏标题 |
+| `posts` | `{ text, time, pinned?, media?, likes? }[]` | 是 | 动态 |
+| `stories` | `{ label, image }[]` |  | 彩圈头像 |
+| `boxes` | `{ title, items }[]` |  | 右侧小方框 |
+| `say` | `string` |  | 蓝色气泡 |
+| `placeholder` | `string` |  | 输入框占位字 |
+| `source` | `string` |  | 说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<SocialFeed profile={{ name: '许知夏', role: '设计 · 独立开发', avatar: a }} menu={[{ icon: 'home', label: '首页' }, …]} posts={[{ text: '…', time: '9 个月前', pinned: true, media: [p, q], likes: '2.3k' }, …]} say="最近正好在看新机会 👋" />
+```
+
+<a id="social-post"></a>
+
+## 323 · 一条发布动态 `<SocialPost />`
+
+**位置**：证据 · 一次上线或里程碑的反响　**参考页**：`src/decks/mockui` 中的 `post`
+
+同一套三栏外壳，中间只放一条大动态：返回链接、作者行、两行大字公告、一张宽幅图和可点的 ♡、评论数、分享；右边一个“这次上线”方框列 2–3 个带图标的数字，下面“热门评论”方框里 2–3 条评论依次出现。只用当前风格的颜色和圆角。
+
+**适合**
+
+- 讲一次上线、发布、里程碑，以及大家的反应
+- 想让数字和评论显得像真实发生过
+
+**避免**
+
+- 数字是重点：用 StatRow
+- 没有配图：用 QuoteHero
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- text 1–2 行 × ≤ 22 字；time ≤ 6 字
+- counts 如 ['12.8k', '932']
+- facts 2–3 条：value ≤ 8 个字符，note ≤ 10 字
+- comments 2–3 条：name ≤ 6 字，text ≤ 16 字
+
+**交互**：点 ♡ 点赞并弹跳计数；评论依次出现；配图悬停推近；菜单点击切换高亮
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `profile` | `{ name, role, avatar }` | 是 | 头像与名字 |
+| `menu` | `{ icon, label }[]` | 是 | 左侧菜单 |
+| `active` | `number` |  | 高亮的菜单项 |
+| `clock` | `{ city, time?, date? }` |  | 时钟方块 |
+| `back` | `string` |  | 返回链接文字 |
+| `time` | `string` | 是 | 发布时间 |
+| `text` | `string[]` | 是 | 公告正文 |
+| `image` | `PhotoImage` | 是 | 宽幅配图 |
+| `counts` | `[string, string?]` |  | 点赞与评论数 |
+| `facts` | `{ title, items }` |  | 数字方框 |
+| `comments` | `{ title, items }` |  | 评论方框 |
+| `source` | `string` |  | 说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<SocialPost profile={me} menu={menu} time="去年" text={['夏至 AI 上线了。', '…']} image={shot} counts={['12.8k', '932']} facts={{ title: '这次上线', items: [{ icon: 'clock', value: '11 个月', note: '一个人从零做完' }] }} />
+```
+
+<a id="direct-chat"></a>
+
+## 324 · 私信邀约 `<DirectChat />`
+
+**位置**：收尾 · 邀请对方联系或合作　**参考页**：`src/decks/mockui` 中的 `dm`
+
+左边同一套头像菜单时钟，右边一整块私信窗口：顶部头像、名字和绿色“通常 1 小时内回复”；对话从底部往上排，访客的白气泡和主人的主题色气泡依次出现，中间可以插一张报价卡（图、标题、说明、价格）；底部一排快捷回复，点一个就发出去，主人显示“正在输入”的三个跳点后回答，用过的快捷回复变灰。只用当前风格的颜色和圆角。
+
+**适合**
+
+- 作品集、个人介绍、服务提案的最后一页
+- 想让听众看到“联系我”之后会发生什么
+
+**避免**
+
+- AI 助手的对话演示：用 ChatDemo
+- 只要联系方式：用 Closing
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- messages 3–5 条 × ≤ 40 字
+- offer 可选：title ≤ 10 字，note ≤ 18 字，price ≤ 10 个字符；after 是插在第几条之后（从 0 数）
+- quick 2–4 个：label ≤ 5 字，reply ≤ 30 字
+- status ≤ 12 字；placeholder ≤ 8 字
+
+**交互**：对话依次出现；点快捷回复会发出消息，出现三个跳点后收到回答；报价卡悬停浮起
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `profile` | `{ name, role, avatar }` | 是 | 头像与名字 |
+| `menu` | `{ icon, label }[]` | 是 | 左侧菜单 |
+| `active` | `number` |  | 高亮的菜单项 |
+| `clock` | `{ city, time?, date? }` |  | 时钟方块 |
+| `status` | `string` |  | 名字下的绿色状态 |
+| `messages` | `{ from: 'me' \| 'you', text }[]` | 是 | 对话 |
+| `offer` | `{ after, image, title, note, price? }` |  | 报价卡 |
+| `quick` | `{ label, reply }[]` |  | 快捷回复与回答 |
+| `placeholder` | `string` |  | 输入框占位字 |
+| `source` | `string` |  | 说明 |
+| `hint` | `string` |  | 页眉提示 |
+
+**示例**
+
+```tsx
+<DirectChat profile={me} menu={menu} messages={[{ from: 'you', text: '…' }, { from: 'me', text: '…' }]} offer={{ after: 1, image: d, title: '首屏诊断 · 一周', note: '…', price: '¥12,000 起' }} quick={[{ label: '约个时间', reply: '…' }]} />
 ```
 
 <a id="icons"></a>

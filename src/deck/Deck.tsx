@@ -60,6 +60,20 @@ export interface DeckDef {
   backdrop?: Backdrop
   /** The "Made with PCafe" credit on the first and last slide and in the controls. `false` hides it; needs PCafe Pro (LICENSE, Exhibit B). */
   attribution?: boolean
+  /**
+   * One or two sentences on what the deck covers (≤ 120 字). The build writes it
+   * into the file's description, link preview and outline for search engines.
+   * Left out, the first paragraph of the deck is used.
+   */
+  description?: string
+  /** Language of the text as a BCP 47 tag: 'zh-CN' (default), 'zh-TW', 'en' and so on. */
+  lang?: string
+  /** Where the deck is published. Becomes the canonical URL, so copies hosted elsewhere point search engines back to it. */
+  url?: string
+  /** Absolute URL of a cover image for link previews (og:image), e.g. a screenshot of the first slide. */
+  image?: string
+  /** Who made the deck, for the outline and structured data. */
+  author?: string | { name: string; url?: string; type?: 'Person' | 'Organization' }
 }
 
 const readHash = (total: number) => {

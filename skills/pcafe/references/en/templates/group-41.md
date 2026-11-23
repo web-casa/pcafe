@@ -61,5 +61,5 @@
 ### `AgencyManifesto` Point-of-view paragraph (Rhythm - one paragraph of a position)
 - Use when: State a problem or a position that one line cannot cover; A pause between two dense blocks
 - Avoid: Only one short line: use Statement; A sourced quotation: use QuoteHero
-- Limits: text ≤ 64 chars; label ≤ 8 chars; marks 0–2, each must appear verbatim in text
+- Limits: text ≤ 64 chars; label ≤ 8 chars; marks 0–2, each must appear verbatim in text; by optional: name ≤ 8 chars, role ≤ 16 chars
 - Reference: src/decks/home-northbound slide `problem`; docs/en/components.md#agency-manifesto

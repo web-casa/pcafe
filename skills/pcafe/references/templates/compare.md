@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 7 个模板。返回索引：[../templates.md](../templates.md)。
+共 8 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `CompareTable` 前后对比表（对比 · 旧 → 新）
 - 适合：版本升级、政策调整、改版前后；每行都是同一维度的旧值与新值
@@ -45,3 +45,9 @@
 - 不适合：两张图不是同一构图：用 BeforeAfter；横图对比：用 CompareSlider
 - 上限：title ≤ 2 行 × 8 字；lead ≤ 40 字；specs 2–4 行：label ≤ 8 字，value ≤ 12 个字符；labels 每个 ≤ 8 个字符；两张图构图一致，用竖图
 - 参考：src/decks/sig-nocturne 的 `compare` 页；docs/zh-CN/components.md#reveal-compare；交互：拖动或方向键：移动分隔线
+
+### `SlateCompare` 立体看板对比表（对比 · 我们与替代方案）
+- 适合：和传统做法或竞品逐项比较；想让差异一眼可见
+- 不适合：要比较的对象超过 2 个：用多列对比模板；比较项是数字而非有无：用 SlateTrend 或数据类模板
+- 上限：title 2 行 × ≤ 10 字；lead ≤ 50 字；cta ≤ 6 字；stats ≤ 3 个：value ≤ 5 个字符，label ≤ 8 字；cols 2 个 × ≤ 5 字；rows 4–8 行：label ≤ 10 字，icon 1 个字符
+- 参考：src/decks/sig-slate 的 `compare` 页；docs/zh-CN/components.md#slate-compare；交互：开关收起相同的行；悬停行名变主色；小数字卡悬停浮起

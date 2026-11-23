@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 31 个模板。返回索引：[../templates.md](../templates.md)。
+共 34 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `MetricBars` 数字条（数据 · 规模与占比）
 - 适合：几个可加总或可比较的数量：新增 / 更新 / 删除，收入构成，用户分层；需要让听众记住一个比例
@@ -189,3 +189,21 @@
 - 不适合：数字需要解释：用 KpiBoard；只有一个数字：用 BigStat
 - 上限：stats 3–4 个；value ≤ 6 个字符；label ≤ 12 字；页标题 ≤ 22 字；有数字就要有 source
 - 参考：src/decks/sig-block-frame 的 `stats` 页；docs/zh-CN/components.md#framed-stats
+
+### `MarkerFacts` 记号笔数字（数据 · 一句话加数字）
+- 适合：个人或小团队的几个累计数字；想让数字有一句话的上下文
+- 不适合：数字需要对比或趋势：用 BarChart 或 StatRow；只有一个数字：用 BigNumber
+- 上限：say ≤ 2 行 × 18 字；facts 3–4 个：value 为整数，unit ≤ 3 个字符，label ≤ 10 字；note ≤ 24 字
+- 参考：src/decks/sig-marker 的 `facts` 页；docs/zh-CN/components.md#marker-facts；交互：数字从 0 滚动计数；悬停格子取景角张开
+
+### `EmberSaves` 暗场省时对比（数据 · 每项工作省下的时间）
+- 适合：量化 AI 工具或自动化省下的时间；前后对比，单位一致的几项工作
+- 不适合：数字单位不一致：用数据类模板；只有一个对比数字：用大数字类模板
+- 上限：title 2 行 × ≤ 10 字；lead ≤ 40 字；tasks 3–6 项：name ≤ 8 字，before ≥ after；labels.unit ≤ 2 字
+- 参考：src/decks/sig-ember 的 `saves` 页；docs/zh-CN/components.md#ember-saves；交互：横条从“自己做”缩到“交给代理”，总数随之出现；分段按钮来回切换
+
+### `DuskStats` 霞光面板结果卡（数据 · 三个结果）
+- 适合：用三个数字总结效果；每个数字都有一段可以画出来的变化
+- 不适合：数字超过 3 个：用数据类模板；没有变化趋势：用大数字类模板
+- 上限：title ≤ 16 字，单行；stats 恰好 3 个：value ≤ 7 个字符，label ≤ 10 字，note ≤ 30 字；series 6–12 个数
+- 参考：src/decks/sig-dusk 的 `stats` 页；docs/zh-CN/components.md#dusk-stats；交互：数字滚动、曲线画出；悬停的卡片变成渐变
