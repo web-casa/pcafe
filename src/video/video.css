@@ -76,11 +76,15 @@ body {
 .v-shell__screen { position: relative; display: grid; place-items: center; overflow: hidden; }
 .v-shell__fit { position: absolute; left: 50%; top: 50%; translate: -50% -50%; transform-origin: center; }
 .v-safe { position: absolute; z-index: 20; outline: 3px dashed #ff4d4f; box-shadow: 0 0 0 9999px rgb(255 77 79 / 0.14); pointer-events: none; }
-.v-bar { display: flex; align-items: center; gap: 14px; padding: 0 18px; }
-.v-bar button { padding: 7px 12px; border: 1px solid #3a3a40; border-radius: 6px; background: #1c1c20; color: inherit; font: inherit; cursor: pointer; }
+.v-bar { display: flex; align-items: center; gap: 10px; padding: 0 18px; }
+.v-bar button { padding: 6px 11px; border: 1px solid #3a3a40; border-radius: 6px; background: #1c1c20; color: inherit; font: inherit; cursor: pointer; white-space: nowrap; }
+.v-bar button:hover { background: #292930; }
 .v-bar__track { position: relative; flex: 1; }
 .v-bar__track input { width: 100%; }
-.v-bar__ticks i { position: absolute; top: -3px; width: 2px; height: 6px; background: #6b6b73; }
+.v-bar__ticks { position: relative; height: 10px; margin-top: -2px; }
+.v-bar__tick { position: absolute; top: 0; width: 8px; height: 10px; padding: 0 !important; border: 0 !important; border-radius: 2px !important; background: transparent !important; transform: translateX(-50%); cursor: pointer; }
+.v-bar__tick::after { content: ''; display: block; width: 2px; height: 8px; margin: 1px auto; background: #7b7b86; border-radius: 1px; }
+.v-bar__tick:hover::after { background: #ffb648; }
 .v-bar__time, .v-bar__scene { font-variant-numeric: tabular-nums; color: #a9a9b0; white-space: nowrap; }
 .v-list { padding: 48px; color: #e8e8ea; font: 16px/1.5 system-ui, sans-serif; display: grid; gap: 8px; }
 .v-list a { color: #ffb648; }

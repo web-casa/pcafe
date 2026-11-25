@@ -18,6 +18,7 @@ import { DECK_KEYS, KeyHelp } from './help'
 import { Ink } from './ink'
 import { Zoom } from './zoom'
 import { TextureLayer, type Texture } from './texture'
+import { RecordStudio } from './record'
 
 export { frameMotion, type Transition } from './transition'
 export type { Texture }
@@ -36,6 +37,10 @@ export interface FeatureProps {
   go: (i: number) => void
   /** Called with true while the audience screen is blanked or frozen (autoplay pauses). */
   onHold?: (held: boolean) => void
+  /** Incremented by the toolbar record button to toggle/focus the PiP recorder. */
+  recordTrigger?: number
+  /** Called when browser PiP recording starts or stops. */
+  onRecordingChange?: (active: boolean) => void
 }
 
 export function DeckFeatures(p: FeatureProps) {
@@ -49,6 +54,12 @@ export function DeckFeatures(p: FeatureProps) {
       <PresenterSync {...p} screen={screen} />
       <Ink overview={p.overview} index={p.index} />
       <Zoom overview={p.overview} index={p.index} />
+      <RecordStudio
+        title={p.title}
+        overview={p.overview}
+        triggerCount={p.recordTrigger}
+        onRecordingChange={p.onRecordingChange}
+      />
       <ScreenLayer blank={screen.blank} frozen={screen.frozen} />
       <KeyHelp groups={DECK_KEYS} disabled={p.overview} />
     </>

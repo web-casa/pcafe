@@ -247,6 +247,7 @@
 | [`TiltShot`](#tilt-shot) 倾斜摆正 | 动效 · 带透视的截图转正后逐条讲要点 | 左边标题和 2–3 条要点，右边一张截图带透视角度出场。配 build: 'reveal' 时第一次按 → 截图转正，之后每按一次出现一条要点。跳页时直接显示转正后的截图和全部要点。 |
 | [`ConvergeShots`](#converge-shots) 多图汇聚 | 动效 · 几张图并排，汇聚成一张焦点图 | 3–4 张图先并排展示、各带一个标签。配 build: 'reveal' 时第一次按 → 它们向中间汇聚，焦点图放大到前面，其余叠在后面；第二次按出现说明。跳页时直接显示汇聚后的画面。 |
 | [`StepVideo`](#step-video) 逐段播放 | 动效 · 视频按一次播一段，停在要讲的画面 | 左边一段视频，右边 2–4 个停点说明。配 build: 'reveal' 时每按一次 → 视频播到下一个停点暂停，对应说明出现。往回翻或跳页时直接显示停点画面；跳页、打印和减少动态效果时停在最后一个停点。 |
+| [`VideoStage`](#video-stage) 视频放映台 | 动效 · 居中大画面完整播放带播控栏的产品录屏或解说视频 | 在单页居中呈现 16:9 完整视频，自带风格统一的播控栏：点击播放/暂停、进度条拖动、0.75×–2× 倍速、声音切换与全屏；离开页面或切后台自动暂停。 |
 | [`ExhibitCover`](#exhibit-cover) 展览封面 | 开场 · 超大窄衬线标题加角落日期块 | 超大标题占满左半页，右上角一块浅色日期块，底部 3–4 栏细线分隔的小字信息。为双年展风格设计，其他风格也能用。 |
 | [`YearBars`](#year-bars) 数字配年份条 | 数据 · 两个大数字配按年份的细条 | 左边 1–2 个大数字（单位上标），右边 3–7 条按年份排的细横条，最新一年用强调色。为双年展风格设计，其他风格也能用。 |
 | [`NumberTiles`](#number-tiles) 数字色块 | 内容 · 3–4 块高色块，各带一个超大编号 | 一排高色块，每块上方一个超大编号，下方标题和一句说明。模印风格下是赭、品红、橙、青四色；其他风格用卡片色和强调色编号。配 build: 'reveal' 逐块出现。 |
@@ -339,7 +340,7 @@
 免费模板都从 `src/kit` 导入：
 
 ```tsx
-import { Cover, Bento, MetricBars, Timeline, SpotlightList, CompareTable, NumberedColumns, VerdictColumns, Checklist, StepTrack, Teaser, Closing, Terminal, CodeDiff, StatusGrid, SpecSheet, Cycle, Faq, Lanes, LineChart, Agenda, SectionBreak, QuoteHero, FlowDiagram, ClaimCards, LayerStack, Matrix, IconGrid, BigStat, DeltaBars, Dumbbell, RangeBars, Gantt, Milestones, QuoteWall, BeforeAfter, Screenshot, Funnel, Quadrant, PersonaCards, PricingTiers, KpiBoard, ShareBar, Waterfall, Team, IssueTree, Heatmap, Roadmap, Statement, HangingCover, PanelCards, AskAnswer, ProofSplit, IndexStack, ContactPanel, Orbit, NumberOpener, ChapterProgress, Question, Contrast, Recap, HeroPanel, TabbedShot, BrandKit, Laurels, FullBleed, Thanks, SplitWord, PillAgenda, StatRow, CountCompare, Donut, BarChart, Bubble, Gauge, ServiceList, QuoteArc, WorkCards, RepeatClosing, StickerCover, WordBlocks, FolderCards, SparkCards, Pictogram, SlopeRank, PixelClosing, FloatCover, TileWall, ServiceIndex, GlowStack, DuoCards, Desktop, WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone, Swimlane, ArchLayers, Balance, DoubleFunnel, KeyReveal, KeySpec, OrbCover, GradientCards, BlockStats, PopPoster, BentoBoard, BentoSpotlight, SlotPicker, UiSteps, FloatHero, TranscriptCard, RetroTabs, RetroLog, GlowMetric, HairlineGrid, RibbonCover, RibbonSection, ChatThread, NoteCards, RevealStatement, SketchCover, ArcCards, CaseCard, AgencyHero, AgencyRows, AgencyManifesto, HaloHero, HaloRows, HaloMarquee, FanCover, PillSentence, OpenList, PhotoCover, PhotoSplit, PhotoMosaic, PolaroidWall, FilmStrip, MagazineSpread, CaseStudy, DeviceFrame, CompareSlider, PhotoStack, FlipCards, CardStack, FanCarousel, DepthCarousel, Envelope, FlipBook, Lanyard, ProgressCards, ProcessAccordion, NotebookCover, Halftone, ProgressiveBlur, MaskReveal, LogoWall, PhotoClosing, RankingRace, BubbleCluster, NodeGraph, Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics, Typewriter, RotatingWord, MorphHeadline, TextArc, Odometer, MarkerSweep, TextMask, SplitFlap, NewsTicker, KaraokeLines, ParadigmCards, AnatomyCard, ExplorerFlip, VerbCards, NinesDial, TierLadder, LifecycleRail, MeterCards, ShelfGallery, TabSpec, TokenStream, MoeRouter, ContextWindow, ScoreMatrix, ModelSpecCard, TokenPriceGrid, AttentionMask, EffortDial, PeakClock, AliasRoute, GlobeCover, ArcGlobe, PopGrid, RequestJourney, ShieldLayers, SpikeChart, OutageBoard, ReachRings, ServerRack, TraceTimeline, QueryPlan, SchemaEr, ResultGrid, CodeCallouts, RequestResponse, BeamFlow, TupleVersions, BTreeIndex, JsonTree, SessionSequence, BadgeHero, TabPanels, EditionPicker, ReleaseTrain, MegaMenu, PathCrumbs, FilterChips, CtaBlock, FooterClosing, FaqAccordion, MediaExpand, ScatterOrder, TiltShot, ConvergeShots, StepVideo, ExhibitCover, YearBars, NumberTiles, ScoreTable, MetricMosaic, StepGrid, FramedStats, IndexList, AgendaMosaic, MethodSteps, PriorityColumns, ChapterNumber, StackBars, ChatDemo, AppCards, AtelierHero, ProjectPair, ProcessQuote, ServiceTrio, TeamBanner, BookingClose, MonographHero, ProjectIndex, WhyStats, TeamPortraits, ServiceLedger, MonographClose, NocturneHero, FeatureBento, GlowPricing, StepTrio, RevealCompare, WallClose, SunriseHero, KitBento, HomeTrio, KanbanDemo, ProofMosaic, BuyoutPricing, FolioHero, FolioCase, FolioSteps, FolioWords, FolioOffers, FolioContact, DiptychHero, DiptychWorks, DiptychServices, DiptychWords, DiptychAbout, DiptychContact, MarkerIntro, MarkerWorks, MarkerSkills, MarkerLog, MarkerFacts, MarkerClose, AlbumHero, AlbumLayout, AlbumWeek, AlbumStories, AlbumPlus, AlbumClose, SlateHero, SlateSteps, SlateCompare, SlateTrend, SlatePricing, SlateConnect, EmberHero, EmberBento, EmberAgent, EmberSaves, EmberWords, EmberClose, DuskHero, DuskFeature, DuskExplain, DuskStats, DuskCases, DuskClose, AgencyStage, AgencyAccordion, AgencyProof, AgencyBook, SocialFeed, SocialPost, DirectChat } from '../../kit'
+import { Cover, Bento, MetricBars, Timeline, SpotlightList, CompareTable, NumberedColumns, VerdictColumns, Checklist, StepTrack, Teaser, Closing, Terminal, CodeDiff, StatusGrid, SpecSheet, Cycle, Faq, Lanes, LineChart, Agenda, SectionBreak, QuoteHero, FlowDiagram, ClaimCards, LayerStack, Matrix, IconGrid, BigStat, DeltaBars, Dumbbell, RangeBars, Gantt, Milestones, QuoteWall, BeforeAfter, Screenshot, Funnel, Quadrant, PersonaCards, PricingTiers, KpiBoard, ShareBar, Waterfall, Team, IssueTree, Heatmap, Roadmap, Statement, HangingCover, PanelCards, AskAnswer, ProofSplit, IndexStack, ContactPanel, Orbit, NumberOpener, ChapterProgress, Question, Contrast, Recap, HeroPanel, TabbedShot, BrandKit, Laurels, FullBleed, Thanks, SplitWord, PillAgenda, StatRow, CountCompare, Donut, BarChart, Bubble, Gauge, ServiceList, QuoteArc, WorkCards, RepeatClosing, StickerCover, WordBlocks, FolderCards, SparkCards, Pictogram, SlopeRank, PixelClosing, FloatCover, TileWall, ServiceIndex, GlowStack, DuoCards, Desktop, WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone, Swimlane, ArchLayers, Balance, DoubleFunnel, KeyReveal, KeySpec, OrbCover, GradientCards, BlockStats, PopPoster, BentoBoard, BentoSpotlight, SlotPicker, UiSteps, FloatHero, TranscriptCard, RetroTabs, RetroLog, GlowMetric, HairlineGrid, RibbonCover, RibbonSection, ChatThread, NoteCards, RevealStatement, SketchCover, ArcCards, CaseCard, AgencyHero, AgencyRows, AgencyManifesto, HaloHero, HaloRows, HaloMarquee, FanCover, PillSentence, OpenList, PhotoCover, PhotoSplit, PhotoMosaic, PolaroidWall, FilmStrip, MagazineSpread, CaseStudy, DeviceFrame, CompareSlider, PhotoStack, FlipCards, CardStack, FanCarousel, DepthCarousel, Envelope, FlipBook, Lanyard, ProgressCards, ProcessAccordion, NotebookCover, Halftone, ProgressiveBlur, MaskReveal, LogoWall, PhotoClosing, RankingRace, BubbleCluster, NodeGraph, Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics, Typewriter, RotatingWord, MorphHeadline, TextArc, Odometer, MarkerSweep, TextMask, SplitFlap, NewsTicker, KaraokeLines, ParadigmCards, AnatomyCard, ExplorerFlip, VerbCards, NinesDial, TierLadder, LifecycleRail, MeterCards, ShelfGallery, TabSpec, TokenStream, MoeRouter, ContextWindow, ScoreMatrix, ModelSpecCard, TokenPriceGrid, AttentionMask, EffortDial, PeakClock, AliasRoute, GlobeCover, ArcGlobe, PopGrid, RequestJourney, ShieldLayers, SpikeChart, OutageBoard, ReachRings, ServerRack, TraceTimeline, QueryPlan, SchemaEr, ResultGrid, CodeCallouts, RequestResponse, BeamFlow, TupleVersions, BTreeIndex, JsonTree, SessionSequence, BadgeHero, TabPanels, EditionPicker, ReleaseTrain, MegaMenu, PathCrumbs, FilterChips, CtaBlock, FooterClosing, FaqAccordion, MediaExpand, ScatterOrder, TiltShot, ConvergeShots, StepVideo, VideoStage, ExhibitCover, YearBars, NumberTiles, ScoreTable, MetricMosaic, StepGrid, FramedStats, IndexList, AgendaMosaic, MethodSteps, PriorityColumns, ChapterNumber, StackBars, ChatDemo, AppCards, AtelierHero, ProjectPair, ProcessQuote, ServiceTrio, TeamBanner, BookingClose, MonographHero, ProjectIndex, WhyStats, TeamPortraits, ServiceLedger, MonographClose, NocturneHero, FeatureBento, GlowPricing, StepTrio, RevealCompare, WallClose, SunriseHero, KitBento, HomeTrio, KanbanDemo, ProofMosaic, BuyoutPricing, FolioHero, FolioCase, FolioSteps, FolioWords, FolioOffers, FolioContact, DiptychHero, DiptychWorks, DiptychServices, DiptychWords, DiptychAbout, DiptychContact, MarkerIntro, MarkerWorks, MarkerSkills, MarkerLog, MarkerFacts, MarkerClose, AlbumHero, AlbumLayout, AlbumWeek, AlbumStories, AlbumPlus, AlbumClose, SlateHero, SlateSteps, SlateCompare, SlateTrend, SlatePricing, SlateConnect, EmberHero, EmberBento, EmberAgent, EmberSaves, EmberWords, EmberClose, DuskHero, DuskFeature, DuskExplain, DuskStats, DuskCases, DuskClose, AgencyStage, AgencyAccordion, AgencyProof, AgencyBook, SocialFeed, SocialPost, DirectChat } from '../../kit'
 ```
 
 <a id="cover"></a>
@@ -11383,7 +11384,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 - lead ≤ 40 字
 - 视频建议 ≤ 15 秒、≤ 1 MB（先用 ffmpeg 截短压缩）
 
-**交互**：按 → 播放到下一个停点
+**交互**：按 → 播放到下一个停点，点击画面可重播当前段
 
 **Props**
 
@@ -11394,7 +11395,10 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 | `lead` | `string` |  | 导语 |
 | `src` | `string` | 是 | 视频文件（import） |
 | `label` | `string` | 是 | 视频内容说明 |
+| `poster` | `string` |  | 可选封面帧图片 |
 | `start` | `number` |  | 第一次按之前显示的秒数，默认 0 |
+| `muted` | `boolean` |  | 默认静音（可点击切换有声） |
+| `playbackRate` | `number` |  | 播放倍速，默认 1 |
 | `stops` | `{ at, title, body }[]` | 是 | 停点 |
 | `source` | `string` |  | 出处 |
 
@@ -11410,9 +11414,65 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 />
 ```
 
+<a id="video-stage"></a>
+
+## 237 · 视频放映台 `<VideoStage />`
+
+**位置**：动效 · 居中大画面完整播放带播控栏的产品录屏或解说视频　**参考页**：`src/decks/motion` 中的 `video-stage`
+
+在单页居中呈现 16:9 完整视频，自带风格统一的播控栏：点击播放/暂停、进度条拖动、0.75×–2× 倍速、声音切换与全屏；离开页面或切后台自动暂停。
+
+**适合**
+
+- 播放完整的产品演示录屏、带人声解说的视频或循环背景画面
+- 演讲者需要现场随时暂停、拖动或切换倍速
+
+**避免**
+
+- 需要按步骤逐段停顿讲解：改用 StepVideo
+- 超大高清视频直接打包单文件 HTML（建议先用 ffmpeg 压缩或托管企业库流式播放）
+
+**内容上限**（超出会破版，`npm run qa` 会报出来）
+
+- 页标题 ≤ 22 字
+- lead ≤ 40 字
+- caption ≤ 36 字
+
+**交互**：点击画面或底栏控制播放、拖动、倍速与全屏
+
+**Props**
+
+| 名称 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `kicker` | `string` | 是 | 小节名 |
+| `title` | `string \| string[]` | 是 | 标题 |
+| `lead` | `string` |  | 导语 |
+| `src` | `string` | 是 | 视频文件（import 或同源 URL） |
+| `label` | `string` | 是 | 视频内容说明 |
+| `poster` | `string` |  | 可选封面帧图片 |
+| `caption` | `string` |  | 下方简短说明（≤ 36 字） |
+| `autoplay` | `boolean` |  | 进入本页自动播放，默认 false |
+| `loop` | `boolean` |  | 循环播放，默认 false |
+| `muted` | `boolean` |  | 初始静音状态（autoplay 时默认 true） |
+| `controls` | `boolean` |  | 显示自定义播控栏，默认 true |
+| `playbackRate` | `number` |  | 初始倍速，默认 1 |
+| `source` | `string` |  | 出处 |
+
+**示例**
+
+```tsx
+<VideoStage
+  kicker="产品演示"
+  title="十秒看懂核心工作流"
+  src={demoMp4}
+  label="产品端到端操作录屏"
+  caption="支持点击暂停、进度条拖动、倍速与全屏放映"
+/>
+```
+
 <a id="exhibit-cover"></a>
 
-## 237 · 展览封面 `<ExhibitCover />`
+## 238 · 展览封面 `<ExhibitCover />`
 
 **位置**：开场 · 超大窄衬线标题加角落日期块　**参考页**：`src/decks/sig-biennale` 中的 `cover`
 
@@ -11456,7 +11516,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="year-bars"></a>
 
-## 238 · 数字配年份条 `<YearBars />`
+## 239 · 数字配年份条 `<YearBars />`
 
 **位置**：数据 · 两个大数字配按年份的细条　**参考页**：`src/decks/sig-biennale` 中的 `bars`
 
@@ -11505,7 +11565,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="number-tiles"></a>
 
-## 239 · 数字色块 `<NumberTiles />`
+## 240 · 数字色块 `<NumberTiles />`
 
 **位置**：内容 · 3–4 块高色块，各带一个超大编号　**参考页**：`src/decks/sig-stencil` 中的 `tiles`
 
@@ -11552,7 +11612,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="score-table"></a>
 
-## 240 · 评分表 `<ScoreTable />`
+## 241 · 评分表 `<ScoreTable />`
 
 **位置**：对比 · 黑表头，每格一个彩色标签　**参考页**：`src/decks/sig-stencil` 中的 `score`
 
@@ -11602,7 +11662,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="metric-mosaic"></a>
 
-## 241 · 数字拼格 `<MetricMosaic />`
+## 242 · 数字拼格 `<MetricMosaic />`
 
 **位置**：数据 · 长条、标题块、小数字块和大数字块拼成一页　**参考页**：`src/decks/sig-neo` 中的 `mosaic`
 
@@ -11653,7 +11713,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="step-grid"></a>
 
-## 242 · 下一步拼格 `<StepGrid />`
+## 243 · 下一步拼格 `<StepGrid />`
 
 **位置**：收尾 · 大标题块加三块步骤　**参考页**：`src/decks/sig-neo` 中的 `steps`
 
@@ -11699,7 +11759,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="framed-stats"></a>
 
-## 243 · 粗框数字 `<FramedStats />`
+## 244 · 粗框数字 `<FramedStats />`
 
 **位置**：数据 · 3–4 个粗边框数字盒　**参考页**：`src/decks/sig-block-frame` 中的 `stats`
 
@@ -11746,7 +11806,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="index-list"></a>
 
-## 244 · 分栏索引 `<IndexList />`
+## 245 · 分栏索引 `<IndexList />`
 
 **位置**：内容 · 两栏编号条目，细线分隔　**参考页**：`src/decks/sig-cobalt-grid` 中的 `index`
 
@@ -11793,7 +11853,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="agenda-mosaic"></a>
 
-## 245 · 议程拼块 `<AgendaMosaic />`
+## 246 · 议程拼块 `<AgendaMosaic />`
 
 **位置**：开场 · 五个议题拼成大小不一的色块　**参考页**：`src/decks/sig-forest` 中的 `agenda`
 
@@ -11837,7 +11897,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="method-steps"></a>
 
-## 246 · 方法步骤 `<MethodSteps />`
+## 247 · 方法步骤 `<MethodSteps />`
 
 **位置**：流程 · 深浅交替的编号步骤卡　**参考页**：`src/decks/sig-emerald` 中的 `method`
 
@@ -11885,7 +11945,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="priority-columns"></a>
 
-## 247 · 三栏重点 `<PriorityColumns />`
+## 248 · 三栏重点 `<PriorityColumns />`
 
 **位置**：内容 · 三根通栏，超大编号，一栏用主题色　**参考页**：`src/decks/sig-platform` 中的 `priorities`
 
@@ -11933,7 +11993,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="chapter-number"></a>
 
-## 248 · 章节大数字 `<ChapterNumber />`
+## 249 · 章节大数字 `<ChapterNumber />`
 
 **位置**：分隔 · 超大章节号配短标题　**参考页**：`src/decks/sig-pink-script` 中的 `chapter`
 
@@ -11979,7 +12039,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="stack-bars"></a>
 
-## 249 · 阶梯层级 `<StackBars />`
+## 250 · 阶梯层级 `<StackBars />`
 
 **位置**：结构 · 一层层错开的横条　**参考页**：`src/decks/sig-broadside` 中的 `stack`
 
@@ -12026,7 +12086,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="chat-demo"></a>
 
-## 250 · 对话演示 `<ChatDemo />`
+## 251 · 对话演示 `<ChatDemo />`
 
 **位置**：拟真界面 · 用一段对话展示怎么用　**参考页**：`src/decks/mockui` 中的 `chat`
 
@@ -12081,7 +12141,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="app-cards"></a>
 
-## 251 · 后台卡片 `<AppCards />`
+## 252 · 后台卡片 `<AppCards />`
 
 **位置**：拟真界面 · 2–4 个填好内容的应用面板　**参考页**：`src/decks/mockui` 中的 `apps`
 
@@ -12129,7 +12189,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="atelier-hero"></a>
 
-## 252 · 设计室开场 `<AtelierHero />`
+## 253 · 设计室开场 `<AtelierHero />`
 
 **位置**：开场 · 工作室首页　**参考页**：`src/decks/sig-atelier` 中的 `hero`
 
@@ -12176,7 +12236,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="project-pair"></a>
 
-## 253 · 双作品展示 `<ProjectPair />`
+## 254 · 双作品展示 `<ProjectPair />`
 
 **位置**：证据 · 两个代表作　**参考页**：`src/decks/sig-atelier` 中的 `work`
 
@@ -12219,7 +12279,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="process-quote"></a>
 
-## 254 · 流程配客户评价 `<ProcessQuote />`
+## 255 · 流程配客户评价 `<ProcessQuote />`
 
 **位置**：方法 · 合作步骤加一句评价　**参考页**：`src/decks/sig-atelier` 中的 `process`
 
@@ -12265,7 +12325,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="service-trio"></a>
 
-## 255 · 三项服务卡 `<ServiceTrio />`
+## 256 · 三项服务卡 `<ServiceTrio />`
 
 **位置**：产品 · 三项服务　**参考页**：`src/decks/sig-atelier` 中的 `services`
 
@@ -12306,7 +12366,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="team-banner"></a>
 
-## 256 · 团队大合影 `<TeamBanner />`
+## 257 · 团队大合影 `<TeamBanner />`
 
 **位置**：背景 · 团队和数字　**参考页**：`src/decks/sig-atelier` 中的 `team`
 
@@ -12349,7 +12409,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="booking-close"></a>
 
-## 257 · 预约收尾 `<BookingClose />`
+## 258 · 预约收尾 `<BookingClose />`
 
 **位置**：收尾 · 预约一次沟通　**参考页**：`src/decks/sig-atelier` 中的 `book`
 
@@ -12395,7 +12455,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="monograph-hero"></a>
 
-## 258 · 机构自我介绍 `<MonographHero />`
+## 259 · 机构自我介绍 `<MonographHero />`
 
 **位置**：开场 · 机构介绍　**参考页**：`src/decks/sig-monograph` 中的 `hero`
 
@@ -12438,7 +12498,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="project-index"></a>
 
-## 259 · 项目索引 `<ProjectIndex />`
+## 260 · 项目索引 `<ProjectIndex />`
 
 **位置**：证据 · 项目列表　**参考页**：`src/decks/sig-monograph` 中的 `index`
 
@@ -12482,7 +12542,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="why-stats"></a>
 
-## 260 · 为什么选我们 `<WhyStats />`
+## 261 · 为什么选我们 `<WhyStats />`
 
 **位置**：实证 · 三个数字　**参考页**：`src/decks/sig-monograph` 中的 `why`
 
@@ -12527,7 +12587,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="team-portraits"></a>
 
-## 261 · 黑白人像团队 `<TeamPortraits />`
+## 262 · 黑白人像团队 `<TeamPortraits />`
 
 **位置**：背景 · 团队成员　**参考页**：`src/decks/sig-monograph` 中的 `team`
 
@@ -12570,7 +12630,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="service-ledger"></a>
 
-## 262 · 服务清单 `<ServiceLedger />`
+## 263 · 服务清单 `<ServiceLedger />`
 
 **位置**：产品 · 服务列表　**参考页**：`src/decks/sig-monograph` 中的 `services`
 
@@ -12614,7 +12674,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="monograph-close"></a>
 
-## 263 · 三行收尾 `<MonographClose />`
+## 264 · 三行收尾 `<MonographClose />`
 
 **位置**：收尾 · 联系方式　**参考页**：`src/decks/sig-monograph` 中的 `close`
 
@@ -12655,7 +12715,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="nocturne-hero"></a>
 
-## 264 · 夜光开场 `<NocturneHero />`
+## 265 · 夜光开场 `<NocturneHero />`
 
 **位置**：开场 · App 首页　**参考页**：`src/decks/sig-nocturne` 中的 `hero`
 
@@ -12702,7 +12762,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="feature-bento"></a>
 
-## 265 · 发光便当格 `<FeatureBento />`
+## 266 · 发光便当格 `<FeatureBento />`
 
 **位置**：产品 · 功能总览　**参考页**：`src/decks/sig-nocturne` 中的 `features`
 
@@ -12747,7 +12807,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="glow-pricing"></a>
 
-## 266 · 发光价格表 `<GlowPricing />`
+## 267 · 发光价格表 `<GlowPricing />`
 
 **位置**：定价 · 三档套餐　**参考页**：`src/decks/sig-nocturne` 中的 `pricing`
 
@@ -12793,7 +12853,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="step-trio"></a>
 
-## 267 · 三步演示卡 `<StepTrio />`
+## 268 · 三步演示卡 `<StepTrio />`
 
 **位置**：操作 · 三步上手　**参考页**：`src/decks/sig-nocturne` 中的 `steps`
 
@@ -12842,7 +12902,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="reveal-compare"></a>
 
-## 268 · 拖动前后对比 `<RevealCompare />`
+## 269 · 拖动前后对比 `<RevealCompare />`
 
 **位置**：对比 · 处理前后　**参考页**：`src/decks/sig-nocturne` 中的 `compare`
 
@@ -12890,7 +12950,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="wall-close"></a>
 
-## 269 · 照片墙收尾 `<WallClose />`
+## 270 · 照片墙收尾 `<WallClose />`
 
 **位置**：收尾 · 行动号召　**参考页**：`src/decks/sig-nocturne` 中的 `close`
 
@@ -12934,7 +12994,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="sunrise-hero"></a>
 
-## 270 · 晨光开场 `<SunriseHero />`
+## 271 · 晨光开场 `<SunriseHero />`
 
 **位置**：开场 · SaaS 首页　**参考页**：`src/decks/sig-sunrise` 中的 `hero`
 
@@ -12982,7 +13042,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="kit-bento"></a>
 
-## 271 · 数字便当格 `<KitBento />`
+## 272 · 数字便当格 `<KitBento />`
 
 **位置**：产品 · 内容清单　**参考页**：`src/decks/sig-sunrise` 中的 `kit`
 
@@ -13023,7 +13083,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="home-trio"></a>
 
-## 272 · 三套首页 `<HomeTrio />`
+## 273 · 三套首页 `<HomeTrio />`
 
 **位置**：产品 · 方案并列　**参考页**：`src/decks/sig-sunrise` 中的 `homes`
 
@@ -13066,7 +13126,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="kanban-demo"></a>
 
-## 273 · 可玩的看板 `<KanbanDemo />`
+## 274 · 可玩的看板 `<KanbanDemo />`
 
 **位置**：产品 · 交互演示　**参考页**：`src/decks/sig-sunrise` 中的 `board`
 
@@ -13116,7 +13176,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="proof-mosaic"></a>
 
-## 274 · 口碑拼图 `<ProofMosaic />`
+## 275 · 口碑拼图 `<ProofMosaic />`
 
 **位置**：客户 · 评价与口碑　**参考页**：`src/decks/sig-sunrise` 中的 `proof`
 
@@ -13162,7 +13222,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="buyout-pricing"></a>
 
-## 275 · 买断价格 `<BuyoutPricing />`
+## 276 · 买断价格 `<BuyoutPricing />`
 
 **位置**：定价 · 两档加收尾　**参考页**：`src/decks/sig-sunrise` 中的 `pricing`
 
@@ -13205,7 +13265,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="folio-hero"></a>
 
-## 276 · 作品轨开场 `<FolioHero />`
+## 277 · 作品轨开场 `<FolioHero />`
 
 **位置**：开场 · 个人作品集首页　**参考页**：`src/decks/sig-folio` 中的 `hero`
 
@@ -13256,7 +13316,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="folio-case"></a>
 
-## 277 · 作品轨案例 `<FolioCase />`
+## 278 · 作品轨案例 `<FolioCase />`
 
 **位置**：证据 · 单个项目详情　**参考页**：`src/decks/sig-folio` 中的 `case`
 
@@ -13306,7 +13366,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="folio-steps"></a>
 
-## 278 · 作品轨流程 `<FolioSteps />`
+## 279 · 作品轨流程 `<FolioSteps />`
 
 **位置**：方法 · 分步折叠　**参考页**：`src/decks/sig-folio` 中的 `steps`
 
@@ -13350,7 +13410,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="folio-words"></a>
 
-## 279 · 作品轨评价 `<FolioWords />`
+## 280 · 作品轨评价 `<FolioWords />`
 
 **位置**：证据 · 客户原话　**参考页**：`src/decks/sig-folio` 中的 `words`
 
@@ -13390,7 +13450,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="folio-offers"></a>
 
-## 280 · 作品轨报价 `<FolioOffers />`
+## 281 · 作品轨报价 `<FolioOffers />`
 
 **位置**：定价 · 合作方式　**参考页**：`src/decks/sig-folio` 中的 `offers`
 
@@ -13440,7 +13500,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="folio-contact"></a>
 
-## 281 · 作品轨问答预约 `<FolioContact />`
+## 282 · 作品轨问答预约 `<FolioContact />`
 
 **位置**：收尾 · 常见问题与预约　**参考页**：`src/decks/sig-folio` 中的 `contact`
 
@@ -13488,7 +13548,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="diptych-hero"></a>
 
-## 282 · 对页开场 `<DiptychHero />`
+## 283 · 对页开场 `<DiptychHero />`
 
 **位置**：开场 · 个人作品集首页　**参考页**：`src/decks/sig-diptych` 中的 `hero`
 
@@ -13539,7 +13599,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="diptych-works"></a>
 
-## 283 · 对页项目列表 `<DiptychWorks />`
+## 284 · 对页项目列表 `<DiptychWorks />`
 
 **位置**：证据 · 精选项目　**参考页**：`src/decks/sig-diptych` 中的 `works`
 
@@ -13584,7 +13644,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="diptych-services"></a>
 
-## 284 · 对页服务 `<DiptychServices />`
+## 285 · 对页服务 `<DiptychServices />`
 
 **位置**：服务 · 分标签介绍　**参考页**：`src/decks/sig-diptych` 中的 `services`
 
@@ -13629,7 +13689,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="diptych-words"></a>
 
-## 285 · 对页评价 `<DiptychWords />`
+## 286 · 对页评价 `<DiptychWords />`
 
 **位置**：证据 · 客户原话　**参考页**：`src/decks/sig-diptych` 中的 `words`
 
@@ -13672,7 +13732,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="diptych-about"></a>
 
-## 286 · 对页关于 `<DiptychAbout />`
+## 287 · 对页关于 `<DiptychAbout />`
 
 **位置**：关于 · 个人经历　**参考页**：`src/decks/sig-diptych` 中的 `about`
 
@@ -13721,7 +13781,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="diptych-contact"></a>
 
-## 287 · 对页需求单 `<DiptychContact />`
+## 288 · 对页需求单 `<DiptychContact />`
 
 **位置**：收尾 · 选项式联系　**参考页**：`src/decks/sig-diptych` 中的 `contact`
 
@@ -13768,7 +13828,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="marker-intro"></a>
 
-## 288 · 记号笔开场 `<MarkerIntro />`
+## 289 · 记号笔开场 `<MarkerIntro />`
 
 **位置**：开场 · 一句话自我介绍　**参考页**：`src/decks/sig-marker` 中的 `intro`
 
@@ -13811,7 +13871,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="marker-works"></a>
 
-## 289 · 记号笔作品卡 `<MarkerWorks />`
+## 290 · 记号笔作品卡 `<MarkerWorks />`
 
 **位置**：证据 · 精选作品　**参考页**：`src/decks/sig-marker` 中的 `works`
 
@@ -13851,7 +13911,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="marker-skills"></a>
 
-## 290 · 记号笔能力卡 `<MarkerSkills />`
+## 291 · 记号笔能力卡 `<MarkerSkills />`
 
 **位置**：能力 · 我做什么与近况　**参考页**：`src/decks/sig-marker` 中的 `skills`
 
@@ -13896,7 +13956,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="marker-log"></a>
 
-## 291 · 记号笔随笔 `<MarkerLog />`
+## 292 · 记号笔随笔 `<MarkerLog />`
 
 **位置**：内容 · 日志与文章列表　**参考页**：`src/decks/sig-marker` 中的 `log`
 
@@ -13938,7 +13998,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="marker-facts"></a>
 
-## 292 · 记号笔数字 `<MarkerFacts />`
+## 293 · 记号笔数字 `<MarkerFacts />`
 
 **位置**：数据 · 一句话加数字　**参考页**：`src/decks/sig-marker` 中的 `facts`
 
@@ -13980,7 +14040,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="marker-close"></a>
 
-## 293 · 记号笔收尾 `<MarkerClose />`
+## 294 · 记号笔收尾 `<MarkerClose />`
 
 **位置**：收尾 · 联系方式　**参考页**：`src/decks/sig-marker` 中的 `close`
 
@@ -14023,7 +14083,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="album-hero"></a>
 
-## 294 · 相册开场 `<AlbumHero />`
+## 295 · 相册开场 `<AlbumHero />`
 
 **位置**：开场 · 温暖的消费产品首页　**参考页**：`src/decks/sig-album` 中的 `hero`
 
@@ -14071,7 +14131,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="album-layout"></a>
 
-## 295 · 相册桌面排版 `<AlbumLayout />`
+## 296 · 相册桌面排版 `<AlbumLayout />`
 
 **位置**：方法 · 三步演示　**参考页**：`src/decks/sig-album` 中的 `layout`
 
@@ -14114,7 +14174,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="album-week"></a>
 
-## 296 · 相册一周 `<AlbumWeek />`
+## 297 · 相册一周 `<AlbumWeek />`
 
 **位置**：内容 · 一周图记　**参考页**：`src/decks/sig-album` 中的 `week`
 
@@ -14155,7 +14215,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="album-stories"></a>
 
-## 297 · 相册翻面故事 `<AlbumStories />`
+## 298 · 相册翻面故事 `<AlbumStories />`
 
 **位置**：证据 · 用户故事　**参考页**：`src/decks/sig-album` 中的 `stories`
 
@@ -14196,7 +14256,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="album-plus"></a>
 
-## 298 · 相册会员 `<AlbumPlus />`
+## 299 · 相册会员 `<AlbumPlus />`
 
 **位置**：定价 · 单一会员　**参考页**：`src/decks/sig-album` 中的 `plus`
 
@@ -14243,7 +14303,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="album-close"></a>
 
-## 299 · 相册收尾 `<AlbumClose />`
+## 300 · 相册收尾 `<AlbumClose />`
 
 **位置**：收尾 · 号召与照片堆　**参考页**：`src/decks/sig-album` 中的 `close`
 
@@ -14289,7 +14349,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="slate-hero"></a>
 
-## 300 · 立体看板开场 `<SlateHero />`
+## 301 · 立体看板开场 `<SlateHero />`
 
 **位置**：开场 · SaaS 产品首页　**参考页**：`src/decks/sig-slate` 中的 `hero`
 
@@ -14337,7 +14397,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="slate-steps"></a>
 
-## 301 · 立体看板三步 `<SlateSteps />`
+## 302 · 立体看板三步 `<SlateSteps />`
 
 **位置**：方法 · 三步上手　**参考页**：`src/decks/sig-slate` 中的 `steps`
 
@@ -14380,7 +14440,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="slate-compare"></a>
 
-## 302 · 立体看板对比表 `<SlateCompare />`
+## 303 · 立体看板对比表 `<SlateCompare />`
 
 **位置**：对比 · 我们与替代方案　**参考页**：`src/decks/sig-slate` 中的 `compare`
 
@@ -14428,7 +14488,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="slate-trend"></a>
 
-## 303 · 立体看板趋势 `<SlateTrend />`
+## 304 · 立体看板趋势 `<SlateTrend />`
 
 **位置**：趋势 · 多指标走势　**参考页**：`src/decks/sig-slate` 中的 `trend`
 
@@ -14473,7 +14533,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="slate-pricing"></a>
 
-## 304 · 立体看板定价 `<SlatePricing />`
+## 305 · 立体看板定价 `<SlatePricing />`
 
 **位置**：定价 · 按人数计价　**参考页**：`src/decks/sig-slate` 中的 `pricing`
 
@@ -14519,7 +14579,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="slate-connect"></a>
 
-## 305 · 立体看板集成 `<SlateConnect />`
+## 306 · 立体看板集成 `<SlateConnect />`
 
 **位置**：收尾 · 集成与号召　**参考页**：`src/decks/sig-slate` 中的 `connect`
 
@@ -14565,7 +14625,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="ember-hero"></a>
 
-## 306 · 暗场开场 `<EmberHero />`
+## 307 · 暗场开场 `<EmberHero />`
 
 **位置**：开场 · AI 产品首页　**参考页**：`src/decks/sig-ember` 中的 `hero`
 
@@ -14609,7 +14669,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="ember-bento"></a>
 
-## 307 · 暗场能力拼贴 `<EmberBento />`
+## 308 · 暗场能力拼贴 `<EmberBento />`
 
 **位置**：能力 · 四项功能　**参考页**：`src/decks/sig-ember` 中的 `bento`
 
@@ -14650,7 +14710,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="ember-agent"></a>
 
-## 308 · 暗场代理执行 `<EmberAgent />`
+## 309 · 暗场代理执行 `<EmberAgent />`
 
 **位置**：机制 · 代理一步步完成任务　**参考页**：`src/decks/sig-ember` 中的 `agent`
 
@@ -14697,7 +14757,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="ember-saves"></a>
 
-## 309 · 暗场省时对比 `<EmberSaves />`
+## 310 · 暗场省时对比 `<EmberSaves />`
 
 **位置**：数据 · 每项工作省下的时间　**参考页**：`src/decks/sig-ember` 中的 `saves`
 
@@ -14741,7 +14801,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="ember-words"></a>
 
-## 310 · 暗场用户评价 `<EmberWords />`
+## 311 · 暗场用户评价 `<EmberWords />`
 
 **位置**：证据 · 两位客户的话和结果　**参考页**：`src/decks/sig-ember` 中的 `words`
 
@@ -14783,7 +14843,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="ember-close"></a>
 
-## 311 · 暗场收尾 `<EmberClose />`
+## 312 · 暗场收尾 `<EmberClose />`
 
 **位置**：收尾 · 号召与提问框　**参考页**：`src/decks/sig-ember` 中的 `close`
 
@@ -14827,7 +14887,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="dusk-hero"></a>
 
-## 312 · 霞光面板开场 `<DuskHero />`
+## 313 · 霞光面板开场 `<DuskHero />`
 
 **位置**：开场 · 开发者工具首页　**参考页**：`src/decks/sig-dusk` 中的 `hero`
 
@@ -14872,7 +14932,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="dusk-feature"></a>
 
-## 313 · 霞光面板特性 `<DuskFeature />`
+## 314 · 霞光面板特性 `<DuskFeature />`
 
 **位置**：产品 · 一项功能和它的图表　**参考页**：`src/decks/sig-dusk` 中的 `feature`
 
@@ -14917,7 +14977,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="dusk-explain"></a>
 
-## 314 · 霞光面板逐段讲解 `<DuskExplain />`
+## 315 · 霞光面板逐段讲解 `<DuskExplain />`
 
 **位置**：讲解 · 代码逐段说成人话　**参考页**：`src/decks/sig-dusk` 中的 `explain`
 
@@ -14962,7 +15022,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="dusk-stats"></a>
 
-## 315 · 霞光面板结果卡 `<DuskStats />`
+## 316 · 霞光面板结果卡 `<DuskStats />`
 
 **位置**：数据 · 三个结果　**参考页**：`src/decks/sig-dusk` 中的 `stats`
 
@@ -15004,7 +15064,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="dusk-cases"></a>
 
-## 316 · 霞光面板客户案例 `<DuskCases />`
+## 317 · 霞光面板客户案例 `<DuskCases />`
 
 **位置**：客户 · 案例轮播与两句评价　**参考页**：`src/decks/sig-dusk` 中的 `cases`
 
@@ -15050,7 +15110,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="dusk-close"></a>
 
-## 317 · 霞光面板收尾 `<DuskClose />`
+## 318 · 霞光面板收尾 `<DuskClose />`
 
 **位置**：收尾 · 号召与安装命令　**参考页**：`src/decks/sig-dusk` 中的 `close`
 
@@ -15094,7 +15154,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="agency-stage"></a>
 
-## 318 · 电光蓝舞台开场 `<AgencyStage />`
+## 319 · 电光蓝舞台开场 `<AgencyStage />`
 
 **位置**：开场 · 机构或品牌第 1 页　**参考页**：`src/decks/sig-agency` 中的 `stage`
 
@@ -15140,7 +15200,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="agency-accordion"></a>
 
-## 319 · 人像加手风琴 `<AgencyAccordion />`
+## 320 · 人像加手风琴 `<AgencyAccordion />`
 
 **位置**：方法 · 使命、服务或做法展开讲　**参考页**：`src/decks/sig-agency` 中的 `mission`
 
@@ -15186,7 +15246,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="agency-proof"></a>
 
-## 320 · 深蓝评价加便当格 `<AgencyProof />`
+## 321 · 深蓝评价加便当格 `<AgencyProof />`
 
 **位置**：客户 · 评价与成果　**参考页**：`src/decks/sig-agency` 中的 `proof`
 
@@ -15234,7 +15294,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="agency-book"></a>
 
-## 321 · 电光蓝预约收尾 `<AgencyBook />`
+## 322 · 电光蓝预约收尾 `<AgencyBook />`
 
 **位置**：收尾 · 预约一次沟通　**参考页**：`src/decks/sig-agency` 中的 `book`
 
@@ -15285,7 +15345,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="social-feed"></a>
 
-## 322 · 个人主页动态流 `<SocialFeed />`
+## 323 · 个人主页动态流 `<SocialFeed />`
 
 **位置**：内容 · 个人或品牌主页式的近况　**参考页**：`src/decks/mockui` 中的 `feed`
 
@@ -15335,7 +15395,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="social-post"></a>
 
-## 323 · 一条发布动态 `<SocialPost />`
+## 324 · 一条发布动态 `<SocialPost />`
 
 **位置**：证据 · 一次上线或里程碑的反响　**参考页**：`src/decks/mockui` 中的 `post`
 
@@ -15386,7 +15446,7 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 <a id="direct-chat"></a>
 
-## 324 · 私信邀约 `<DirectChat />`
+## 325 · 私信邀约 `<DirectChat />`
 
 **位置**：收尾 · 邀请对方联系或合作　**参考页**：`src/decks/mockui` 中的 `dm`
 

@@ -47,6 +47,50 @@ const { browser, page, cdp, info } = await openVideo(opts.name, { failOn: (m) =>
 const { def, scenes } = info
 const seek = (f) => page.evaluate((x) => window.__video.seek(x), f)
 
+function fmtSrtTime(sec) {
+  const ms = Math.max(0, Math.round(sec * 1000))
+  const h = String(Math.floor(ms / 3600000)).padStart(2, '0')
+  const m = String(Math.floor((ms % 3600000) / 60000)).padStart(2, '0')
+  const s = String(Math.floor((ms % 60000) / 1000)).padStart(2, '0')
+  const rem = String(ms % 1000).padStart(3, '0')
+  return `${h}:${m}:${s},${rem}`
+}
+
+function buildSrt(scenes, fps, fromF, toF) {
+  if (!Number.isFinite(fps) || fps <= 0) return null
+  const fromSec = fromF / fps
+  const toSec = toF / fps
+  const cues = []
+  for (const sc of scenes) {
+    const base = Number(sc.start) / fps
+    const scEnd = Number(sc.end) / fps
+    const scDuration = Number.isFinite(Number(sc.duration)) ? Number(sc.duration) : scEnd - base
+    if (!Number.isFinite(base) || !Number.isFinite(scEnd)) continue
+    for (const cap of sc.captions ?? []) {
+      const text = String(cap.text ?? '')
+        .replace(/\r\n?/g, '\n')
+        .split('\n')
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .join('\n')
+      if (!text) continue
+      const atNum = Number(cap.at)
+      const toNum = cap.to !== undefined ? Number(cap.to) : scDuration
+      const relAt = Number.isFinite(atNum) ? Math.max(0, atNum) : 0
+      const relTo = Number.isFinite(toNum) ? toNum : scDuration
+      const start = Math.max(fromSec, base + relAt)
+      const end = Math.min(toSec, scEnd, base + relTo)
+      if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) continue
+      cues.push({ start: start - fromSec, end: end - fromSec, text })
+    }
+  }
+  if (!cues.length) return null
+  cues.sort((a, b) => a.start - b.start || a.end - b.end)
+  return cues
+    .map((c, i) => `${i + 1}\n${fmtSrtTime(c.start)} --> ${fmtSrtTime(c.end)}\n${c.text}\n`)
+    .join('\n')
+}
+
 function encoder(file, fps, seconds) {
   mkdirSync(dirname(file), { recursive: true })
   const keyint = Math.max(1, Math.round(fps / 2)) // YouTube: closed GOP, half the frame rate
@@ -110,10 +154,19 @@ try {
     await enc.close()
     const seconds = (Date.now() - t0) / 1000
     const manifest = { name: opts.name, def, scenes, from: fromF, to: toF, audio: !!opts.audio, renderSeconds: seconds, framesPerSecond: (toF - fromF) / seconds, hashes, problems }
-    const jsonFile = out.replace(/\.mp4$/, '.frames.json')
+    const stem = out.replace(/\.mp4$/i, '')
+    const jsonFile = `${stem}.frames.json`
+    if (jsonFile === out) throw new Error(`refusing to overwrite video output with manifest: ${out}`)
     writeFileSync(jsonFile, JSON.stringify(manifest))
+    const srt = buildSrt(scenes, def.fps, fromF, toF)
+    let srtFile = null
+    if (srt) {
+      srtFile = `${stem}.srt`
+      if (srtFile === out) throw new Error(`refusing to overwrite video output with subtitles: ${out}`)
+      writeFileSync(srtFile, srt, 'utf8')
+    }
     const all = createHash('sha1').update(hashes.join('')).digest('hex').slice(0, 16)
-    console.log(`${out}\n${toF - fromF} frames in ${seconds.toFixed(1)}s (${manifest.framesPerSecond.toFixed(1)} fps, ${(((toF - fromF) / def.fps) / seconds).toFixed(2)}× real time)  frames ${all}`)
+    console.log(`${out}${srtFile ? `\n${srtFile}` : ''}\n${toF - fromF} frames in ${seconds.toFixed(1)}s (${manifest.framesPerSecond.toFixed(1)} fps, ${(((toF - fromF) / def.fps) / seconds).toFixed(2)}× real time)  frames ${all}`)
   }
   for (const p of problems) console.error(`problem: ${p}`)
 } finally {

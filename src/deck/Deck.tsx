@@ -125,6 +125,8 @@ export function Deck({ title, slides, iconStyle, theme, style = DEFAULT_STYLE, t
   const [overview, setOverview] = useState(false)
   // True while the audience screen is blanked or frozen: autoplay waits.
   const [held, setHeld] = useState(false)
+  const [recording, setRecording] = useState(false)
+  const [recordTrigger, setRecordTrigger] = useState(0)
   const layer = useRef<HTMLDivElement>(null)
   const current = useRef<HTMLElement | null>(null)
   const { index, step } = pos
@@ -340,9 +342,31 @@ export function Deck({ title, slides, iconStyle, theme, style = DEFAULT_STYLE, t
           ))}
         </nav>
       </DeckContext.Provider>
-      <DeckFeatures title={title} slides={slides} index={index} step={step} builds={builds} texture={texture} overview={overview} go={jump} onHold={setHeld} />
+      <DeckFeatures
+        title={title}
+        slides={slides}
+        index={index}
+        step={step}
+        builds={builds}
+        texture={texture}
+        overview={overview}
+        go={jump}
+        onHold={setHeld}
+        recordTrigger={recordTrigger}
+        onRecordingChange={setRecording}
+      />
       {/* Stays mounted under the overview so autoplay pauses there instead of stopping. */}
-      <Controls credit={credit} hidden={overview} paused={overview || held} onPrev={back} onNext={forward} onOverview={() => setOverview(true)} atEnd={index === total - 1 && !(building && step! < builds)} />
+      <Controls
+        credit={credit}
+        hidden={overview}
+        paused={overview || held}
+        onPrev={back}
+        onNext={forward}
+        onOverview={() => setOverview(true)}
+        onRecord={() => setRecordTrigger((n) => n + 1)}
+        recording={recording}
+        atEnd={index === total - 1 && !(building && step! < builds)}
+      />
       {overview && (
         <Overview
           title={title}

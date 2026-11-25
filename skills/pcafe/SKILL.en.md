@@ -77,6 +77,12 @@ For every field, check the template's "limit" in its group file. Limits are hard
 - Numbers carry units and scope; long identifiers go in `tag`, `source` or code fields, not body text.
 - If it doesn't fit, split into two slides. **Don't shrink fonts, don't write custom CSS.**
 - Column item counts differ by at most 1; don't leave the lower half of a slide empty (add an optional block or use a fuller template).
+- Hard layout guardrails for overflow-prone templates (deterministic `pcafe check` may not catch in-card border collisions):
+  - `IconGrid`: keep the slide `title` to **one single line** (≤ 13–14 CJK units), otherwise the 2-row card grid compresses and card text overflows the bottom border; keep card bodies within 2 lines (≤ 20 CJK units for 4×2, ≤ 28 for 3×2).
+  - `StatRow`: keep every big `value` an ultra-short single-line token (≤ 5–6 chars, e.g. `8.6.0`, `4 yrs`, `64-bit`); never use multi-word phrases with spaces (e.g. `3 Defaults`) that wrap and collide horizontally with the next card.
+  - `Closing`: keep the slide `label` (≤ 4–5 units) and top-bar `hint` (≤ 14 units) short so the top bar never wraps or collides; keep `takeaways` concise (30–42 units) and `refs` on a single line.
+  - `SpecSheet`: rows with `major: true` append a dot `•` after `to`; keep `to` ≤ 3 CJK units or ≤ 6 ASCII chars so the dot never wraps onto an orphan line.
+  - `Agenda` left column and `SectionBreak` title column are narrow (~7–8 CJK units per line); always pass an explicit array for multi-line titles to avoid mid-word splits or single-word orphans.
 
 ### 5. Choose style and theme
 
@@ -136,7 +142,12 @@ Checks come in two tiers. Run them yourself; don't wait for the user to ask:
    - **Up to 10 slides**: open every `qa/slide-NN-1920x1080.png`;
    - **Over 10 slides (long decks)**: open every `2560×1440` 2×2 high-res review grid `qa/grid-NN.png` (so every slide is visually checked with far fewer images), and open full-size `qa/slide-NN-1920x1080.png` for any slide with a WARN, complex chart/decoration, or recent edits;
    - After targeted follow-up edits, review only the changed slides' screenshots.
-   Check for too much white space, overcrowded slides, unclear focus, or a title's second line with only one or two words.
+   What to check (note: `pcafe check` returning `PASS` does **not** guarantee zero card-border overflow or top-bar wrapping — inspect visually for all five):
+   - (1) `IconGrid` / `StatRow` card text touching or overflowing bottom/right borders or colliding with a neighbour card;
+   - (2) `StatRow` figures and `Matrix` pills staying cleanly single-line;
+   - (3) top bar (especially on `Closing`) keeping deck title + `label` + `hint` on one line without wrapping;
+   - (4) titles avoiding mid-word CJK splits or one-/two-word orphan second lines;
+   - (5) `SpecSheet` major-jump dots `•` staying on the same line as the value, plus overall whitespace, density and focus.
 5. Emphasis matches the text: "longest" highlights the largest item; "at step 3" fills only up to step 3.
 
 `hint  copy.…` lines before `PASS` flag stock phrases; they are not failures. Rewrite them, or keep them when accurate; "studies show" needs a named `source`.
@@ -165,6 +176,9 @@ Done means a full-check `PASS` and visual review completed (every `slide-NN` for
 - Putting a number on the cover that has no source and never reappears.
 - Fixing overflow by shrinking fonts or adding custom styles.
 - Writing text into `Closing`'s `mark`: it accepts only a 1–4 digit number; text leaves the whole slide blank.
+- Doubling backslashes inside JSX string attributes (e.g. `title="Time\\Duration"`): JSX attributes render `\\` literally; use a single backslash in JSX attributes (`title="Time\Duration"`) and double `\\` only inside JS string literals (objects/arrays like `'Time\\Duration'`).
+- Running `npx pcafe build <name>` back-to-back without copying outputs: each build wipes `dist/`, so copy or move `dist/<name>.html` immediately before building the next deck.
+- Capturing static screenshots of animated slides (`build: 'reveal'`, `Timeline`, `CodeDiff`) without `reducedMotion: 'reduce'`: custom capture scripts can catch semi-transparent mid-animation frames unless reduced motion is enabled or animations have fully settled.
 - Changing `src/kit/catalog.ts` without running `npx pcafe docs`, leaving docs and this skill's reference tables out of date.
 
 ## If you catch yourself…

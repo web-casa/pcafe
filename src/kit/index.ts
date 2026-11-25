@@ -153,6 +153,7 @@ export { ScatterOrder, type ScatterOrderProps, type ScatterStep } from './Scatte
 export { TiltShot, type TiltShotProps } from './TiltShot'
 export { ConvergeShots, type ConvergeShot, type ConvergeShotsProps } from './ConvergeShots'
 export { StepVideo, type StepVideoProps, type VideoStop } from './StepVideo'
+export { VideoStage, type VideoStageProps } from './VideoStage'
 export { ExhibitCover, type ExhibitCoverProps } from './ExhibitCover'
 export { YearBars, type YearBarsProps } from './YearBars'
 export { NumberTiles, type NumberTilesProps } from './NumberTiles'

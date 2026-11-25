@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 324 个模板，90 组。先读本页选组，再读组文件里的“适合 / 不适合 / 上限 / 参考”；完整 props 和示例见 docs/zh-CN/components.md。
+共 325 个模板，90 组。先读本页选组，再读组文件里的“适合 / 不适合 / 上限 / 参考”；完整 props 和示例见 docs/zh-CN/components.md。
 
 | 组 | 内容形状 | 模板 |
 | --- | --- | --- |
@@ -91,7 +91,7 @@
 | [选项](templates/options.md) | 产品的几个版本、套餐、发行版本，各有用途；想逐个讲“这一个适合谁” | `EditionPicker` |
 | [关系](templates/relation.md) | 上游到下游、源头到成品这种单向链条；3–5 个环节，每个环节一两句话 | `PathCrumbs` |
 | [分类](templates/classify.md) | 一组条目有交叉分类，想逐个说明“这一类有哪些”；条目多但每个只要一句话 | `FilterChips` |
-| [动效](templates/motion.md) | 产品演示、案例：先让人认出画面，再看细节；一张图本身就是这一页的重点；把零散的事项理成有顺序的步骤 | `MediaExpand`、`ScatterOrder`、`TiltShot`、`ConvergeShots`、`StepVideo` |
+| [动效](templates/motion.md) | 产品演示、案例：先让人认出画面，再看细节；一张图本身就是这一页的重点；把零散的事项理成有顺序的步骤 | `MediaExpand`、`ScatterOrder`、`TiltShot`、`ConvergeShots`、`StepVideo`、`VideoStage` |
 | [拟真界面](templates/realistic-ui.md) | 工具、助手、客服类产品：展示一次典型的交互；比列功能更直观的场合；同一件东西在几个平台、几种出口里的样子 | `ChatDemo`、`AppCards` |
 | [服务](templates/group-88.md) | 2–4 项服务，每项有交付物和大致报价；不想把所有服务挤在一页里 | `DiptychServices` |
 | [关于](templates/group-89.md) | 作品集里的自我介绍；想把经历和联系方式放在一起 | `DiptychAbout` |

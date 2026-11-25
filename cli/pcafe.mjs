@@ -2,8 +2,10 @@
 // pcafe CLI. Plain Node ESM, no dependencies beyond what the project template installs.
 import { spawn, spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, renameSync, rmSync, statSync, writeFileSync, copyFileSync, symlinkSync } from 'node:fs'
+import { chmodSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, renameSync, rmSync, statSync, writeFileSync, copyFileSync, symlinkSync } from 'node:fs'
+import { homedir } from 'node:os'
 import { basename, dirname, join, relative, resolve } from 'node:path'
+import { createInterface } from 'node:readline/promises'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { findLiveLicence, safeWalkFiles } from '../scripts/licence-util.mjs'
 
@@ -64,6 +66,11 @@ Usage:
                              picture of each slide, notes included (builds first
                              if needed); dist/<name>.pptx.json lists what stayed
                              in the picture
+  pcafe export-video <name|file.html> [--tts openai|edge|none] [--voice <name>]
+                             [--model <tts-1>] [--rate <1.0>] [--slide-duration <sec>]
+                             [--transition fade|none] [--subtitles] [--out <path.mp4>]
+                             Export a slide deck as a narrated 1080p MP4 + SRT
+                             using speakerNotes (PCafe Pro / Founder)
   pcafe paper new <name> [--resume]
                              Create src/papers/<name>/: a report, or a résumé
   pcafe paper dev <name> Preview it (sheets, article view, Save as PDF)
@@ -85,6 +92,13 @@ Usage:
   pcafe photos [cat:n ...]
                              Download optional Unsplash mood photos into
                              src/assets/photos/ (needs UNSPLASH_ACCESS_KEY)
+  pcafe login [--host https://app.p.cafe] [--token-stdin]
+                             Save an Enterprise Vault token (pcev_*) in ~/.config/pcafe/
+  pcafe push <name|file.html> [--org <slug>] [--folder <name>] [--deck-id <id>]
+             [--note <text>] [--expected-version <n>] [--share] [--password-stdin]
+             [--watermark] [--download]
+                             Push a built deck to Enterprise Vault (or publish a new version)
+                             and optionally print a controlled share.p.cafe link
   pcafe help             Show this help
 
 Deck names: lowercase letters, digits and dashes.`
@@ -538,6 +552,18 @@ const commands = {
     return run('node', [join(root, 'scripts', 'pptx-export.mjs'), name, ...flags], root)
   },
 
+  'export-video'(target, ...flags) {
+    const root = projectRoot()
+    if (!target || target === '--help' || target === '-h' || flags.includes('--help') || flags.includes('-h')) {
+      return run('node', [join(root, 'scripts', 'deck-video-export.mjs'), '--help'], root)
+    }
+    const isHtmlFile = existsSync(resolve(target)) && target.toLowerCase().endsWith('.html')
+    if (!isHtmlFile && !flags.includes('--no-build')) {
+      needDeps(root)
+    }
+    return run('node', [join(root, 'scripts', 'deck-video-export.mjs'), target, ...flags], root)
+  },
+
   async paper(action, name, ...flags) {
     const flag = flags[0]
     const root = projectRoot()
@@ -589,6 +615,252 @@ const commands = {
     const root = projectRoot()
     return run('node', [join(root, 'scripts', 'fetch-photos.mjs'), ...args], root)
   },
+
+  async login(...args) {
+    let host = 'https://app.p.cafe'
+    let tokenStdin = false
+    for (let i = 0; i < args.length; i++) {
+      if (args[i] === '--host' && args[i + 1]) host = args[++i]
+      else if (args[i] === '--token-stdin') tokenStdin = true
+    }
+    const baseUrl = normalizeVaultHost(host)
+    let rawToken = (process.env.PCAFE_VAULT_TOKEN || '').trim()
+    if (!rawToken && tokenStdin) {
+      rawToken = readFileSync(0, 'utf8').trim()
+    }
+    if (!rawToken) {
+      const rl = createInterface({ input: process.stdin, output: process.stderr })
+      try {
+        rawToken = (await rl.question('Enterprise Vault token (pcev_...): ')).trim()
+      } finally {
+        rl.close()
+      }
+    }
+    if (!/^pcev_[A-Za-z0-9_-]{43}$/.test(rawToken)) {
+      fail('invalid token format: expected a PCafe Enterprise Vault token starting with "pcev_".')
+    }
+    const orgsRes = await vaultFetch(`${baseUrl}/api/enterprise/orgs`, rawToken)
+    const orgs = orgsRes.items || []
+    if (!orgs.length) fail('token is valid but not associated with an active organization.')
+    saveVaultCredentials({ host: baseUrl, token: rawToken, orgId: orgs[0].id, orgSlug: orgs[0].slug })
+    console.log(`Logged in to ${baseUrl} (org: ${orgs[0].name} [${orgs[0].slug}])`)
+    return 0
+  },
+
+  async push(target, ...args) {
+    if (!target) {
+      fail('usage: pcafe push <deck-name|file.html> [--org <slug>] [--folder <name>] [--deck-id <id>] [--note <text>] [--expected-version <n>] [--share] [--password-stdin] [--watermark] [--download]')
+    }
+    const opts = {
+      org: null,
+      folder: null,
+      deckId: null,
+      title: null,
+      note: null,
+      expectedVersion: null,
+      share: false,
+      passwordStdin: false,
+      watermark: false,
+      download: false,
+      host: null,
+    }
+    for (let i = 0; i < args.length; i++) {
+      const a = args[i]
+      if (a === '--org' && args[i + 1]) opts.org = args[++i]
+      else if (a === '--folder' && args[i + 1]) opts.folder = args[++i]
+      else if (a === '--deck-id' && args[i + 1]) opts.deckId = args[++i]
+      else if (a === '--title' && args[i + 1]) opts.title = args[++i]
+      else if (a === '--note' && args[i + 1]) opts.note = args[++i]
+      else if (a === '--expected-version' && args[i + 1]) {
+        const raw = args[++i]
+        if (!/^\d+$/.test(raw) || Number(raw) < 1) {
+          fail(`invalid --expected-version "${raw}": expected a positive integer.`)
+        }
+        opts.expectedVersion = Number(raw)
+      }
+      else if (a === '--host' && args[i + 1]) opts.host = args[++i]
+      else if (a === '--share') opts.share = true
+      else if (a === '--password-stdin') opts.passwordStdin = true
+      else if (a === '--watermark') opts.watermark = true
+      else if (a === '--download') opts.download = true
+      else fail(`unknown option "${a}" for pcafe push`)
+    }
+
+    const creds = loadVaultCredentials()
+    const envToken = (process.env.PCAFE_VAULT_TOKEN || '').trim()
+    const token = envToken || (creds?.token || '').trim()
+    if (!token) fail('not logged in. Run `pcafe login` or set PCAFE_VAULT_TOKEN.')
+    const baseUrl = normalizeVaultHost(opts.host || process.env.PCAFE_VAULT_HOST || creds?.host || 'https://app.p.cafe')
+    if (!envToken && creds?.host && baseUrl !== creds.host) {
+      fail(`refusing to send saved credentials for ${creds.host} to ${baseUrl}. Pass PCAFE_VAULT_TOKEN or run \`pcafe login --host ${baseUrl}\`.`)
+    }
+
+    // Read share password BEFORE uploading so invalid stdin fails fast without creating a version.
+    let sharePassword = null
+    if (opts.passwordStdin) {
+      if (!opts.share) fail('--password-stdin requires --share.')
+      sharePassword = readFileSync(0, 'utf8').trim()
+      if (sharePassword.length < 6) fail('share password from stdin must be at least 6 characters.')
+    }
+
+    let htmlPath = null
+    if (existsSync(resolve(target)) && target.toLowerCase().endsWith('.html')) {
+      htmlPath = resolve(target)
+    } else {
+      const root = projectRoot()
+      const name = deckName(target, root, true)
+      const builtPath = join(root, 'dist', `${name}.html`)
+      if (!existsSync(builtPath)) {
+        const prevToken = process.env.PCAFE_VAULT_TOKEN
+        delete process.env.PCAFE_VAULT_TOKEN
+        let code = 1
+        try {
+          code = await commands.build(name)
+        } finally {
+          if (prevToken !== undefined) process.env.PCAFE_VAULT_TOKEN = prevToken
+        }
+        if (code !== 0) return code
+      }
+      htmlPath = builtPath
+    }
+
+    const htmlBuf = readFileSync(htmlPath)
+    const htmlHash = createHash('sha256').update(htmlBuf).digest('hex')
+    const orgsRes = await vaultFetch(`${baseUrl}/api/enterprise/orgs`, token)
+    const orgs = orgsRes.items || []
+    if (!orgs.length) fail('no active enterprise organization found for this token.')
+    const org = opts.org
+      ? orgs.find((o) => o.slug === opts.org || o.id === opts.org)
+      : orgs[0]
+    if (!org) fail(`organization "${opts.org}" not found for this token.`)
+
+    let folderId = null
+    if (opts.folder && !opts.deckId) {
+      const foldersRes = await vaultFetch(`${baseUrl}/api/enterprise/orgs/${encodeURIComponent(org.id)}/folders`, token)
+      const found = (foldersRes.items || []).find((f) => f.name === opts.folder || f.id === opts.folder)
+      if (found) {
+        folderId = found.id
+      } else {
+        const created = await vaultFetch(`${baseUrl}/api/enterprise/orgs/${encodeURIComponent(org.id)}/folders`, token, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: opts.folder }),
+        })
+        folderId = created.id
+      }
+    }
+
+    const form = new FormData()
+    form.append('file', new Blob([htmlBuf], { type: 'text/html' }), basename(htmlPath))
+    if (opts.title) form.append('title', opts.title)
+
+    let deck
+    if (opts.deckId) {
+      if (opts.note) form.append('change_note', opts.note)
+      if (opts.expectedVersion !== null) {
+        form.append('expected_version', String(opts.expectedVersion))
+      }
+      const idemKey = createHash('sha256')
+        .update(`${org.id}:${opts.deckId}:${htmlHash}:${opts.title ?? ''}:${opts.note ?? ''}:${opts.expectedVersion ?? ''}`)
+        .digest('hex')
+        .slice(0, 48)
+      const res = await vaultFetch(
+        `${baseUrl}/api/enterprise/orgs/${encodeURIComponent(org.id)}/decks/${encodeURIComponent(opts.deckId)}/versions`,
+        token,
+        { method: 'POST', headers: { 'Idempotency-Key': idemKey }, body: form },
+      )
+      deck = res.deck
+      const tag = res.idempotent_replay ? ' (idempotent replay)' : ''
+      console.log(`Updated "${deck.title}" → v${res.version.version_number}${tag}  (deck_id: ${deck.id})`)
+    } else {
+      if (folderId) form.append('folder_id', folderId)
+      const res = await vaultFetch(
+        `${baseUrl}/api/enterprise/orgs/${encodeURIComponent(org.id)}/decks`,
+        token,
+        { method: 'POST', body: form },
+      )
+      deck = res.deck
+      console.log(`Uploaded "${deck.title}" v${deck.current_version ?? 1}  (deck_id: ${deck.id})`)
+    }
+
+    if (opts.share) {
+      const shareRes = await vaultFetch(
+        `${baseUrl}/api/enterprise/orgs/${encodeURIComponent(org.id)}/shares`,
+        token,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            target_type: 'deck',
+            target_id: deck.id,
+            visibility: sharePassword ? 'password' : 'public',
+            ...(sharePassword ? { password: sharePassword } : {}),
+            watermark_enabled: opts.watermark,
+            allow_download: opts.download,
+          }),
+        },
+      )
+      console.log(`Share link: ${shareRes.share.url}`)
+    }
+    return 0
+  },
+}
+
+function vaultCredsPath() {
+  return join(homedir(), '.config', 'pcafe', 'credentials.json')
+}
+
+function normalizeVaultHost(raw) {
+  let u
+  try {
+    u = new URL(raw)
+  } catch {
+    fail(`invalid host URL "${raw}".`)
+  }
+  const isLocal = u.hostname === 'localhost' || u.hostname === '127.0.0.1'
+  if (u.protocol !== 'https:' && !(isLocal && u.protocol === 'http:')) {
+    fail(`refusing insecure host "${raw}": HTTPS is required (except localhost).`)
+  }
+  return u.origin
+}
+
+function saveVaultCredentials(data) {
+  const file = vaultCredsPath()
+  mkdirSync(dirname(file), { recursive: true, mode: 0o700 })
+  writeFileSync(file, JSON.stringify(data, null, 2) + '\n', { mode: 0o600 })
+  try { chmodSync(file, 0o600) } catch { /* Windows */ }
+}
+
+function loadVaultCredentials() {
+  const file = vaultCredsPath()
+  if (!existsSync(file)) return null
+  try {
+    return JSON.parse(readFileSync(file, 'utf8'))
+  } catch {
+    return null
+  }
+}
+
+async function vaultFetch(url, token, init = {}) {
+  const headers = new Headers(init.headers || {})
+  headers.set('Authorization', `Bearer ${token}`)
+  const res = await fetch(url, {
+    ...init,
+    headers,
+    redirect: 'error',
+    signal: AbortSignal.timeout(30_000),
+  })
+  const text = await res.text()
+  if (text.length > 2 * 1024 * 1024) {
+    fail(`vault API response too large (${text.length} bytes).`)
+  }
+  let json = null
+  try { json = JSON.parse(text) } catch { /* non-json */ }
+  if (!res.ok) {
+    const msg = json?.message || json?.error || text.slice(0, 200) || `HTTP ${res.status}`
+    fail(`vault API error (${res.status}): ${msg}`)
+  }
+  return json?.data ?? json
 }
 
 /** Formats beside decks and papers. Each one builds per name, so none of them touches an active.ts. */

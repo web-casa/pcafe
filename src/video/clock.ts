@@ -13,6 +13,8 @@
 
 const realPerfNow = performance.now.bind(performance)
 const realRaf = window.requestAnimationFrame.bind(window)
+const realSetTimeout = window.setTimeout.bind(window)
+const realClearTimeout = window.clearTimeout.bind(window)
 const RealDate = Date
 
 const EPOCH = RealDate.UTC(2026, 0, 1)
@@ -268,9 +270,106 @@ function syncAnimations() {
   lastActive = active
 }
 
-async function settle() {
+const videoOrigin = new WeakMap<HTMLVideoElement, number>()
+
+type VideoWithRVFC = HTMLVideoElement & {
+  requestVideoFrameCallback?: (cb: () => void) => number
+  cancelVideoFrameCallback?: (id: number) => void
+}
+
+function waitVideoEvent(
+  v: HTMLVideoElement,
+  eventName: 'loadedmetadata' | 'seeked',
+  timeoutMs: number,
+  onTimeout: () => void,
+) {
+  return new Promise<void>((res) => {
+    let settled = false
+    let timer = 0
+    const cleanup = () => {
+      if (settled) return
+      settled = true
+      realClearTimeout(timer)
+      v.removeEventListener(eventName, onOk)
+      v.removeEventListener('error', onErr)
+      res()
+    }
+    const onOk = () => cleanup()
+    const onErr = () => {
+      errors.push(`video element error while waiting for ${eventName}`)
+      cleanup()
+    }
+    timer = realSetTimeout(() => {
+      onTimeout()
+      cleanup()
+    }, timeoutMs)
+    v.addEventListener(eventName, onOk, { once: true })
+    v.addEventListener('error', onErr, { once: true })
+  })
+}
+
+async function syncVideos() {
+  const isRenderMode = document.documentElement.hasAttribute('data-video-render')
+  const videos = [...document.querySelectorAll<VideoWithRVFC>('video')].filter(
+    (v) => isRenderMode || v.dataset.clockVideo !== undefined,
+  )
+  if (!videos.length) return
+  await Promise.all(
+    videos.map(async (v) => {
+      if (!v.currentSrc && !v.getAttribute('src')) return
+      if (!videoOrigin.has(v)) videoOrigin.set(v, vnow)
+      const origin = videoOrigin.get(v)!
+      if (!v.paused) v.pause()
+
+      if (v.readyState < 1) {
+        await waitVideoEvent(v, 'loadedmetadata', 2000, () => {
+          errors.push(`video metadata timeout at ${vnow}ms`)
+        })
+      }
+      if (v.readyState < 1) return
+
+      const elapsed = Math.max(0, (vnow - origin) / 1000)
+      const dur = v.duration
+      const target =
+        Number.isFinite(dur) && dur > 0
+          ? v.loop
+            ? elapsed % dur
+            : Math.min(elapsed, Math.max(0, dur - 0.001))
+          : elapsed
+
+      if (Math.abs(v.currentTime - target) > 0.005) {
+        const seeking = waitVideoEvent(v, 'seeked', 1500, () => {
+          errors.push(`video seek timeout at ${target.toFixed(3)}s`)
+        })
+        try {
+          v.currentTime = target
+        } catch {
+          return
+        }
+        await seeking
+        if (typeof v.requestVideoFrameCallback === 'function') {
+          await new Promise<void>((res) => {
+            let id = 0
+            const timer = realSetTimeout(() => {
+              if (id && v.cancelVideoFrameCallback) v.cancelVideoFrameCallback(id)
+              res()
+            }, 250)
+            id = v.requestVideoFrameCallback!(() => {
+              realClearTimeout(timer)
+              res()
+            })
+          })
+        }
+      }
+    }),
+  )
+}
+
+async function settle(options?: { fast?: boolean }) {
   await drain()
   syncAnimations()
+  if (options?.fast && !finishing.size) return
+  if (!options?.fast) await syncVideos()
   for (let pass = 0; pass < 8; pass++) {
     await realFrame()
     await drain()
@@ -286,7 +385,7 @@ export const clock = {
    * Moves to `t` ms: timers, then `commit` (the frame's React update, so what mounts on this frame
    * is born at `t`), then one animation frame, then everything that follows from them.
    */
-  async step(t: number, commit?: () => void) {
+  async step(t: number, commit?: () => void, options?: { fast?: boolean }) {
     for (let due = nextTimer(t); due; due = nextTimer(t)) {
       vnow = Math.max(vnow, due.at)
       runTimer(due)
@@ -297,7 +396,7 @@ export const clock = {
     const batch = rafs
     rafs = new Map()
     for (const cb of batch.values()) guard(() => cb(t))
-    await settle()
+    await settle(options)
   },
   /** Jumps without running anything. Used to rewind when re-mounting a scene for a seek. */
   jump(t: number) {

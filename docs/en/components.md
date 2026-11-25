@@ -245,6 +245,7 @@
 | [`TiltShot`](#tilt-shot) Tilt to straight | Motion · a screenshot in perspective straightens, then the points are covered one by one | Title and 2–3 points on the left, a screenshot entering at a perspective angle on the right. With build: 'reveal', the first press straightens the screenshot, and each press after that reveals one point. When jumping to the slide, the straightened screenshot and all points are shown directly. |
 | [`ConvergeShots`](#converge-shots) Images converge | Motion · several images stand side by side, then converge into one focus image | 3–4 images stand side by side, each with a label. With build: 'reveal', the first press brings them together, the focus image grows to the front and the others stack behind it; the second press shows the caption. When jumping to the slide, the converged view is shown directly. |
 | [`StepVideo`](#step-video) Step through video | Motion · each press plays one segment and stops on the frame to talk about | A video on the left, 2–4 stop notes on the right. With build: 'reveal', each press plays up to the next stop and pauses there, and the matching note appears. Going back or jumping to the slide shows the stop frame directly; when jumping to the slide, printing or with reduced motion it stops at the last stop. |
+| [`VideoStage`](#video-stage) Video stage | Motion · full-width 16:9 video player with editorial controls | A centered 16:9 video stage with built-in play/pause, scrub bar, 0.75×–2× speed toggle, audio mute switch, and fullscreen. Automatically pauses when leaving the slide or switching tabs. |
 | [`ExhibitCover`](#exhibit-cover) Exhibition cover | Opening · a huge narrow serif title with a date block in the corner | A huge title fills the left half, a light date block sits at the top right, and 3–4 columns of small text divided by thin rules run along the bottom. Designed for the biennale style; other styles work too. |
 | [`YearBars`](#year-bars) Numbers with year bars | Data · two big numbers with thin bars by year | 1–2 big numbers on the left (unit as superscript), 3–7 thin horizontal bars ordered by year on the right, the latest year in the accent colour. Designed for the biennale style; other styles work too. |
 | [`NumberTiles`](#number-tiles) Number tiles | Content · 3–4 tall colour blocks, each with a huge number | A row of tall colour blocks, each with a huge number above and a title and one-line description below. In the stencil style the four colours are ochre, magenta, orange and cyan; other styles use the card colour and accent-coloured numbers. With build: 'reveal' the blocks appear one by one. |
@@ -337,7 +338,7 @@
 Free templates all come from `src/kit`:
 
 ```tsx
-import { Cover, Bento, MetricBars, Timeline, SpotlightList, CompareTable, NumberedColumns, VerdictColumns, Checklist, StepTrack, Teaser, Closing, Terminal, CodeDiff, StatusGrid, SpecSheet, Cycle, Faq, Lanes, LineChart, Agenda, SectionBreak, QuoteHero, FlowDiagram, ClaimCards, LayerStack, Matrix, IconGrid, BigStat, DeltaBars, Dumbbell, RangeBars, Gantt, Milestones, QuoteWall, BeforeAfter, Screenshot, Funnel, Quadrant, PersonaCards, PricingTiers, KpiBoard, ShareBar, Waterfall, Team, IssueTree, Heatmap, Roadmap, Statement, HangingCover, PanelCards, AskAnswer, ProofSplit, IndexStack, ContactPanel, Orbit, NumberOpener, ChapterProgress, Question, Contrast, Recap, HeroPanel, TabbedShot, BrandKit, Laurels, FullBleed, Thanks, SplitWord, PillAgenda, StatRow, CountCompare, Donut, BarChart, Bubble, Gauge, ServiceList, QuoteArc, WorkCards, RepeatClosing, StickerCover, WordBlocks, FolderCards, SparkCards, Pictogram, SlopeRank, PixelClosing, FloatCover, TileWall, ServiceIndex, GlowStack, DuoCards, Desktop, WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone, Swimlane, ArchLayers, Balance, DoubleFunnel, KeyReveal, KeySpec, OrbCover, GradientCards, BlockStats, PopPoster, BentoBoard, BentoSpotlight, SlotPicker, UiSteps, FloatHero, TranscriptCard, RetroTabs, RetroLog, GlowMetric, HairlineGrid, RibbonCover, RibbonSection, ChatThread, NoteCards, RevealStatement, SketchCover, ArcCards, CaseCard, AgencyHero, AgencyRows, AgencyManifesto, HaloHero, HaloRows, HaloMarquee, FanCover, PillSentence, OpenList, PhotoCover, PhotoSplit, PhotoMosaic, PolaroidWall, FilmStrip, MagazineSpread, CaseStudy, DeviceFrame, CompareSlider, PhotoStack, FlipCards, CardStack, FanCarousel, DepthCarousel, Envelope, FlipBook, Lanyard, ProgressCards, ProcessAccordion, NotebookCover, Halftone, ProgressiveBlur, MaskReveal, LogoWall, PhotoClosing, RankingRace, BubbleCluster, NodeGraph, Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics, Typewriter, RotatingWord, MorphHeadline, TextArc, Odometer, MarkerSweep, TextMask, SplitFlap, NewsTicker, KaraokeLines, ParadigmCards, AnatomyCard, ExplorerFlip, VerbCards, NinesDial, TierLadder, LifecycleRail, MeterCards, ShelfGallery, TabSpec, TokenStream, MoeRouter, ContextWindow, ScoreMatrix, ModelSpecCard, TokenPriceGrid, AttentionMask, EffortDial, PeakClock, AliasRoute, GlobeCover, ArcGlobe, PopGrid, RequestJourney, ShieldLayers, SpikeChart, OutageBoard, ReachRings, ServerRack, TraceTimeline, QueryPlan, SchemaEr, ResultGrid, CodeCallouts, RequestResponse, BeamFlow, TupleVersions, BTreeIndex, JsonTree, SessionSequence, BadgeHero, TabPanels, EditionPicker, ReleaseTrain, MegaMenu, PathCrumbs, FilterChips, CtaBlock, FooterClosing, FaqAccordion, MediaExpand, ScatterOrder, TiltShot, ConvergeShots, StepVideo, ExhibitCover, YearBars, NumberTiles, ScoreTable, MetricMosaic, StepGrid, FramedStats, IndexList, AgendaMosaic, MethodSteps, PriorityColumns, ChapterNumber, StackBars, ChatDemo, AppCards, AtelierHero, ProjectPair, ProcessQuote, ServiceTrio, TeamBanner, BookingClose, MonographHero, ProjectIndex, WhyStats, TeamPortraits, ServiceLedger, MonographClose, NocturneHero, FeatureBento, GlowPricing, StepTrio, RevealCompare, WallClose, SunriseHero, KitBento, HomeTrio, KanbanDemo, ProofMosaic, BuyoutPricing, FolioHero, FolioCase, FolioSteps, FolioWords, FolioOffers, FolioContact, DiptychHero, DiptychWorks, DiptychServices, DiptychWords, DiptychAbout, DiptychContact, MarkerIntro, MarkerWorks, MarkerSkills, MarkerLog, MarkerFacts, MarkerClose, AlbumHero, AlbumLayout, AlbumWeek, AlbumStories, AlbumPlus, AlbumClose, SlateHero, SlateSteps, SlateCompare, SlateTrend, SlatePricing, SlateConnect, EmberHero, EmberBento, EmberAgent, EmberSaves, EmberWords, EmberClose, DuskHero, DuskFeature, DuskExplain, DuskStats, DuskCases, DuskClose, AgencyStage, AgencyAccordion, AgencyProof, AgencyBook, SocialFeed, SocialPost, DirectChat } from '../../kit'
+import { Cover, Bento, MetricBars, Timeline, SpotlightList, CompareTable, NumberedColumns, VerdictColumns, Checklist, StepTrack, Teaser, Closing, Terminal, CodeDiff, StatusGrid, SpecSheet, Cycle, Faq, Lanes, LineChart, Agenda, SectionBreak, QuoteHero, FlowDiagram, ClaimCards, LayerStack, Matrix, IconGrid, BigStat, DeltaBars, Dumbbell, RangeBars, Gantt, Milestones, QuoteWall, BeforeAfter, Screenshot, Funnel, Quadrant, PersonaCards, PricingTiers, KpiBoard, ShareBar, Waterfall, Team, IssueTree, Heatmap, Roadmap, Statement, HangingCover, PanelCards, AskAnswer, ProofSplit, IndexStack, ContactPanel, Orbit, NumberOpener, ChapterProgress, Question, Contrast, Recap, HeroPanel, TabbedShot, BrandKit, Laurels, FullBleed, Thanks, SplitWord, PillAgenda, StatRow, CountCompare, Donut, BarChart, Bubble, Gauge, ServiceList, QuoteArc, WorkCards, RepeatClosing, StickerCover, WordBlocks, FolderCards, SparkCards, Pictogram, SlopeRank, PixelClosing, FloatCover, TileWall, ServiceIndex, GlowStack, DuoCards, Desktop, WindowStack, ToggleCard, Pyramid, Venn, Concentric, DecisionTree, Fishbone, Swimlane, ArchLayers, Balance, DoubleFunnel, KeyReveal, KeySpec, OrbCover, GradientCards, BlockStats, PopPoster, BentoBoard, BentoSpotlight, SlotPicker, UiSteps, FloatHero, TranscriptCard, RetroTabs, RetroLog, GlowMetric, HairlineGrid, RibbonCover, RibbonSection, ChatThread, NoteCards, RevealStatement, SketchCover, ArcCards, CaseCard, AgencyHero, AgencyRows, AgencyManifesto, HaloHero, HaloRows, HaloMarquee, FanCover, PillSentence, OpenList, PhotoCover, PhotoSplit, PhotoMosaic, PolaroidWall, FilmStrip, MagazineSpread, CaseStudy, DeviceFrame, CompareSlider, PhotoStack, FlipCards, CardStack, FanCarousel, DepthCarousel, Envelope, FlipBook, Lanyard, ProgressCards, ProcessAccordion, NotebookCover, Halftone, ProgressiveBlur, MaskReveal, LogoWall, PhotoClosing, RankingRace, BubbleCluster, NodeGraph, Sankey, Treemap, Radar, Scatter, StackedArea, DotMap, GlowMetrics, Typewriter, RotatingWord, MorphHeadline, TextArc, Odometer, MarkerSweep, TextMask, SplitFlap, NewsTicker, KaraokeLines, ParadigmCards, AnatomyCard, ExplorerFlip, VerbCards, NinesDial, TierLadder, LifecycleRail, MeterCards, ShelfGallery, TabSpec, TokenStream, MoeRouter, ContextWindow, ScoreMatrix, ModelSpecCard, TokenPriceGrid, AttentionMask, EffortDial, PeakClock, AliasRoute, GlobeCover, ArcGlobe, PopGrid, RequestJourney, ShieldLayers, SpikeChart, OutageBoard, ReachRings, ServerRack, TraceTimeline, QueryPlan, SchemaEr, ResultGrid, CodeCallouts, RequestResponse, BeamFlow, TupleVersions, BTreeIndex, JsonTree, SessionSequence, BadgeHero, TabPanels, EditionPicker, ReleaseTrain, MegaMenu, PathCrumbs, FilterChips, CtaBlock, FooterClosing, FaqAccordion, MediaExpand, ScatterOrder, TiltShot, ConvergeShots, StepVideo, VideoStage, ExhibitCover, YearBars, NumberTiles, ScoreTable, MetricMosaic, StepGrid, FramedStats, IndexList, AgendaMosaic, MethodSteps, PriorityColumns, ChapterNumber, StackBars, ChatDemo, AppCards, AtelierHero, ProjectPair, ProcessQuote, ServiceTrio, TeamBanner, BookingClose, MonographHero, ProjectIndex, WhyStats, TeamPortraits, ServiceLedger, MonographClose, NocturneHero, FeatureBento, GlowPricing, StepTrio, RevealCompare, WallClose, SunriseHero, KitBento, HomeTrio, KanbanDemo, ProofMosaic, BuyoutPricing, FolioHero, FolioCase, FolioSteps, FolioWords, FolioOffers, FolioContact, DiptychHero, DiptychWorks, DiptychServices, DiptychWords, DiptychAbout, DiptychContact, MarkerIntro, MarkerWorks, MarkerSkills, MarkerLog, MarkerFacts, MarkerClose, AlbumHero, AlbumLayout, AlbumWeek, AlbumStories, AlbumPlus, AlbumClose, SlateHero, SlateSteps, SlateCompare, SlateTrend, SlatePricing, SlateConnect, EmberHero, EmberBento, EmberAgent, EmberSaves, EmberWords, EmberClose, DuskHero, DuskFeature, DuskExplain, DuskStats, DuskCases, DuskClose, AgencyStage, AgencyAccordion, AgencyProof, AgencyBook, SocialFeed, SocialPost, DirectChat } from '../../kit'
 ```
 
 <a id="cover"></a>
@@ -11380,7 +11381,7 @@ A video on the left, 2–4 stop notes on the right. With build: 'reveal', each p
 - lead ≤ 40 chars
 - video ideally ≤ 15 s and ≤ 1 MB (trim and compress with ffmpeg first)
 
-**Interaction**: Press → play to the next stop
+**Interaction**: Press → play to the next stop; click video to replay current segment
 
 **Props**
 
@@ -11391,7 +11392,10 @@ A video on the left, 2–4 stop notes on the right. With build: 'reveal', each p
 | `lead` | `string` |  | Lead |
 | `src` | `string` | yes | Video file (import) |
 | `label` | `string` | yes | Description of the video content |
+| `poster` | `string` |  | Optional poster image |
 | `start` | `number` |  | Seconds shown before the first press, default 0 |
+| `muted` | `boolean` |  | Start muted (toggleable via HUD), default true |
+| `playbackRate` | `number` |  | Playback speed multiplier, default 1 |
 | `stops` | `{ at, title, body }[]` | yes | Stops |
 | `source` | `string` |  | Source |
 
@@ -11407,9 +11411,65 @@ A video on the left, 2–4 stop notes on the right. With build: 'reveal', each p
 />
 ```
 
+<a id="video-stage"></a>
+
+## 237 · Video stage `<VideoStage />`
+
+**Position**: Motion · full-width 16:9 video player with editorial controls; **Reference slide**: `src/decks/motion` — `video-stage`
+
+A centered 16:9 video stage with built-in play/pause, scrub bar, 0.75×–2× speed toggle, audio mute switch, and fullscreen. Automatically pauses when leaving the slide or switching tabs.
+
+**Use when**
+
+- Full product walkthroughs, narrated demos, or looping ambient clips
+- Presenters who want live play/pause, scrubbing, and speed controls
+
+**Avoid**
+
+- Step-by-step pauses synced to bullet notes: use StepVideo instead
+- Large multi-minute videos in offline single-file HTML (compress with ffmpeg or stream via Enterprise Vault)
+
+**Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
+
+- slide title ≤ 22 chars
+- lead ≤ 40 chars
+- caption ≤ 36 chars
+
+**Interaction**: Click frame or control bar to play/pause, scrub, adjust speed, or go fullscreen
+
+**Props**
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `kicker` | `string` | yes | Section label |
+| `title` | `string \| string[]` | yes | Title |
+| `lead` | `string` |  | Lead |
+| `src` | `string` | yes | Video file (import or same-origin URL) |
+| `label` | `string` | yes | Description of the video content |
+| `poster` | `string` |  | Optional poster image |
+| `caption` | `string` |  | Short caption below player |
+| `autoplay` | `boolean` |  | Autoplay on slide open, default false |
+| `loop` | `boolean` |  | Loop playback, default false |
+| `muted` | `boolean` |  | Initial mute state (defaults to true when autoplay is set) |
+| `controls` | `boolean` |  | Show custom control bar, default true |
+| `playbackRate` | `number` |  | Initial playback rate, default 1 |
+| `source` | `string` |  | Source |
+
+**Example**
+
+```tsx
+<VideoStage
+  kicker="产品演示"
+  title="十秒看懂核心工作流"
+  src={demoMp4}
+  label="产品端到端操作录屏"
+  caption="支持点击暂停、进度条拖动、倍速与全屏放映"
+/>
+```
+
 <a id="exhibit-cover"></a>
 
-## 237 · Exhibition cover `<ExhibitCover />`
+## 238 · Exhibition cover `<ExhibitCover />`
 
 **Position**: Opening · a huge narrow serif title with a date block in the corner; **Reference slide**: `src/decks/sig-biennale` — `cover`
 
@@ -11453,7 +11513,7 @@ A huge title fills the left half, a light date block sits at the top right, and 
 
 <a id="year-bars"></a>
 
-## 238 · Numbers with year bars `<YearBars />`
+## 239 · Numbers with year bars `<YearBars />`
 
 **Position**: Data · two big numbers with thin bars by year; **Reference slide**: `src/decks/sig-biennale` — `bars`
 
@@ -11502,7 +11562,7 @@ A huge title fills the left half, a light date block sits at the top right, and 
 
 <a id="number-tiles"></a>
 
-## 239 · Number tiles `<NumberTiles />`
+## 240 · Number tiles `<NumberTiles />`
 
 **Position**: Content · 3–4 tall colour blocks, each with a huge number; **Reference slide**: `src/decks/sig-stencil` — `tiles`
 
@@ -11549,7 +11609,7 @@ A row of tall colour blocks, each with a huge number above and a title and one-l
 
 <a id="score-table"></a>
 
-## 240 · Score table `<ScoreTable />`
+## 241 · Score table `<ScoreTable />`
 
 **Position**: Comparison · a black header row, a coloured tag in every cell; **Reference slide**: `src/decks/sig-stencil` — `score`
 
@@ -11599,7 +11659,7 @@ A row of tall colour blocks, each with a huge number above and a title and one-l
 
 <a id="metric-mosaic"></a>
 
-## 241 · Metric mosaic `<MetricMosaic />`
+## 242 · Metric mosaic `<MetricMosaic />`
 
 **Position**: Data · a tall bar, a title block, small number tiles and a big number tile fit into one slide; **Reference slide**: `src/decks/sig-neo` — `mosaic`
 
@@ -11650,7 +11710,7 @@ A tall accent-coloured bar holding one number on the left, the title block in th
 
 <a id="step-grid"></a>
 
-## 242 · Next-steps grid `<StepGrid />`
+## 243 · Next-steps grid `<StepGrid />`
 
 **Position**: Closing · a large title block plus three step blocks; **Reference slide**: `src/decks/sig-neo` — `steps`
 
@@ -11696,7 +11756,7 @@ The top row holds one large accent-coloured title block and one pattern block; t
 
 <a id="framed-stats"></a>
 
-## 243 · Framed numbers `<FramedStats />`
+## 244 · Framed numbers `<FramedStats />`
 
 **Position**: Data · 3–4 number boxes with heavy borders; **Reference slide**: `src/decks/sig-block-frame` — `stats`
 
@@ -11743,7 +11803,7 @@ A row of number boxes with thick black borders and hard shadows, each with a the
 
 <a id="index-list"></a>
 
-## 244 · Column index `<IndexList />`
+## 245 · Column index `<IndexList />`
 
 **Position**: Content · numbered entries in two columns, divided by thin rules; **Reference slide**: `src/decks/sig-cobalt-grid` — `index`
 
@@ -11790,7 +11850,7 @@ A row of number boxes with thick black borders and hard shadows, each with a the
 
 <a id="agenda-mosaic"></a>
 
-## 245 · Agenda mosaic `<AgendaMosaic />`
+## 246 · Agenda mosaic `<AgendaMosaic />`
 
 **Position**: Opening · five topics as colour blocks of different sizes; **Reference slide**: `src/decks/sig-forest` — `agenda`
 
@@ -11834,7 +11894,7 @@ One tall dark block holds the first topic; the other four are smaller blocks in 
 
 <a id="method-steps"></a>
 
-## 246 · Method steps `<MethodSteps />`
+## 247 · Method steps `<MethodSteps />`
 
 **Position**: Process · numbered step cards alternating dark and light; **Reference slide**: `src/decks/sig-emerald` — `method`
 
@@ -11882,7 +11942,7 @@ One tall dark block holds the first topic; the other four are smaller blocks in 
 
 <a id="priority-columns"></a>
 
-## 247 · Three priority columns `<PriorityColumns />`
+## 248 · Three priority columns `<PriorityColumns />`
 
 **Position**: Content · three full-height columns, huge numbers, one column in the theme colour; **Reference slide**: `src/decks/sig-platform` — `priorities`
 
@@ -11930,7 +11990,7 @@ A thick rule under the big title, then three full-height columns below, each wit
 
 <a id="chapter-number"></a>
 
-## 248 · Chapter number `<ChapterNumber />`
+## 249 · Chapter number `<ChapterNumber />`
 
 **Position**: Section break · a huge chapter number with a short title; **Reference slide**: `src/decks/sig-pink-script` — `chapter`
 
@@ -11976,7 +12036,7 @@ A glowing huge chapter number on the left, a short title and a paragraph on the 
 
 <a id="stack-bars"></a>
 
-## 249 · Stepped layers `<StackBars />`
+## 250 · Stepped layers `<StackBars />`
 
 **Position**: Structure · horizontal bars offset layer by layer; **Reference slide**: `src/decks/sig-broadside` — `stack`
 
@@ -12023,7 +12083,7 @@ A glowing huge chapter number on the left, a short title and a paragraph on the 
 
 <a id="chat-demo"></a>
 
-## 250 · Chat demo `<ChatDemo />`
+## 251 · Chat demo `<ChatDemo />`
 
 **Position**: Realistic UI · show how it works through a short conversation; **Reference slide**: `src/decks/mockui` — `chat`
 
@@ -12078,7 +12138,7 @@ Title, lead and 0–3 notes on the left; a hand-built chat window on the right, 
 
 <a id="app-cards"></a>
 
-## 251 · Dashboard cards `<AppCards />`
+## 252 · Dashboard cards `<AppCards />`
 
 **Position**: Realistic UI · 2–4 filled-in app panels; **Reference slide**: `src/decks/mockui` — `apps`
 
@@ -12126,7 +12186,7 @@ A row of hand-built app panels below the title: window name, title, status pill,
 
 <a id="atelier-hero"></a>
 
-## 252 · Atelier hero `<AtelierHero />`
+## 253 · Atelier hero `<AtelierHero />`
 
 **Position**: Opening · studio home page; **Reference slide**: `src/decks/sig-atelier` — `hero`
 
@@ -12173,7 +12233,7 @@ A centred status pill with a green "available" dot, a huge heavy title, a lead a
 
 <a id="project-pair"></a>
 
-## 253 · Project pair `<ProjectPair />`
+## 254 · Project pair `<ProjectPair />`
 
 **Position**: Evidence · two flagship projects; **Reference slide**: `src/decks/sig-atelier` — `work`
 
@@ -12216,7 +12276,7 @@ A centred pill label and title over two large landscape images side by side, eac
 
 <a id="process-quote"></a>
 
-## 254 · Process with quote `<ProcessQuote />`
+## 255 · Process with quote `<ProcessQuote />`
 
 **Position**: Method · how we work plus one quote; **Reference slide**: `src/decks/sig-atelier` — `process`
 
@@ -12262,7 +12322,7 @@ A title and 3–5 numbered steps with durations on the left; a tall portrait on 
 
 <a id="service-trio"></a>
 
-## 255 · Service trio `<ServiceTrio />`
+## 256 · Service trio `<ServiceTrio />`
 
 **Position**: Product · three services; **Reference slide**: `src/decks/sig-atelier` — `services`
 
@@ -12303,7 +12363,7 @@ Three soft grey rounded cards under a centred title, each with an image on top, 
 
 <a id="team-banner"></a>
 
-## 256 · Team banner `<TeamBanner />`
+## 257 · Team banner `<TeamBanner />`
 
 **Position**: Background · team and figures; **Reference slide**: `src/decks/sig-atelier` — `team`
 
@@ -12346,7 +12406,7 @@ A team photo filling the slide, a pill label at the top left, and along the bott
 
 <a id="booking-close"></a>
 
-## 257 · Booking close `<BookingClose />`
+## 258 · Booking close `<BookingClose />`
 
 **Position**: Closing · book a call; **Reference slide**: `src/decks/sig-atelier` — `book`
 
@@ -12392,7 +12452,7 @@ A status pill, big title, lead, buttons and contacts on the left; on the right a
 
 <a id="monograph-hero"></a>
 
-## 258 · Monograph hero `<MonographHero />`
+## 259 · Monograph hero `<MonographHero />`
 
 **Position**: Opening · agency introduction; **Reference slide**: `src/decks/sig-monograph` — `hero`
 
@@ -12435,7 +12495,7 @@ A three-line introduction at the top left, a rating and a short note at the top 
 
 <a id="project-index"></a>
 
-## 259 · Project index `<ProjectIndex />`
+## 260 · Project index `<ProjectIndex />`
 
 **Position**: Evidence · project list; **Reference slide**: `src/decks/sig-monograph` — `index`
 
@@ -12479,7 +12539,7 @@ A column of project rows with the current one inked black, and a large picture o
 
 <a id="why-stats"></a>
 
-## 260 · Why stats `<WhyStats />`
+## 261 · Why stats `<WhyStats />`
 
 **Position**: Proof · three figures; **Reference slide**: `src/decks/sig-monograph` — `why`
 
@@ -12524,7 +12584,7 @@ A short title, a few plus-sign reasons and a quote on the left; a large paragrap
 
 <a id="team-portraits"></a>
 
-## 261 · Team portraits `<TeamPortraits />`
+## 262 · Team portraits `<TeamPortraits />`
 
 **Position**: Background · team members; **Reference slide**: `src/decks/sig-monograph` — `team`
 
@@ -12567,7 +12627,7 @@ Three black-and-white portrait photos plus a dark hiring card; portraits turn co
 
 <a id="service-ledger"></a>
 
-## 262 · Service ledger `<ServiceLedger />`
+## 263 · Service ledger `<ServiceLedger />`
 
 **Position**: Product · service list; **Reference slide**: `src/decks/sig-monograph` — `services`
 
@@ -12611,7 +12671,7 @@ A title and a ruled list on the left: accent numbers, a service name and one lin
 
 <a id="monograph-close"></a>
 
-## 263 · Monograph close `<MonographClose />`
+## 264 · Monograph close `<MonographClose />`
 
 **Position**: Closing · contact details; **Reference slide**: `src/decks/sig-monograph` — `close`
 
@@ -12652,7 +12712,7 @@ Three huge lines with the middle one in the theme colour, contacts ruled underne
 
 <a id="nocturne-hero"></a>
 
-## 264 · Nocturne hero `<NocturneHero />`
+## 265 · Nocturne hero `<NocturneHero />`
 
 **Position**: Opening · app home page; **Reference slide**: `src/decks/sig-nocturne` — `hero`
 
@@ -12699,7 +12759,7 @@ The theme colour glows in the middle of a dark stage: faces, a big title, a lead
 
 <a id="feature-bento"></a>
 
-## 265 · Feature bento `<FeatureBento />`
+## 266 · Feature bento `<FeatureBento />`
 
 **Position**: Product · feature overview; **Reference slide**: `src/decks/sig-nocturne` — `features`
 
@@ -12744,7 +12804,7 @@ A five-cell bento under a centred title: a large accent card with three portrait
 
 <a id="glow-pricing"></a>
 
-## 266 · Glow pricing `<GlowPricing />`
+## 267 · Glow pricing `<GlowPricing />`
 
 **Position**: Pricing · three plans; **Reference slide**: `src/decks/sig-nocturne` — `pricing`
 
@@ -12790,7 +12850,7 @@ Three plan cards with the recommended one glowing in an accent gradient; a month
 
 <a id="step-trio"></a>
 
-## 267 · Step trio `<StepTrio />`
+## 268 · Step trio `<StepTrio />`
 
 **Position**: Procedure · three steps to start; **Reference slide**: `src/decks/sig-nocturne` — `steps`
 
@@ -12839,7 +12899,7 @@ Three step cards whose top half acts out the step: photos dealt like prints, a s
 
 <a id="reveal-compare"></a>
 
-## 268 · Reveal compare `<RevealCompare />`
+## 269 · Reveal compare `<RevealCompare />`
 
 **Position**: Comparison · before and after; **Reference slide**: `src/decks/sig-nocturne` — `compare`
 
@@ -12887,7 +12947,7 @@ A title, a lead and 2–4 spec rows on the left; a portrait comparison on the ri
 
 <a id="wall-close"></a>
 
-## 269 · Wall close `<WallClose />`
+## 270 · Wall close `<WallClose />`
 
 **Position**: Closing · call to action; **Reference slide**: `src/decks/sig-nocturne` — `close`
 
@@ -12931,7 +12991,7 @@ A tilted wall of photos filling the slide, columns drifting slowly up and down; 
 
 <a id="sunrise-hero"></a>
 
-## 270 · Sunrise hero `<SunriseHero />`
+## 271 · Sunrise hero `<SunriseHero />`
 
 **Position**: Opening · SaaS home page; **Reference slide**: `src/decks/sig-sunrise` — `hero`
 
@@ -12979,7 +13039,7 @@ A warm yellow sunrise glow across the top: a mock nav bar, a centred title, lead
 
 <a id="kit-bento"></a>
 
-## 271 · Kit bento `<KitBento />`
+## 272 · Kit bento `<KitBento />`
 
 **Position**: Product · what is inside; **Reference slide**: `src/decks/sig-sunrise` — `kit`
 
@@ -13020,7 +13080,7 @@ A three-cell bento: two big-figure cards on top whose right halves sketch stacke
 
 <a id="home-trio"></a>
 
-## 272 · Home trio `<HomeTrio />`
+## 273 · Home trio `<HomeTrio />`
 
 **Position**: Product · options side by side; **Reference slide**: `src/decks/sig-sunrise` — `homes`
 
@@ -13063,7 +13123,7 @@ Three cards under a centred title, each holding a homepage sketch (chart, calend
 
 <a id="kanban-demo"></a>
 
-## 273 · Kanban demo `<KanbanDemo />`
+## 274 · Kanban demo `<KanbanDemo />`
 
 **Position**: Product · interactive demo; **Reference slide**: `src/decks/sig-sunrise` — `board`
 
@@ -13113,7 +13173,7 @@ A pill, title, lead and ticked points on the left; a task board on the right wit
 
 <a id="proof-mosaic"></a>
 
-## 274 · Proof mosaic `<ProofMosaic />`
+## 275 · Proof mosaic `<ProofMosaic />`
 
 **Position**: Customer · quotes and reviews; **Reference slide**: `src/decks/sig-sunrise` — `proof`
 
@@ -13159,7 +13219,7 @@ A mosaic under a centred title: a large dark quote card with a portrait in its r
 
 <a id="buyout-pricing"></a>
 
-## 275 · Buyout pricing `<BuyoutPricing />`
+## 276 · Buyout pricing `<BuyoutPricing />`
 
 **Position**: Pricing · two plans and a close; **Reference slide**: `src/decks/sig-sunrise` — `pricing`
 
@@ -13202,7 +13262,7 @@ Two plan cards and a sun-yellow closing card: each plan has a price, one line, a
 
 <a id="folio-hero"></a>
 
-## 276 · Folio hero `<FolioHero />`
+## 277 · Folio hero `<FolioHero />`
 
 **Position**: Opening · personal portfolio home; **Reference slide**: `src/decks/sig-folio` — `hero`
 
@@ -13253,7 +13313,7 @@ A text column on the left with a status pill and green dot, avatar and email, a 
 
 <a id="folio-case"></a>
 
-## 277 · Folio case `<FolioCase />`
+## 278 · Folio case `<FolioCase />`
 
 **Position**: Evidence · one project in depth; **Reference slide**: `src/decks/sig-folio` — `case`
 
@@ -13303,7 +13363,7 @@ Left: a mono case number, the project name with a grey subtitle, a two-to-four r
 
 <a id="folio-steps"></a>
 
-## 278 · Folio steps `<FolioSteps />`
+## 279 · Folio steps `<FolioSteps />`
 
 **Position**: Method · step accordion; **Reference slide**: `src/decks/sig-folio` — `steps`
 
@@ -13347,7 +13407,7 @@ A numbered list of steps on the left that opens one at a time like an accordion:
 
 <a id="folio-words"></a>
 
-## 279 · Folio words `<FolioWords />`
+## 280 · Folio words `<FolioWords />`
 
 **Position**: Evidence · client quotes; **Reference slide**: `src/decks/sig-folio` — `words`
 
@@ -13387,7 +13447,7 @@ One client quote at a time in large type on the left; under a hairline sit the a
 
 <a id="folio-offers"></a>
 
-## 280 · Folio offers `<FolioOffers />`
+## 281 · Folio offers `<FolioOffers />`
 
 **Position**: Pricing · ways to work together; **Reference slide**: `src/decks/sig-folio` — `offers`
 
@@ -13437,7 +13497,7 @@ Two to four ways to work together as a priced list on the left; clicking a row r
 
 <a id="folio-contact"></a>
 
-## 281 · Folio contact `<FolioContact />`
+## 282 · Folio contact `<FolioContact />`
 
 **Position**: Closing · FAQ and booking; **Reference slide**: `src/decks/sig-folio` — `contact`
 
@@ -13485,7 +13545,7 @@ Three or four common questions on the left, each opening to its answer; in the m
 
 <a id="diptych-hero"></a>
 
-## 282 · Diptych hero `<DiptychHero />`
+## 283 · Diptych hero `<DiptychHero />`
 
 **Position**: Opening · personal portfolio home; **Reference slide**: `src/decks/sig-diptych` — `hero`
 
@@ -13536,7 +13596,7 @@ A full-height picture card on the left with a handwritten Latin signature in the
 
 <a id="diptych-works"></a>
 
-## 283 · Diptych works `<DiptychWorks />`
+## 284 · Diptych works `<DiptychWorks />`
 
 **Position**: Evidence · selected work; **Reference slide**: `src/decks/sig-diptych` — `works`
 
@@ -13581,7 +13641,7 @@ On the right a grey kicker, a two-line title and a numbered list of project name
 
 <a id="diptych-services"></a>
 
-## 284 · Diptych services `<DiptychServices />`
+## 285 · Diptych services `<DiptychServices />`
 
 **Position**: Services · tabbed; **Reference slide**: `src/decks/sig-diptych` — `services`
 
@@ -13626,7 +13686,7 @@ Under the title a row of pill tabs (brand / website / product); picking one swap
 
 <a id="diptych-words"></a>
 
-## 285 · Diptych words `<DiptychWords />`
+## 286 · Diptych words `<DiptychWords />`
 
 **Position**: Evidence · client quotes; **Reference slide**: `src/decks/sig-diptych` — `words`
 
@@ -13669,7 +13729,7 @@ A row of small numbered pills on the right and one large client quote with its n
 
 <a id="diptych-about"></a>
 
-## 286 · Diptych about `<DiptychAbout />`
+## 287 · Diptych about `<DiptychAbout />`
 
 **Position**: About · career; **Reference slide**: `src/decks/sig-diptych` — `about`
 
@@ -13718,7 +13778,7 @@ A half-length portrait on the left; on the right a two-line title, a list of rol
 
 <a id="diptych-contact"></a>
 
-## 287 · Diptych brief `<DiptychContact />`
+## 288 · Diptych brief `<DiptychContact />`
 
 **Position**: Closing · pick-to-contact; **Reference slide**: `src/decks/sig-diptych` — `contact`
 
@@ -13765,7 +13825,7 @@ Under a two-line title on the right, two or three rows of pill options (what, bu
 
 <a id="marker-intro"></a>
 
-## 288 · Marker intro `<MarkerIntro />`
+## 289 · Marker intro `<MarkerIntro />`
 
 **Position**: Opening · a one-sentence intro; **Reference slide**: `src/decks/sig-marker` — `intro`
 
@@ -13808,7 +13868,7 @@ A centred column on white: a small double-diamond mark and one large sentence of
 
 <a id="marker-works"></a>
 
-## 289 · Marker works `<MarkerWorks />`
+## 290 · Marker works `<MarkerWorks />`
 
 **Position**: Evidence · selected work; **Reference slide**: `src/decks/sig-marker` — `works`
 
@@ -13848,7 +13908,7 @@ Three soft grey rounded cards side by side, each with the name and number on top
 
 <a id="marker-skills"></a>
 
-## 290 · Marker skills `<MarkerSkills />`
+## 291 · Marker skills `<MarkerSkills />`
 
 **Position**: Capabilities · what I do and what's now; **Reference slide**: `src/decks/sig-marker` — `skills`
 
@@ -13893,7 +13953,7 @@ Three soft grey cards across the top, each with a line-drawn isometric icon (scr
 
 <a id="marker-log"></a>
 
-## 291 · Marker log `<MarkerLog />`
+## 292 · Marker log `<MarkerLog />`
 
 **Position**: Content · notes and posts; **Reference slide**: `src/decks/sig-marker` — `log`
 
@@ -13935,7 +13995,7 @@ A column of short dated entries, each title with one highlighter-marked phrase, 
 
 <a id="marker-facts"></a>
 
-## 292 · Marker facts `<MarkerFacts />`
+## 293 · Marker facts `<MarkerFacts />`
 
 **Position**: Data · a sentence and figures; **Reference slide**: `src/decks/sig-marker` — `facts`
 
@@ -13977,7 +14037,7 @@ One large sentence with highlighter marks on top and 3–4 soft grey boxes in br
 
 <a id="marker-close"></a>
 
-## 293 · Marker close `<MarkerClose />`
+## 294 · Marker close `<MarkerClose />`
 
 **Position**: Closing · contact; **Reference slide**: `src/decks/sig-marker` — `close`
 
@@ -14020,7 +14080,7 @@ The double-diamond mark, one closing sentence with highlighter marks, a large mo
 
 <a id="album-hero"></a>
 
-## 294 · Album hero `<AlbumHero />`
+## 295 · Album hero `<AlbumHero />`
 
 **Position**: Opening · warm consumer product home; **Reference slide**: `src/decks/sig-album` — `hero`
 
@@ -14068,7 +14128,7 @@ A warm sunrise glow at the top: a small pill, a handwritten-feel serif line, a t
 
 <a id="album-layout"></a>
 
-## 295 · Album layout `<AlbumLayout />`
+## 296 · Album layout `<AlbumLayout />`
 
 **Position**: Method · three-step demo; **Reference slide**: `src/decks/sig-album` — `layout`
 
@@ -14111,7 +14171,7 @@ A title with one word in gradient italic and three steps on the left; on the rig
 
 <a id="album-week"></a>
 
-## 296 · Album week `<AlbumWeek />`
+## 297 · Album week `<AlbumWeek />`
 
 **Position**: Content · a week in pictures; **Reference slide**: `src/decks/sig-album` — `week`
 
@@ -14152,7 +14212,7 @@ A slightly sagging string runs across the slide with 5–7 instant prints pegged
 
 <a id="album-stories"></a>
 
-## 297 · Album stories `<AlbumStories />`
+## 298 · Album stories `<AlbumStories />`
 
 **Position**: Evidence · user stories; **Reference slide**: `src/decks/sig-album` — `stories`
 
@@ -14193,7 +14253,7 @@ Three large instant prints set at slight angles that straighten on hover; clicki
 
 <a id="album-plus"></a>
 
-## 298 · Album plus `<AlbumPlus />`
+## 299 · Album plus `<AlbumPlus />`
 
 **Position**: Pricing · single membership; **Reference slide**: `src/decks/sig-album` — `plus`
 
@@ -14240,7 +14300,7 @@ One large white card in the middle: the plan name with a gradient star, a short 
 
 <a id="album-close"></a>
 
-## 299 · Album close `<AlbumClose />`
+## 300 · Album close `<AlbumClose />`
 
 **Position**: Closing · call to action and a pile of prints; **Reference slide**: `src/decks/sig-album` — `close`
 
@@ -14286,7 +14346,7 @@ A handwritten-feel line, a two-line title with the last word in gradient italic,
 
 <a id="slate-hero"></a>
 
-## 300 · Slate hero `<SlateHero />`
+## 301 · Slate hero `<SlateHero />`
 
 **Position**: Opening · SaaS product home; **Reference slide**: `src/decks/sig-slate` — `hero`
 
@@ -14334,7 +14394,7 @@ On the left a version pill, a two-line headline with a small tilted gradient ico
 
 <a id="slate-steps"></a>
 
-## 301 · Slate steps `<SlateSteps />`
+## 302 · Slate steps `<SlateSteps />`
 
 **Position**: Method · three steps to start; **Reference slide**: `src/decks/sig-slate` — `steps`
 
@@ -14377,7 +14437,7 @@ A centred dot label, a two-line title and a subtitle; below, three white cards s
 
 <a id="slate-compare"></a>
 
-## 302 · Slate comparison table `<SlateCompare />`
+## 303 · Slate comparison table `<SlateCompare />`
 
 **Position**: Comparison · us versus the alternative; **Reference slide**: `src/decks/sig-slate` — `compare`
 
@@ -14425,7 +14485,7 @@ Title, lead, button and three small stat cards on the left; on the right a white
 
 <a id="slate-trend"></a>
 
-## 303 · Slate trend `<SlateTrend />`
+## 304 · Slate trend `<SlateTrend />`
 
 **Position**: Trend · several metrics over time; **Reference slide**: `src/decks/sig-slate` — `trend`
 
@@ -14470,7 +14530,7 @@ A title at the top left; a column of metric cards (name, current value, green ch
 
 <a id="slate-pricing"></a>
 
-## 304 · Slate pricing `<SlatePricing />`
+## 305 · Slate pricing `<SlatePricing />`
 
 **Position**: Pricing · per-seat plans; **Reference slide**: `src/decks/sig-slate` — `pricing`
 
@@ -14516,7 +14576,7 @@ A title at the top with a team-size stepper (− / +) on the right; below, three
 
 <a id="slate-connect"></a>
 
-## 305 · Slate integrations `<SlateConnect />`
+## 306 · Slate integrations `<SlateConnect />`
 
 **Position**: Closing · integrations and call to action; **Reference slide**: `src/decks/sig-slate` — `connect`
 
@@ -14562,7 +14622,7 @@ On the left a title (which may hold an icon tile), a lead, two buttons and a sma
 
 <a id="ember-hero"></a>
 
-## 306 · Ember hero `<EmberHero />`
+## 307 · Ember hero `<EmberHero />`
 
 **Position**: Opening · AI product home; **Reference slide**: `src/decks/sig-ember` — `hero`
 
@@ -14606,7 +14666,7 @@ A full-bleed dark, lit picture (for example a head silhouette traced by rim ligh
 
 <a id="ember-bento"></a>
 
-## 307 · Ember feature bento `<EmberBento />`
+## 308 · Ember feature bento `<EmberBento />`
 
 **Position**: Capabilities · four features; **Reference slide**: `src/decks/sig-ember` — `bento`
 
@@ -14647,7 +14707,7 @@ A centred serif title over four dark cards fitted together: two tall picture car
 
 <a id="ember-agent"></a>
 
-## 308 · Ember agent run `<EmberAgent />`
+## 309 · Ember agent run `<EmberAgent />`
 
 **Position**: Mechanism · an agent finishing a task step by step; **Reference slide**: `src/decks/sig-ember` — `agent`
 
@@ -14694,7 +14754,7 @@ On the left a serif title, a request bubble from 'you' and a draft being written
 
 <a id="ember-saves"></a>
 
-## 309 · Ember time saved `<EmberSaves />`
+## 310 · Ember time saved `<EmberSaves />`
 
 **Position**: Data · time saved per task; **Reference slide**: `src/decks/sig-ember` — `saves`
 
@@ -14738,7 +14798,7 @@ On the left a serif title, a lead and a huge gradient serif number (hours saved 
 
 <a id="ember-words"></a>
 
-## 310 · Ember testimonials `<EmberWords />`
+## 311 · Ember testimonials `<EmberWords />`
 
 **Position**: Evidence · two customers, their words and results; **Reference slide**: `src/decks/sig-ember` — `words`
 
@@ -14780,7 +14840,7 @@ A centred title under an ember glow and two large dark cards side by side: a ser
 
 <a id="ember-close"></a>
 
-## 311 · Ember closing `<EmberClose />`
+## 312 · Ember closing `<EmberClose />`
 
 **Position**: Closing · call to action with a prompt box; **Reference slide**: `src/decks/sig-ember` — `close`
 
@@ -14824,7 +14884,7 @@ A ring of fire breathing slowly in the middle of the slide; inside it two lines 
 
 <a id="dusk-hero"></a>
 
-## 312 · Dusk hero `<DuskHero />`
+## 313 · Dusk hero `<DuskHero />`
 
 **Position**: Opening · developer tool home; **Reference slide**: `src/decks/sig-dusk` — `hero`
 
@@ -14869,7 +14929,7 @@ A mint announcement pill at the top, a centred two-line tight headline, a lead a
 
 <a id="dusk-feature"></a>
 
-## 313 · Dusk feature `<DuskFeature />`
+## 314 · Dusk feature `<DuskFeature />`
 
 **Position**: Product · one feature and its chart; **Reference slide**: `src/decks/sig-dusk` — `feature`
 
@@ -14914,7 +14974,7 @@ On the left a small tag, a two-line title, a paragraph, two to four ticked point
 
 <a id="dusk-explain"></a>
 
-## 314 · Dusk code explainer `<DuskExplain />`
+## 315 · Dusk code explainer `<DuskExplain />`
 
 **Position**: Explanation · code told in plain words, block by block; **Reference slide**: `src/decks/sig-dusk` — `explain`
 
@@ -14959,7 +15019,7 @@ On the left a white code card split into 2–4 blocks: the current one lights up
 
 <a id="dusk-stats"></a>
 
-## 315 · Dusk result cards `<DuskStats />`
+## 316 · Dusk result cards `<DuskStats />`
 
 **Position**: Data · three results; **Reference slide**: `src/decks/sig-dusk` — `stats`
 
@@ -15001,7 +15061,7 @@ Under a one-line title, three tall cards side by side: a small label and an area
 
 <a id="dusk-cases"></a>
 
-## 316 · Dusk customer stories `<DuskCases />`
+## 317 · Dusk customer stories `<DuskCases />`
 
 **Position**: Customer · case carousel with two quotes; **Reference slide**: `src/decks/sig-dusk` — `cases`
 
@@ -15047,7 +15107,7 @@ On the left a large photo case card: the customer name top left, a one-line resu
 
 <a id="dusk-close"></a>
 
-## 317 · Dusk closing `<DuskClose />`
+## 318 · Dusk closing `<DuskClose />`
 
 **Position**: Closing · call to action with an install command; **Reference slide**: `src/decks/sig-dusk` — `close`
 
@@ -15091,7 +15151,7 @@ A centred two-line headline, a lead and two buttons; below, a sunset gradient pa
 
 <a id="agency-stage"></a>
 
-## 318 · Electric-blue stage opening `<AgencyStage />`
+## 319 · Electric-blue stage opening `<AgencyStage />`
 
 **Position**: Opening · first page for an agency or brand; **Reference slide**: `src/decks/sig-agency` — `stage`
 
@@ -15137,7 +15197,7 @@ The whole page is an electric-blue gradient mixed from the theme accent with fin
 
 <a id="agency-accordion"></a>
 
-## 319 · Portrait with accordion `<AgencyAccordion />`
+## 320 · Portrait with accordion `<AgencyAccordion />`
 
 **Position**: Method · mission, services or approach in detail; **Reference slide**: `src/decks/sig-agency` — `mission`
 
@@ -15183,7 +15243,7 @@ A small white pill top left and a light two-line title on the right half. On the
 
 <a id="agency-proof"></a>
 
-## 320 · Navy quote with bento `<AgencyProof />`
+## 321 · Navy quote with bento `<AgencyProof />`
 
 **Position**: Customer · testimonials and results; **Reference slide**: `src/decks/sig-agency` — `proof`
 
@@ -15231,7 +15291,7 @@ A small white pill top left and a light two-line title on the right half. Across
 
 <a id="agency-book"></a>
 
-## 321 · Electric-blue booking close `<AgencyBook />`
+## 322 · Electric-blue booking close `<AgencyBook />`
 
 **Position**: Closing · book a call; **Reference slide**: `src/decks/sig-agency` — `book`
 
@@ -15282,7 +15342,7 @@ The whole page is the electric-blue gradient with fine grain. On the left a fros
 
 <a id="social-feed"></a>
 
-## 322 · Personal feed `<SocialFeed />`
+## 323 · Personal feed `<SocialFeed />`
 
 **Position**: Content · recent news as a personal or brand home; **Reference slide**: `src/decks/mockui` — `feed`
 
@@ -15332,7 +15392,7 @@ A three-column social home page. On the left an avatar, a name, six menu items t
 
 <a id="social-post"></a>
 
-## 323 · Launch post `<SocialPost />`
+## 324 · Launch post `<SocialPost />`
 
 **Position**: Evidence · the response to a launch or milestone; **Reference slide**: `src/decks/mockui` — `post`
 
@@ -15383,7 +15443,7 @@ The same three-column shell with one big post in the middle: a back link, the au
 
 <a id="direct-chat"></a>
 
-## 324 · Direct message invite `<DirectChat />`
+## 325 · Direct message invite `<DirectChat />`
 
 **Position**: Closing · invite the audience to get in touch; **Reference slide**: `src/decks/mockui` — `dm`
 

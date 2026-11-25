@@ -37,7 +37,8 @@ export async function deckStyle(root: string, resolveOptions: ResolveOptions = {
     if (!mod.deck) return undefined
     // Deck renders with DEFAULT_STYLE when style is omitted; match that here.
     return typeof mod.deck.style === 'string' ? mod.deck.style : 'standard'
-  } catch {
+  } catch (err) {
+    console.warn('[style-fonts] failed to read DeckDef.style via SSR:', err instanceof Error ? err.message : err)
     return undefined
   } finally {
     await server.close()

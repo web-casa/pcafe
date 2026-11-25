@@ -2,7 +2,7 @@
 
 > 由 `npm run docs` 从 `src/kit/catalog.ts` 和 `src/kit/theme.ts` 生成，请勿手改。
 
-共 5 个模板。返回索引：[../templates.md](../templates.md)。
+共 6 个模板。返回索引：[../templates.md](../templates.md)。
 
 ### `MediaExpand` 小窗放大（动效 · 一张截图或照片从小窗放大到整页）
 - 适合：产品演示、案例：先让人认出画面，再看细节；一张图本身就是这一页的重点
@@ -32,4 +32,10 @@
 - 适合：操作录屏、动画图表，需要边放边讲；一段变化里有 2–4 个值得停下来的时刻
 - 不适合：视频很长或很大：会内联进单个 HTML 文件；需要声音：视频固定静音
 - 上限：stops 2–4 个，at 按秒递增；title ≤ 8 字；body ≤ 30 字；页标题 ≤ 22 字；lead ≤ 40 字；视频建议 ≤ 15 秒、≤ 1 MB（先用 ffmpeg 截短压缩）
-- 参考：src/decks/motion 的 `video` 页；docs/zh-CN/components.md#step-video；交互：按 → 播放到下一个停点
+- 参考：src/decks/motion 的 `video` 页；docs/zh-CN/components.md#step-video；交互：按 → 播放到下一个停点，点击画面可重播当前段
+
+### `VideoStage` 视频放映台（动效 · 居中大画面完整播放带播控栏的产品录屏或解说视频）
+- 适合：播放完整的产品演示录屏、带人声解说的视频或循环背景画面；演讲者需要现场随时暂停、拖动或切换倍速
+- 不适合：需要按步骤逐段停顿讲解：改用 StepVideo；超大高清视频直接打包单文件 HTML（建议先用 ffmpeg 压缩或托管企业库流式播放）
+- 上限：页标题 ≤ 22 字；lead ≤ 40 字；caption ≤ 36 字
+- 参考：src/decks/motion 的 `video-stage` 页；docs/zh-CN/components.md#video-stage；交互：点击画面或底栏控制播放、拖动、倍速与全屏

@@ -1,0 +1,510 @@
+/* Phase 5A: Browser Picture-in-Picture deck recording (local export only, zero remote calls) */
+
+.rec-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 108;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgb(9 9 11 / 0.56);
+  backdrop-filter: blur(6px);
+  font-family: var(--f-sans, system-ui, -apple-system, sans-serif);
+}
+
+.rec-panel {
+  width: min(440px, calc(100vw - 32px));
+  border-radius: 18px;
+  padding: 22px 24px;
+  background: #141418;
+  color: #f4f4f5;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  box-shadow: 0 24px 64px rgb(0 0 0 / 0.45);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.rec-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.rec-panel__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fafafa;
+}
+
+.rec-panel__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.1);
+  color: #d4d4d8;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.rec-panel__badge--pro {
+  background: rgb(245 158 11 / 0.18);
+  color: #fbbf24;
+}
+
+.rec-panel__close {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.08);
+  color: #d4d4d8;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.rec-panel__close:hover {
+  background: rgb(255 255 255 / 0.16);
+  color: #fff;
+}
+
+.rec-panel__desc {
+  margin: 0 0 14px;
+  color: #a1a1aa;
+  font-size: 12.5px;
+}
+
+.rec-panel__notice {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgb(245 158 11 / 0.12);
+  border: 1px solid rgb(245 158 11 / 0.28);
+  color: #fde68a;
+  font-size: 12px;
+}
+
+.rec-panel__error {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgb(239 68 68 / 0.14);
+  border: 1px solid rgb(239 68 68 / 0.32);
+  color: #fecaca;
+  font-size: 12px;
+}
+
+.rec-panel__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.rec-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.04);
+  border: 1px solid rgb(255 255 255 / 0.07);
+}
+
+.rec-row__label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.rec-row__label strong {
+  font-weight: 500;
+  color: #f4f4f5;
+  font-size: 13px;
+}
+
+.rec-row__label span {
+  font-size: 11px;
+  color: #a1a1aa;
+}
+
+.rec-toggle {
+  position: relative;
+  width: 38px;
+  height: 22px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.16);
+  cursor: pointer;
+  transition: background 150ms ease;
+  flex-shrink: 0;
+}
+
+.rec-toggle[aria-pressed='true'] {
+  background: #22c55e;
+}
+
+.rec-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 150ms ease;
+}
+
+.rec-toggle[aria-pressed='true']::after {
+  transform: translateX(16px);
+}
+
+.rec-sizes {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.rec-sizes button {
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 8px;
+  padding: 4px 9px;
+  background: transparent;
+  color: #d4d4d8;
+  font-size: 11.5px;
+  cursor: pointer;
+}
+
+.rec-sizes button.is-active {
+  background: #fff;
+  color: #09090b;
+  border-color: #fff;
+  font-weight: 600;
+}
+
+.rec-panel__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 11.5px;
+  color: #a1a1aa;
+}
+
+.rec-panel__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.rec-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 15px;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background: rgb(255 255 255 / 0.08);
+  color: #f4f4f5;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 140ms ease, opacity 140ms ease;
+}
+
+.rec-btn:hover:not(:disabled) {
+  background: rgb(255 255 255 / 0.16);
+}
+
+.rec-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.rec-btn--primary {
+  border-color: #ef4444;
+  background: #ef4444;
+  color: #fff;
+}
+
+.rec-btn--primary:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.rec-btn--light {
+  border-color: #fff;
+  background: #fff;
+  color: #09090b;
+}
+
+.rec-btn--light:hover:not(:disabled) {
+  background: #e4e4e7;
+}
+
+.rec-pro-list {
+  margin: 0 0 16px;
+  padding: 0 0 0 18px;
+  color: #d4d4d8;
+  font-size: 12.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* ── Draggable circular PiP camera bubble ─────────────────────────────── */
+
+.rec-pip {
+  position: fixed;
+  z-index: 95;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #09090b;
+  border: 3px solid rgb(255 255 255 / 0.9);
+  box-shadow: 0 14px 36px rgb(0 0 0 / 0.42), 0 0 0 1px rgb(0 0 0 / 0.35);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.rec-pip:active {
+  cursor: grabbing;
+}
+
+.rec-pip__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.rec-pip__video.is-mirrored {
+  transform: scaleX(-1);
+}
+
+.rec-pip__tools {
+  position: absolute;
+  inset: auto 0 8px 0;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease;
+}
+
+.rec-pip:hover .rec-pip__tools,
+.rec-pip:focus-within .rec-pip__tools {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rec-pip__tools button {
+  border: 0;
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: rgb(9 9 11 / 0.78);
+  color: #fff;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.rec-pip__tools button:hover {
+  background: #09090b;
+}
+
+/* ── Active recording floating HUD ────────────────────────────────────── */
+
+.rec-hud {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 106;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 6px 12px;
+  border-radius: 999px;
+  background: rgb(15 15 18 / 0.88);
+  color: #f4f4f5;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.38);
+  backdrop-filter: blur(8px);
+  font: 500 12px / 1 var(--f-sans, system-ui, -apple-system, sans-serif);
+}
+
+.rec-hud--compact {
+  padding: 5px 10px;
+  gap: 6px;
+}
+
+.rec-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
+  animation: rec-pulse 1.2s ease-in-out infinite;
+}
+
+.rec-dot--paused {
+  background: #f59e0b;
+  animation: none;
+}
+
+@keyframes rec-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgb(239 68 68 / 0.65);
+  }
+  50% {
+    opacity: 0.65;
+    box-shadow: 0 0 0 6px rgb(239 68 68 / 0);
+  }
+}
+
+.rec-timer {
+  font-family: var(--f-mono, ui-monospace, monospace);
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  min-width: 42px;
+}
+
+.rec-size {
+  font-family: var(--f-mono, ui-monospace, monospace);
+  font-size: 11px;
+  color: #a1a1aa;
+}
+
+.rec-size--warn {
+  color: #fbbf24;
+}
+
+.rec-hud__note {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  color: #fde68a;
+}
+
+.rec-meter {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  padding: 0 2px;
+}
+
+.rec-meter i {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: #22c55e;
+  transition: height 70ms linear;
+}
+
+.rec-hud__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.1);
+  color: #f4f4f5;
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.rec-hud__btn:hover {
+  background: rgb(255 255 255 / 0.2);
+}
+
+.rec-hud__btn--stop {
+  background: #ef4444;
+  color: #fff;
+}
+
+.rec-hud__btn--stop:hover {
+  background: #dc2626;
+}
+
+.rec-hud__btn--muted {
+  background: rgb(239 68 68 / 0.22);
+  color: #fca5a5;
+}
+
+/* ── Saved recording toast ────────────────────────────────────────────── */
+
+.rec-saved {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 106;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: rgb(15 15 18 / 0.92);
+  color: #f4f4f5;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.4);
+  font: 500 12.5px / 1.2 var(--f-sans, system-ui, -apple-system, sans-serif);
+}
+
+.rec-saved a {
+  color: #60a5fa;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.rec-saved button {
+  border: 0;
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: rgb(255 255 255 / 0.12);
+  color: #d4d4d8;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* Record button active dot in bottom-right controls toolbar */
+.controls button.is-rec {
+  color: #ef4444;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rec-dot {
+    animation: none;
+  }
+}
+
+@media print {
+  .rec-backdrop,
+  .rec-pip,
+  .rec-hud,
+  .rec-saved {
+    display: none !important;
+  }
+}

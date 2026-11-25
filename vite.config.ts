@@ -43,10 +43,11 @@ export const forbidRemote = (): Plugin => ({
   },
 })
 
-// Ported styles bring their own display faces. A deck build keeps only the faces
-// tagged with the style that deck uses, so each file carries one style's fonts.
-// When the style cannot be read, keep every face and warn: never prune silently.
-export const styleFonts = (session?: DeckSsrSession): Plugin => {
+// Ported styles bring their own display faces. A presentation build keeps only the
+// faces tagged with the style that deck uses; Studio builds pass { prune: false }
+// so switching across every style in #/kit retains all style faces.
+export const styleFonts = (session?: DeckSsrSession, options: { prune?: boolean; strict?: boolean } = {}): Plugin => {
+  const { prune = true, strict = false } = options
   let root = process.cwd()
   let pending: Promise<string | undefined> | undefined
   let warned = false
@@ -64,14 +65,17 @@ export const styleFonts = (session?: DeckSsrSession): Plugin => {
     transform: {
       filter: { id: /style-fonts\.css(?:\?.*)?$/ },
       async handler(code, id) {
+        if (!prune) return
         const file = id.split('?')[0].replaceAll('\\', '/')
         if (!file.endsWith('/style-fonts.css')) return
         pending ??= session ? session.getStyle() : deckStyle(root, engineResolve, [proVirtual()])
         const style = await pending
         if (!style) {
+          const msg = 'style-fonts: could not read DeckDef.style from src/decks/active.ts.'
+          if (strict) this.error(msg)
           if (!warned) {
             warned = true
-            this.warn('style-fonts: could not read DeckDef.style from src/decks/active.ts; keeping every style font.')
+            this.warn(`${msg} Keeping every style font.`)
           }
           return
         }
@@ -100,7 +104,7 @@ export default defineConfig(() => {
   const ssrPro = proVirtual()
   const sharedSsr = createDeckSsrSession(engineResolve, [ssrPro])
   return {
-    plugins: [styleFonts(sharedSsr), mainPro, ...emoji(), deckOutline(engineResolve, [ssrPro], sharedSsr), viteSingleFile({ removeViteModuleLoader: true }), forbidRemote(), presentationOutput(sharedSsr)],
+    plugins: [styleFonts(sharedSsr, { prune: true, strict: true }), mainPro, ...emoji(), deckOutline(engineResolve, [ssrPro], sharedSsr), viteSingleFile({ removeViteModuleLoader: true }), forbidRemote(), presentationOutput(sharedSsr)],
     css: { postcss: { plugins: [designUnit] } },
     resolve: engineResolve,
     optimizeDeps: engineOptimizeDeps,

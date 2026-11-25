@@ -5,10 +5,9 @@ import { proVirtual } from './vite.pro'
 import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote, styleFonts } from './vite.config'
 
 // Gallery build: `#/kit` at dist/studio.html, kept beside the deck output.
-// styleFonts runs here too so the gallery keeps the same font pruning as before
-// the entry split.
+// Keep every style font unpruned because the gallery switches across all styles.
 export default defineConfig({
-  plugins: [styleFonts(), proVirtual(), ...emoji(), viteSingleFile({ removeViteModuleLoader: true }), forbidRemote()],
+  plugins: [styleFonts(undefined, { prune: false }), proVirtual(), ...emoji(), viteSingleFile({ removeViteModuleLoader: true }), forbidRemote()],
   css: { postcss: { plugins: [designUnit] } },
   resolve: engineResolve,
   optimizeDeps: engineOptimizeDeps,

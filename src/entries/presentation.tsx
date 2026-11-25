@@ -47,11 +47,22 @@ function App() {
   )
 }
 
-// Fonts are embedded, so waiting costs a few ms and guarantees the intro
-// choreography never runs on fallback glyphs. fonts.ready alone would resolve
-// immediately because nothing has been rendered yet.
-const faces = ['500 1em Geist', '400 1em "Geist Mono"', 'italic 400 1em "Instrument Serif"', '400 1em "Deck Sans SC"', '500 1em "Deck Sans SC"']
-void Promise.all(faces.map((f) => document.fonts.load(f, 'Lumen 中文'))).finally(() => {
+// Wait briefly for core faces so offline/cached decks never flash fallback glyphs,
+// while capping remote CDN waits so cold-cache online playback mounts within ~800ms
+// (CDN-offloaded copies rewrite @font-face to font-display: swap).
+const FONT_LOAD_TIMEOUT_MS = 800
+const CORE_FACES = [
+  '500 1em Geist',
+  '400 1em "Geist Mono"',
+  'italic 400 1em "Instrument Serif"',
+  '400 1em "Deck Sans SC"',
+  '500 1em "Deck Sans SC"',
+] as const
+
+const waitFonts = Promise.allSettled(CORE_FACES.map((f) => document.fonts.load(f, 'Lumen 中文')))
+const timeout = new Promise<void>((resolve) => setTimeout(resolve, FONT_LOAD_TIMEOUT_MS))
+
+void Promise.race([waitFonts, timeout]).finally(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <MotionConfig reducedMotion="user">

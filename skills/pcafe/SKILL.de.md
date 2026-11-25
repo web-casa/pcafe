@@ -76,6 +76,12 @@ Prüfen Sie jedes Feld gegen die „Grenze“ der Vorlage in ihrer Gruppendatei.
 - Zahlen mit Einheit und Bezugsgröße; lange Bezeichner gehören in `tag`, `source` oder Code-Felder, nicht in den Fließtext.
 - Passt es nicht, auf zwei Folien aufteilen. **Keine Schrift verkleinern, kein eigenes CSS.**
 - Spalten unterscheiden sich um höchstens einen Eintrag; die untere Folienhälfte nicht leer lassen (optionalen Block ergänzen oder vollere Vorlage wählen).
+- Verbindliche Layout-Leitplanken für überlaufanfällige Vorlagen (die automatische Prüfung `pcafe check` erkennt Überläufe innerhalb von Kartenrändern nicht immer):
+  - `IconGrid`: Folientitel **einzeilig** halten (≤ 13–14 CJK-Einheiten), sonst wird das 2-zeilige Kartenraster zusammengedrückt und Text läuft über den unteren Kartenrand; Kartentext auf maximal 2 Zeilen kürzen.
+  - `StatRow`: Großwerte `value` als ultrakurze einzeilige Tokens (≤ 5–6 Zeichen, z. B. `8.6.0`, `64-bit`); keine mehrwortigen Ausdrücke mit Leerzeichen (z. B. `3 Defaults`), die umbrechen und in die Nachbarkarte ragen.
+  - `Closing`: Folien-`label` (≤ 4–5 Einheiten) und Kopfzeilen-`hint` (≤ 14 Einheiten) kurz halten, damit die Kopfzeile einzeilig bleibt; `takeaways` kompakt (30–42 Einheiten) und `refs` einzeilig.
+  - `SpecSheet`: Zeilen mit `major: true` hängen einen Punkt `•` an `to` an; `to` auf ≤ 3 CJK-Einheiten bzw. ≤ 6 ASCII-Zeichen begrenzen, damit der Punkt nicht allein in die nächste Zeile rutscht.
+  - `Agenda` (linke Spalte) und `SectionBreak` sind schmal (~7–8 CJK-Einheiten pro Zeile); mehrzeilige Titel stets als Array manuell umbrechen.
 
 ### 5. Stil und Farbthema wählen
 
@@ -131,7 +137,7 @@ Es gibt zwei Prüfstufen. Führen Sie sie selbst aus, ohne dass der Nutzer danac
 1. Eine bestandene Teilprüfung (`--changed`, `--slides`) gibt `run a full check before delivery` aus. Sie ist nicht die Abschlussprüfung: Vor der Abgabe einmal voll prüfen. Mit `--explain` sehen Sie, welche Folien laufen würden, ohne zu prüfen.
 2. FAILs wie in `docs/de/guide.md` beschrieben beheben; auch WARNs wie „untere Hälfte wirkt leer“ ansehen. Nach einer Korrektur nur die betroffenen Folien erneut prüfen, nicht nach jeder Änderung voll.
 3. `slide N never settled` heißt: Auf der Folie ändert sich ständig etwas. Ein echtes Live-Element (Uhr, laufende Zahl) bekommt `data-settle-ignore`; nicht löschen, nur um die Prüfung zu bestehen.
-4. Nach der vollen Prüfung zuerst `qa/contact-sheet.png` (alle Folien als Miniaturen) auf Rhythmus und Dichte ansehen, dann jede `qa/slide-NN-1920x1080.png`: zu viel Leerraum, überfüllte Folien, unklarer Fokus, zweite Titelzeile mit nur einem oder zwei Wörtern.
+4. Nach der vollen Prüfung zuerst `qa/contact-sheet.png` (alle Folien als Miniaturen) auf Rhythmus und Dichte ansehen, dann jede `qa/slide-NN-1920x1080.png` visuell prüfen (Hinweis: `PASS` von `pcafe check` fängt Kartenrand-Überläufe und Kopfzeilen-Umbrüche nicht sicher ab): ① berührt oder überschreitet Text in `IconGrid`/`StatRow` den Kartenrand bzw. die Nachbarkarte ② bleiben `StatRow`-Werte und `Matrix`-Pills einzeilig ③ bleibt die Kopfzeile (besonders auf `Closing`) einzeilig ④ gibt es ungeschickte Wortumbrüche oder ein-/zweiwortige Waisenzeilen ⑤ bleibt der `SpecSheet`-Punkt `•` in derselben Zeile wie der Wert.
 5. Hervorhebung passt zum Text: „am längsten“ hebt das größte Element hervor; „bei Schritt 3“ füllt nur bis Schritt 3.
 
 `hint  copy.…`-Zeilen vor `PASS` markieren Floskeln; sie sind keine Fehler. Umschreiben oder behalten, wenn zutreffend; „Studien zeigen“ braucht eine benannte `source`.
@@ -158,6 +164,9 @@ Fertig heißt: volle Prüfung `PASS` und jeder Screenshot geöffnet und angesehe
 - Auf der Titelfolie eine Zahl ohne Quelle zeigen, die später nicht wieder auftaucht.
 - Überlauf durch kleinere Schrift oder eigene Styles lösen.
 - Text in `mark` von `Closing` schreiben: Das Feld nimmt nur eine 1–4-stellige Zahl an; Text lässt die ganze Folie leer.
+- Doppelte Backslashes in JSX-String-Attributen (z. B. `title="Time\\Duration"`): JSX-Attribute rendern `\\` wörtlich; dort einfachen Backslash (`title="Time\Duration"`) verwenden und `\\` nur in JS-String-Literalen (Objekten/Arrays) nutzen.
+- Mehrere `npx pcafe build <name>`-Läufe direkt hintereinander ohne Sichern von `dist/`: jeder Build leert `dist/`, daher `dist/<name>.html` nach jedem Lauf sofort kopieren oder verschieben.
+- Statische Screenshots animierter Folien (`build: 'reveal'`, `Timeline`, `CodeDiff`) ohne `reducedMotion: 'reduce'`: eigene Screenshot-Skripte erfassen sonst halbtransparente Zwischenbilder.
 - `src/kit/catalog.ts` ändern, ohne `npx pcafe docs` auszuführen – Dokumentation und Referenztabellen dieses Skills veralten.
 
 ## Wenn Sie sich dabei ertappen …

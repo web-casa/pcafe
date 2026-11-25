@@ -9,6 +9,7 @@ import { DEFAULT_STYLE, themeVars, toneOf, type DeckStyle } from '../../kit/them
 import { BackdropLayer } from './backdrop'
 import type { Blank, Frozen, Screen } from './screen'
 import { KeyHelp, PRESENTER_KEYS } from './help'
+import { Credit, creditOn } from '../../engine/attribution'
 
 /*
  * Sync protocol (BroadcastChannel `pcafe:<title>`, plus window.opener
@@ -508,6 +509,7 @@ export function PrintView({ deck }: { deck: DeckDef }) {
   const style = useDeckRoot(deck, 'print')
   const { slides, title } = deck
   const total = slides.length
+  const credit = creditOn(deck.attribution)
   useEffect(() => {
     document.title = title
   }, [title])
@@ -535,6 +537,12 @@ export function PrintView({ deck }: { deck: DeckDef }) {
                   </div>
                   <div className="slide-header__hint" />
                   <div className="slide-header__page">
+                    {credit && (i === 0 || i === total - 1) && (
+                      <>
+                        <Credit className="slide-header__credit" withUrl />
+                        <span className="slide-header__muted" aria-hidden>·</span>
+                      </>
+                    )}
                     <span>{pad2(i + 1)}</span>
                     <span className="slide-header__muted">/ {pad2(total)}</span>
                   </div>

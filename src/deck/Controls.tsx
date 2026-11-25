@@ -11,6 +11,7 @@ const paths = {
   pause: 'M8 5v14M16 5v14',
   grid: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z',
   full: 'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5',
+  rec: 'M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10z',
 }
 
 function Glyph({ d, fill }: { d: string; fill?: boolean }) {
@@ -31,6 +32,8 @@ export function Controls({
   onPrev,
   onNext,
   onOverview,
+  onRecord,
+  recording = false,
   atEnd,
   hidden = false,
   paused = false,
@@ -39,6 +42,8 @@ export function Controls({
   onPrev: () => void
   onNext: () => void
   onOverview: () => void
+  onRecord?: () => void
+  recording?: boolean
   atEnd: boolean
   hidden?: boolean
   paused?: boolean
@@ -112,6 +117,18 @@ export function Controls({
       <button type="button" tabIndex={-1} onClick={toggleFull} aria-label={full ? '退出全屏 (F)' : '全屏 (F)'} aria-pressed={full}>
         <Glyph d={paths.full} />
       </button>
+      {onRecord && (
+        <button
+          type="button"
+          tabIndex={-1}
+          onClick={onRecord}
+          aria-label={recording ? '录制中 (Shift+R)' : '画中画录课 (Shift+R)'}
+          aria-pressed={recording}
+          className={recording ? 'is-rec' : undefined}
+        >
+          <Glyph d={paths.rec} fill={recording} />
+        </button>
+      )}
       {credit && (
         <>
           <span className="controls__sep" aria-hidden />

@@ -107,6 +107,8 @@ if (FULL_ENGINE && (SLIDES_ARG || CHANGED)) {
 }
 const sha = (text) => createHash('sha256').update(text).digest('hex').slice(0, 20)
 const CACHE_FILE = join(OUT, '.check-cache.json')
+/** Bump whenever slideAudit/layoutAudit rules change so cached PASS runs invalidate. */
+const QA_RULESET_VERSION = '2026-11-24-v2'
 const slideKey = (s) => `${s.n}:${s.id}#${s.occurrence ?? 1}`
 
 function withOccurrences(list) {
@@ -150,6 +152,7 @@ function sharedFingerprint() {
     }
   }
   parts.push(`licence=${findLiveLicence(ROOT).stateKey}`)
+  parts.push(`ruleset=${QA_RULESET_VERSION}`)
   return { engine: sha(parts.join('\n')), files: parts.length }
 }
 
@@ -601,6 +604,9 @@ async function slideAudit(page) {
       // Decorative text (aria-hidden: background words, avatars) may sit under real text.
       if (!node.textContent.trim() || el.closest('.numeral') || el.closest('[aria-hidden]')) continue
       if (getComputedStyle(el).visibility === 'hidden') continue
+      if (!el.closest('pre, code, .code-block, .cdiff, .callouts__code, .term, [data-code]') && node.textContent.includes('\\\\')) {
+        issues.push(`literal double backslash "\\\\" in visible text "${node.textContent.trim().slice(0, 24)}" (JSX string attributes need only a single \\)`)
+      }
       const range = document.createRange()
       range.selectNodeContents(node)
       // CJK content areas are taller than tight line-heights, so collisions are
@@ -638,6 +644,118 @@ async function slideAudit(page) {
     }
     for (const seg of frame.querySelectorAll('.life__seg'))
       if (seg.scrollWidth > seg.clientWidth + 1) issues.push(`lifecycle label "${seg.textContent}" does not fit its bar`)
+
+    // Card visual-border audit (catches overflow:visible cards that scrollWidth misses).
+    // Verified CSS selector registry:
+    // - .igrid__card   (src/styles/templates.css:868 — IconGrid 3x2 & 4x2)
+    // - .statrow__card (src/styles/craft.css:438     — StatRow 3-4 stat cards)
+    // - .kpi__tile     (src/styles/business.css:661  — KpiBoard tiles)
+    // - .status__tile  (src/styles/business.css:1512 — StatusGrid tiles)
+    // - .duo__card     (src/styles/forms.css:532     — DuoCards 2-up cards)
+    const CARD_SELECTORS = ['.igrid__card', '.statrow__card', '.kpi__tile', '.status__tile', '.duo__card']
+    for (const sel of CARD_SELECTORS) {
+      for (const box of frame.querySelectorAll(sel)) {
+        const b = box.getBoundingClientRect()
+        if (b.width < 1 || b.height < 1) continue
+        const bcs = getComputedStyle(box)
+        const name = sel.slice(1)
+        const innerLeft = b.left + (parseFloat(bcs.borderLeftWidth) || 0)
+        const innerRight = b.right - (parseFloat(bcs.borderRightWidth) || 0)
+        const innerTop = b.top + (parseFloat(bcs.borderTopWidth) || 0)
+        const innerBottom = b.bottom - (parseFloat(bcs.borderBottomWidth) || 0)
+        if (b.right > stage.right + 1 || b.bottom > stage.bottom + 1 || b.left < stage.left - 1 || b.top < stage.top - 1) {
+          issues.push(`${name} leaves the stage`)
+        }
+        const cw = document.createTreeWalker(box, NodeFilter.SHOW_TEXT)
+        while (cw.nextNode()) {
+          const tn = cw.currentNode
+          const txt = tn.textContent.trim()
+          if (!txt) continue
+          const pe = tn.parentElement
+          if (!pe || pe.closest('[aria-hidden]') || getComputedStyle(pe).visibility === 'hidden') continue
+          const isNumeral = Boolean(pe.closest('.numeral'))
+          const cr = document.createRange()
+          cr.selectNodeContents(tn)
+          for (const r of cr.getClientRects()) {
+            if (r.width < 1) continue
+            const horizPad = 2 * u
+            const vertPad = 2 * u
+            if (r.right > innerRight - horizPad || r.left < innerLeft + horizPad) {
+              issues.push(`${name}: text "${txt.slice(0, 24)}" overflows card horizontally`)
+            }
+            if (!isNumeral && (r.bottom > innerBottom - vertPad || r.top < innerTop - 1 * u)) {
+              issues.push(`${name}: text "${txt.slice(0, 24)}" touches/overflows card bottom/top border`)
+            }
+          }
+        }
+        for (const m of box.querySelectorAll('.numeral__mask')) {
+          const mr = m.getBoundingClientRect()
+          if (mr.left < innerLeft - 1 || mr.right > innerRight + 1 || mr.bottom > innerBottom + 1) {
+            issues.push(`${name}: display numeral overflows its card`)
+          }
+        }
+      }
+    }
+
+    // Top bar (header.slide-header, Deck.tsx:261-295): every zone must stay single-line and non-overlapping.
+    const header = document.querySelector('.stage header.slide-header')
+    if (header && getComputedStyle(header).visibility !== 'hidden') {
+      const hw = document.createTreeWalker(header, NodeFilter.SHOW_TEXT)
+      while (hw.nextNode()) {
+        const tn = hw.currentNode
+        const txt = tn.textContent.trim()
+        if (!txt) continue
+        const pe = tn.parentElement
+        if (!pe || pe.closest('[aria-hidden]') || getComputedStyle(pe).visibility === 'hidden') continue
+        const hr = document.createRange()
+        hr.selectNodeContents(tn)
+        const rects = [...hr.getClientRects()].filter((r) => r.width >= 1)
+        const distinctRows = rects.reduce((acc, r) => (acc.some((y) => Math.abs(y - r.top) < 4 * u) ? acc : [...acc, r.top]), [])
+        if (distinctRows.length > 1) {
+          issues.push(`slide-header wraps onto ${distinctRows.length} lines: "${txt.slice(0, 28)}"`)
+        }
+      }
+      const zones = [...header.children].map((child) => {
+        const zRects = []
+        const zw = document.createTreeWalker(child, NodeFilter.SHOW_TEXT)
+        while (zw.nextNode()) {
+          const tn = zw.currentNode
+          if (!tn.textContent.trim()) continue
+          const zr = document.createRange()
+          zr.selectNodeContents(tn)
+          for (const r of zr.getClientRects()) if (r.width >= 1) zRects.push(r)
+        }
+        if (!zRects.length) return null
+        return {
+          name: child.className.split(' ')[0] || child.tagName.toLowerCase(),
+          left: Math.min(...zRects.map((r) => r.left)),
+          right: Math.max(...zRects.map((r) => r.right)),
+        }
+      }).filter(Boolean)
+      for (let i = 0; i < zones.length - 1; i++) {
+        if (zones[i].right > zones[i + 1].left - 4 * u) {
+          issues.push(`slide-header zones collide: ${zones[i].name} × ${zones[i + 1].name}`)
+        }
+      }
+    }
+
+    // SpecSheet major-jump dot (.spec__row.is-major .spec__to::after, business.css:1623-1632):
+    // must stay on the same single line as the value without pushing the dot onto an orphan line.
+    for (const el of frame.querySelectorAll('.spec__row.is-major .spec__to')) {
+      const ecs = getComputedStyle(el)
+      const after = getComputedStyle(el, '::after')
+      if (after.display === 'none') continue
+      const fs = parseFloat(ecs.fontSize) || 24 * u
+      const boxH = el.getBoundingClientRect().height
+      const sr = document.createRange()
+      sr.selectNodeContents(el)
+      const rects = [...sr.getClientRects()].filter((r) => r.width >= 1)
+      const rows = rects.reduce((acc, r) => (acc.some((y) => Math.abs(y - r.top) < 4 * u) ? acc : [...acc, r.top]), [])
+      if (boxH > fs * 1.55 || rows.length > 1) {
+        issues.push(`SpecSheet major value wraps (orphan dot): "${el.textContent.trim().slice(0, 24)}"`)
+      }
+    }
+
     return [...new Set(issues)]
   })
 }

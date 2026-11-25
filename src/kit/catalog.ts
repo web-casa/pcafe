@@ -5749,7 +5749,10 @@ import jsOff from './assets/deck-js-off.webp'
       { name: 'lead', type: 'string', note: '导语' },
       { name: 'src', type: 'string', required: true, note: '视频文件（import）' },
       { name: 'label', type: 'string', required: true, note: '视频内容说明' },
+      { name: 'poster', type: 'string', note: '可选封面帧图片' },
       { name: 'start', type: 'number', note: '第一次按之前显示的秒数，默认 0' },
+      { name: 'muted', type: 'boolean', note: '默认静音（可点击切换有声）' },
+      { name: 'playbackRate', type: 'number', note: '播放倍速，默认 1' },
       { name: 'stops', type: '{ at, title, body }[]', required: true, note: '停点' },
       { name: 'source', type: 'string', note: '出处' },
     ],
@@ -5762,7 +5765,42 @@ import jsOff from './assets/deck-js-off.webp'
 />`,
     demo: 'video',
     deck: 'motion',
-    interaction: '按 → 播放到下一个停点',
+    interaction: '按 → 播放到下一个停点，点击画面可重播当前段',
+  },
+  {
+    id: 'video-stage',
+    component: 'VideoStage',
+    name: '视频放映台',
+    role: '动效 · 居中大画面完整播放带播控栏的产品录屏或解说视频',
+    summary: '在单页居中呈现 16:9 完整视频，自带风格统一的播控栏：点击播放/暂停、进度条拖动、0.75×–2× 倍速、声音切换与全屏；离开页面或切后台自动暂停。',
+    useWhen: ['播放完整的产品演示录屏、带人声解说的视频或循环背景画面', '演讲者需要现场随时暂停、拖动或切换倍速'],
+    avoidWhen: ['需要按步骤逐段停顿讲解：改用 StepVideo', '超大高清视频直接打包单文件 HTML（建议先用 ffmpeg 压缩或托管企业库流式播放）'],
+    limits: ['页标题 ≤ 22 字', 'lead ≤ 40 字', 'caption ≤ 36 字'],
+    props: [
+      { name: 'kicker', type: 'string', required: true, note: '小节名' },
+      { name: 'title', type: 'string | string[]', required: true, note: '标题' },
+      { name: 'lead', type: 'string', note: '导语' },
+      { name: 'src', type: 'string', required: true, note: '视频文件（import 或同源 URL）' },
+      { name: 'label', type: 'string', required: true, note: '视频内容说明' },
+      { name: 'poster', type: 'string', note: '可选封面帧图片' },
+      { name: 'caption', type: 'string', note: '下方简短说明（≤ 36 字）' },
+      { name: 'autoplay', type: 'boolean', note: '进入本页自动播放，默认 false' },
+      { name: 'loop', type: 'boolean', note: '循环播放，默认 false' },
+      { name: 'muted', type: 'boolean', note: '初始静音状态（autoplay 时默认 true）' },
+      { name: 'controls', type: 'boolean', note: '显示自定义播控栏，默认 true' },
+      { name: 'playbackRate', type: 'number', note: '初始倍速，默认 1' },
+      { name: 'source', type: 'string', note: '出处' },
+    ],
+    example: `<VideoStage
+  kicker="产品演示"
+  title="十秒看懂核心工作流"
+  src={demoMp4}
+  label="产品端到端操作录屏"
+  caption="支持点击暂停、进度条拖动、倍速与全屏放映"
+/>`,
+    demo: 'video-stage',
+    deck: 'motion',
+    interaction: '点击画面或底栏控制播放、拖动、倍速与全屏',
   },
   {
     id: 'exhibit-cover',

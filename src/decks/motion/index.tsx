@@ -1,5 +1,5 @@
 import type { DeckDef } from '../../kit'
-import { Closing, ConvergeShots, MediaExpand, ScatterOrder, Statement, StepVideo, TiltShot } from '../../kit'
+import { Closing, ConvergeShots, MediaExpand, ScatterOrder, Statement, StepVideo, TiltShot, VideoStage } from '../../kit'
 import kit from './assets/shot-kit.webp'
 import overview from './assets/shot-overview.webp'
 import entry from './assets/shot-kit-entry.webp'
@@ -118,6 +118,21 @@ export const deck: DeckDef = {
             { at: 4.4, title: '2021 年', body: '中国 327 TWh，约为美国的 2 倍' },
             { at: 7.5, title: '2025 年', body: '中国 1,175 TWh，约为美国的 3 倍' },
           ]}
+          source="视频：PCafe 示例视频 solar-data 片段；数据 Our World in Data（Ember、Energy Institute，2026）"
+        />
+      ),
+    },
+    {
+      id: 'video-stage',
+      label: '视频放映台',
+      render: () => (
+        <VideoStage
+          kicker="视频放映台"
+          title="完整播放，随时暂停与拖动"
+          lead="适合产品录屏、带解说演示或循环背景画面，内置进度条、倍速与全屏。"
+          src={race}
+          label="2015 到 2025 年各国太阳能发电量排名完整视频"
+          caption="支持点击画面暂停、拖动时间轴、0.75×–2× 倍速与全屏播放"
           source="视频：PCafe 示例视频 solar-data 片段；数据 Our World in Data（Ember、Energy Institute，2026）"
         />
       ),
