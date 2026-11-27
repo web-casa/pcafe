@@ -1,6 +1,6 @@
 {
   "name": "pcafe",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Turn notes or a document into a finished HTML slide deck with PCafe's templates and styles, checked until PASS",
   "author": {
     "name": "PCafe",
