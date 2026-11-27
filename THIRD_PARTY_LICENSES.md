@@ -24,7 +24,7 @@ page where the deck is hosted).
 
 | Name | Licence | Source | Used for |
 | --- | --- | --- | --- |
-| qu-ai-wei 0.9.1 (`skills/qu-ai-wei/`) | MIT, Copyright (c) 2026 @LifelongLazyLearner, see `skills/qu-ai-wei/LICENSE` | https://github.com/LifelongLazyLearner/qu-ai-wei | Rewriting Simplified Chinese copy so it reads naturally |
+| oil-tone (`skills/oil-tone/`, commit `7aaa0ae`) | MIT, Copyright (c) 2026 oil-oil, see `skills/oil-tone/LICENSE` | https://github.com/oil-oil/oil-tone | Keeping Chinese and English deck copy natural, clear, readable and grounded in facts |
 
 ## Fonts (bundled in `src/assets/fonts/`, embedded in built decks)
 
@@ -115,7 +115,7 @@ Fluent Emoji MIT notice:
 
 The example decks include screenshots of PCafe's own interface
 (`src/decks/studio/assets/`, `src/decks/geo/assets/`). They are part of this
-project and are covered by the MIT License.
+project and are covered by the Common Public Attribution License 1.0 (CPAL-1.0, see `LICENSE`).
 
 ## Style presets ported from beautiful-html-templates
 

@@ -1,9 +1,9 @@
-import { proVirtual } from './vite.pro'
+import { proVirtual } from './vite.pro.ts'
 import { resolve } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 import { emoji } from './vite.emoji.mjs'
 import { viteSingleFile } from 'vite-plugin-singlefile'
-import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote } from './vite.config'
+import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote } from './vite.config.ts'
 
 // Posters, roll-up banners, tri-folds and long images: one offline HTML file per item.
 //   PRINT=apollo-poster npx vite build -c vite.print.config.ts   writes dist/print/apollo-poster.html

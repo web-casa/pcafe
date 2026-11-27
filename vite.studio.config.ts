@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 import { emoji } from './vite.emoji.mjs'
 import { viteSingleFile } from 'vite-plugin-singlefile'
-import { proVirtual } from './vite.pro'
-import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote, styleFonts } from './vite.config'
+import { proVirtual } from './vite.pro.ts'
+import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote, styleFonts } from './vite.config.ts'
 
 // Gallery build: `#/kit` at dist/studio.html, kept beside the deck output.
 // Keep every style font unpruned because the gallery switches across all styles.

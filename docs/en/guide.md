@@ -122,7 +122,7 @@ npx pcafe check q3-review
 ```
 
 1. The last line must be `PASS`. Fix every `FAIL` (see below). Also look at `WARN` lines such as "lower half looks empty".
-2. Open every `qa/slide-NN-1920x1080.png`: too much empty space, an overcrowded slide, no clear focus, one or two words alone on a line.
+2. Open every `qa/deck/<name>/slide-NN-1920x1080.png`: too much empty space, an overcrowded slide, no clear focus, one or two words alone on a line.
 3. Emphasis must match the text: if the slide says "longest", the longest bar is highlighted; if it says "we are at step 3", only three steps are filled.
 4. Read the `hint  copy.…` lines printed just before `PASS`. They flag stock phrases ("it's worth noting", "studies show", "未来可期") in your copy, with the file and line. They never fail a check: rewrite the phrase, or keep it if it is accurate in context. Vague attributions such as "studies show" need a named source in `source`. Rules exist for Chinese and English; `node scripts/copy-lint.mjs <path>` runs them on any file.
    Long decks (20+ slides) also get `hint  deck.…` structure lines: no agenda (`deck.no-agenda`), fewer than two section breaks (`deck.few-sections`), no closing slide (`deck.no-closing`), the same template four or more times in a row (`deck.repeat`, any length) and builds on more than a third of the slides (`deck.builds`). These never fail a check either.
@@ -177,7 +177,7 @@ Use them sparingly: one or two on a slide, in the place you want remembered, and
 
 ## Fixing QA errors
 
-QA checks every slide at 1920×1080, 1366×768, 2560×1440 and 1440×900. Details are in `qa/report.json`.
+QA checks every slide at 1920×1080 and 1366×768 (plus 2560×1440 and 1440×900 with `--full-engine`). Details are in `qa/deck/<name>/report.json`.
 
 While editing, `npx pcafe check <name> --slides 3,5` checks only those slides and prints which deck-wide sections it skipped. `--changed` checks only slides whose rendered content changed since the last passing run; if shared CSS, fonts, theme, style, slide order or count changed (or the cache is missing), it runs the full deck and says why. Both are partial checks: they print `run a full check before delivery`, and delivery still needs a full `npx pcafe check <name>`.
 

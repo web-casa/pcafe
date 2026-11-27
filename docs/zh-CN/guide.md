@@ -50,7 +50,7 @@ npx pcafe photos            # 下载可选的氛围照片（见第 15 节）
 4. **建 deck 文件**：`npx pcafe new <name>`，见 [第 4 节](#4-新建一份演示)。
 5. **填内容**：每填完一页，就对照 [components.md](components.md) 里该模板的“内容上限”自查一遍。
 6. **跑检查**：运行 `npx pcafe check <name>`。只要出现 FAIL 就一定要修，修法见第 8 节。
-7. **看一遍截图**：`qa/slide-NN-1920x1080.png` 是每页的截图。逐页确认没有空白过多、一页塞太满、重点不突出等问题。
+7. **看一遍截图**：`qa/deck/<name>/slide-NN-1920x1080.png` 是每页的截图。逐页确认没有空白过多、一页塞太满、重点不突出等问题。
 
 ---
 
@@ -351,7 +351,7 @@ export const deck: DeckDef = {
 
 ## 8. QA 报错怎么修
 
-`npx pcafe check` 的最后一步是自动 QA：在 1920×1080、1366×768、2560×1440、1440×900 四种窗口下逐页检查，截图存到 `qa/`，详细结果写入 `qa/report.json`。
+`npx pcafe check` 的最后一步是自动 QA：在 1920×1080、1366×768（加 `--full-engine` 时另含 2560×1440、1440×900）窗口下逐页检查，截图存到 `qa/deck/<name>/`，详细结果写入 `qa/deck/<name>/report.json`。
 
 ### 给脚本和 AI 用的报告
 

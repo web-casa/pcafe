@@ -1,11 +1,11 @@
 import { existsSync, realpathSync, renameSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
-import { deckStyle, filterStyleFonts } from './src/engine/style-fonts'
-import { deckOutline } from './src/engine/outline-plugin'
-import { createDeckSsrSession, type DeckSsrSession } from './src/engine/ssr-session'
+import { deckStyle, filterStyleFonts } from './src/engine/style-fonts.ts'
+import { deckOutline } from './src/engine/outline-plugin.ts'
+import { createDeckSsrSession, type DeckSsrSession } from './src/engine/ssr-session.ts'
 import { emoji } from './vite.emoji.mjs'
-import { proVirtual } from './vite.pro'
+import { proVirtual } from './vite.pro.ts'
 import { designUnit } from './vite.unit.mjs'
 import { viteSingleFile } from 'vite-plugin-singlefile'
 
@@ -37,7 +37,7 @@ export const forbidRemote = (): Plugin => ({
     for (const file of Object.values(bundle)) {
       // Links (<a href>, rel=canonical) point elsewhere but load nothing; only resources count.
       const text = (file.type === 'chunk' ? file.code : String(file.source)).replace(/<a\s[^>]*>|<link rel="canonical"[^>]*>/g, '')
-      const hit = text.match(/(?:src|href)=["']https?:\/\/|@import\s+url\(["']?https?:|fonts\.googleapis/)
+      const hit = text.match(/(?:src|href)=["']https?:\/\/|@import\s+url\(["']?https?:|url\(\s*["']?https?:\/\/|fonts\.googleapis/)
       if (hit) this.error(`${file.fileName} references a remote resource: ${hit[0]}`)
     }
   },
@@ -110,6 +110,8 @@ export default defineConfig(() => {
     optimizeDeps: engineOptimizeDeps,
     server: { fs: { allow: [...new Set([process.cwd(), proRoot, proRealRoot])] } },
     build: {
+      outDir: 'dist',
+      emptyOutDir: false,
       target: 'es2022',
       cssCodeSplit: false,
       assetsInlineLimit: () => true,

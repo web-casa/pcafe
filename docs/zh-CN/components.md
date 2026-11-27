@@ -3555,6 +3555,7 @@ import entryShot from './assets/shot-kit-entry.webp'
 | `kicker` | `string` | 是 | 小节名 |
 | `question` | `string \| string[]` | 是 | 问题 |
 | `sub` | `string` |  | 补充 |
+| `source` | `string` |  | 事实出处；页面上有任何数据或事实时必填 |
 
 **示例**
 
@@ -6238,11 +6239,9 @@ import entryShot from './assets/shot-kit-entry.webp'
 | 名称 | 类型 | 必填 | 说明 |
 | --- | --- | --- | --- |
 | `kicker` | `string` | 是 | 小节名，2–8 字 |
-| `title` | `string \| string[]` | 是 | 标题；数组手动断行 |
-| `lead` | `string` |  | 一两句导语，≤ 60 字 |
-| `source` | `string` |  | 事实出处 |
 | `index` | `number` | 是 | 章节编号 |
 | `title` | `string` | 是 | 彩带上的章节标题 |
+| `lead` | `string` |  | 一两句导语，≤ 60 字 |
 | `contents` | `string[]` | 是 | 本章各页标题 |
 
 **示例**
@@ -11378,9 +11377,9 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 - stops 2–4 个，at 按秒递增
 - title ≤ 8 字
 - body ≤ 30 字
-- 页标题 ≤ 22 字
+- 页标题建议单行 ≤ 15 字（两行标题时省略 lead）
 - lead ≤ 40 字
-- 视频建议 ≤ 15 秒、≤ 1 MB（先用 ffmpeg 截短压缩）
+- 视频建议 ≤ 15 秒、≤ 1 MB（先用 ffmpeg 截短压缩）；单文件总大小超过 20 MiB 会预警
 
 **交互**：按 → 播放到下一个停点，点击画面可重播当前段
 
@@ -11432,9 +11431,10 @@ EXPLAIN 风格的计划树，自上而下画节点和连线；可选在上方放
 
 **内容上限**（超出会破版，`npm run qa` 会报出来）
 
-- 页标题 ≤ 22 字
+- 页标题建议单行 ≤ 15 字（两行标题时省略 lead）
 - lead ≤ 40 字
 - caption ≤ 36 字
+- 单文件总大小超过 20 MiB 会预警，大视频建议先用 ffmpeg 压缩或用 pcafe push 托管流式播放
 
 **交互**：点击画面或底栏控制播放、拖动、倍速与全屏
 

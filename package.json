@@ -1,6 +1,6 @@
 {
   "name": "@pcafe/pcafe",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Fixed-template HTML slide decks for humans and AI: React templates, single-file offline build, automated layout QA.",
   "license": "CPAL-1.0",
   "type": "module",
@@ -100,7 +100,7 @@
     "docs:check": "node scripts/zh-tw.mjs --check",
     "fonts:verify": "node scripts/font-coverage.mjs",
     "check": "npm run typecheck && npm run build:deck && node scripts/qa.mjs",
-    "check:engine": "npm run docs:check && npm run typecheck && npm run build && node scripts/qa.mjs --full-engine && npm run qa:kit && npm run check:formats && npm run test:deck-video",
+    "check:engine": "npm run docs:check && npm run test:emoji && npm run typecheck && npm run build && node scripts/qa.mjs --full-engine && npx pcafe check motion && npm run qa:kit && npm run check:formats && npm run test:deck-video",
     "check:formats": "npx pcafe paper check report-solar && npx pcafe cards check solar-linkedin && npx pcafe video check solar-data && npx pcafe course check object-storage && npx pcafe screen check apollo11 && npx pcafe print check starter",
     "photos": "node scripts/fetch-photos.mjs",
     "test:style-fonts": "node scripts/style-fonts-test.mjs",

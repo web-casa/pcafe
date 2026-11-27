@@ -3556,6 +3556,7 @@ import entryShot from './assets/shot-kit-entry.webp'
 | `kicker` | `string` | 是 | 小節名 |
 | `question` | `string \| string[]` | 是 | 問題 |
 | `sub` | `string` |  | 補充 |
+| `source` | `string` |  | 事實出處；頁面上有任何資料或事即時必填 |
 
 **範例**
 
@@ -6239,11 +6240,9 @@ import entryShot from './assets/shot-kit-entry.webp'
 | 名稱 | 型別 | 必填 | 說明 |
 | --- | --- | --- | --- |
 | `kicker` | `string` | 是 | 小節名，2–8 字 |
-| `title` | `string \| string[]` | 是 | 標題；陣列手動斷行 |
-| `lead` | `string` |  | 一兩句導語，≤ 60 字 |
-| `source` | `string` |  | 事實出處 |
 | `index` | `number` | 是 | 章節編號 |
 | `title` | `string` | 是 | 綵帶上的章節標題 |
+| `lead` | `string` |  | 一兩句導語，≤ 60 字 |
 | `contents` | `string[]` | 是 | 本章各頁標題 |
 
 **範例**
@@ -11379,9 +11378,9 @@ EXPLAIN 風格的計畫樹，自上而下畫節點和連線；可選在上方放
 - stops 2–4 個，at 按秒遞增
 - title ≤ 8 字
 - body ≤ 30 字
-- 頁標題 ≤ 22 字
+- 頁標題建議單行 ≤ 15 字（兩行標題時省略 lead）
 - lead ≤ 40 字
-- 影片建議 ≤ 15 秒、≤ 1 MB（先用 ffmpeg 截短壓縮）
+- 影片建議 ≤ 15 秒、≤ 1 MB（先用 ffmpeg 截短壓縮）；單檔案總大小超過 20 MiB 會預警
 
 **互動**：按 → 播放到下一個停點，點選畫面可重播目前段
 
@@ -11433,9 +11432,10 @@ EXPLAIN 風格的計畫樹，自上而下畫節點和連線；可選在上方放
 
 **內容上限**（超出會破版，`npm run qa` 會報出來）
 
-- 頁標題 ≤ 22 字
+- 頁標題建議單行 ≤ 15 字（兩行標題時省略 lead）
 - lead ≤ 40 字
 - caption ≤ 36 字
+- 單檔案總大小超過 20 MiB 會預警，大影片建議先用 ffmpeg 壓縮或用 pcafe push 託管流式播放
 
 **互動**：點選畫面或底欄控制播放、拖動、倍速與全屏
 

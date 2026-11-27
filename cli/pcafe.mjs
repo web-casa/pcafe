@@ -7,16 +7,19 @@ import { homedir } from 'node:os'
 import { basename, dirname, join, relative, resolve } from 'node:path'
 import { createInterface } from 'node:readline/promises'
 import { fileURLToPath, pathToFileURL } from 'node:url'
-import { findLiveLicence, safeWalkFiles } from '../scripts/licence-util.mjs'
+import { computeDeckBuildInputHash } from '../scripts/licence-util.mjs'
 
 const PKG_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const NAME_RE = /^[a-z0-9][a-z0-9-]*$/
+const LARGE_BUNDLE_BYTES = 20 * 1024 * 1024
 
 // A new project must not inherit secrets, build output, VCS metadata, or local settings.
 const INIT_EXCLUDES = [
   /(^|\/)\.env(?:\.|$)/,
   /(^|\/)\.dev\.vars(?:\.|$)/,
   /(^|\/)\.npmrc$/,
+  /(^|\/)pcafe-licence\.json$/,
+  /(^|\/)credentials\.json$/,
   /\.pem$/i,
   /\.key$/i,
   /(^|\/)(?:node_modules|dist|qa|\.git)$/,
@@ -55,9 +58,9 @@ Usage:
   pcafe status [format] <name> [--json]
                              What to do next, from the last check: run it, fix the
                              listed issues, or look at the screenshots
-  pcafe build <name> [--force]
-                             Build dist/<name>.html (single offline file); reuses an
-                             up-to-date verified deck build unless --force is passed
+  pcafe build <name> [--force] [--out-dir <dir>]
+                             Build <out-dir>/<name>.html (default dist/, single offline file);
+                             preserves other built decks and reuses an up-to-date build unless --force
   pcafe spec <TemplateName...> [--json]
   pcafe spec --search <query> [--json]
                              Look up template props, limits, import path and examples
@@ -99,7 +102,8 @@ Usage:
              [--watermark] [--download]
                              Push a built deck to Enterprise Vault (or publish a new version)
                              and optionally print a controlled share.p.cafe link
-  pcafe help             Show this help
+  pcafe --version | -v   Print the installed pcafe version
+  pcafe help             Show this help (use <command> --help for details)
 
 Deck names: lowercase letters, digits and dashes.`
 
@@ -188,7 +192,7 @@ async function checked(root, format, name, flags, steps) {
   let checkedSlides
   let grids = []
   if (format === 'deck') {
-    const qaFile = join(root, 'qa', 'report.json')
+    const qaFile = join(root, 'qa', 'deck', name, 'report.json')
     if (existsSync(qaFile) && statSync(qaFile).mtimeMs >= startedAt) {
       try {
         const qa = JSON.parse(readFileSync(qaFile, 'utf8'))
@@ -205,6 +209,7 @@ async function checked(root, format, name, flags, steps) {
     ok: code === 0,
     startedAt,
     finishedAt: Date.now(),
+    ...(format === 'deck' ? { inputHash: computeDeckBuildInputHash(root, name) } : {}),
     issues,
     screenshots: shots,
     ...(grids.length && !partial ? { grids } : {}),
@@ -225,37 +230,25 @@ async function checked(root, format, name, flags, steps) {
 
 const sha = (buf) => createHash('sha256').update(buf).digest('hex')
 
-/** Strict input fingerprint for deck HTML build reuse: covers all src (except active.ts), config, lockfiles, full Pro dist realpath, live licence & env. */
-function computeDeckBuildInputHash(root, name) {
-  const files = safeWalkFiles(join(root, 'src')).filter((f) => basename(f) !== 'active.ts')
-  for (const rel of [
-    'presentation.html', 'index.html', 'vite.config.ts', 'vite.emoji.mjs', 'vite.pro.ts',
-    'vite.licence.ts', 'vite.unit.mjs', 'tsconfig.json', 'package.json', 'package-lock.json', 'pnpm-lock.yaml',
-  ]) {
-    const f = join(root, rel)
-    if (existsSync(f)) files.push(f)
-  }
-  const unique = [...new Set(files)].sort()
-  const parts = [`deck=${name}`, ...unique.map((f) => `${relative(root, f)}=${sha(readFileSync(f))}`)]
-  const proLink = join(root, 'node_modules', '@pcafe', 'pro')
-  if (existsSync(proLink)) {
-    const proReal = realpathSync(proLink)
-    const pkgFile = join(proReal, 'package.json')
-    if (existsSync(pkgFile)) parts.push(`@pcafe/pro/package.json=${sha(readFileSync(pkgFile))}`)
-    for (const f of safeWalkFiles(join(proReal, 'dist'), { skipDirs: new Set() }).sort()) {
-      parts.push(`@pcafe/pro/${relative(proReal, f)}=${sha(readFileSync(f))}`)
-    }
-  } else {
-    parts.push('@pcafe/pro=none')
-  }
-  parts.push(`licence=${findLiveLicence(root).stateKey}`)
-  const envKeys = ['NODE_ENV', 'PCAFE_LICENCE', 'HOME', ...Object.keys(process.env).filter((k) => k.startsWith('VITE_')).sort()]
-  for (const k of envKeys) parts.push(`env:${k}=${process.env[k] ?? ''}`)
-  return sha(parts.join('\n'))
-}
-
 function buildMetaFile(root) {
   return join(root, 'dist', '.pcafe-build-meta.json')
+}
+
+function clearBuildMeta(root) {
+  rmSync(buildMetaFile(root), { force: true })
+  rmSync(join(root, 'dist', 'presentation.html'), { force: true })
+}
+
+function warnIfLargeBundle(file, name) {
+  if (!existsSync(file)) return
+  const bytes = statSync(file).size
+  if (bytes <= LARGE_BUNDLE_BYTES) return
+  const mib = (bytes / 1024 / 1024).toFixed(1)
+  console.warn(
+    `warning: bundle is ${mib} MiB (> 20 MiB): embedded media inflates single-file HTML by ~33%. ` +
+      `For offline single-file delivery, compress video with ffmpeg (e.g. 720p CRF 28); ` +
+      `for large media with HTTP Range streaming, publish to Enterprise Vault via \`npx pcafe push ${name}\`.`,
+  )
 }
 
 function recordDeckBuildMeta(root, name, expectedInputHash) {
@@ -473,6 +466,7 @@ const commands = {
     return checked(root, 'deck', name, flags, () =>
       withDeck(root, name, async () => {
         const preHash = isPartialRequest ? null : computeDeckBuildInputHash(root, name)
+        clearBuildMeta(root)
         const code = await runKept('npm', ['run', 'check', ...(qaFlags.length ? ['--', ...qaFlags] : [])], root, env)
         // Record reusable build metadata only for full builds (with outline) whose inputs did not change mid-run.
         if (code === 0 && !isPartialRequest) recordDeckBuildMeta(root, name, preHash)
@@ -489,7 +483,10 @@ const commands = {
     if (!name || !lib.FORMATS[format]) fail('usage: pcafe status [deck|paper|cards|video|course|screen|print] <name> [--json]')
     if (!existsSync(join(root, 'src', lib.FORMATS[format].dir, name, 'index.tsx'))) fail(`${format} "${name}" not found (expected src/${lib.FORMATS[format].dir}/${name}/index.tsx).`)
     const file = join(root, 'qa', 'reports', `${format}-${name}.json`)
-    const report = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : null
+    let report = null
+    if (existsSync(file)) {
+      try { report = JSON.parse(readFileSync(file, 'utf8')) } catch { report = null }
+    }
     const next = lib.nextStep(root, format, name, report)
     if (flags.includes('--json')) { console.log(JSON.stringify({ format, name, last: report && { ok: report.ok, finishedAt: new Date(report.finishedAt).toISOString(), issues: report.issues.length }, next }, null, 2)); return 0 }
     console.log(`${format} ${name}: ${report ? `last check ${report.ok ? 'PASS' : 'FAIL'} at ${new Date(report.finishedAt).toLocaleString()}` : 'never checked'}`)
@@ -500,7 +497,8 @@ const commands = {
     }
     if (next.action === 'review') {
       if (next.grids?.length) {
-        console.log(`next: look at qa/contact-sheet.png and ${next.grids.length} review grids (2x2), then open full-size slides for any WARN or edited pages`)
+        const contact = format === 'deck' ? `qa/deck/${name}/contact-sheet.png` : 'qa/contact-sheet.png'
+        console.log(`next: look at ${contact} and ${next.grids.length} review grids (2x2), then open full-size slides for any WARN or edited pages`)
         next.grids.forEach((p) => console.log(`  ${p}`))
       } else {
         console.log(`next: look at ${next.screenshots.length} screenshots, then show the user`)
@@ -515,26 +513,53 @@ const commands = {
     const root = projectRoot()
     deckName(name, root)
     needDeps(root)
-    for (const f of flags) {
-      if (f !== '--force' && f !== '--no-cache') {
+    let force = false
+    let outDirArg = null
+    for (let i = 0; i < flags.length; i++) {
+      const f = flags[i]
+      if (f === '--force' || f === '--no-cache') {
+        force = true
+      } else if (f === '--out-dir') {
+        const val = flags[i + 1]
+        if (!val || val.startsWith('-')) {
+          console.error('pcafe build: --out-dir requires a directory path, e.g. --out-dir out')
+          return 2
+        }
+        outDirArg = val
+        i++
+      } else if (f.startsWith('--out-dir=')) {
+        const val = f.slice('--out-dir='.length)
+        if (!val || val.startsWith('-')) {
+          console.error('pcafe build: --out-dir requires a directory path, e.g. --out-dir=out')
+          return 2
+        }
+        outDirArg = val
+      } else {
         console.error(`pcafe build: unknown option "${f}"`)
         return 2
       }
     }
-    const force = flags.includes('--force') || flags.includes('--no-cache')
-    const out = join(root, 'dist', `${name}.html`)
+    const outDir = outDirArg ? resolve(process.cwd(), outDirArg) : join(root, 'dist')
+    const out = join(outDir, `${name}.html`)
+    const indexHtml = join(root, 'dist', 'index.html')
+    const writeDeliverable = () => {
+      mkdirSync(outDir, { recursive: true })
+      if (resolve(out) !== resolve(indexHtml)) copyFileSync(indexHtml, out)
+      warnIfLargeBundle(out, name)
+    }
     return withDeck(root, name, () => {
       if (!force && canReuseDeckBuild(root, name)) {
-        copyFileSync(join(root, 'dist', 'index.html'), out)
-        console.log(`wrote ${relative(root, out)} (reused up-to-date build)`)
+        writeDeliverable()
+        console.log(`wrote ${relative(process.cwd(), out) || out} (reused up-to-date build)`)
         return 0
       }
       const preHash = computeDeckBuildInputHash(root, name)
+      clearBuildMeta(root)
       const code = run('npm', ['run', 'build:deck'], root, { PCAFE_DECK_NAME: name, PCAFE_SKIP_OUTLINE: '' })
       if (code !== 0) { console.error('build failed.'); return code }
       recordDeckBuildMeta(root, name, preHash)
-      copyFileSync(join(root, 'dist', 'index.html'), out)
-      console.log(`wrote ${relative(root, out)}`)
+      writeDeliverable()
+      console.log(`wrote ${relative(process.cwd(), out) || out}`)
       return 0
     })
   },
@@ -935,12 +960,88 @@ async function runFormat(kind, action, name, ...flags) {
     (await runKept('npm', ['run', 'typecheck'], root)) || (await format.build(root, name)) || format.qa(root, name))
 }
 
+const VALUE_FLAGS = new Set([
+  '--slides', '--out-dir', '--out', '--tts', '--voice', '--model', '--rate',
+  '--slide-duration', '--transition', '--host', '--org', '--folder', '--deck-id',
+  '--title', '--note', '--expected-version', '--search',
+])
+
+function wantsHelp(args) {
+  for (let i = 0; i < args.length; i++) {
+    const a = args[i]
+    if (a === '--') return false
+    if (a === '-h' || a === '--help') return true
+    if (VALUE_FLAGS.has(a)) i++
+  }
+  return false
+}
+
+const COMMAND_HELP = {
+  init: 'Usage: pcafe init <dir>\n\nCopy the PCafe project template into a new empty directory.',
+  new: 'Usage: pcafe new <name> [--modular]\n\nCreate src/decks/<name>/ from the starter deck (--modular splits slides into slides/).',
+  dev: 'Usage: pcafe dev [name]\n\nStart the Vite dev server (opens /?deck=<name> when a deck name is given).',
+  check: 'Usage: pcafe check <name> [--slides 3,5] [--changed] [--full-engine] [--explain] [--json]\n\nRun typecheck, deck build, and automated QA. Screenshots are saved to qa/deck/<name>/.',
+  status: 'Usage: pcafe status [deck|paper|cards|video|course|screen|print] <name> [--json]\n\nShow the last check state and the next recommended step.',
+  build: 'Usage: pcafe build <name> [--force] [--out-dir <dir>]\n\nBuild <out-dir>/<name>.html (default dist/) as a single offline HTML file without deleting other decks.',
+  spec: 'Usage:\n  pcafe spec <TemplateName...> [--json]\n  pcafe spec --search <query> [--json]\n\nLook up template props, limits, import path and examples offline.',
+  pptx: 'Usage: pcafe pptx <name>\n\nExport dist/<name>.pptx with editable text boxes over slide backgrounds and speaker notes.',
+  'export-video': 'Usage: pcafe export-video <name|file.html> [--tts openai|edge|none] [--voice <name>] [--model <tts-1>] [--rate <1.0>] [--slide-duration <sec>] [--transition fade|none] [--subtitles] [--out <path.mp4>]\n\nExport a slide deck as a narrated 1080p MP4 + SRT (PCafe Pro / Founder).',
+  docs: 'Usage: pcafe docs\n\nRegenerate docs/*/components.md and skill lookup tables from src/kit/catalog.ts.',
+  photos: 'Usage: pcafe photos [cat:n ...]\n\nDownload optional Unsplash mood photos into src/assets/photos/ (requires UNSPLASH_ACCESS_KEY).',
+  login: 'Usage: pcafe login [--host https://app.p.cafe] [--token-stdin]\n\nSave an Enterprise Vault token (pcev_*) in ~/.config/pcafe/credentials.json.',
+  push: 'Usage: pcafe push <name|file.html> [--org <slug>] [--folder <name>] [--deck-id <id>] [--note <text>] [--expected-version <n>] [--share] [--password-stdin] [--watermark] [--download]\n\nPush a built deck to Enterprise Vault and optionally create a share.p.cafe link.',
+  paper: 'Usage: pcafe paper <new|dev|check|build> <name> [--resume]\n\nCreate, preview, QA-check, or build reports and résumés under src/papers/<name>/.',
+  cards: 'Usage: pcafe cards <new|dev|check|build> <name>\n\nCreate, preview, QA-check, or export social cards and carousels.',
+  video: 'Usage: pcafe video <new|dev|check|build> <name>\n\nCreate, preview, QA-check, or render animated MP4 videos.',
+  course: 'Usage: pcafe course <new|dev|check|build> <name>\n\nCreate, preview, QA-check, or build interactive single-file courseware.',
+  screen: 'Usage: pcafe screen <new|dev|check|build> <name>\n\nCreate, preview, QA-check, or build looping display screens.',
+  print: 'Usage: pcafe print <new|dev|check|build> <name>\n\nCreate, preview, QA-check, or build posters, roll-ups, tri-folds, and long infographics.',
+}
+
+const FORMAT_CMDS = new Set(['paper', 'cards', 'video', 'course', 'screen', 'print'])
+const FORMAT_ACTIONS = new Set(['new', 'dev', 'check', 'build'])
+
+function formatActionHelp(fmt, action) {
+  const extra = fmt === 'paper' && action === 'new' ? ' [--resume]' : action === 'check' ? ' [--json]' : ''
+  const desc = {
+    new: `Create a new ${fmt} project under src/${fmt === 'cards' ? 'cardsets' : `${fmt}s`}/<name>/.`,
+    dev: `Preview ${fmt} <name> in the local Vite dev server.`,
+    check: `Run typecheck, build, and automated QA for ${fmt} <name>.`,
+    build: `Build final deliverables for ${fmt} <name>.`,
+  }[action]
+  return `Usage: pcafe ${fmt} ${action} <name>${extra}\n\n${desc}`
+}
+
+function printVersion(...args) {
+  if (args.length) {
+    console.error(`pcafe: --version takes no arguments (got "${args[0]}")`)
+    return 2
+  }
+  const version = JSON.parse(readFileSync(join(PKG_ROOT, 'package.json'), 'utf8')).version
+  console.log(`pcafe ${version}`)
+  return 0
+}
+
 const [cmd = 'help', ...rest] = process.argv.slice(2)
-const alias = { '-h': 'help', '--help': 'help' }
-const fn = commands[alias[cmd] ?? cmd]
+const alias = { '-h': 'help', '--help': 'help', '-v': 'version', '--version': 'version' }
+const resolvedCmd = alias[cmd] ?? cmd
+if (resolvedCmd === 'version') {
+  process.exit(printVersion(...rest))
+}
+const fn = commands[resolvedCmd]
 if (!fn) {
   console.error(`pcafe: unknown command "${cmd}"\n\n${HELP}`)
   process.exit(2)
+}
+if (resolvedCmd !== 'help' && wantsHelp(rest)) {
+  if (FORMAT_CMDS.has(resolvedCmd) && rest[0] && FORMAT_ACTIONS.has(rest[0])) {
+    console.log(formatActionHelp(resolvedCmd, rest[0]))
+  } else if (COMMAND_HELP[resolvedCmd]) {
+    console.log(COMMAND_HELP[resolvedCmd])
+  } else {
+    console.log(HELP)
+  }
+  process.exit(0)
 }
 try {
   process.exit(await fn(...rest))

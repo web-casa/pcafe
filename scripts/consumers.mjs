@@ -88,6 +88,8 @@ function auditTarball(meta) {
     [/(^|\/)PHASE\d*-.*REPORT\.md$/i, 'PHASE report'],
     [/(^|\/)\.env(?:\.|$)/, '.env'],
     [/(^|\/)\.npmrc$/, '.npmrc'],
+    [/(^|\/)pcafe-licence\.json$/, 'pcafe-licence.json'],
+    [/(^|\/)credentials\.json$/, 'credentials.json'],
     [/(^|\/)\.check-cache\.json$/, '.check-cache.json'],
     [/@pcafe\/pro/, '@pcafe/pro'],
   ]
@@ -222,13 +224,44 @@ async function caseInit(unpacked) {
   const name = 'init'
   const project = join(CASES, 'init')
   initProject(unpacked, project, name)
+  // Verify oil-tone replaced qu-ai-wei cleanly in packed/init output.
+  for (const rel of [
+    'skills/oil-tone/SKILL.md',
+    'skills/oil-tone/LICENSE',
+    'skills/oil-tone/agents/openai.yaml',
+    'skills/oil-tone/scripts/tone_lint.py',
+    '.claude/skills/oil-tone/SKILL.md',
+  ]) {
+    if (!existsSync(join(project, rel))) throw new Error(`missing bundled skill file: ${rel}`)
+  }
+  if (existsSync(join(project, 'skills', 'qu-ai-wei')) || existsSync(join(project, '.claude', 'skills', 'qu-ai-wei'))) {
+    throw new Error('legacy qu-ai-wei skill still present in init project')
+  }
   installProject(project, name)
+  // Verify CLI --version and subcommand --help work cleanly.
+  const ver = sh('npx', ['--no-install', 'pcafe', '--version'], { cwd: project, label: `${name}-version` })
+  if (!/^pcafe \d+\.\d+\.\d+/.test(ver.stdout.trim())) throw new Error(`unexpected --version output: ${ver.stdout}`)
+  const buildHelp = sh('npx', ['--no-install', 'pcafe', 'build', '--help'], { cwd: project, label: `${name}-build-help` })
+  if (!/Usage: pcafe build/.test(buildHelp.stdout)) throw new Error('pcafe build --help did not print build usage')
   sh(npm, ['run', 'build'], { cwd: project, label: `${name}-build` })
   await assertCredit(join(project, 'dist', 'index.html'), true)
+  // Verify multi-deck build preserves sibling outputs and supports --out-dir.
+  sh('npx', ['--no-install', 'pcafe', 'build', 'starter'], { cwd: project, label: `${name}-build-starter` })
+  sh('npx', ['--no-install', 'pcafe', 'build', 'launch'], { cwd: project, label: `${name}-build-launch` })
+  if (!existsSync(join(project, 'dist', 'starter.html')) || !existsSync(join(project, 'dist', 'launch.html'))) {
+    throw new Error('sequential pcafe build wiped previous deck HTML in dist/')
+  }
+  sh('npx', ['--no-install', 'pcafe', 'build', 'starter', '--out-dir', 'deliverables'], { cwd: project, label: `${name}-build-outdir` })
+  if (!existsSync(join(project, 'deliverables', 'starter.html'))) {
+    throw new Error('pcafe build --out-dir did not write deliverables/starter.html')
+  }
   sh(npm, ['run', 'check'], { cwd: project, label: `${name}-check` })
+  if (!existsSync(join(project, 'qa', 'deck', 'launch', 'report.json'))) {
+    throw new Error('pcafe check did not write qa/deck/launch/report.json')
+  }
   const explain = sh('npx', ['--no-install', 'pcafe', 'check', 'launch', '--changed', '--explain'], { cwd: project, label: `${name}-explain` })
   if (!/no slides would run/.test(explain.stdout)) throw new Error('explain did not report no slides would run')
-  return 'build/check PASS; explain says no slides would run'
+  return 'oil-tone/CLI/multi-deck build/qa isolation/explain PASS'
 }
 
 async function caseVite() {

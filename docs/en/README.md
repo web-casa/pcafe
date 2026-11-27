@@ -41,7 +41,7 @@ npx pcafe check my-deck     # type check → build → QA
 npx pcafe build my-deck     # dist/my-deck.html
 ```
 
-`check` ends with `PASS` or `FAIL (n)`. A deck is done only when it prints `PASS` **and** you have looked at every `qa/slide-NN-1920x1080.png`. To fix failures, see [guide.md › Fixing QA errors](guide.md#fixing-qa-errors).
+`check` ends with `PASS` or `FAIL (n)`. A deck is done only when it prints `PASS` **and** you have looked at every `qa/deck/<name>/slide-NN-1920x1080.png`. To fix failures, see [guide.md › Fixing QA errors](guide.md#fixing-qa-errors).
 
 The built file is a single offline HTML page. Send it to anyone; it opens in a browser with no network access.
 

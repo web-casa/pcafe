@@ -56,7 +56,7 @@ npx pcafe check q3-review   # 型別檢查 + 建置 + 自動 QA，最後一行�
 npx pcafe build q3-review   # 產生 dist/q3-review.html，單檔案，可以直接發給別人
 ```
 
-`check` 輸出 `FAIL` 時按 [guide.md 第 8 節](guide.md#qa-fixes) 修復。每頁截圖在 `qa/slide-NN-1920x1080.png`，逐頁看過才算完成。
+`check` 輸出 `FAIL` 時按 [guide.md 第 8 節](guide.md#qa-fixes) 修復。每頁截圖在 `qa/deck/<name>/slide-NN-1920x1080.png`，逐頁看過才算完成。
 
 開發預覽裡開啟 `#/kit` 可以瀏覽全部範本、風格樣張和圖示。
 

@@ -5599,6 +5599,12 @@
         "type": "string",
         "note": "补充",
         "noteEn": "Sub line"
+      },
+      {
+        "name": "source",
+        "type": "string",
+        "note": "事实出处；页面上有任何数据或事实时必填",
+        "noteEn": "Source for the facts; required when the slide contains data or claims"
       }
     ],
     "example": "<Question kicker=\"为什么不现场设计\" question={['为什么不让 AI', '每次现场设计？']} sub=\"现场设计上限高，但每次结果不同。\" />"
@@ -10698,25 +10704,6 @@
         "noteEn": "Section label, 2–8 chars"
       },
       {
-        "name": "title",
-        "type": "string | string[]",
-        "required": true,
-        "note": "标题；数组手动断行",
-        "noteEn": "Chapter title on the ribbon; the slide title also accepts an array to break lines"
-      },
-      {
-        "name": "lead",
-        "type": "string",
-        "note": "一两句导语，≤ 60 字",
-        "noteEn": "One or two lead sentences, ≤ 60 chars"
-      },
-      {
-        "name": "source",
-        "type": "string",
-        "note": "事实出处",
-        "noteEn": "Source for the facts"
-      },
-      {
         "name": "index",
         "type": "number",
         "required": true,
@@ -10728,7 +10715,13 @@
         "type": "string",
         "required": true,
         "note": "彩带上的章节标题",
-        "noteEn": "Chapter title on the ribbon; the slide title also accepts an array to break lines"
+        "noteEn": "Chapter title on the ribbon"
+      },
+      {
+        "name": "lead",
+        "type": "string",
+        "note": "一两句导语，≤ 60 字",
+        "noteEn": "One or two lead sentences, ≤ 60 chars"
       },
       {
         "name": "contents",
@@ -21380,17 +21373,17 @@
       "stops 2–4 个，at 按秒递增",
       "title ≤ 8 字",
       "body ≤ 30 字",
-      "页标题 ≤ 22 字",
+      "页标题建议单行 ≤ 15 字（两行标题时省略 lead）",
       "lead ≤ 40 字",
-      "视频建议 ≤ 15 秒、≤ 1 MB（先用 ffmpeg 截短压缩）"
+      "视频建议 ≤ 15 秒、≤ 1 MB（先用 ffmpeg 截短压缩）；单文件总大小超过 20 MiB 会预警"
     ],
     "limitsEn": [
       "stops 2–4, at increases in seconds",
       "title ≤ 8 chars",
       "body ≤ 30 chars",
-      "slide title ≤ 22 chars",
+      "slide title ideally 1 line ≤ 15 chars (omit lead if 2 lines)",
       "lead ≤ 40 chars",
-      "video ideally ≤ 15 s and ≤ 1 MB (trim and compress with ffmpeg first)"
+      "video ideally ≤ 15 s and ≤ 1 MB (trim and compress with ffmpeg first); bundles over 20 MiB trigger a size warning"
     ],
     "interaction": "按 → 播放到下一个停点，点击画面可重播当前段",
     "interactionEn": "Press → play to the next stop; click video to replay current segment",
@@ -21498,14 +21491,16 @@
       "Large multi-minute videos in offline single-file HTML (compress with ffmpeg or stream via Enterprise Vault)"
     ],
     "limits": [
-      "页标题 ≤ 22 字",
+      "页标题建议单行 ≤ 15 字（两行标题时省略 lead）",
       "lead ≤ 40 字",
-      "caption ≤ 36 字"
+      "caption ≤ 36 字",
+      "单文件总大小超过 20 MiB 会预警，大视频建议先用 ffmpeg 压缩或用 pcafe push 托管流式播放"
     ],
     "limitsEn": [
-      "slide title ≤ 22 chars",
+      "slide title ideally 1 line ≤ 15 chars (omit lead if 2 lines)",
       "lead ≤ 40 chars",
-      "caption ≤ 36 chars"
+      "caption ≤ 36 chars",
+      "bundles over 20 MiB trigger a size warning; compress with ffmpeg or publish via pcafe push for streaming"
     ],
     "interaction": "点击画面或底栏控制播放、拖动、倍速与全屏",
     "interactionEn": "Click frame or control bar to play/pause, scrub, adjust speed, or go fullscreen",

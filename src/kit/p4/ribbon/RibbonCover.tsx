@@ -8,13 +8,19 @@ export interface RibbonCoverProps extends SlideBase {
   band2?: string
 }
 
-const REPEAT = 8
+function repeatCount(text: string): number {
+  let weight = 0
+  for (const ch of text) weight += ch.charCodeAt(0) > 127 ? 2 : 1
+  return Math.max(4, Math.min(10, Math.ceil(56 / Math.max(4, weight + 3))))
+}
 
 function Band({ text, className }: { text: string; className: string }) {
+  if (!text.trim()) return null
+  const count = repeatCount(text)
   return (
-    <div className={className}>
+    <div className={className} data-crop>
       <span>
-        {Array.from({ length: REPEAT }, (_, i) => (
+        {Array.from({ length: count }, (_, i) => (
           <em key={i}>{text}</em>
         ))}
       </span>

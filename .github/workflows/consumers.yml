@@ -2,6 +2,14 @@ name: consumers
 
 on:
   push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: consumers-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   consumers:
@@ -18,6 +26,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install chromium --with-deps
-      - run: npm run build
+      - run: npm run check:engine
       - run: npm run test:consumers
       - run: npm run lint:package

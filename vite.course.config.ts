@@ -1,10 +1,10 @@
-import { proVirtual } from './vite.pro'
+import { proVirtual } from './vite.pro.ts'
 import { renameSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 import { emoji } from './vite.emoji.mjs'
 import { viteSingleFile } from 'vite-plugin-singlefile'
-import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote } from './vite.config'
+import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote } from './vite.config.ts'
 
 // Interactive lessons: one offline HTML file, like a deck.
 // COURSE=<folder> builds src/courses/<folder> to dist/course/<folder>.html without touching active.ts.

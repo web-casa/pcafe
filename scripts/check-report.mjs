@@ -5,10 +5,11 @@
 //   node scripts/check-report.mjs --self-test   every known QA message must get a specific code
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
+import { computeDeckBuildInputHash } from './licence-util.mjs'
 
 /** Where each format keeps its sources and the images a person must look at. */
 export const FORMATS = {
-  deck: { dir: 'decks', report: () => 'qa/report.json', shots: (n) => [['qa', /^slide-\d+-1920x1080\.png$/]] },
+  deck: { dir: 'decks', report: (n) => `qa/deck/${n}/report.json`, shots: (n) => [[`qa/deck/${n}`, /^slide-\d+-1920x1080\.png$/]] },
   paper: { dir: 'papers', report: (n) => `qa/${n}/report.json`, shots: (n) => [[`qa/${n}`, /^page-\d+\.png$/]] },
   cards: { dir: 'cardsets', report: (n) => `qa/cards/${n}/report.json`, shots: (n) => [[`dist/cards/${n}`, /\.png$/], [`qa/cards/${n}`, /^feed-.*\.png$/]] },
   video: { dir: 'videos', report: () => null, shots: (n) => [[`qa/video/${n}`, /^contact\.png$/]] },
@@ -24,7 +25,7 @@ export const FORMATS = {
 const CODES = [
   ['setup.missing', /no file at|run video-render first|poppler|not found: .*Install|could not write|was not written|not in the QA table|not found in its template|asked for and not written/i],
   ['security.secret', /looks like a key|run as a script/i],
-  ['size.file', /MB is too big|too big for one file/i],
+  ['size.file', /MB is too big|too big for one file|bundle is .* Mi?B/i],
   ['fonts.fallback', /fell back|system font|font .* not loaded|not embedded|glyphs? fell/i],
   ['offline.external-request', /network request|external request|remote (?:file|resource)|left the single file|request left/i],
   ['runtime.console-error', /console error|page error|QA stopped at line|async error was not/i],
@@ -40,18 +41,18 @@ const CODES = [
   ['text.unsettled', /still changing|frozen for|is frozen|ignores reduced motion|did not settle/i],
   ['layout.sideways-scroll', /scrolls sideways|wider than the screen|page scrolls by/i],
   ['layout.stage', /stage ratio/i],
+  ['print.geometry', /BleedBox|TrimBox|PDF page .* mm|mm, it must|fold|panel/i],
   ['layout.safe-area', /safe area|safe zone|outside the sa|falls outside|outside the sheet|leaves the stage|off screen|off the (?:screen|trim)|outside the trim|hidden (?:area|bottom)|behind the top bar|closer than .* to the side|past the live area|too wide\.|bleed/i],
   ['layout.overlap', /collision|overlap|runs into|touches|on top of|text crosses/i],
   ['layout.overflow', /clips content|clipped|cut off by its box|overflow|too tall|wider than the column|below the text area|does not fit|leaves its card|cut content/i],
   ['layout.widow', /left alone|alone at the foot|single word|orphan/i],
-  ['layout.empty', /empty sheet|did not render|nothing rendered|no sheets|no scenes|blank page|blank picture|frame is blank|lower half looks empty|rendered empty/i],
+  ['layout.empty', /empty sheet|did not render|nothing rendered|no sheets|no scenes|blank page|blank picture|frame is blank|lower (?:half|part) looks empty|rendered empty/i],
   ['interaction.detail', /did not return to its slot|card did not open|previews mounted|detail /i],
   ['a11y.target-size', /24×24|target under/i],
   ['a11y.focus', /focus|Tab key|arrow keys|cursor is visible/i],
   ['a11y.label', /WCAG|no name|status region|no text label|h1 headings/i],
   ['nav.keys', /navigation|keyboard|ArrowRight|Escape|Esc |Enter |overview|controls:|deep link|drawer|walk-through|did not advance|did not pause|does not open|contents link/i],
   ['build.reveal', /builds?:|build groups|build items|steps for/i],
-  ['print.geometry', /BleedBox|TrimBox|PDF page .* mm|mm, it must|fold|panel/i],
   ['print.raster', /ppi|raster/i],
   ['pdf.pages', /PDF has \S+ pages|pages, the limit|has \S+ pages|pages, expected/i],
   ['pdf.text', /PDF text|cannot be extracted|heading missing from PDF|outlined/i],
@@ -165,7 +166,13 @@ export function nextStep(root, format, name, report) {
   const rerun = command(format, name)
   const src = sourceTime(root, format, name)
   if (!report) return { action: 'run_check', command: rerun, reason: 'no check has run yet' }
-  if (src > report.finishedAt) return { action: 'run_check', command: rerun, reason: 'sources changed after the last check' }
+  if (format === 'deck' && report.inputHash) {
+    if (computeDeckBuildInputHash(root, name) !== report.inputHash) {
+      return { action: 'run_check', command: rerun, reason: 'sources, styles or assets changed after the last check' }
+    }
+  } else if (src > report.finishedAt) {
+    return { action: 'run_check', command: rerun, reason: 'sources changed after the last check' }
+  }
   if (!report.ok) {
     const fails = report.issues.filter((i) => i.level === 'fail')
     const byCode = {}
@@ -180,13 +187,17 @@ export function nextStep(root, format, name, report) {
       checkedScreenshots: report.screenshots,
     }
   }
+  if (format === 'deck' && Array.isArray(report.screenshots) && report.screenshots.length > 0 && !existsSync(join(root, report.screenshots[0]))) {
+    return { action: 'run_check', command: rerun, reason: 'cached screenshots are missing or moved to qa/deck/<name>/; run a fresh check' }
+  }
+  const qaDir = format === 'deck' ? `qa/deck/${name}` : 'qa'
   return {
     action: 'review',
     screenshots: report.screenshots,
     ...(report.grids?.length ? { grids: report.grids } : {}),
     hints: report.issues.filter((i) => i.level !== 'fail'),
     then: report.grids?.length
-      ? 'Look at qa/contact-sheet.png and every qa/grid-NN.png (2x2 high-res review grid); open full-size qa/slide-NN-1920x1080.png for any slide with WARN, complex graphics, or edits.'
+      ? `Look at ${qaDir}/contact-sheet.png and every ${qaDir}/grid-NN.png (2x2 high-res review grid); open full-size ${qaDir}/slide-NN-1920x1080.png for any slide with WARN, complex graphics, or edits.`
       : 'Look at every screenshot at full size. Fix what reads badly, then show the result to the user; the user decides when it is done.',
   }
 }
@@ -209,11 +220,11 @@ function selfTest() {
       if (codeFor(formatOf[f], msg).endsWith('.other')) other.push(`${f}: ${msg.slice(0, 90)}`)
     }
   }
-  const sample = parseOutput('deck', 'Errors  Files\nsrc/decks/a/index.tsx:3:5 - error TS2322: Type x\nFAIL (2)\n- deck slide 4: font 12.0u too small: "x"\n- external requests https://x\nhint  copy.zh.filler  src/decks/a/index.tsx:9  "值得注意的是"\nPASS', '/nonexistent', 'a', 0)
-  const want = ['typecheck.TS2322', 'text.too-small', 'offline.external-request', 'copy.zh.filler']
+  const sample = parseOutput('deck', 'Errors  Files\nsrc/decks/a/index.tsx:3:5 - error TS2322: Type x\nFAIL (2)\n- deck slide 4: font 12.0u too small: "x"\n- external requests https://x\nWARN (2)\n- slide 3: content ends at y=600 of 1080, the lower part looks empty (add an optional block or more items, see docs/zh-CN/README.md §8)\n- bundle is 24.5 MiB (> 20 MiB): embedded media inflates single-file HTML by ~33%.\nhint  copy.zh.filler  src/decks/a/index.tsx:9  "值得注意的是"\nPASS', '/nonexistent', 'a', 0)
+  const want = ['typecheck.TS2322', 'text.too-small', 'offline.external-request', 'layout.empty', 'size.file', 'copy.zh.filler']
   const got = sample.map((i) => i.code)
-  const other2 = parseOutput('print', 'note: x\nFAIL: poster: text runs off the trim: "Moon"\nFAIL: and 3 more, see qa/print/a/report.json\nFAIL', '/nonexistent', 'a', 0)
-  const okParse = want.every((c, i) => got[i] === c) && sample[1].where === 'slide 4' && other2.length === 1 && other2[0].code === 'layout.safe-area'
+  const other2 = parseOutput('print', 'note: x\nFAIL: poster: text runs off the trim: "Moon"\nFAIL: BleedBox mismatch (300mm)\nFAIL: and 3 more, see qa/print/a/report.json\nFAIL', '/nonexistent', 'a', 0)
+  const okParse = want.every((c, i) => got[i] === c) && sample[1].where === 'slide 4' && sample[3].where === 'slide 3' && other2.length === 2 && other2[0].code === 'layout.safe-area' && other2[1].code === 'print.geometry'
   const share = other.length / total
   console.log(`${total} QA messages, ${other.length} without a specific code (${(share * 100).toFixed(1)}%)`)
   other.slice(0, 200).forEach((o) => console.log(`  other  ${o}`))

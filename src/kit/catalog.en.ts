@@ -3278,9 +3278,8 @@ export const catalogEn: Record<string, CatalogEntryEn> = {
       "index": "Chapter number",
       "contents": "Titles of this chapter's slides",
       "kicker": "Section label, 2–8 chars",
-      "title": "Chapter title on the ribbon; the slide title also accepts an array to break lines",
+      "title": "Chapter title on the ribbon",
       "lead": "One or two lead sentences, ≤ 60 chars",
-      "source": "Source for the facts",
     },
   },
   "chat-thread": {
@@ -6258,9 +6257,9 @@ export const catalogEn: Record<string, CatalogEntryEn> = {
       "stops 2–4, at increases in seconds",
       "title ≤ 8 chars",
       "body ≤ 30 chars",
-      "slide title ≤ 22 chars",
+      "slide title ideally 1 line ≤ 15 chars (omit lead if 2 lines)",
       "lead ≤ 40 chars",
-      "video ideally ≤ 15 s and ≤ 1 MB (trim and compress with ffmpeg first)",
+      "video ideally ≤ 15 s and ≤ 1 MB (trim and compress with ffmpeg first); bundles over 20 MiB trigger a size warning",
     ],
     props: {
       "src": "Video file (import)",
@@ -6290,9 +6289,10 @@ export const catalogEn: Record<string, CatalogEntryEn> = {
       "Large multi-minute videos in offline single-file HTML (compress with ffmpeg or stream via Enterprise Vault)",
     ],
     limits: [
-      "slide title ≤ 22 chars",
+      "slide title ideally 1 line ≤ 15 chars (omit lead if 2 lines)",
       "lead ≤ 40 chars",
       "caption ≤ 36 chars",
+      "bundles over 20 MiB trigger a size warning; compress with ffmpeg or publish via pcafe push for streaming",
     ],
     props: {
       "kicker": "Section label",

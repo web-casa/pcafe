@@ -3,8 +3,8 @@
 // slide inside #root). See outline.tsx for what the outline holds. If the deck
 // cannot be rendered in Node, the build goes on without it and says so.
 import { createServer, type Plugin, type ResolveOptions } from 'vite'
-import type { Outline } from './outline'
-import type { DeckSsrSession } from './ssr-session'
+import type { Outline } from './outline.tsx'
+import type { DeckSsrSession } from './ssr-session.ts'
 
 const emojiStub: Plugin = {
   name: 'pcafe-outline-emoji-stub',

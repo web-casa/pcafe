@@ -1896,6 +1896,7 @@ import jsOff from './assets/deck-js-off.webp'
       { name: 'kicker', type: 'string', required: true, note: '小节名' },
       { name: 'question', type: 'string | string[]', required: true, note: '问题' },
       { name: 'sub', type: 'string', note: '补充' },
+      { name: 'source', type: 'string', note: '事实出处；页面上有任何数据或事实时必填' },
     ],
     example: `<Question kicker="为什么不现场设计" question={['为什么不让 AI', '每次现场设计？']} sub="现场设计上限高，但每次结果不同。" />`,
     demo: 'why',
@@ -3348,11 +3349,9 @@ import jsOff from './assets/deck-js-off.webp'
     limits: ['title 一行 ≤ 8 字', 'lead ≤ 44 字', 'contents 2–4 项，每项 ≤ 12 字', '没有 source：章节页不陈述事实'],
     props: [
       { name: 'kicker', type: 'string', required: true, note: '小节名，2–8 字' },
-      { name: 'title', type: 'string | string[]', required: true, note: '标题；数组手动断行' },
-      { name: 'lead', type: 'string', note: '一两句导语，≤ 60 字' },
-      { name: 'source', type: 'string', note: '事实出处' },
       { name: 'index', type: 'number', required: true, note: '章节编号' },
       { name: 'title', type: 'string', required: true, note: '彩带上的章节标题' },
+      { name: 'lead', type: 'string', note: '一两句导语，≤ 60 字' },
       { name: 'contents', type: 'string[]', required: true, note: '本章各页标题' },
     ],
     example: `<RibbonSection kicker="第一章" index={1} title="按顺序做" contents={['四个关键步骤', '六条文案规则']} />`,
@@ -5742,7 +5741,7 @@ import jsOff from './assets/deck-js-off.webp'
     summary: '左边一段视频，右边 2–4 个停点说明。配 build: \'reveal\' 时每按一次 → 视频播到下一个停点暂停，对应说明出现。往回翻或跳页时直接显示停点画面；跳页、打印和减少动态效果时停在最后一个停点。',
     useWhen: ['操作录屏、动画图表，需要边放边讲', '一段变化里有 2–4 个值得停下来的时刻'],
     avoidWhen: ['视频很长或很大：会内联进单个 HTML 文件', '需要声音：视频固定静音'],
-    limits: ['stops 2–4 个，at 按秒递增', 'title ≤ 8 字', 'body ≤ 30 字', '页标题 ≤ 22 字', 'lead ≤ 40 字', '视频建议 ≤ 15 秒、≤ 1 MB（先用 ffmpeg 截短压缩）'],
+    limits: ['stops 2–4 个，at 按秒递增', 'title ≤ 8 字', 'body ≤ 30 字', '页标题建议单行 ≤ 15 字（两行标题时省略 lead）', 'lead ≤ 40 字', '视频建议 ≤ 15 秒、≤ 1 MB（先用 ffmpeg 截短压缩）；单文件总大小超过 20 MiB 会预警'],
     props: [
       { name: 'kicker', type: 'string', required: true, note: '小节名' },
       { name: 'title', type: 'string | string[]', required: true, note: '标题' },
@@ -5775,7 +5774,7 @@ import jsOff from './assets/deck-js-off.webp'
     summary: '在单页居中呈现 16:9 完整视频，自带风格统一的播控栏：点击播放/暂停、进度条拖动、0.75×–2× 倍速、声音切换与全屏；离开页面或切后台自动暂停。',
     useWhen: ['播放完整的产品演示录屏、带人声解说的视频或循环背景画面', '演讲者需要现场随时暂停、拖动或切换倍速'],
     avoidWhen: ['需要按步骤逐段停顿讲解：改用 StepVideo', '超大高清视频直接打包单文件 HTML（建议先用 ffmpeg 压缩或托管企业库流式播放）'],
-    limits: ['页标题 ≤ 22 字', 'lead ≤ 40 字', 'caption ≤ 36 字'],
+    limits: ['页标题建议单行 ≤ 15 字（两行标题时省略 lead）', 'lead ≤ 40 字', 'caption ≤ 36 字', '单文件总大小超过 20 MiB 会预警，大视频建议先用 ffmpeg 压缩或用 pcafe push 托管流式播放'],
     props: [
       { name: 'kicker', type: 'string', required: true, note: '小节名' },
       { name: 'title', type: 'string | string[]', required: true, note: '标题' },

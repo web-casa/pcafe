@@ -49,9 +49,9 @@
 - 模板库页面能否正常打开，`catalog.ts` 的 `demo` 是否指向存在的页面
 - 页面下半部分是否偏空（只出 WARN）
 
-报错的修法见 [guide.md 第 8 节](guide.md#qa-fixes)。截图存在 `qa/`，结果写在 `qa/report.json`。
+报错的修法见 [guide.md 第 8 节](guide.md#qa-fixes)。截图存在 `qa/deck/<name>/`，结果写在 `qa/deck/<name>/report.json`。
 
-QA 抓不到的也要看：逐页打开 `qa/slide-NN-1920x1080.png`，手绘圈、高亮、箭头这类装饰件放大 2 倍检查，位置要对准，强调的内容要和文字一致。
+QA 抓不到的也要看：逐页打开 `qa/deck/<name>/slide-NN-1920x1080.png`，手绘圈、高亮、箭头这类装饰件放大 2 倍检查，位置要对准，强调的内容要和文字一致。
 
 ## 重新生成文档
 

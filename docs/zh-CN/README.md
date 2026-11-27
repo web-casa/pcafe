@@ -55,7 +55,7 @@ npx pcafe check q3-review   # 类型检查 + 构建 + 自动 QA，最后一行�
 npx pcafe build q3-review   # 生成 dist/q3-review.html，单文件，可以直接发给别人
 ```
 
-`check` 输出 `FAIL` 时按 [guide.md 第 8 节](guide.md#qa-fixes) 修复。每页截图在 `qa/slide-NN-1920x1080.png`，逐页看过才算完成。
+`check` 输出 `FAIL` 时按 [guide.md 第 8 节](guide.md#qa-fixes) 修复。每页截图在 `qa/deck/<name>/slide-NN-1920x1080.png`，逐页看过才算完成。
 
 开发预览里打开 `#/kit` 可以浏览全部模板、风格样张和图标。
 

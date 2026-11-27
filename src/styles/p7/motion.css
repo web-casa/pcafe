@@ -322,12 +322,13 @@
 }
 .sv__body {
   flex: 1;
+  min-height: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1080u) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 992u) minmax(0, 1fr);
   align-items: center;
-  gap: 64u;
-  margin-top: 36u;
-  padding-bottom: 46u;
+  gap: 52u;
+  margin-top: 18u;
+  padding-bottom: 24u;
 }
 .sv__player {
   position: relative;
@@ -357,9 +358,9 @@
   display: flex;
   align-items: center;
   gap: 14u;
-  padding: 12u 16u;
+  padding: 10u 16u;
   background: rgb(14 15 18 / 0.92);
-  border-top: 1px solid rgb(255 255 255 / 0.1);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
   color: #f4f4f6;
 }
 .sv__btn {
@@ -368,7 +369,7 @@
   border-radius: 999px;
   background: rgb(255 255 255 / 0.08);
   color: #f4f4f6;
-  font: 500 15u/1.1 var(--f-sans);
+  font: 500 17u/1.15 var(--f-sans);
   white-space: nowrap;
   cursor: pointer;
 }
@@ -397,7 +398,7 @@
   transform: translateX(-50%);
 }
 .sv__clock {
-  font: 500 15u/1 var(--f-mono);
+  font: 500 17u/1 var(--f-mono);
   font-variant-numeric: tabular-nums;
   color: rgb(255 255 255 / 0.72);
   white-space: nowrap;
@@ -416,13 +417,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 18u;
-  margin-top: 24u;
-  padding-bottom: 36u;
+  gap: 14u;
+  margin-top: 16u;
+  padding-bottom: 24u;
 }
 .vs__player {
   position: relative;
-  width: min(100%, 1180u);
+  flex-shrink: 0;
+  width: min(100%, 880u);
   border-radius: calc(18u * var(--rs, 1));
   overflow: hidden;
   background: #000000;
@@ -462,7 +464,7 @@ html[data-video-render] .sv__hud {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: 560u;
+  max-height: 495u;
   object-fit: contain;
   background: #000000;
   cursor: pointer;
@@ -472,7 +474,7 @@ html[data-video-render] .sv__hud {
   place-items: center;
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: 560u;
+  max-height: 495u;
   padding: 28u;
   color: rgb(255 255 255 / 0.8);
   font: 500 22u/1.45 var(--f-sans);
@@ -502,9 +504,9 @@ html[data-video-render] .sv__hud {
   display: flex;
   align-items: center;
   gap: 12u;
-  padding: 12u 18u;
+  padding: 10u 16u;
   background: rgb(14 15 18 / 0.94);
-  border-top: 1px solid rgb(255 255 255 / 0.1);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
   color: #f4f4f6;
 }
 .vs__btn {
@@ -513,7 +515,7 @@ html[data-video-render] .sv__hud {
   border-radius: 999px;
   background: rgb(255 255 255 / 0.08);
   color: #f4f4f6;
-  font: 500 15u/1.1 var(--f-sans);
+  font: 500 17u/1.15 var(--f-sans);
   white-space: nowrap;
   cursor: pointer;
 }
@@ -526,7 +528,7 @@ html[data-video-render] .sv__hud {
   cursor: pointer;
 }
 .vs__time {
-  font: 500 15u/1 var(--f-mono);
+  font: 500 17u/1 var(--f-mono);
   font-variant-numeric: tabular-nums;
   color: rgb(255 255 255 / 0.74);
   white-space: nowrap;

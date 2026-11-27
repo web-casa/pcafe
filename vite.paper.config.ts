@@ -1,8 +1,8 @@
-import { proVirtual } from './vite.pro'
+import { proVirtual } from './vite.pro.ts'
 import { defineConfig } from 'vite'
 import { emoji } from './vite.emoji.mjs'
 import { viteSingleFile } from 'vite-plugin-singlefile'
-import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote } from './vite.config'
+import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote } from './vite.config.ts'
 
 // Reports and résumés: one offline HTML file, like a deck.
 export default defineConfig({

@@ -3,7 +3,7 @@
 // `proVirtual` instance instead of booting two servers per build, while keeping
 // independent error boundaries and lazy outline loading.
 import { createServer, type Plugin, type ResolveOptions, type ViteDevServer } from 'vite'
-import type { Outline } from './outline'
+import type { Outline } from './outline.tsx'
 
 const emojiStub: Plugin = {
   name: 'pcafe-ssr-emoji-stub',

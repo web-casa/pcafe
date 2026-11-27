@@ -3555,6 +3555,7 @@ The whole slide is one question in large centered type, with a very faint giant 
 | `kicker` | `string` | yes | Section label |
 | `question` | `string \| string[]` | yes | The question |
 | `sub` | `string` |  | Sub line |
+| `source` | `string` |  | Source for the facts; required when the slide contains data or claims |
 
 **Example**
 
@@ -6238,10 +6239,9 @@ A wide accent-colour ribbon runs across the slide at an angle, holding the chapt
 | Name | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `kicker` | `string` | yes | Section label, 2–8 chars |
-| `title` | `string \| string[]` | yes | Chapter title on the ribbon; the slide title also accepts an array to break lines |
-| `lead` | `string` |  | One or two lead sentences, ≤ 60 chars |
-| `source` | `string` |  | Source for the facts |
 | `index` | `number` | yes | Chapter number |
+| `title` | `string` | yes | Chapter title on the ribbon |
+| `lead` | `string` |  | One or two lead sentences, ≤ 60 chars |
 | `contents` | `string[]` | yes | Titles of this chapter's slides |
 
 **Example**
@@ -11377,9 +11377,9 @@ A video on the left, 2–4 stop notes on the right. With build: 'reveal', each p
 - stops 2–4, at increases in seconds
 - title ≤ 8 chars
 - body ≤ 30 chars
-- slide title ≤ 22 chars
+- slide title ideally 1 line ≤ 15 chars (omit lead if 2 lines)
 - lead ≤ 40 chars
-- video ideally ≤ 15 s and ≤ 1 MB (trim and compress with ffmpeg first)
+- video ideally ≤ 15 s and ≤ 1 MB (trim and compress with ffmpeg first); bundles over 20 MiB trigger a size warning
 
 **Interaction**: Press → play to the next stop; click video to replay current segment
 
@@ -11431,9 +11431,10 @@ A centered 16:9 video stage with built-in play/pause, scrub bar, 0.75×–2× sp
 
 **Content limits** (exceeding them breaks the layout; `npm run qa` reports it)
 
-- slide title ≤ 22 chars
+- slide title ideally 1 line ≤ 15 chars (omit lead if 2 lines)
 - lead ≤ 40 chars
 - caption ≤ 36 chars
+- bundles over 20 MiB trigger a size warning; compress with ffmpeg or publish via pcafe push for streaming
 
 **Interaction**: Click frame or control bar to play/pause, scrub, adjust speed, or go fullscreen
 

@@ -26,6 +26,9 @@ npx @pcafe/pcafe init <name>
 cd <name> && npm install
 ```
 
+> 若本地 `~/.npmrc` 為 `@pcafe` 設定了私有源（`app.p.cafe`）但在受限企業網路中遇到 403，請顯式覆蓋 scoped registry 從公共源安裝（scoped registry 優先順序高於 `--registry`）：
+> `npm install --@pcafe:registry=https://registry.npmjs.org`（或 `npx --@pcafe:registry=https://registry.npmjs.org @pcafe/pcafe init <name>`）。
+
 之後在 `<name>` 裡工作，先讀它的 `AGENTS.md`，再按下面的流程做。不能執行指令列時，只交付故事線和逐頁大綱（每頁寫明用哪個範本），並告訴使用者需要能執行 Node.js 的環境才能產生 HTML。
 
 ## 安裝了 @pcafe/pro 時
@@ -147,9 +150,9 @@ export const deck: DeckDef = {
 1. 部分檢查（`--changed`、`--slides`）通過時會列印 `run a full check before delivery`：它不算最終檢查，交付前一定要跑一次完整檢查。想先知道會檢查哪些頁，可以加 `--explain`，它只說明，不檢查。
 2. 出現 FAIL 按 `docs/zh-TW/guide.md` 第 8 節（`#qa-fixes`）修；WARN 裡的「下半部分偏空」也要看一眼。修完只重跑相關的頁，不要每改一處就跑完整檢查。
 3. 報 `slide N never settled` 時，說明這頁有東西一直在變。真實的時鐘、跳動的數字這類活元素，給它加 `data-settle-ignore`；不要為了過檢查把它刪掉。
-4. 完整檢查後先看 `qa/contact-sheet.png`（整份簡報的縮圖），找出節奏和密度的問題；再按頁數做視覺複核：
-   - **10 頁以內**：逐頁開啟 `qa/slide-NN-1920x1080.png` 檢視；
-   - **10 頁以上（長簡報）**：逐張開啟所有 `2560×1440` 高畫質 2×2 網格圖 `qa/grid-NN.png`（確保每一頁都被視覺檢查過，30 頁僅需看 8 張圖），並對**有 WARN、含複雜圖表/手繪裝飾、或剛修改過的頁**開啟對應的 `qa/slide-NN-1920x1080.png` 原圖放大複核；
+4. 完整檢查後先看 `qa/deck/<name>/contact-sheet.png`（整份簡報的縮圖），找出節奏和密度的問題；再按頁數做視覺複核：
+   - **10 頁以內**：逐頁開啟 `qa/deck/<name>/slide-NN-1920x1080.png` 檢視；
+   - **10 頁以上（長簡報）**：逐張開啟所有 `2560×1440` 高畫質 2×2 網格圖 `qa/deck/<name>/grid-NN.png`（確保每一頁都被視覺檢查過，30 頁僅需看 8 張圖），並對**有 WARN、含複雜圖表/手繪裝飾、或剛修改過的頁**開啟對應的 `qa/deck/<name>/slide-NN-1920x1080.png` 原圖放大複核；
    - 區域性修改重跑後，只需複核本次修改頁對應的截圖。
    看圖重點（注意：`pcafe check` 返回 `PASS` **不會攔截卡片內底邊/右邊溢位、鄰卡碰撞或頂欄折行**，必須人工逐項核查）：
    - ① `IconGrid`、`StatRow` 等卡片底邊與右邊有無文字貼邊、裁切或撞進鄰卡；
@@ -162,7 +165,7 @@ export const deck: DeckDef = {
 
 `PASS` 前的 `hint  copy.…` 行是文案套話提示，不算失敗：改掉，或在準確時保留；「有研究表明」這類說法要在 `source` 寫出處。
 
-簡體中文文案寫完、跑完整檢查之前，按 `skills/qu-ai-wei/SKILL.md`（去 AI 味）過一遍標題、導語和要點，作為內嵌步驟只改文字：不加事實，不動數字、引語、指令和 `source`，改完的字數仍要在範本上限內。使用者只要求「去 AI 味」某段文字時，直接按那個技能的普通模式處理。
+中英文文案寫完、跑完整檢查之前，按 `skills/oil-tone/SKILL.md` 過一遍標題、導語和要點，作為內嵌潤色步驟讓表達自然、清楚、通順：只改文字，不加事實，不動數字、引語、指令和 `source`，改完的字數仍要在範本上限內。使用者明確要求用 `oil-tone` 改寫某段文案時，直接按該技能處理。
 
 檢查時可以加 `--json`（任何格式都支援），只輸出帶固定代號的問題和下一步 `next`；`npx pcafe status [格式] <name> --json` 根據最近一次檢查給出下一步。見 `docs/zh-TW/guide.md`「給腳本和 AI 用的報告」。
 
@@ -188,7 +191,7 @@ export const deck: DeckDef = {
 - 用縮小字號或自訂樣式解決溢位。
 - `Closing` 的 `mark` 寫成文字：它只能是 1–4 位數字，寫成文字整頁會空白。
 - 在 JSX 字串屬性裡寫雙反斜槓（如 `title="Time\\Duration"`）：JSX 屬性中的 `\\` 會按字面渲染出兩個反斜槓；JSX 屬性中直接寫單反斜槓（`title="Time\Duration"`），僅在 JS 字串字面量（物件/數組裡的 `'Time\\Duration'`）中才需要 `\\`。
-- 連續建置多份簡報時忘了及時移走 `dist/` 產物：`npx pcafe build <name>` 每次都會清空 `dist/`，建置完一份要立刻複製/移走 `dist/<name>.html` 再建置下一份。
+- 多份簡報連續建置時可直接執行 `npx pcafe build a && npx pcafe build b`（不會刪除已有的 `dist/*.html`），也可用 `--out-dir <dir>` 指定輸出目錄；單檔案超過 20 MiB 會輸出體積預警，建議壓縮影片或通過 `npx pcafe push` 託管至 Enterprise Vault 流式播放。
 - 對帶入場動畫的頁（`build: 'reveal'`、`Timeline`、`CodeDiff`）直接截靜態宣傳圖：容易截在半透明或未展開的中間幀，自訂截圖腳本必須開啟 `reducedMotion: 'reduce'` 或等動畫完全定格後再拍。
 - 改了 `src/kit/catalog.ts` 卻沒執行 `npx pcafe docs`，導致文件和這份 skill 的參考表過期。
 

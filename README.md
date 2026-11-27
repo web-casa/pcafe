@@ -4,10 +4,10 @@
 
 PCafe is an HTML slide-deck engine built for presentations written by AI assistants. A deck is composed only from fixed, pre-designed templates, so the layout, typography, colour and motion are already decided. The writer (human or AI) chooses templates, fills in content within each template's limits, and runs a check. If the check passes, the deck looks as good as the reference decks.
 
-- **251 templates** for data, comparisons, structures, timelines, quotes, screenshots and pacing slides, each with documented "good for / avoid / content limits".
+- **325 templates** for data, comparisons, structures, timelines, quotes, screenshots and pacing slides, each with documented "good for / avoid / content limits".
 - **33 style presets** (title typography, corner radius, paper colour, decoration) and **5 colour themes**, freely combinable.
 - **One offline HTML file**: `build` inlines fonts, images and code into a single file you can send to anyone.
-- **Automated QA**: type check, build and a browser check of every slide at several window sizes (overflow, text collisions, font sizes, remote requests). The last line is `PASS` or `FAIL`, and every slide is screenshotted to `qa/` for review.
+- **Automated QA**: type check, build and a browser check of every slide at several window sizes (overflow, text collisions, font sizes, remote requests). The last line is `PASS` or `FAIL`, and every slide is screenshotted to `qa/deck/<name>/` for review.
 - **Presenting**: presenter view with notes, timer and next slide; laser pointer, pen and zoom; overview grid; autoplay; step-by-step reveals; PDF export through the browser's print dialog.
 
 ## Quick start
@@ -22,6 +22,8 @@ npx pcafe dev q3-review     # live preview in the browser
 npx pcafe check q3-review   # type check + build + QA; last line is PASS or FAIL
 npx pcafe build q3-review   # write dist/q3-review.html (single offline file)
 ```
+
+> If your `~/.npmrc` maps `@pcafe` to a private registry and a restricted network returns HTTP 403, override the scoped registry explicitly (`--registry` alone is overridden by scoped entries): `npm install --@pcafe:registry=https://registry.npmjs.org`.
 
 Other commands:
 

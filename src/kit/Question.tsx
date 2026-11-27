@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Kicker, Reveal } from '../deck/primitives'
-import { Hint, Lines, type Text } from './shared'
+import { Hint, Lines, SlideFoot, type Text } from './shared'
 
 export interface QuestionProps {
   kicker: string
@@ -8,11 +8,13 @@ export interface QuestionProps {
   question: Text
   /** One line that frames why it matters, ≤ 36 CJK characters. */
   sub?: string
+  /** Optional fact or quote source pinned to the bottom safe area. */
+  source?: string
   hint?: ReactNode
 }
 
 /** One question on an empty page, a large question mark behind it. Opens a chapter by asking what it answers. */
-export function Question({ kicker, question, sub, hint }: QuestionProps) {
+export function Question({ kicker, question, sub, source, hint }: QuestionProps) {
   return (
     <section className="slide">
       <Hint id="question">{hint}</Hint>
@@ -35,6 +37,7 @@ export function Question({ kicker, question, sub, hint }: QuestionProps) {
             </Reveal>
           )}
         </div>
+        <SlideFoot source={source} i={5} />
       </div>
     </section>
   )

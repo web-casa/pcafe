@@ -22,6 +22,9 @@ npx @pcafe/pcafe init <name>
 cd <name> && npm install
 ```
 
+> If your `~/.npmrc` maps `@pcafe` to the private registry (`app.p.cafe`) and a corporate firewall returns 403, override the scoped registry explicitly (scoped registries take precedence over `--registry`):
+> `npm install --@pcafe:registry=https://registry.npmjs.org` (or `npx --@pcafe:registry=https://registry.npmjs.org @pcafe/pcafe init <name>`).
+
 Then work inside `<name>`: read its `AGENTS.md` first and follow the process below. If you cannot run commands, deliver only the storyline and a slide-by-slide outline (naming the template for each slide), and tell the user that building the HTML needs an environment that can run Node.js.
 
 ## If @pcafe/pro is installed
@@ -138,9 +141,9 @@ Checks come in two tiers. Run them yourself; don't wait for the user to ask:
 1. A partial check (`--changed`, `--slides`) that passes prints `run a full check before delivery`. It is not the final check: run the full check once before you deliver. Add `--explain` to see which slides would run without checking anything.
 2. Fix FAILs as described in `docs/en/guide.md` ("Fixing QA errors"); also look at WARNs such as "lower half looks empty". After a fix, rerun only the slides involved, not the full check after every edit.
 3. `slide N never settled` means something on the slide keeps changing. For a real live element (a clock, a ticking number) add `data-settle-ignore`; don't delete it to get past the check.
-4. After the full check, look at `qa/contact-sheet.png` first (the whole deck as thumbnails) for pacing and density, then visually review every slide:
-   - **Up to 10 slides**: open every `qa/slide-NN-1920x1080.png`;
-   - **Over 10 slides (long decks)**: open every `2560×1440` 2×2 high-res review grid `qa/grid-NN.png` (so every slide is visually checked with far fewer images), and open full-size `qa/slide-NN-1920x1080.png` for any slide with a WARN, complex chart/decoration, or recent edits;
+4. After the full check, look at `qa/deck/<name>/contact-sheet.png` first (the whole deck as thumbnails) for pacing and density, then visually review every slide:
+   - **Up to 10 slides**: open every `qa/deck/<name>/slide-NN-1920x1080.png`;
+   - **Over 10 slides (long decks)**: open every `2560×1440` 2×2 high-res review grid `qa/deck/<name>/grid-NN.png` (so every slide is visually checked with far fewer images), and open full-size `qa/deck/<name>/slide-NN-1920x1080.png` for any slide with a WARN, complex chart/decoration, or recent edits;
    - After targeted follow-up edits, review only the changed slides' screenshots.
    What to check (note: `pcafe check` returning `PASS` does **not** guarantee zero card-border overflow or top-bar wrapping — inspect visually for all five):
    - (1) `IconGrid` / `StatRow` card text touching or overflowing bottom/right borders or colliding with a neighbour card;
@@ -152,7 +155,7 @@ Checks come in two tiers. Run them yourself; don't wait for the user to ask:
 
 `hint  copy.…` lines before `PASS` flag stock phrases; they are not failures. Rewrite them, or keep them when accurate; "studies show" needs a named `source`.
 
-Before the full check, run Simplified Chinese copy (titles, leads, points) through `skills/qu-ai-wei/SKILL.md` as an embedded step: wording only, no new facts, numbers, quotes, commands and `source` untouched, still within each template's limits. For English copy, write plain sentences without stock phrases. When the user only asks to de-AI a piece of Chinese text, use that skill's normal mode.
+Before the full check, polish Chinese and English copy (titles, leads, points) following `skills/oil-tone/SKILL.md` as an embedded step: keep wording natural, clear, and readable; never add facts or touch numbers, quotes, commands or `source`; and stay within each template's limits. When the user explicitly asks to polish copy with `oil-tone`, apply that skill directly.
 
 Add `--json` to any check to get only the issues (stable codes) and a `next` step; `npx pcafe status [format] <name> --json` gives the next step from the last check. See `docs/en/guide.md`, "Reports for scripts and agents".
 
@@ -177,7 +180,7 @@ Done means a full-check `PASS` and visual review completed (every `slide-NN` for
 - Fixing overflow by shrinking fonts or adding custom styles.
 - Writing text into `Closing`'s `mark`: it accepts only a 1–4 digit number; text leaves the whole slide blank.
 - Doubling backslashes inside JSX string attributes (e.g. `title="Time\\Duration"`): JSX attributes render `\\` literally; use a single backslash in JSX attributes (`title="Time\Duration"`) and double `\\` only inside JS string literals (objects/arrays like `'Time\\Duration'`).
-- Running `npx pcafe build <name>` back-to-back without copying outputs: each build wipes `dist/`, so copy or move `dist/<name>.html` immediately before building the next deck.
+- Multi-deck builds keep previous outputs intact (`npx pcafe build a && npx pcafe build b` preserves both files; pass `--out-dir <dir>` to export to another folder). Single-file HTML bundles over 20 MiB trigger a size warning—compress videos with ffmpeg or publish via `npx pcafe push` for Enterprise Vault HTTP Range streaming.
 - Capturing static screenshots of animated slides (`build: 'reveal'`, `Timeline`, `CodeDiff`) without `reducedMotion: 'reduce'`: custom capture scripts can catch semi-transparent mid-animation frames unless reduced motion is enabled or animations have fully settled.
 - Changing `src/kit/catalog.ts` without running `npx pcafe docs`, leaving docs and this skill's reference tables out of date.
 

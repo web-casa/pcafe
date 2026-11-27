@@ -1,9 +1,9 @@
-import { proVirtual } from './vite.pro'
+import { proVirtual } from './vite.pro.ts'
 import { resolve } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 import { emoji } from './vite.emoji.mjs'
 import { viteSingleFile } from 'vite-plugin-singlefile'
-import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote } from './vite.config'
+import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote } from './vite.config.ts'
 
 // Display screens: one offline HTML file per screen.
 //   SCREEN=apollo11 npx vite build -c vite.screen.config.ts   writes dist/screen/apollo11.html

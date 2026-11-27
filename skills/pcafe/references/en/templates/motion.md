@@ -31,11 +31,11 @@
 ### `StepVideo` Step through video (Motion - each press plays one segment and stops on the frame to talk about)
 - Use when: A screen recording or an animated chart you want to talk over while it plays; A change with 2–4 moments worth stopping at
 - Avoid: The video is long or large: it is inlined into a single HTML file; You need sound: the video is always muted
-- Limits: stops 2–4, at increases in seconds; title ≤ 8 chars; body ≤ 30 chars; slide title ≤ 22 chars; lead ≤ 40 chars; video ideally ≤ 15 s and ≤ 1 MB (trim and compress with ffmpeg first)
+- Limits: stops 2–4, at increases in seconds; title ≤ 8 chars; body ≤ 30 chars; slide title ideally 1 line ≤ 15 chars (omit lead if 2 lines); lead ≤ 40 chars; video ideally ≤ 15 s and ≤ 1 MB (trim and compress with ffmpeg first); bundles over 20 MiB trigger a size warning
 - Reference: src/decks/motion slide `video`; docs/en/components.md#step-video; interaction: Press → play to the next stop; click video to replay current segment
 
 ### `VideoStage` Video stage (Motion - full-width 16:9 video player with editorial controls)
 - Use when: Full product walkthroughs, narrated demos, or looping ambient clips; Presenters who want live play/pause, scrubbing, and speed controls
 - Avoid: Step-by-step pauses synced to bullet notes: use StepVideo instead; Large multi-minute videos in offline single-file HTML (compress with ffmpeg or stream via Enterprise Vault)
-- Limits: slide title ≤ 22 chars; lead ≤ 40 chars; caption ≤ 36 chars
+- Limits: slide title ideally 1 line ≤ 15 chars (omit lead if 2 lines); lead ≤ 40 chars; caption ≤ 36 chars; bundles over 20 MiB trigger a size warning; compress with ffmpeg or publish via pcafe push for streaming
 - Reference: src/decks/motion slide `video-stage`; docs/en/components.md#video-stage; interaction: Click frame or control bar to play/pause, scrub, adjust speed, or go fullscreen

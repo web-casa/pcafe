@@ -3,7 +3,7 @@
 import { createHash, createPublicKey, verify } from 'node:crypto'
 import { existsSync, lstatSync, readFileSync, readdirSync, realpathSync } from 'node:fs'
 import { homedir } from 'node:os'
-import { isAbsolute, join, resolve } from 'node:path'
+import { basename, isAbsolute, join, relative, resolve } from 'node:path'
 
 /** PCafe's licence-signing public key (Ed25519, SPKI DER, base64). Mirrors vite.licence.ts. */
 export const LICENCE_PUBLIC_KEY = 'MCowBQYDK2VwAyEAZV1UUfYuTUCidy3Ume/+ql6vaVXmvXkeIm7jCnw5Zv0='
@@ -168,4 +168,41 @@ export function findLiveLicence(root, env = process.env) {
     stateKey: `valid:${l.id}:${l.until ?? 'lifetime'}:${fileHash}`,
     problem: null,
   }
+}
+
+/**
+ * Strict content fingerprint for a deck build: covers all `src/` (except `active.ts`),
+ * root `public/` & `assets/` directories (if present), Vite/TS/package configs, lockfiles,
+ * full `@pcafe/pro` dist realpath, live licence state, and relevant env vars.
+ */
+export function computeDeckBuildInputHash(root, name, env = process.env) {
+  const files = safeWalkFiles(join(root, 'src')).filter((f) => basename(f) !== 'active.ts')
+  for (const extraDir of ['public', 'assets']) {
+    const dir = join(root, extraDir)
+    if (existsSync(dir)) files.push(...safeWalkFiles(dir))
+  }
+  for (const rel of [
+    'presentation.html', 'index.html', 'vite.config.ts', 'vite.emoji.mjs', 'vite.pro.ts',
+    'vite.licence.ts', 'vite.unit.mjs', 'tsconfig.json', 'package.json', 'package-lock.json', 'pnpm-lock.yaml',
+  ]) {
+    const f = join(root, rel)
+    if (existsSync(f)) files.push(f)
+  }
+  const unique = [...new Set(files)].sort()
+  const parts = [`deck=${name}`, ...unique.map((f) => `${relative(root, f)}=${sha(readFileSync(f))}`)]
+  const proLink = join(root, 'node_modules', '@pcafe', 'pro')
+  if (existsSync(proLink)) {
+    const proReal = realpathSync(proLink)
+    const pkgFile = join(proReal, 'package.json')
+    if (existsSync(pkgFile)) parts.push(`@pcafe/pro/package.json=${sha(readFileSync(pkgFile))}`)
+    for (const f of safeWalkFiles(join(proReal, 'dist'), { skipDirs: new Set() }).sort()) {
+      parts.push(`@pcafe/pro/${relative(proReal, f)}=${sha(readFileSync(f))}`)
+    }
+  } else {
+    parts.push('@pcafe/pro=none')
+  }
+  parts.push(`licence=${findLiveLicence(root, env).stateKey}`)
+  const envKeys = ['NODE_ENV', 'PCAFE_LICENCE', 'HOME', ...Object.keys(env).filter((k) => k.startsWith('VITE_')).sort()]
+  for (const k of envKeys) parts.push(`env:${k}=${env[k] ?? ''}`)
+  return sha(parts.join('\n'))
 }

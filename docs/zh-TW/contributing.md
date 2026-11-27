@@ -50,9 +50,9 @@
 - 範本庫頁面能否正常開啟，`catalog.ts` 的 `demo` 是否指向存在的頁面
 - 頁面下半部分是否偏空（只出 WARN）
 
-報錯的修法見 [guide.md 第 8 節](guide.md#qa-fixes)。截圖存在 `qa/`，結果寫在 `qa/report.json`。
+報錯的修法見 [guide.md 第 8 節](guide.md#qa-fixes)。截圖存在 `qa/deck/<name>/`，結果寫在 `qa/deck/<name>/report.json`。
 
-QA 抓不到的也要看：逐頁開啟 `qa/slide-NN-1920x1080.png`，手繪圈、高亮、箭頭這類裝飾件放大 2 倍檢查，位置要對準，強調的內容要和文字一致。
+QA 抓不到的也要看：逐頁開啟 `qa/deck/<name>/slide-NN-1920x1080.png`，手繪圈、高亮、箭頭這類裝飾件放大 2 倍檢查，位置要對準，強調的內容要和文字一致。
 
 ## 重新產生文件
 

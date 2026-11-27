@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, realpathSync } from 'node:fs'
 import { join } from 'node:path'
 import type { Plugin } from 'vite'
-import { findLicence, licenceProblem, type LicenceResult } from './vite.licence'
+import { findLicence, licenceProblem, type LicenceResult } from './vite.licence.ts'
 
 const VIRTUAL = 'virtual:pcafe-pro'
 const RESOLVED = `\0${VIRTUAL}`

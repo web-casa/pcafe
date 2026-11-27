@@ -1,7 +1,7 @@
-import { proVirtual } from './vite.pro'
+import { proVirtual } from './vite.pro.ts'
 import { defineConfig } from 'vite'
 import { emoji } from './vite.emoji.mjs'
-import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote } from './vite.config'
+import { designUnit, engineOptimizeDeps, engineResolve, forbidRemote } from './vite.config.ts'
 
 // Live slides for the website: shared chunks and one chunk per deck, so many
 // iframes on a page download the engine once. Not used for deck builds.

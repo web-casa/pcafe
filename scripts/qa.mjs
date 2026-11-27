@@ -3,7 +3,7 @@
 import { launchChromium } from './playwright.mjs'
 import { missingCjk } from './font-coverage.mjs'
 import { probeSlidesInNode } from './slide-fingerprints.mjs'
-import { findLiveLicence, safeWalkFiles } from './licence-util.mjs'
+import { computeDeckBuildInputHash, findLiveLicence, safeWalkFiles } from './licence-util.mjs'
 import { mkdirSync, readFileSync, realpathSync, statSync, writeFileSync, readdirSync, existsSync, unlinkSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { basename, resolve, join, relative } from 'node:path'
@@ -13,7 +13,7 @@ import { pathToFileURL } from 'node:url'
 const ROOT = resolve(import.meta.dirname, '..')
 const DIST = join(ROOT, 'dist', 'index.html')
 const STUDIO = join(ROOT, 'dist', 'studio.html')
-const OUT = join(ROOT, 'qa')
+const LARGE_BUNDLE_BYTES = 20 * 1024 * 1024
 const URL = pathToFileURL(DIST).href
 // Gallery screenshots stay in Chinese whatever the browser language.
 const STUDIO_URL = `${pathToFileURL(STUDIO).href}?lang=zh`
@@ -30,6 +30,8 @@ function resolveActiveDeckName() {
   return m ? m[1] : ''
 }
 const DECK_NAME = resolveActiveDeckName()
+const DECK_OUT_REL = `qa/deck/${DECK_NAME || 'active'}`
+const OUT = KIT_ONLY ? join(ROOT, 'qa') : join(ROOT, 'qa', 'deck', DECK_NAME || 'active')
 if (KIT_ONLY) console.log('deck checks skipped (--kit)')
 const jobsAt = process.argv.indexOf('--jobs')
 const DEFAULT_JOBS = Math.min(6, Math.max(1, Math.floor(availableParallelism() / 2)))
@@ -79,8 +81,16 @@ const fail = (msg) => failures.push(msg)
 // Soft findings: printed and saved, but they do not fail the run.
 const warnings = []
 report.warnings = warnings
-const missingGlyphs = missingCjk(readFileSync(DIST, 'utf8'))
-if (missingGlyphs.length) warnings.push(`characters missing from the committed font subsets: ${missingGlyphs.join(' ')}. The browser falls back to a system font; maintainers can add them with npm run fonts, then run npm run fonts:verify.`)
+const EXPLAIN_EARLY = process.argv.includes('--explain')
+if (!KIT_ONLY && !EXPLAIN_EARLY && existsSync(DIST)) {
+  if (report.bytes > LARGE_BUNDLE_BYTES) {
+    warnings.push(
+      `bundle is ${(report.bytes / 1024 / 1024).toFixed(1)} MiB (> 20 MiB): embedded media inflates single-file HTML by ~33%. For offline single-file delivery, compress video with ffmpeg (e.g. 720p CRF 28); for large media with HTTP Range streaming, publish to Enterprise Vault via \`npx pcafe push ${DECK_NAME || '<name>'}\`.`,
+    )
+  }
+  const missingGlyphs = missingCjk(readFileSync(DIST, 'utf8'))
+  if (missingGlyphs.length) warnings.push(`characters missing from the committed font subsets: ${missingGlyphs.join(' ')}. The browser falls back to a system font; maintainers can add them with npm run fonts, then run npm run fonts:verify.`)
+}
 
 
 // ── Partial and changed-only checks ───────────────────────────────────────────
@@ -106,9 +116,10 @@ if (FULL_ENGINE && (SLIDES_ARG || CHANGED)) {
   process.exit(2)
 }
 const sha = (text) => createHash('sha256').update(text).digest('hex').slice(0, 20)
+const fullSha = (buf) => createHash('sha256').update(buf).digest('hex')
 const CACHE_FILE = join(OUT, '.check-cache.json')
 /** Bump whenever slideAudit/layoutAudit rules change so cached PASS runs invalidate. */
-const QA_RULESET_VERSION = '2026-11-24-v2'
+const QA_RULESET_VERSION = '2026-11-27-v3'
 const slideKey = (s) => `${s.n}:${s.id}#${s.occurrence ?? 1}`
 
 function withOccurrences(list) {
@@ -125,7 +136,10 @@ const walkFiles = (dir) => safeWalkFiles(dir)
 /** Engine, templates, styles, fonts, scripts, config, Pro package and deck assets. A change here forces a full check. */
 function sharedFingerprint() {
   const files = []
-  for (const rel of ['src/deck', 'src/engine', 'src/kit', 'src/styles', 'src/assets']) files.push(...walkFiles(join(ROOT, rel)))
+  for (const rel of ['src/deck', 'src/engine', 'src/kit', 'src/styles', 'src/assets', 'public', 'assets']) {
+    const abs = join(ROOT, rel)
+    if (existsSync(abs)) files.push(...walkFiles(abs))
+  }
   for (const rel of [
     'cli/pcafe.mjs', 'scripts/qa.mjs', 'scripts/slide-fingerprints.mjs', 'scripts/licence-util.mjs',
     'vite.config.ts', 'vite.studio.config.ts', 'vite.emoji.mjs', 'vite.pro.ts', 'vite.licence.ts', 'vite.unit.mjs',
@@ -361,10 +375,28 @@ async function chooseSlides() {
   }
   // active.ts is rewritten by `pcafe check` after each run; slide ids and
   // signatures already cover what it selects, so its time is not compared.
-  const deckSourceAt = Math.max(newest(join(ROOT, 'src', 'decks'), (f) => basename(f) !== 'active.ts'), newest(join(ROOT, 'src', 'kit')), newest(join(ROOT, 'src', 'styles')))
+  const deckSourceAt = Math.max(
+    newest(join(ROOT, 'src', 'decks'), (f) => basename(f) !== 'active.ts'),
+    newest(join(ROOT, 'src', 'kit')),
+    newest(join(ROOT, 'src', 'styles')),
+    existsSync(join(ROOT, 'public')) ? newest(join(ROOT, 'public')) : 0,
+    existsSync(join(ROOT, 'assets')) ? newest(join(ROOT, 'assets')) : 0,
+  )
   if (!existsSync(DIST) || statSync(DIST).mtimeMs < deckSourceAt) {
     console.log('full check: build output is older than the deck source; running every slide')
     return { all: true, fp }
+  }
+  const metaPath = join(ROOT, 'dist', '.pcafe-build-meta.json')
+  if (DECK_NAME && distBuf && existsSync(metaPath)) {
+    try {
+      const meta = JSON.parse(readFileSync(metaPath, 'utf8'))
+      if (meta?.version === 1 && meta.deck === DECK_NAME) {
+        if (meta.outputSha256 !== fullSha(distBuf) || meta.inputHash !== computeDeckBuildInputHash(ROOT, DECK_NAME)) {
+          console.log('full check: built HTML does not match current source/asset content hash; running every slide')
+          return { all: true, fp }
+        }
+      }
+    } catch {}
   }
 
   if (fp.fromNode) {
@@ -466,6 +498,7 @@ if (selection.noChanges && !FULL_ENGINE) {
     console.log('PASS — explain only; no checks run')
     process.exit(0)
   }
+  if (warnings.length) console.log(`WARN (${warnings.length})\n- ${warnings.join('\n- ')}`)
   console.log('PASS — no slides changed since the last passing check (partial)')
   process.exit(0)
 }
@@ -841,11 +874,11 @@ const rect = (page, sel) => page.locator(sel).evaluate((el) => el.getBoundingCli
 // 1 ─ Every slide at every viewport ──────────────────────────────────────
 let speakerNotes = ''
 if (!KIT_ONLY) {
-  // On a full run, remove stale slide/grid/contact-sheet images so switching decks
-  // never leaves outdated PNGs behind.
+  // On a full run, remove stale PNGs in this deck's QA folder so deleted slides
+  // or old overview/detail captures never linger alongside new screenshots.
   if (!PARTIAL) {
     for (const f of readdirSync(OUT)) {
-      if (/^(?:slide-\d+-.*\.png|grid-\d+\.png|contact-sheet\.png)$/.test(f)) {
+      if (f.endsWith('.png')) {
         try { unlinkSync(join(OUT, f)) } catch {}
       }
     }
@@ -1088,7 +1121,7 @@ if (!KIT_ONLY) {
           await gridPage.goto(pathToFileURL(gridHtml).href)
           await gridPage.waitForFunction(() => [...document.images].every((img) => img.complete), null, { timeout: 5000 }).catch(() => {})
           await gridPage.screenshot({ path: join(OUT, outName) })
-          report.grids.push(`qa/${outName}`)
+          report.grids.push(`${DECK_OUT_REL}/${outName}`)
         }
       } finally {
         await gridPage.close()

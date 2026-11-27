@@ -88,7 +88,7 @@ are still awaited.
 
 `npx pcafe check <deck> --slides 3,5` (or `npm run check -- --slides 3,5`)
 audits only those slides at all four viewports. `--changed` compares each
-slide's rendered signature with the last passing run in `qa/.check-cache.json`
+slide's rendered signature with the last passing run in `qa/deck/<name>/.check-cache.json`
 and audits only the slides that differ. A partial run prints which deck-wide
 sections it skipped (navigation, presenter, keyboard) and ends with
 `run a full check before delivery`; it never counts as a delivery check.
