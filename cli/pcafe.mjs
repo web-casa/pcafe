@@ -1034,6 +1034,12 @@ if (!fn) {
   process.exit(2)
 }
 if (resolvedCmd !== 'help' && wantsHelp(rest)) {
+  if (resolvedCmd === 'export-video') {
+    process.exit(run('node', [join(PKG_ROOT, 'scripts', 'deck-video-export.mjs'), '--help'], PKG_ROOT))
+  }
+  if (resolvedCmd === 'spec') {
+    process.exit(run('node', [join(PKG_ROOT, 'scripts', 'spec.mjs'), '--help'], PKG_ROOT))
+  }
   if (FORMAT_CMDS.has(resolvedCmd) && rest[0] && FORMAT_ACTIONS.has(rest[0])) {
     console.log(formatActionHelp(resolvedCmd, rest[0]))
   } else if (COMMAND_HELP[resolvedCmd]) {
